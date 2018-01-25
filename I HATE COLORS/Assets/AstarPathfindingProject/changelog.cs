@@ -1,5 +1,211 @@
 /** \page changelog Changelog
+\order{-10}
 
+- 4.1.10
+	- 4.1.0 through 4.1.9 were beta versions, all their changelogs have been merged into this one.
+	- Upgrade notes
+		- Fixed the AIPath script with rotationIn2D would rotate so that the Z axis pointed in the -Z direction instead of as is common for Unity 2D objects: to point in the +Z direction.
+		- ALL classes are now inside the Pathfinding namespace to reduce potential naming collisions with other packages.
+			Make sure you have "using Pathfinding;" at the top of your scripts.
+			Previously most scripts have been inside the Pathfinding namespace, but not all of them.
+			The exception is the AstarPath script to avoid breaking too much existing code (and it has a very distinctive name so name collisions are not likely).
+		- Since the API for several movement scripts have been unified (see below), many members of the movement scripts have been deprecated.
+			Your code should continue to work exactly as before (except bugs of course, but if some other behaviour is broken, please start a thread in the forum) but you may get deprecation warnings.
+			In most cases the changes should be very easy to make as the visible changes mostly consist of renames.
+		- A method called \link Pathfinding.IAstarAI.SetPath SetPath\endlink has been added to all movement scripts. This replaces some hacks you could achieve by calling the OnPathComplete method on the movement scripts
+			from other scripts. If you have been doing that you should now call SetPath instead.
+		- Paths calculated with a heuristic scale greater than 1 (the default is 1) might be slightly less optimal compared to before.
+			See below for more information.
+		- The StartEndModifier's raycasting options are now only used if the 'Original' snapping option is used as that's the only one it makes sense for.
+		- The RaycastModifier has changed a bit, so your paths might look slightly different, however in all but very rare cases it should be at least as good as in previous versions.
+		- Linecast methods will now assign the #Pathfinding.GraphHitInfo.node field with the last node that was traversed in case no obstacle was hit, previously it was always null.
+		- Multithreading is now enabled by default (1 thread). This may affect you if you have been adding the AstarPath component during runtime using a script, though the change is most likely positive.
+		- The DynamicGridObstacle component will now properly update the graph when the object is deactivated since the object just disappeared and shouldn't block the graph anymore.
+			Previously it only did this if the object was destroyed, not if it was deactivated.
+		- If you have written a custom graph type you may have to change the access modifier on some methods.
+			For example the ScanInternal method has been changed from being public to being protected.
+		- Some internal methods on graphs have been hidden. They should never have been used by user code
+			but in case you have done that anyway you will have to access them using the IGraphInternals or IUpdatableGraph interface now.
+		- Removed some compatibility code for Seekers for when upgrading from version 3.6.7 and earlier (released about 2 years ago).
+			If you are upgrading from a version that old then the 'Valid Tags' field on the Seeker component may get reset to the default value.
+			If you did not use that field then you will not have to do anything.
+		- AIPath now rotates towards actual movement direction when RVO is used.
+	- Improvements
+		- Improved pathfinding performance by around 8% for grid graphs, possibly more for other graph types.
+			This involved removing a special case for when the pathfinding heuristic is not <a href="https://en.wikipedia.org/wiki/Admissible_heuristic">admissable</a> (in short, when A* Inspector -> Settings -> Heuristic Scale was greater than 1).
+			Now paths calculated with the heuristic scale greater than 1 might be slightly less optimal compared to before.
+			If this is important I suggest you reduce the heuristic scale to compensate.
+			Note that as before: a heuristic scale of 1 is the default and if it is greater than 1 then the calculated paths may no longer be the shortest possible ones.
+		- Improved overall pathfinding performance by an additional 10-12% by heavily optimizing some core algorithms.
+		- Improved performance of querying for the closest node to a point when using the PointGraph and \link Pathfinding.PointGraph.optimizeForSparseGraph optimizeForSparseGraph\endlink.
+			The improvements are around 7%.
+		- Unified the API for the included movement scripts (AIPath, RichAI, AILerp) and added a large number of nice properties and functionality.
+			- The \link Pathfinding.IAstarAI IAstarAI\endlink interface can now be used with all movement scripts.
+			- To make it easier to migrate from Unity's navmesh system, this interface has been designed to be similar to Unity's NavmeshAgent API.
+			- The interface has several nice properties like:
+				\link Pathfinding.IAstarAI.remainingDistance remainingDistance\endlink,
+				\link Pathfinding.IAstarAI.reachedEndOfPath reachedEndOfPath\endlink,
+				\link Pathfinding.IAstarAI.pathPending pathPending\endlink,
+				\link Pathfinding.IAstarAI.steeringTarget steeringTarget\endlink,
+				\link Pathfinding.IAstarAI.isStopped isStopped\endlink,
+				\link Pathfinding.IAstarAI.destination destination\endlink, and many more.
+			- You no longer need to set the destination of an agent using a Transform object, instead you can simply set the \link Pathfinding.IAstarAI.destination destination\endlink property.
+				Note that when you upgrade, a new AIDestinationSetter component will be automatically created which has a 'target' field. So your existing code will continue to work.
+		- Improved behavior when AIPath/RichAI characters move down slopes.
+			Previously the way gravity was handled could sometimes lead to a 'bouncing' behavior unless the gravity was very high. Old behavior on the left, new behavior on the right.
+			\htmlonly <video class="tinyshadow" controls loop><source src="images/changelog/ai_slope.mp4" type="video/mp4"></video> \endhtmlonly
+		- Improved the grid graph inspector by adding preconfigured modes for different node shapes: square grids, isometric grids and hexagons.
+			This also reduces clutter in the inspector since irrelevant options can be hidden.
+			\shadowimage{changelog/grid_shape.png}
+		- For 2D grid graphs the inspector will now show a single rotation value instead of a full 3D rotation which makes it a lot easier to configure.
+		- Improved the performance of the \link Pathfinding.RaycastModifier RaycastModifier\endlink significantly. Common speedups on grid graphs range from 2x to 10x.
+		- The RaycastModifier now has a \link Pathfinding.RaycastModifier.Quality quality enum\endlink. The higher quality options use a new algorithm that is about the same performance (or slightly slower) compared to the RaycastModifier in previous versions
+			however it often manages to simplify the path a lot more.
+			The quality of the previous RaycastModifier with default settings corresponds to somewhere between the Low and Medium qualities.
+		- Improved support for HiDPI (retina) screens as well as improved visual coherency for some icons.
+			\shadowimage{changelog/retina_icons.png}
+		- Improved the 'eye' icon for when a graph's gizmos are disabled to make it easier to spot.
+		- Added \link Pathfinding.GridGraph.CalculateConnectionsForCellAndNeighbours GridGraph.CalculateConnectionsForCellAndNeighbours\endlink.
+		- AIPath now works with point graphs in 2D as well (assuming the 'rotate in 2D' checkbox is enabled).
+		- Improved the performance of the RVONavmesh component when used together with navmesh cutting, especially when many navmesh cuts are moving at the same time.
+		- A warning is now displayed in the editor if one tries to use both the AIDestinationSetter and Patrol components on an agent at the same time.
+		- Improved linecasts on recast/navmesh graphs. They are now more accurate (there were some edge cases that previously could cause it to fail) and faster.
+			Performance has been improved by by around 3x for longer linecasts and 1.4x for shorter ones.
+		- Linecast methods will now assign the #Pathfinding.GraphHitInfo.node field with the last node that was traversed in case no obstacle was hit.
+		- Linecast on graphs now set the hit point to the endpoint of the line if no obstacle was hit. Previously the endpoint would be set to Vector3.zero. Thanks borluse for suggesting this.
+		- Multithreading is now enabled by default (1 thread).
+		- The DynamicGridObstacle component now works with 2D colliders.
+		- Clicking on the graph name in the inspector will no longer focus the name text field.
+			To edit the graph name you will now have to click the Edit/Pen button to the right of the graph name.
+			Previously it was easy to focus the text field by mistake when you actually wanted to show the graph settings.
+			\shadowimage{changelog/edit_icon.png}
+		- Reduced memory usage of the PointGraph when using \link Pathfinding.PointGraph.optimizeForSparseGraph optimizeForSparseGraph\endlink.
+		- Improved the StartEndModifier inspector slightly.
+		- The Seeker inspector now has support for multi-editing.
+		- The AIPath and RichAI scripts now rotate to face the direction they are actually moving with when using local avoidance (RVO)
+			instead of always facing the direction they want to move with. At very low speeds they fall back to looking the direction they want to move with to avoid jitter.
+		- Improved the Seeker inspector. Unified the UI for setting tag penalties and determining if a tag should be traversable.
+			\shadowimage{changelog/seeker_tags.png}
+		- Reduced string allocations for error messages when paths fail.
+		- Added support for 2D physics to the #Pathfinding.RaycastModifier component.
+		- Improved performance of GraphUpdateObjects with updatePhysics=false on rotated navmesh/recast graphs.
+		- Improved the inspector for AILerp.
+		- RVO obstacles can now be visualized by enabling the 'Draw Obstacles' checkbox on the RVOSimulator component.
+			\shadowimage{changelog/rvo_navmesh_obstacle.png}
+		- Reduced allocations in the funnel modifier.
+		- Added a 'filter' parameter to \link Pathfinding.PathUtilities.BFS PathUtilities.BFS\endlink and \link Pathfinding.PathUtilities.GetReachableNodes PathUtilities.GetReachableNodes\endlink.
+		- Added a method called \link Pathfinding.IAstarAI.SetPath SetPath\endlink to all movement scripts.
+		- Added \link Pathfinding.GraphNode.Graph GraphNode.Graph\endlink.
+		- Added #Pathfinding.MeshNode.ContainsPoint(Vector3) in addition to the already existing MeshNode.ContainsPoint(Int3).
+		- Added #Pathfinding.MeshNode.ContainsPointInGraphSpace.
+		- Added #Pathfinding.TriangleMeshNode.GetVerticesInGraphSpace.
+		- Added Pathfinding.AstarData.FindGraph(predicate).
+		- Added Pathfinding.AstarData.FindGraphWhichInheritsFrom(type).
+		- Added a new class \link Pathfinding.GraphUtilities GraphUtilities\endlink which has some utilities for extracting contours of graphs.
+		- Added a new method \link Pathfinding.GridGraph.Linecast(GridNodeBase,GridNodeBase) Linecast(GridNodeBase,GridNodeBase)\endlink to the GridGraph class which is much faster than the normal Linecast methods.
+		- Added \link Pathfinding.GridGraph.GetNode(int,int) GridGraph.GetNode(int,int)\endlink.
+		- Added MeshNode.AddConnection(node,cost,edge) in addition to the already existing AddConnection(node,cost) method.
+		- Added a \link Pathfinding.NavMeshGraph.recalculateNormals\endlink setting to the navmesh graph for using the original mesh normals. This is useful for spherical/curved worlds.
+	- Documentation
+		- Added a documentation page on error messages: \ref error-messages.
+		- Added a tutorial on how to create a wandering AI: \ref wander.
+		- Added tutorial on bitmasks: \ref bitmasks.
+		- You can now right-click on most fields in the Unity Inspector to bring up a link to the online documentation.
+			\shadowimage{inspector_doc_links.png}
+		- Various other documentation improvements and fixes.
+	- Changes
+		- Height or collision testing for grid graphs now never hits triggers, regardless of the Unity Physics setting 'Queries Hit Triggers'
+		which has previously controlled this.
+		- Seeker.StartPath will no longer overwrite the path's graphMask unless it was explicitly passed as a parameter to the StartPath method.
+		- The built in movement scripts no longer uses a coroutine for scheduling path recalculations.
+			This shouldn't have any impact for you unless you have been modifying those scripts.
+		- Replaced the MineBotAI script that has been used in the tutorials with MineBotAnimation.
+			The new script does not inherit from AIPath so in the example scenes there is now one AIPath component and one MineBotAnimation script on each unit.
+		- Removed prompt to make the package support UnityScript which would show up the first time you used the package in a new project.
+			Few people use UnityScript nowadays so that prompt was mostly annoying. UnityScript support can still be enabled, see \ref javscript.
+		- If deserialization fails, the graph data will no longer be stored in a backup byte array to be able to be recovered later.
+			This was not very useful, but more importantly if the graph data was very large (several megabytes) then Unity's Undo system would choke on it
+			and essentially freeze the Unity editor.
+		- The StartEndModifier's raycasting options are now only used if the 'Original' snapping option is used as that's the only one it makes sense for.
+		- The RaycastModifier.subdivideEveryIter field has been removed, this is now always enabled except for the lowest quality setting.
+		- The RaycastModifier.iterations field has been removed. The number of iterations is now controlled by the quality field.
+			Unfortunately this setting cannot be directly mapped to a quality value, so if you are upgrading all RaycastModifier components will use the quality Medium after the upgrade.
+		- The default value for \link Pathfinding.RVOController.lockWhenNotMoving RVOController.lockWhenNotMoving\endlink is now false.
+		- Tiles are now enabled by default on recast graphs.
+		- Modifiers now register/unregister themselves with the Seeker component during OnEnable/OnDisable instead of Awake/OnDestroy.
+			If you have written any custom modifiers which defines those methods you may have to add the 'override' modifier to those methods and call base.OnEnable/OnDisable.
+		- When paths fail this is now always logged as a warning in the Unity console instead of a normal log message.
+		- Node connections now store which edge of the node shape that is used for that node. This is used for navmesh/recast graphs.
+		- The \link Pathfinding.RVOController.velocity velocity\endlink property on the RVOController can now be assigned to and that has the same effect as calling ForceSetVelocity.
+		- Deprecated the RVOController.ForceSetVelocity method. You should use the velocity property instead.
+		- All graphs now explicitly implement the IUpdatableGraph interface.
+			This is done to hide those methods (which should not be used directly) and thereby reduce confusion about which methods should be used to update graphs.
+		- Hid several internal methods behind the IGraphInternals interface to reduce clutter in the documentation and IntelliSense suggestions.
+		- Removed NavGraph.UnloadGizmoMeshes because it was not used for anything.
+		- Since 4.0 individual graphs can be scanned using AstarPath.Scan. The older NavGraph.Scan method now redirects to that method
+			which is more robust. This may cause slight changes in behavior, however the recommendation in the documentation has always been to use AstarPath.Scan anyway
+			so I do not expect many to have used the NavGraph.Scan method.
+		- Deprecated the NavGraph.ScanGraph method since it just does the same thing as NavGraph.Scan.
+		- Deprecated the internal methods Path.LogError and Path.Log.
+		- Added the new internal method Path.FailWithError which replaces LogError and Log.
+		- Made the AIPath.TrySearchPath method private, it should never have been public to begin with.
+	- Fixes
+		- Fixed AIPath/RichAI throwing exceptions in the Unity Editor when drawing gizmos if the game starts while they are enabled in a disabled gameObject.
+		- Fixed some typos in the documentation for PathUtilities.BFS and PathUtilities.GetReachableNodes.
+		- For some point graph settings, path requests to points that could not be reached would fail completely instead of going to the closest node that it could reach. Thanks BYELIK for reporting this bug.
+			If you for some reason have been relying on the old buggy behavior you can emulate it by setting A* Inspector -> Settings -> Max Nearest Node Distance to a very low value.
+		- Fixed connection costs were assumed to be equal in both directions for bidirectional connections.
+		- Fixed a compiler error when building for UWP/HoloLens.
+		- Fixed some cases where circles used for debugging could have a much lower resolution than intended (#Pathfinding.Util.Draw.Debug.CircleXZ).
+		- Fixed RVO agents which were locked but some script sent it movement commands would cause the RVO system to think it was moving
+			even though it was actually stationary, causing some odd behavior. Now locked agents are always treated as stationary.
+		- Fixed RVO obstacles generated from graph borders (using the RVONavmesh component) could be incorrect if a tiled recast graph and navmesh cutting was used.
+			The bug resulted in an RVO obstacle around the tile that was most recently updated by a navmesh cut even where there should be no obstacle.
+		- Fixed the RVONavmesh component could throw an exception in some cases when using tiled recast graphs.
+		- Fixed a regression in some 4.0.x version where setting \link Pathfinding.RVOController.velocity RVOController.velocity\endlink to make the agent's movement externally controlled
+			would not work properly (the system would always think the agent had a velocity of zero).
+		- Fixed the RichAI movement script could sometimes get stuck on the border between two tiles.
+			(due to a possibility of division by zero that would cause its velocity to become NaN).
+		- Fixed AIPath/RichAI movement not working properly with rigidbodies in Unity 2017.3+ when the new physics setting "Auto Sync Transforms" was disabled. Thanks DougW for reporting this and coming up with a fix.
+		- Fixed a few cases where \link Pathfinding.RichAI RichAI\endlink would automatically recalculate its path even though \link Pathfinding.RichAI.canSearch canSearch\endlink was disabled.
+		- Fixed some compiler warnings when using Unity 2017.3 or later.
+		- Fixed graphical artifacts in the graph visualization line drawing code which could show up at very large coordinate values or steep viewing angles.
+			Differential calculus can be really useful sometimes.
+		- Fixed the \ref MultiTargetPathExample.cs.
+		- Fixed the width/depth fields in the recast graph inspector causing warnings to be logged (introduced in 4.1.7). Thanks NoxMortem for reporting this.
+		- Fixed the Pathfinding.GraphHitInfo.tangentOrigin field was offset by half a node when using linecasting on grid graphs.
+		- Fixed the AIPath script with rotationIn2D would rotate so that the Z axis pointed in the -Z direction instead of as is common for Unity 2D objects: to point in the +Z direction.
+		- Fixed the AILerp script with rotationIn2D would rotate incorrectly if it started out with the Z axis pointed in the -Z direction.
+		- Clamp recast graph bounding box size to be non-zero on all axes.
+		- The DynamicGridObstacle component will now properly update the graph when the object is deactivated since the object just disappeared and shouldn't block the graph anymore.
+			Previously it only did this if the object was destroyed, not if it was deactivated.
+		- Fixed \link Pathfinding.AILerp AILerp\endlink ceasing to work properly if one of the paths it tries to calculate fails.
+		- Fixed the \link Pathfinding.FunnelModifier FunnelModifier\endlink could yield a zero length path in some rare circumstances when using custom node links.
+			This could lead to an exception in some of the movement scripts. Thanks DougW for reporting the bug.
+		- Fixed calling Seeker.CancelCurrentPathRequest could in some cases cause an exception to be thrown due to multithreading race conditions.
+		- Fixed a multithreading race condition which could cause a path canceled by Seeker.CancelCurrentPathRequest to not actually be canceled.
+		- Fixed a rare ArrayOutOfBoundsException when using the FunnelModifier with the 'unwrap' option enabled.
+		- Fixed Seeker -> Start End Modifier could not be expanded in the Unity inspector. Thanks Dee_Lucky for reporting this.
+		- Fixed a few compatiblity bugs relating to AIPath/RichAI that were introduced in 4.1.0.
+		- Fixed funnel modifier could sometimes fail if the agent started exactly on the border between two nodes.
+		- Fixed another bug which could cause the funnel modifier to produce incorrect results (it was checking for colinearity of points in 2D instead of in 3D).
+		- Fixed the funnel modifier would sometimes clip a corner near the end of the path.
+		- Fixed ProceduralGridMover would not detect user defined graphs that were subclasses of the GridGraph class. Thanks viveleroi for reporting this.
+		- Fixed enabling and disabling a AIPath or RichAI component a very large number of times could potentially have a negative performance impact.
+		- Fixed AIPath/RichAI would continue searching for paths even when the component had been disabled.
+		- MeshNode.ContainsPoint now supports rotated graphs properly. MeshNode is used in navmesh and recast graphs.
+		- Fixed Linecast for navmesh and recast graphs not working for rotated graphs.
+		- Fixed RVONavmesh component not working properly with grid graphs that had height differences.
+		- Fixed 2D RVO agents sometimes ignoring obstacles.
+		- Fixed RVONavmesh not removing the obstacles it had created when the component was disabled.
+		- Fixed RaycastModifier could miss obstacles when thick raycasting was used due to Unity's Physics.SphereCast method not
+			reporting hits very close to the start of the raycast.
+		- In the free version the inspector for RaycastModifier now displays a warning if graph raycasting is enabled since
+			for all built-in graphs raycasts are only supported in the pro version.
+		- Fixed some cases where the funnel modifier would produce incorrect results.
+		- Fixed typo in a private method in the AstarPath class. Renamed the UpdateGraphsInteral method to UpdateGraphsInternal.
+		- Fixed AIPath.remainingDistance and AIPath.targetReached could be incorrect for 1 frame when a new path had just been calculated (introduced in a previous beta release).
+	
 - 4.0.11 (2017-09-09)
 	- Fixed paths would ignore the ITraversalProvider (used for the turn based utilities) on the first node of the path, resulting in successful paths where they should have failed.
 	- Fixed BlockManager.BlockMode.AllExceptSelector could often produce incorrect results. Thanks Cquels for spotting the bug.
@@ -277,7 +483,7 @@
 		- Renamed GridNode.GetConnectionInternal to HasConnectionInDirection.
 		- Renamed NNInfo.clampedPosition to NNInfo.position.
 		- Renamed GridGraph.GetNodesInArea to GetNodesInRegion to avoid confusing the word 'area' for what is used to indicate different connected components in graphs.
-		- Renamed AIPath.turningSpeed to #AIPath.rotationSpeed.
+		- Renamed AIPath.turningSpeed to \link Pathfinding.AIPath.rotationSpeed rotationSpeed\endlink.
 		- Deprecated Seeker.GetNewPath.
 		- Deprecated NavGraph.matrix, NavGraph.inverseMatrix, NavGraph.SetMatrix and NavGraph.RelocateNodes(Matrix4x4,Matrix4x4).
 			They have been replaced with a single transform field only available on some graph types as well as a few other overloads of teh RelocateNodes method.

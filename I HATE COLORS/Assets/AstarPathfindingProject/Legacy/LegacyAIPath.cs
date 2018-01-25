@@ -70,12 +70,12 @@ namespace Pathfinding.Legacy {
 		 * A path is first requested by #SearchPath, it is then calculated, probably in the same or the next frame.
 		 * Finally it is returned to the seeker which forwards it to this function.\n
 		 */
-		public override void OnPathComplete (Path _p) {
+		protected override void OnPathComplete (Path _p) {
 			ABPath p = _p as ABPath;
 
 			if (p == null) throw new System.Exception("This function only handles ABPaths, do not use special path types");
 
-			canSearchAgain = true;
+			waitingForPathCalculation = false;
 
 			//Claim the new path
 			p.Claim(this);
@@ -95,7 +95,7 @@ namespace Pathfinding.Legacy {
 
 			//Reset some variables
 			currentWaypointIndex = 0;
-			TargetReached = false;
+			reachedEndOfPath = false;
 
 			//The next row can be used to find out if the path could be found or not
 			//If it couldn't (error == true), then a message has probably been logged to the console
@@ -204,10 +204,9 @@ namespace Pathfinding.Legacy {
 			float slowdown = Mathf.Clamp01(targetDist / slowdownDistance);
 
 			this.targetDirection = dir;
-			this.targetPoint = targetPosition;
 
 			if (currentWaypointIndex == vPath.Count-1 && targetDist <= endReachedDistance) {
-				if (!TargetReached) { TargetReached = true; OnTargetReached(); }
+				if (!reachedEndOfPath) { reachedEndOfPath = true; OnTargetReached(); }
 
 				//Send a move request, this ensures gravity is applied
 				return Vector3.zero;
@@ -215,7 +214,7 @@ namespace Pathfinding.Legacy {
 
 			Vector3 forward = tr.forward;
 			float dot = Vector3.Dot(dir.normalized, forward);
-			float sp = speed * Mathf.Max(dot, minMoveScale) * slowdown;
+			float sp = maxSpeed * Mathf.Max(dot, minMoveScale) * slowdown;
 
 
 			if (Time.deltaTime > 0) {

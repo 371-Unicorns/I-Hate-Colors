@@ -397,7 +397,6 @@ MonoBehaviour:
   data:
     dataString: UEsDBBQAAAgIAAAIIexF0+fxHwEAAPUBAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGFUU1vwjAM/StVzhtKQXTVjpsmToNJ3aRpl8lLHIiUOlU+gIL470tKJ9Au5GLHz89+to/M2+gEvqLfsMfiyJbQYnIYwbZNsW/cQ9sZrMY/uyvYe98NKR+kQ/9Ca004GfinBFqlPIZcqmD7ZHiK9aM9ZFvkLGcDBG3pVp4XYHKvMvnKJp3yyUaSvtEHvHCn5aTm6ZXlvyLldDKbnwtt7C5rXMVgkt6EBRdxBJZW4rMlQpE1+QQqMB6vaE10CsQVjRAc+tAkIzYrMv3n1wVcRy3P6rZg4rArWUtZV5I/CDkH+OH3XNZciVlZo6oqUXM2yNRppRrMGxKY8DeJ7ZCuOo8HWsI2K1s46IarSAe7hT601l9yNSnbCIdIq3ONYa7TL1BLAwQUAAAICAAACCHsSXTLG28AAAB6AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9Az0FFQSi9KLMgoBgoYgjilmSkgdrRSikVKioVZioF5coppYmKSga5BioVBWrKxoUVqmplZsoWBUixQfUllQapfYm4qRE9AYklGWmZeSmZeup5fYplvanGGO8h0pdhaAFBLAQItABQAAAgIAAAIIexF0+fxHwEAAPUBAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAIIexJdMsbbwAAAHoAAAAJACQAAAAAAAAAAAAAAGwBAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAJgIAAAAA
     upgradeData: 
-    data_backup: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
@@ -742,6 +741,7 @@ GameObject:
   - 114: {fileID: 1797897907}
   - 114: {fileID: 1797897906}
   - 114: {fileID: 1797897904}
+  - 114: {fileID: 1797897905}
   m_Layer: 1
   m_Name: Player
   m_TagString: Untagged
@@ -774,16 +774,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 2
   repathRate: .100000001
-  target: {fileID: 16}
   canSearch: 1
   canMove: 1
-  speed: 2.20000005
+  maxSpeed: 2.20000005
+  gravity: {x: NaN, y: NaN, z: NaN}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  centerOffset: 1
+  rotationIn2D: 0
+  targetCompatibility: {fileID: 0}
   rotationSpeed: 720
   slowdownDistance: .200000003
   pickNextWaypointDist: .699999988
   endReachedDistance: .200000003
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
+--- !u!114 &1797897905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1797897902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 16}
 --- !u!114 &1797897906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -843,9 +865,6 @@ MonoBehaviour:
       m_Bits: 4294967295
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!143 &1797897909
 CharacterController:

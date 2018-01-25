@@ -4,14 +4,39 @@ using System.Collections.Generic;
 namespace Pathfinding {
 	[System.Serializable]
 	/** Adjusts start and end points of a path.
+	 *
+	 * This modifier is included in the \link Pathfinding.Seeker Seeker\endlink component and is always used if you are using a Seeker.
+	 * When a path is calculated the resulting path will only be the positions of the nodes it passes through.
+	 * However often you may not want to navigate to the center of a specific node but instead to a point on the surface of a node.
+	 * This modifier will adjust the endpoints of the path.
+	 *
+	 * \shadowimage{startendmodifier.png}
+	 *
 	 * \ingroup modifiers
+	 *
 	 */
 	public class StartEndModifier : PathModifier {
 		public override int Order { get { return 0; } }
 
-		/** Add points to the path instead of replacing them */
+		/** Add points to the path instead of replacing them.
+		 * If for example #exactEndPoint is set to ClosestOnNode then the path will be modified so that
+		 * the path goes first to the center of the last node in the path and then goes to the closest point
+		 * on the node to the end point in the path request.
+		 *
+		 * If this is false however then the relevant points in the path will simply be replaced.
+		 * In the above example the path would go directly to the closest point on the node without passing
+		 * through the center of the node.
+		 */
 		public bool addPoints;
+
+		/** How the start point of the path will be determined.
+		 * \see #Exactness
+		 */
 		public Exactness exactStartPoint = Exactness.ClosestOnNode;
+
+		/** How the end point of the path will be determined.
+		 * \see #Exactness
+		 */
 		public Exactness exactEndPoint = Exactness.ClosestOnNode;
 
 		/** Will be called when a path is processed.
@@ -23,23 +48,37 @@ namespace Pathfinding {
 
 		/** Sets where the start and end points of a path should be placed */
 		public enum Exactness {
-			/** The point is snapped to the first/last node in the path*/
+			/** The point is snapped to the position of the first/last node in the path */
 			SnapToNode,
-			/** The point is set to the exact point which was passed when calling the pathfinding */
+			/** The point is set to the exact point which was passed when creating the path request */
 			Original,
 			/** The point is set to the closest point on the line between either the two first points or the two last points.
 			 * Usually you will want to use the NodeConnection mode instead since that is usually the behaviour that you really want.
+			 * This mode exists mostly for compatibility reasons.
+			 *
+			 * \deprecated Use NodeConnection instead.
 			 */
 			Interpolate,
-			/** The point is set to the closest point on the node. Note that for some node types (point nodes) the "closest point" is the node's position which makes this identical to Exactness.SnapToNode */
+			/** The point is set to the closest point on the surface of the node. Note that some node types (point nodes) do not have a surface, so the "closest point" is simply the node's position which makes this identical to #Exactness.SnapToNode */
 			ClosestOnNode,
 			/** The point is set to the closest point on one of the connections from the start/end node */
 			NodeConnection,
 		}
 
+		/** Do a straight line check from the node's center to the point determined by the #Exactness.
+		 * There are very few cases where you will want to use this. It is mostly here for
+		 * backwards compatibility reasons.
+		 *
+		 * \version Since 4.1 this field only has an effect for the #Exactness mode Original because that's the only one where it makes sense.
+		 */
 		public bool useRaycasting;
 		public LayerMask mask = -1;
 
+		/** Do a straight line check from the node's center to the point determined by the #Exactness.
+		 * \see #useRaycasting
+		 *
+		 * \version Since 4.1 this field only has an effect for the #Exactness mode Original because that's the only one where it makes sense.
+		 */
 		public bool useGraphRaycasting;
 
 		List<GraphNode> connectionBuffer;
@@ -88,7 +127,7 @@ namespace Pathfinding {
 
 			switch (mode) {
 			case Exactness.ClosestOnNode:
-				return GetClampedPoint(nodePos, start ? path.startPoint : path.endPoint, node);
+				return start ? path.startPoint : path.endPoint;
 			case Exactness.SnapToNode:
 				return nodePos;
 			case Exactness.Original:
@@ -105,10 +144,9 @@ namespace Pathfinding {
 				case Exactness.Original:
 					return GetClampedPoint(nodePos, relevantPoint, node);
 				case Exactness.Interpolate:
-					var clamped = GetClampedPoint(nodePos, relevantPoint, node);
 					// Adjacent node to either the start node or the end node in the path
 					var adjacentNode = path.path[Mathf.Clamp(index + (start ? 1 : -1), 0, path.path.Count-1)];
-					return VectorMath.ClosestPointOnSegment(nodePos, (Vector3)adjacentNode.position, clamped);
+					return VectorMath.ClosestPointOnSegment(nodePos, (Vector3)adjacentNode.position, relevantPoint);
 				case Exactness.NodeConnection:
 					// This code uses some tricks to avoid allocations
 					// even though it uses delegates heavily
@@ -156,7 +194,7 @@ namespace Pathfinding {
 			}
 		}
 
-		public Vector3 GetClampedPoint (Vector3 from, Vector3 to, GraphNode hint) {
+		protected Vector3 GetClampedPoint (Vector3 from, Vector3 to, GraphNode hint) {
 			Vector3 point = to;
 			RaycastHit hit;
 

@@ -862,6 +862,7 @@ GameObject:
   - 114: {fileID: 498}
   - 114: {fileID: 499}
   - 114: {fileID: 128}
+  - 114: {fileID: 131}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -933,16 +934,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
+  version: 2
   repathRate: .5
-  target: {fileID: 249}
   canSearch: 1
   canMove: 1
-  speed: 5
+  maxSpeed: 5
+  gravity: {x: NaN, y: NaN, z: NaN}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  centerOffset: 1
+  rotationIn2D: 0
+  targetCompatibility: {fileID: 0}
   rotationSpeed: 360
   slowdownDistance: .699999988
   pickNextWaypointDist: 1
   endReachedDistance: .100000001
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
 --- !u!4 &129
 Transform:
   m_ObjectHideFlags: 0
@@ -967,6 +977,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 249}
 --- !u!4 &203
 Transform:
   m_ObjectHideFlags: 0
@@ -3265,9 +3288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAIIewjyFmnOwEAAAUCAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlkctuwjAQRX8l8rqgNI8m6ZoWdUMRjw8Y25PEIrEj2wEC4t9rJ1RQdTXWmTt3rsZXopWy5D24khW06B5kpTiaFZ7IS0B2QzeyvRR2+JCVkDjfaZCmVLr1guX+a+EFRRaVUZhTSMOspK/xDLOM0gyKhCaYxHFBbk5tEDSrd1BNnhaqCrm3aeG8EMaCZH5d6kgjWmGNDxaQsyuhY8O9XnwNvKGGgYHx+UtoDDrSG4wW63owgpknbGvBDpt/6me8AS56PxPN33LvjazXRhx9Iqt7HGOawxTpCE3vG7N0zKE66/Je8FPpbQfa4FJDVz8Gq17wv4Mkjl+zhBaMJhQ5QjhL8gh4mueYspRizsnoLNzlBTRrlNDY3wOoDuXDXN4/bq2EtNNiR7mG01JcWmUeSiFLtWUaUX5PDuMdbj9QSwMEFAAACAgAAAgh7Dyo8lBtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPQM9BRUEovSizIKAYKGII4pZkpIHa0krGxoblJkmVykklSakpqooGuiYVRYoqphUWqabJpUqpFilIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeQH5mXok7yGyl2FoAUEsBAi0AFAAACAgAAAgh7CPIWac7AQAABQIAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7Dyo8lBtAAAAeAAAAAkAJAAAAAAAAAAAAAAAiAEAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABAAgAAAAA=
+    dataString: UEsDBBQAAAgIAAAIIewjyFmnOwEAAAUCAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlkctuwjAQRX8l8rqgNI8m6ZoWdUMRjw8Y25PEIrEj2wEC4t9rJ1RQdTXWmTt3rsZXopWy5D24khW06B5kpTiaFZ7IS0B2QzeyvRR2+JCVkDjfaZCmVLr1guX+a+EFRRaVUZhTSMOspK/xDLOM0gyKhCaYxHFBbk5tEDSrd1BNnhaqCrm3aeG8EMaCZH5d6kgjWmGNDxaQsyuhY8O9XnwNvKGGgYHx+UtoDDrSG4wW63owgpknbGvBDpt/6me8AS56PxPN33LvjazXRhx9Iqt7HGOawxTpCE3vG7N0zKE66/Je8FPpbQfa4FJDVz8Gq17wv4Mkjl+zhBaMJhQ5QjhL8gh4mueYspRizsnoLNzlBTRrlNDY3wOoDuXDXN4/bq2EtNNiR7mG01JcWmUeSiFLtWUaUX5PDuMdbj9QSwMEFAAACAgAAAgh7BYsDkltAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPUs9RRUEovSizIKAYKGII4pZkpIHa0krGxoblJkmVykklSakpqooGuiYVRYoqphUWqabJpUqpFilIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrpeQH5mXok7yGyl2FoAUEsBAi0AFAAACAgAAAgh7CPIWac7AQAABQIAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAgh7BYsDkltAAAAeAAAAAkAJAAAAAAAAAAAAAAAiAEAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABAAgAAAAA=
     upgradeData: 
-    data_backup: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
     cacheStartup: 0
@@ -3363,9 +3385,6 @@ MonoBehaviour:
       m_Bits: 0
     useGraphRaycasting: 0
   traversableTags: -1
-  traversableTagsCompatibility:
-    tagsChange: -1
-    tagsSet: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &499
 MonoBehaviour:

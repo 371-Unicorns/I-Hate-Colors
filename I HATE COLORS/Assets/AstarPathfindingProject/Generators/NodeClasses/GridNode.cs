@@ -257,7 +257,7 @@ namespace Pathfinding {
 			int[] neighbourOffsets = gg.neighbourOffsets;
 			GridNode[] nodes = gg.nodes;
 
-			UpdateG(path, pathNode);
+			pathNode.UpdateG(path);
 			handler.heap.Add(pathNode);
 
 			ushort pid = handler.PathID;
@@ -296,6 +296,7 @@ namespace Pathfinding {
 
 						uint tmpCost = neighbourCosts[i];
 
+						// Check if the other node has not yet been visited by this path
 						if (otherPN.pathID != pid) {
 							otherPN.parent = pathNode;
 							otherPN.pathID = pid;
@@ -303,11 +304,9 @@ namespace Pathfinding {
 							otherPN.cost = tmpCost;
 
 							otherPN.H = path.CalculateHScore(other);
-							other.UpdateG(path, otherPN);
+							otherPN.UpdateG(path);
 
-							//Debug.Log ("G " + otherPN.G + " F " + otherPN.F);
 							handler.heap.Add(otherPN);
-							//Debug.DrawRay ((Vector3)otherPN.node.Position, Vector3.up,Color.blue);
 						} else {
 							// Sorry for the huge number of #ifs
 
@@ -325,20 +324,6 @@ namespace Pathfinding {
 								otherPN.parent = pathNode;
 
 								other.UpdateRecursiveG(path, otherPN, handler);
-
-								//Or if the path from this node ("other") to the current ("current") is better
-							}
-#if ASTAR_NO_TRAVERSAL_COST
-							else if (otherPN.G+tmpCost < pathNode.G)
-#else
-							else if (otherPN.G+tmpCost+path.GetTraversalCost(this) < pathNode.G)
-#endif
-							{
-								//Debug.Log ("Path better from " + otherPN.node.NodeIndex + " to " + NodeIndex + " " + (otherPN.G+tmpCost+path.GetTraversalCost (this)) + " < " + pathNode.G);
-								pathNode.parent = otherPN;
-								pathNode.cost = tmpCost;
-
-								UpdateRecursiveG(path, pathNode, handler);
 							}
 						}
 					}

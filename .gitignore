@@ -329,12 +329,12 @@ Temporary Items
 test-results/
 
 ### Unity ###
-I HATE COLORS/[Ll]ibrary/
-I HATE COLORS/[Tt]emp/
-I HATE COLORS/[Oo]bj/
-I HATE COLORS/[Bb]uild/
-I HATE COLORS/[Bb]uilds/
-I HATE COLORS/Assets/AssetStoreTools*
+/I HATE COLORS/[Ll]ibrary/
+/I HATE COLORS/[Tt]emp/
+/I HATE COLORS/[Oo]bj/
+/I HATE COLORS/[Bb]uild/
+/I HATE COLORS/[Bb]uilds/
+/I HATE COLORS/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
 /.vs/
