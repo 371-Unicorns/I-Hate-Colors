@@ -3576,9 +3576,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54f0b2feb89e57343bb413f7d630842d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  castle: {fileID: 0}
   gameOver: 0
   gameOverText: {fileID: 339113517}
   healthText: {fileID: 432489181}
+  enemies: []
 --- !u!1001 &524412602
 Prefab:
   m_ObjectHideFlags: 0
@@ -8032,7 +8034,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 8.365255
+  orthographic size: 5.64
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8055,7 +8057,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1117435693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalPosition: {x: -1.45, y: 2.1, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12156,7 +12158,7 @@ SpriteRenderer:
   m_SortingLayerID: -784907773
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8cfa154c44c18244cb7f4c91cb4abdcc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f870df5c3d0d34f4db0e2f70e030f840, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12173,7 +12175,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1515026743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.51, y: 2.09, z: 1}
+  m_LocalPosition: {x: 2.51, y: 2.108, z: 1}
   m_LocalScale: {x: 0.0252292, y: 0.0252292, z: 0.0252292}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12215,6 +12217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffeed6a1a068dcd4d80545c58510023c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
 --- !u!1 &1515347484
 GameObject:
   m_ObjectHideFlags: 0
