@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CastleController : MonoBehaviour {
 
-    private int health;
+    public int health;
 	// Use this for initialization
 	void Start () {
         health = 100;
@@ -17,6 +17,7 @@ public class CastleController : MonoBehaviour {
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        Destroy(collision.gameObject);
         if(health > 0)
             health--;
         if(health == 0)
