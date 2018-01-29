@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MainGame;
 
 public class Turret : MonoBehaviour {
 
@@ -14,16 +15,17 @@ public class Turret : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
 
-    private Transform target;
-    private float countdownToFire = 0f;
+    public Transform target;
+    private float countdownToFire = 1f;
 
     void Start () {
-        InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        target = null;
 	}
 	
 	void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        ArrayList enemies = GameControl.GetEnemies();
+        print(enemies.Count);
 
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
@@ -60,12 +62,13 @@ public class Turret : MonoBehaviour {
     }
 
 	void Update () {
-		if (target == null)
+        //where to rotate turrets
+        UpdateTarget();
+
+        if (target == null)
         {
             return;
         }
-
-        //where to rotate turrets
 
         if (countdownToFire <= 0f)
         {

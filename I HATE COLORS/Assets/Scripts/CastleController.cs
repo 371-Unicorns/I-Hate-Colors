@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MainGame;
 
 public class CastleController : MonoBehaviour {
 
@@ -17,7 +18,9 @@ public class CastleController : MonoBehaviour {
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        GameControl.GetEnemies().Remove(collision.gameObject);
         Destroy(collision.gameObject);
+
         if(health > 0)
             health--;
         if(health == 0)
