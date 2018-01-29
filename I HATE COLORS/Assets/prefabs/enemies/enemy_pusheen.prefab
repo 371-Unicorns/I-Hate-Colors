@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 50569337159479438}
   - component: {fileID: 58429899201754352}
   m_Layer: 12
-  m_Name: enemy_pusheen
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
