@@ -16,7 +16,7 @@ TagManager:
   - 
   - Nodes
   - Background
-  - 
+  - A* Obstacles
   - 
   - Players
   - Bullets
@@ -45,6 +45,12 @@ TagManager:
   - name: Background
     uniqueID: 2074376427
     locked: 0
-  - name: Sprites
+  - name: Towers
+    uniqueID: 3693077661
+    locked: 0
+  - name: Enemies
     uniqueID: 3510059523
+    locked: 0
+  - name: Hover
+    uniqueID: 326291917
     locked: 0
