@@ -2058,6 +2058,21 @@ Prefab:
       propertyPath: m_Name
       value: Sprite
       objectReference: {fileID: 0}
+    - target: {fileID: 114426550761404634, guid: 4e7e466a1e1a1c54eaaa50474dc31b56,
+        type: 2}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114426550761404634, guid: 4e7e466a1e1a1c54eaaa50474dc31b56,
+        type: 2}
+      propertyPath: fireRate
+      value: 68.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114426550761404634, guid: 4e7e466a1e1a1c54eaaa50474dc31b56,
+        type: 2}
+      propertyPath: range
+      value: 38.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e7e466a1e1a1c54eaaa50474dc31b56, type: 2}
   m_IsPrefabParent: 0
@@ -3403,8 +3418,7 @@ MonoBehaviour:
   gameOver: 0
   gameOverText: {fileID: 339113517}
   healthText: {fileID: 432489181}
-  enemies:
-  - {fileID: 1944684868302490, guid: bf37ad36b4e125f4c9ceca0a786f5bbf, type: 2}
+  enemyList: []
 --- !u!1001 &524412602
 Prefab:
   m_ObjectHideFlags: 0
