@@ -458,7 +458,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 326291917
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b67b0f7469952ef4a803e0a3e4f02454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -876,12 +876,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b791ce6e542bb864dae68d63842f0ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  width: 15
+  heigth: 7
   gameOver: 0
   gameOverText: {fileID: 0}
   healthText: {fileID: 0}
   enemyList: []
-  width: 15
-  heigth: 7
 --- !u!4 &1294420089
 Transform:
   m_ObjectHideFlags: 0
@@ -977,7 +977,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 4
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   enemies: {fileID: 1154713577}
   towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
     type: 2}
-  pusheenPrefab: {fileID: 1944684868302490, guid: bf37ad36b4e125f4c9ceca0a786f5bbf,
+  pusheenPrefab: {fileID: 1845804638312314, guid: de5f0c82ef005b845ba4bcd93e057dc2,
     type: 2}
 --- !u!4 &1800944729
 Transform:
