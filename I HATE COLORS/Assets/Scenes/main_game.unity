@@ -2066,12 +2066,12 @@ Prefab:
     - target: {fileID: 114426550761404634, guid: 4e7e466a1e1a1c54eaaa50474dc31b56,
         type: 2}
       propertyPath: fireRate
-      value: 68.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114426550761404634, guid: 4e7e466a1e1a1c54eaaa50474dc31b56,
         type: 2}
       propertyPath: range
-      value: 38.1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e7e466a1e1a1c54eaaa50474dc31b56, type: 2}
@@ -3418,7 +3418,8 @@ MonoBehaviour:
   gameOver: 0
   gameOverText: {fileID: 339113517}
   healthText: {fileID: 432489181}
-  enemyList: []
+  enemyList:
+  - {fileID: 1944684868302490, guid: bf37ad36b4e125f4c9ceca0a786f5bbf, type: 2}
 --- !u!1001 &524412602
 Prefab:
   m_ObjectHideFlags: 0
@@ -8218,7 +8219,7 @@ MonoBehaviour:
     seed: 0
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
-  showGraphs: 0
+  showGraphs: 1
 --- !u!4 &1152856553
 Transform:
   m_ObjectHideFlags: 0
