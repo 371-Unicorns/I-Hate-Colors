@@ -1078,7 +1078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grassTile: {fileID: 1421935461526844, guid: 61c6a6fa53cfa094aa880139c7b0fc25, type: 2}
-  wallTile: {fileID: 1895383895475978, guid: fe70a06a6d94d574e9efc3f711d9ea1c, type: 2}
+  wallTile: {fileID: 1712275638179984, guid: 755a59fb1cee3e342a0ff245b38c4d59, type: 2}
   map: {fileID: 644048562}
   enemies: {fileID: 1154713577}
   towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
