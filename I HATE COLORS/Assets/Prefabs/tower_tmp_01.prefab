@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 212886114892803304}
   - component: {fileID: 114151732517600178}
   - component: {fileID: 61716106735944588}
-  m_Layer: 8
+  - component: {fileID: 114555940482824722}
+  m_Layer: 10
   m_Name: tower_tmp_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,6 +79,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e157e2cd4bae4183806a71e70f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114555940482824722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904437191444272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e037e39f05d91b142b2eb63f51712b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  fireRate: 1
+  enemyTag: Enemy
+  bulletPrefab: {fileID: 1049023387692060, guid: 5863ea6b7e626024da17bd721d24fb9a,
+    type: 2}
+  target: {fileID: 0}
 --- !u!212 &212886114892803304
 SpriteRenderer:
   m_ObjectHideFlags: 1

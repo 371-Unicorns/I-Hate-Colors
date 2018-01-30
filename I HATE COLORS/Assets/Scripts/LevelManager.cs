@@ -89,5 +89,7 @@ public class LevelManager : Singleton<LevelManager>
 
         TileScript randomTargetTileScript = targetTiles[Random.Range(0, targetTiles.Length)];
         pusheen.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
+
+        GameManager.PushEnemy(pusheen);
     }
 }

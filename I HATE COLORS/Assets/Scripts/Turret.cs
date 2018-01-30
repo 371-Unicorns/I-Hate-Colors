@@ -13,7 +13,6 @@ public class Turret : MonoBehaviour {
     public string enemyTag = "Enemy";
 
     public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
 
     public Transform target;
     private float countdownToFire = 1f;
@@ -24,7 +23,7 @@ public class Turret : MonoBehaviour {
 	
 	void UpdateTarget()
     {
-        ArrayList enemies = GameControl.GetEnemies();
+        ArrayList enemies = GameManager.GetEnemies();
         print(enemies.Count);
 
         float shortestDistance = Mathf.Infinity;
@@ -52,7 +51,7 @@ public class Turret : MonoBehaviour {
 
     void Shoot()
     {
-        GameObject goBullet = (GameObject)Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        GameObject goBullet = (GameObject)Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation);
         Bullet bullet = goBullet.GetComponent<Bullet>();
 
         if (bullet != null)

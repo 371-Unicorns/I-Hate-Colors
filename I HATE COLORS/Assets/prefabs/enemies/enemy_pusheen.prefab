@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 114179232007669918}
   - component: {fileID: 114963020727362222}
   - component: {fileID: 114496542021892042}
-  - component: {fileID: 50569337159479438}
   - component: {fileID: 58429899201754352}
   m_Layer: 12
   m_Name: enemy_pusheen
@@ -74,26 +73,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50569337159479438
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1944684868302490}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &58429899201754352
 CircleCollider2D:
   m_ObjectHideFlags: 1
