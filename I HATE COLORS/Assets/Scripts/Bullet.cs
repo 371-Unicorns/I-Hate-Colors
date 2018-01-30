@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : MonoBehaviour
+{
 
     public float speed = 10f;
     public GameObject impactFX;
-    
+
     private Transform target;
 
     public void Seek(Transform _target)
@@ -18,12 +19,13 @@ public class Bullet : MonoBehaviour {
     {
         GameObject fx = (GameObject)Instantiate(impactFX, transform.position, transform.rotation);
         Destroy(fx, 2f);
-       // Destroy(target.gameObject);
+        Destroy(target.gameObject);
         Destroy(gameObject);
     }
 
-    void Update () {
-		if (target == null)
+    void Update()
+    {
+        if (target == null)
         {
             Destroy(gameObject);
             return;
@@ -39,5 +41,5 @@ public class Bullet : MonoBehaviour {
         }
 
         transform.Translate(dir.normalized * distFrame, Space.World);
-	}
+    }
 }
