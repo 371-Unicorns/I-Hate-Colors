@@ -18,8 +18,8 @@ public class GameManager : Singleton<GameManager>
     /// Height of grid
     /// </summary>
     [SerializeField]
-    private int heigth = 7;
-    public int Heigth { get { return heigth; } }
+    private int height = 7;
+    public int Height { get { return height; } }
 
     /// <summary>
     /// Currently selected tower by player.
@@ -30,10 +30,14 @@ public class GameManager : Singleton<GameManager>
     public bool gameOver;
     public Text gameOverText;
     public Text healthText;
+    public Text moneyText;
 
     public GameObject[] enemyList;
 
     public static ArrayList activeEnemies = new ArrayList();
+
+    public int castleHealth = 100;
+    public int money = 0;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -43,16 +47,22 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         gameOver = false;
-        //gameOverText.text = "";
-        //healthText.text = "Health: 100";
+        gameOverText.text = "";
+        healthText.text = "Health: 100";
+        moneyText.text = "$ ";
     }
 
     void Update()
     {
         if (gameOver)
         {
-            //healthText.text = "Health: 0";
-            //gameOverText.text = "GAME OVER";
+            healthText.text = "Health: 0";
+            gameOverText.text = "GAME OVER";
+        }
+        else
+        {
+            healthText.text = "Health: " + castleHealth.ToString();
+            moneyText.text = "$ " + money.ToString();
         }
     }
 
@@ -84,4 +94,5 @@ public class GameManager : Singleton<GameManager>
     {
         this.SelectedTower = null;
     }
+
 }

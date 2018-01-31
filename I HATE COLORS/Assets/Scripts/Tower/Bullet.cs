@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
         GameManager.activeEnemies.Remove(target.transform);
         target.gameObject.SetActive(false);
         Destroy(gameObject);
+        GameManager.Instance.money += 20;
     }
 
     void Update()

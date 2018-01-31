@@ -35,7 +35,7 @@ public class LevelManager : Singleton<LevelManager>
     void Start()
     {
         TileDict = new Dictionary<Point, Tile>();
-        GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Heigth);
+        GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Height);
         Hover.Instance.Deactivate();
     }
 
@@ -47,8 +47,8 @@ public class LevelManager : Singleton<LevelManager>
         GenerateTiles(width, heigth, tileSize, worldStart);
         GridGraphManager.Instance.AdjustGridGraph(width, heigth, tileSize, worldStart);
 
-        targetTiles = new Tile[GameManager.Instance.Heigth];
-        for (int i = 0; i < GameManager.Instance.Heigth; i++)
+        targetTiles = new Tile[GameManager.Instance.Height];
+        for (int i = 0; i < GameManager.Instance.Height; i++)
         {
             Tile tile = TileDict[new Point(GameManager.Instance.Width - 1, i)];
             targetTiles[i] = tile;
@@ -83,7 +83,7 @@ public class LevelManager : Singleton<LevelManager>
 
     public void SpawnUnicorn()
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Heigth));
+        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
         GameObject unicorn = Instantiate(unicornPrefab, spawnTileScript.transform.position, Quaternion.identity);
         unicorn.transform.SetParent(enemies.transform);
@@ -93,4 +93,16 @@ public class LevelManager : Singleton<LevelManager>
 
         GameManager.PushEnemy(unicorn);
     }
+
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (GameManager.Instance.castleHealth > 0)
+            GameManager.Instance.castleHealth--;
+        if (GameManager.Instance.castleHealth == 0)
+        {
+            GameManager.Instance.gameOver = true;
+        }
+    }
+
 }
