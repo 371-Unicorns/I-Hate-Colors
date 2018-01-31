@@ -263,6 +263,7 @@ RectTransform:
   - {fileID: 606119404}
   - {fileID: 1609847444}
   - {fileID: 1128528643}
+  - {fileID: 946051182}
   m_Father: {fileID: 738701219}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -606,6 +607,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 922461471}
+--- !u!1 &946051181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 946051182}
+  - component: {fileID: 946051184}
+  - component: {fileID: 946051183}
+  m_Layer: 5
+  m_Name: Money
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &946051182
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 946051181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 522868060}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -232.5, y: -51.7}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &946051183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 946051181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: MoneyText
+--- !u!222 &946051184
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 946051181}
 --- !u!1 &966140171
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +733,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -717,9 +792,9 @@ RectTransform:
   m_Father: {fileID: 522868060}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -215.1, y: -24.7}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128528644
@@ -957,8 +1032,10 @@ MonoBehaviour:
   gameOver: 0
   gameOverText: {fileID: 1609847445}
   healthText: {fileID: 1128528644}
+  moneyText: {fileID: 946051183}
   enemyList: []
   castleHealth: 0
+  money: 0
 --- !u!4 &1294420089
 Transform:
   m_ObjectHideFlags: 0
@@ -1041,7 +1118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACAn+vL3OYPEQIAAHQEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty2kAQ/BVK5+CSeJNbApjkgKGMUzkP0ghtsdpV7SMYXP73zK5WliyfWLp7Znoe8BYxoStMjVRbxbKdzDD6PojcO/o2iMBzz2CYJDghhGlZolEs/SHO3GljAq1guVTlJjvjSmqjCc6BayRKSeOiBUFvg+iVPoZLF3Kj12juXnd6LePBOz1TFAZVK22EjaxWWZFyKCvMjuyOrTgJ4sSLBHUSeEekknOmg4/I3Crf5jPcXJcZA+rJF3baAtm5MM5fN3Cf5xpNMKPgtmaKRlNnjH5KU7hMJehL7egfcOtqjKYz76dOuvvCD2u7uZLlr6ZuErsapmDphRymoE1noF14/dm4FVfgFzhx/FugeJJbJa3IiDTKulCrcbRuv360tiowvbR4bbUH2urrWpKH+WKRjJez8WYYz8OOXEPvfhSvK87Kk9M/TGrgyKUfvL8AVLSi3+Te34cOeQl1lv5ofIFz95AC8ciUNkSFloXzepJWOWm08QN0rVmzkkqgh0MHFQrg5nagNKa/zx7XKdtjHsH9VELxwDW/hF6Ih1t9HPeog7x+bE4X8rpDXeyt4Uxga9oRTzSnlRSiPrfuTJqwo1U5pJ2ws2XZ5zuLxlOEyXQU4wQQsiQZLheYjiE+5UmGs2x+ivwhMkF9Aj/URsN4aGuiTS7o6Jo/icFWQeVPP1Nw3bJ7KTsjZyKXx1Qhin2b4f0/UEsDBBQAAAgIAACAn+tu4XRLNAAAADcAAAASACQAZ3JhcGgwX2VkaXRvci5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1bKyU/OTk1RslIoKSpN1VFQKs7IL3etKClKBAqlJeYUg8QKMsvyS4B8JefUvJLUIqVaAFBLAwQUAAAICAAAgJ/ry7WFAm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9QzNNBRUEovSizIKAaKGII4pZkpIHa0krFpaqKJqZFBqkliamKKoaGupUVqsnGiQVKaYUqqWYp5klIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAgJ/ry9zmDxECAAB0BAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAgJ/rbuF0SzQAAAA3AAAAEgAkAAAAAAAAAAAAAABeAgAAZ3JhcGgwX2VkaXRvci5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf68u1hQJtAAAAeAAAAAkAJAAAAAAAAAAAAAAA5gIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAwADABwBAACeAwAAAAA=
+    dataString: UEsDBBQAAAgIAACAn+vsDzYhEQIAAHMEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMuS2jAQ/BXK57Bl8ya3BFiSAwu1bCrnwR5jFbLk0iMsbPHvGcny2rAnRHfPTM8DPiImdIWpkWqtWLaRGUbfe5F7R996EXjuFQyTBCeEMC1LNIqlP8SRO21MoBUsl6pcZUdcSG00wTlwjUQpaVy0IOijF73TR3/uQi70Gkzd60qvedy70TNFYVC10kbYyGqVFSmHssJsz67YipMgTrxIUCeBd0QqOWc6+IjMpfJtvsLFdZkxoJ58YactkB0L4/x1A7d5rtEEMwouS6ZoNHXG6Kc0hctUgj7Vjv4Bt67GYDzxfuqkmy98v7abK1n+auomsathCpaeyGEK2nQG2oWX98atOAM/wYHj3wLFi1wraUVGpFHWhVqNg2X79bO1RYHpqcVrqw+grb6uJXmazmbJcD4ZrvrxNOzINXTzo3hfcFYenP5pVAN7Lv3g/QWgohX9Jvf+PnTIS6iz9EfjGxy7hxSIZ6a0ISq0LJzXg7TKSaOVH6BrzZqFVAI9HDqoUAA3lx2lMY/7fOA6ZR+YZ3A/lVA8cM0v4b6OR1t5HD9QO3n+XJwu5HmDuthaw5no5HLEC41pIYWor607kiZsb1UOaSfsaFl2f2bRcIwwGg9iHAFCliT9+QzTIcSHPMlwkk0Pkb9DJqhN4LvaaJgOLU20yQXdXPMf0VsrqPzlZwrOa3YtZWfiTORynypEsW0z3P4DUEsDBBQAAAgIAACAn+uBAiKLLgAAADYAAAASACQAZ3JhcGgwX2VkaXRvci5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1bKyU/OTk1RslIoKSpN1VFQKs7IL3etKClKRAgVZJbllwC5Ss6peSWpRUq1AFBLAwQUAAAICAAAgJ/ry7WFAm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9QzNNBRUEovSizIKAaKGII4pZkpIHa0krFpaqKJqZFBqkliamKKoaGupUVqsnGiQVKaYUqqWYp5klIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAgJ/r7A82IRECAABzBAAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAgJ/rgQIiiy4AAAA2AAAAEgAkAAAAAAAAAAAAAABeAgAAZ3JhcGgwX2VkaXRvci5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf68u1hQJtAAAAeAAAAAkAJAAAAAAAAAAAAAAA4AIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAwADABwBAACYAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 

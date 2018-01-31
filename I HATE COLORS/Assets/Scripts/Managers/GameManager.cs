@@ -30,12 +30,14 @@ public class GameManager : Singleton<GameManager>
     public bool gameOver;
     public Text gameOverText;
     public Text healthText;
+    public Text moneyText;
 
     public GameObject[] enemyList;
 
     public static ArrayList activeEnemies = new ArrayList();
 
-    public int castleHealth;
+    public int castleHealth = 100;
+    public int money = 0;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -47,7 +49,7 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
         gameOverText.text = "";
         healthText.text = "Health: 100";
-        castleHealth = 100;
+        moneyText.text = "$ ";
     }
 
     void Update()
@@ -60,6 +62,7 @@ public class GameManager : Singleton<GameManager>
         else
         {
             healthText.text = "Health: " + castleHealth.ToString();
+            moneyText.text = "$ " + money.ToString();
         }
     }
 
