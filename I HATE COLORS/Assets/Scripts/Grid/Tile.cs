@@ -54,4 +54,5 @@ public class Tile : MonoBehaviour
         GridGraphManager.Instance.ScanGridGraph();
         Hover.Instance.Deactivate();
     }
+
 }

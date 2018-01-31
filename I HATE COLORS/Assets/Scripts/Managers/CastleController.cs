@@ -22,19 +22,20 @@ public class CastleController : Singleton<CastleController>
     // Update is called once per frame
     void Update()
     {
-        GameControl.instance.healthText.text = "Health: " + health.ToString();
+        GameManager.Instance.castleHealth = health;
+        GameManager.Instance.healthText.text = "Health: " + health.ToString();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        GameControl.GetEnemies().Remove(collision.gameObject);
-        Destroy(collision.gameObject);
+        //GameControl.GetEnemies().Remove(collision.gameObject);
+        //Destroy(collision.gameObject);
 
         if (health > 0)
             health--;
         if (health == 0)
         {
-            GameControl.instance.gameOver = true;
+            GameManager.Instance.gameOver = true;
         }
     }
 }
