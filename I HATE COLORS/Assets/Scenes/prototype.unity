@@ -562,7 +562,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1800944728}
-        m_MethodName: SpawnPusheen
+        m_MethodName: SpawnUnicorn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -593,7 +593,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8c55fc4bfd6b5094196118910279e1ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69be6e7aeead6ee46814b02dac0db1c4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1076,7 +1076,7 @@ SpriteRenderer:
   m_Size: {x: 0.56, y: 0.47}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &1287704604
 Transform:
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   enemies: {fileID: 1154713577}
   towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
     type: 2}
-  pusheenPrefab: {fileID: 1845804638312314, guid: de5f0c82ef005b845ba4bcd93e057dc2,
+  unicornPrefab: {fileID: 1845804638312314, guid: de5f0c82ef005b845ba4bcd93e057dc2,
     type: 2}
 --- !u!4 &1800944729
 Transform:
