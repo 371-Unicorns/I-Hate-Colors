@@ -22,7 +22,7 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject towerPrefab;
 
     [SerializeField]
-    private GameObject pusheenPrefab;
+    private GameObject unicornPrefab;
 
     private GridGraph gridGraph;
 
@@ -81,17 +81,17 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-    public void SpawnPusheen()
+    public void SpawnUnicorn()
     {
         Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
-        GameObject pusheen = Instantiate(pusheenPrefab, spawnTileScript.transform.position, Quaternion.identity);
-        pusheen.transform.SetParent(enemies.transform);
+        GameObject unicorn = Instantiate(unicornPrefab, spawnTileScript.transform.position, Quaternion.identity);
+        unicorn.transform.SetParent(enemies.transform);
 
         Tile randomTargetTileScript = targetTiles[Random.Range(0, targetTiles.Length)];
-        pusheen.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
+        unicorn.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
 
-        GameManager.PushEnemy(pusheen);
+        GameManager.PushEnemy(unicorn);
     }
 
 }
