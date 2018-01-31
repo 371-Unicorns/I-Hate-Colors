@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212719058624144008}
   - component: {fileID: 114243505353438388}
   - component: {fileID: 61451370332939350}
-  - component: {fileID: 114305468232664720}
+  - component: {fileID: 114133205775867306}
   m_Layer: 0
   m_Name: wall_orig 1
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1712275638179984}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,22 +52,33 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.45, y: 0.45}
+  m_Offset: {x: 0.6, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
-    oldSize: {x: 0.94, y: 0.89}
+    oldSize: {x: 1.2702702, y: 1.2027028}
     newSize: {x: 0.94, y: 0.89}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
+--- !u!114 &114133205775867306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1712275638179984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9348c794b1cb709458645ac3011ac135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114243505353438388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -79,18 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e157e2cd4bae4183806a71e70f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114305468232664720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1712275638179984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffeed6a1a068dcd4d80545c58510023c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
 --- !u!212 &212719058624144008
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -36,7 +36,6 @@ public class GameManager : Singleton<GameManager>
 
     public static ArrayList activeEnemies = new ArrayList();
 
-    public int castleHealth = 100;
     public int money = 0;
 
     /// <summary>
@@ -61,7 +60,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            healthText.text = "Health: " + castleHealth.ToString();
+            healthText.text = "Health: " + CastleController.Instance.CastleHealth.ToString();
             moneyText.text = "$ " + money.ToString();
         }
     }
@@ -75,7 +74,6 @@ public class GameManager : Singleton<GameManager>
     {
         activeEnemies.Add(obj);
     }
-
 
     /// <summary>
     /// Signals player that tower is ready to place by hovering it with the mouse cursor.

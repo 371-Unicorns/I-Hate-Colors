@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using MainGame;
 
-public class CastleController : MonoBehaviour
+public class CastleController : Singleton<CastleController>
 {
+    public int CastleHealth { get; private set; }
+
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
@@ -12,17 +13,13 @@ public class CastleController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.castleHealth = 100;
+        CastleHealth = 100;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void TakeDamage(int damage)
     {
-        //GameControl.GetEnemies().Remove(collision.gameObject);
-        //Destroy(collision.gameObject);
-
-        if (GameManager.Instance.castleHealth > 0)
-            GameManager.Instance.castleHealth--;
-        if (GameManager.Instance.castleHealth == 0)
+        CastleHealth -= damage;
+        if (CastleHealth <= 0)
         {
             GameManager.Instance.gameOver = true;
         }

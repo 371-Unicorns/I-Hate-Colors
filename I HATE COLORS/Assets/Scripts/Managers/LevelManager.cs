@@ -94,15 +94,4 @@ public class LevelManager : Singleton<LevelManager>
         GameManager.PushEnemy(pusheen);
     }
 
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (GameManager.Instance.castleHealth > 0)
-            GameManager.Instance.castleHealth--;
-        if (GameManager.Instance.castleHealth == 0)
-        {
-            GameManager.Instance.gameOver = true;
-        }
-    }
-
 }
