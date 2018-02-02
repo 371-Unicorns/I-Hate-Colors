@@ -30,6 +30,9 @@ public class LevelManager : Singleton<LevelManager>
 
     public Dictionary<Point, Tile> TileDict { get; private set; }
 
+    /// <summary>
+    /// Prevent instance of this class, since it's a Singleton.
+    /// </summary>
     private LevelManager() { }
 
     void Start()
@@ -41,11 +44,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private void GenerateLevel(int width, int heigth)
     {
-        Vector3 worldStart = Camera.main.ScreenToWorldPoint(new Vector3(0, 0));
         float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 
-        GenerateTiles(width, heigth, tileSize, worldStart);
-        GridGraphManager.Instance.AdjustGridGraph(width, heigth, tileSize, worldStart);
+        GenerateTiles(width, heigth, tileSize);
+        GridGraphManager.Instance.AdjustGridGraph(width, heigth, tileSize);
 
         targetTiles = new Tile[GameManager.Instance.Height];
         for (int i = 0; i < GameManager.Instance.Height; i++)
@@ -56,25 +58,26 @@ public class LevelManager : Singleton<LevelManager>
 
     }
 
-    private void GenerateTiles(int width, int heigth, float tileSize, Vector3 worldStart)
+    private void GenerateTiles(int width, int heigth, float tileSize)
     {
-        float tileXStart = worldStart.x;
-        float tileYStart = worldStart.y;
+        // Start point for grid is bottom left
+        float tileXStart = -((width - 1) / 2.0f * tileSize);
+        float tileYStart = -((heigth - 1) / 2.0f * tileSize);
 
-        for (int y = 0; y < heigth; y++)
+        for (int x = 0; x < width; x++)
         {
-            for (int x = 0; x < width; x++)
+            for (int y = 0; y < heigth; y++)
             {
-                // Last tile in row is wall
+                // Last column is wall
                 if (x == width - 1)
                 {
                     Tile newWallTileScript = Instantiate(wallTile).GetComponent<Tile>();
-                    newWallTileScript.Setup(new Point(x, y), new Vector3(tileSize * x + tileXStart, tileSize * y + tileYStart, 0));
+                    newWallTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
                 }
                 else
                 {
                     Tile newGrassTileScript = Instantiate(grassTile).GetComponent<Tile>();
-                    newGrassTileScript.Setup(new Point(x, y), new Vector3(tileSize * x + tileXStart, tileSize * y + tileYStart, 0));
+                    newGrassTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
                 }
             }
         }
