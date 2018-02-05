@@ -75,7 +75,7 @@ public class Tower : MonoBehaviour, Upgradeable {
 
         if (countdownToFire <= 0f)
         {
-            Shoot();
+            //Shoot();
             countdownToFire = 1f / fireRate;
         }
 

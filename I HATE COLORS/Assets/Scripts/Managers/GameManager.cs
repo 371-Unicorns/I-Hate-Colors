@@ -28,9 +28,7 @@ public class GameManager : Singleton<GameManager>
     public TowerBtn SelectedTower { get; private set; }
 
     public bool gameOver;
-    public Text gameOverText;
-    public Text healthText;
-    public Text moneyText;
+    private  Text gameOverText, healthText, moneyText;
 
     public static GameObject curTower;
     public static bool onTower = false;
@@ -51,10 +49,15 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         gameOver = false;
-        gameOverText.text = "";
+
+        Transform textObjects = canvas.transform.Find("TextObjects");
+
+        gameOverText = textObjects.Find("GameOverText").gameObject.GetComponent<Text>();
+        healthText = textObjects.Find("HealthText").gameObject.GetComponent<Text>();
+        moneyText = textObjects.Find("MoneyText").gameObject.GetComponent<Text>();
+
         healthText.text = "Health: 100";
         moneyText.text = "$ ";
-        canvas = GameObject.Find("Canvas");
         upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
     }
 
@@ -139,6 +142,11 @@ public class GameManager : Singleton<GameManager>
     public static void PushEnemy(GameObject obj)
     {
         activeEnemies.Add(obj);
+    }
+
+    public static void RemoveEnemy(GameObject obj)
+    {
+        activeEnemies.Remove(obj);
     }
 
     /// <summary>

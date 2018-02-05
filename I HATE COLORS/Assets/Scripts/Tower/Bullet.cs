@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         GameObject fx = (GameObject)Instantiate(impactFX, transform.position, transform.rotation);
         Destroy(fx, 2f);
-        GameManager.activeEnemies.Remove(target.transform);
+        GameManager.RemoveEnemy(target.gameObject);
         target.gameObject.SetActive(false);
         Destroy(gameObject);
         GameManager.money += 20;
