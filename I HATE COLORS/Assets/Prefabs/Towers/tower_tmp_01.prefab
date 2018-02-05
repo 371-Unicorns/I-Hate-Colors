@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114555940482824722}
   m_Layer: 8
   m_Name: tower_tmp_01
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e157e2cd4bae4183806a71e70f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitTowerSometime: 0
 --- !u!114 &114555940482824722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,7 +96,13 @@ MonoBehaviour:
   enemyTag: Enemy
   bulletPrefab: {fileID: 1318892502327916, guid: d8007d426def7d441b8bf274d56180c2,
     type: 2}
+  canvas: {fileID: 0}
   target: {fileID: 0}
+  countdownToFire: 1
+  level: 1
+  upgradeCost: 10
+  baseUpgradeCost: 500
+  upgradeCostScale: 1.25
 --- !u!212 &212886114892803304
 SpriteRenderer:
   m_ObjectHideFlags: 1

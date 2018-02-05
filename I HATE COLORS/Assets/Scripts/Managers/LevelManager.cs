@@ -93,7 +93,7 @@ public class LevelManager : Singleton<LevelManager>
 
         Tile randomTargetTileScript = targetTiles[Random.Range(0, targetTiles.Length)];
         unicorn.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
-
+        GameManager.onTower = false;
         GameManager.PushEnemy(unicorn);
     }
 
