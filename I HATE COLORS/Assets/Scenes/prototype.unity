@@ -822,7 +822,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.25
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1312,8 +1312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b791ce6e542bb864dae68d63842f0ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 17
-  height: 7
+  width: 20
+  height: 15
   gameOver: 1
   enemyList: []
   canvas: {fileID: 522868056}
@@ -1412,7 +1412,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 2
+  logPathResults: 4
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0
