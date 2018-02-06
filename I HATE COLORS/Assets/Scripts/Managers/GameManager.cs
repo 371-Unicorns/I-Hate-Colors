@@ -11,15 +11,15 @@ public class GameManager : Singleton<GameManager>
     /// Amount of tiles on the x-Axis.
     /// </summary>
     [SerializeField]
-    private int height = 22;
-    public int Height { get { return height; } }
+    private int width = 40;
+    public int Width { get { return width; } }
 
     /// <summary>
     /// Amount of tiles on the y-Axis.
     /// </summary>
     [SerializeField]
-    private int width = 40;
-    public int Width { get { return width; } }
+    private int height = 22;
+    public int Height { get { return height; } }
 
     /// <summary>
     /// Currently selected tower by player to place.

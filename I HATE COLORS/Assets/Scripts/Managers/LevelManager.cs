@@ -32,16 +32,16 @@ public class LevelManager : Singleton<LevelManager>
     void Awake()
     {
         TileDict = new Dictionary<Point, Tile>();
-        GenerateLevel(GameManager.Instance.Height, GameManager.Instance.Width);
+        GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Height);
         Hover.Instance.Deactivate();
     }
 
-    private void GenerateLevel(int length, int width)
+    private void GenerateLevel(int width, int height)
     {
         float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 
-        GenerateTiles(length, width, tileSize);
-        GridGraphManager.Instance.Setup(length, width, tileSize);
+        GenerateTiles(width, height, tileSize);
+        GridGraphManager.Instance.Setup(width, height, tileSize);
 
         targetTiles = new Tile[GameManager.Instance.Width];
         for (int i = 0; i < GameManager.Instance.Width; i++)
