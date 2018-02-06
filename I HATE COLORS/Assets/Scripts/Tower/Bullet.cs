@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : Collidable
 {
     public float damage;
 
@@ -11,19 +11,20 @@ public class Bullet : MonoBehaviour
 
     private Enemy target;
 
+    public float GetDamage()
+    {
+        return damage;
+    }
+
     public void Seek(Enemy _target)
     {
         target = _target;
     }
 
-    void HitTarget()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject fx = (GameObject)Instantiate(impactFX, transform.position, transform.rotation);
-        Destroy(fx, 2f);
-
-        target.TakeDamage(damage);
-
-        Destroy(gameObject);
+        Collidable other = collision.gameObject.GetComponent<Collidable>();
+        other.ProcessCollision(this);
     }
 
     void Update()
@@ -37,12 +38,14 @@ public class Bullet : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position;
         float distFrame = speed * Time.deltaTime;
 
-        if (dir.magnitude <= distFrame)
-        {
-            HitTarget();
-            return;
-        }
-
         transform.Translate(dir.normalized * distFrame, Space.World);
+    }
+
+    public override void ProcessCollision(Collidable collidable)
+    {
+        GameObject fx = (GameObject)Instantiate(impactFX, transform.position, transform.rotation);
+        Destroy(fx, 2f);
+
+        Destroy(gameObject);
     }
 }

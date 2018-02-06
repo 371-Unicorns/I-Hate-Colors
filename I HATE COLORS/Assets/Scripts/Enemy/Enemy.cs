@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Collidable {
 
     private float health;
     private float speed;
@@ -23,16 +23,6 @@ public class Enemy : MonoBehaviour {
         this.value = other.value;
     }
 
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            GameManager.AddMoney(value);
-            EnemyManager.RemoveEnemy(this);
-        }
-    }
-
     public void SetHealth(float health)
     {
         this.health = health;
@@ -43,8 +33,20 @@ public class Enemy : MonoBehaviour {
         this.speed = speed;
     }
 
-    public void printSelf()
+    public override void ProcessCollision(Collidable collidable) 
     {
-        print("health: " + health + ", speed: " + speed + ", value: " + value);
+        if (collidable is Bullet)
+        {
+            Bullet bullet = (Bullet)collidable;
+            
+            health -= bullet.GetDamage();
+            if (health <= 0)
+            {
+                GameManager.AddMoney(value);
+                EnemyManager.RemoveEnemy(this);
+            }
+
+            bullet.ProcessCollision(this);
+        }
     }
 }
