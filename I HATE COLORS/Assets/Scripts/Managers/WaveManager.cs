@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaveManager : Singleton<WaveManager> {
 
-    private static readonly float SPAWN_DELAY = 1.0f;
+    private static readonly float SPAWN_DELAY = 0.1f;
 
     public string waveXmlFile;
     private static Wave currentWave;

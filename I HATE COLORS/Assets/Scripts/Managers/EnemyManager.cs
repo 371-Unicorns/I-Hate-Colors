@@ -32,6 +32,7 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     public static void RemoveEnemy(Enemy obj)
     {
+        GameManager.AddMoney(obj.GetValue());
         activeEnemies.Remove(obj);
         Destroy(obj.gameObject);
     }

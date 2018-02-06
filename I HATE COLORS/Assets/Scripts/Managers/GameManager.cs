@@ -176,4 +176,8 @@ public class GameManager : Singleton<GameManager>
         this.SelectedTower = null;
     }
 
+    public static void AddMoney(int m)
+    {
+        GameManager.money += m;
+    }
 }

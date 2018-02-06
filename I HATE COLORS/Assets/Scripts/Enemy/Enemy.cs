@@ -33,4 +33,9 @@ public class Enemy : MonoBehaviour {
     {
         this.speed = speed;
     }
+
+    public int GetValue()
+    {
+        return 20;
+    }
 }
