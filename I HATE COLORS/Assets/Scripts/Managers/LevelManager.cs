@@ -18,9 +18,6 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private GameObject towerPrefab;
 
-    [SerializeField]
-    private GameObject candycanePrefab;
-
     private GridGraph gridGraph;
 
     private static Tile[] targetTiles;
@@ -53,22 +50,11 @@ public class LevelManager : Singleton<LevelManager>
             targetTiles[i] = tile;
         }
 
-        GenerateScenery();
+        SceneryGenerator.GenerateScenery();
 
     }
 
-    private void GenerateScenery()
-    {
-        int curCandy = 0;
-
-        while (curCandy < 9)
-        {
-            int posX = Random.Range(-10, 10);
-            int posY = Random.Range(-10, 10);
-            GameObject candy = Instantiate(candycanePrefab, new Vector3(posX, posY, 0), Quaternion.identity);
-            curCandy++;
-        }
-    }
+    
 
     public static Tile[] GetTargetTiles()
     {
