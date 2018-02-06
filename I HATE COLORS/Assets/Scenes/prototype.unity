@@ -1769,7 +1769,7 @@ MonoBehaviour:
   map: {fileID: 644048562}
   towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
     type: 2}
-  candycanePrefab: {fileID: 1679670024401648, guid: 7a2178eb2487e7e4e83a0cefdc3540e4,
+  candycanePrefab: {fileID: 1217158430669232, guid: 01e643cc4da807342bd3fb2692cf12ee,
     type: 2}
 --- !u!4 &1800944729
 Transform:
