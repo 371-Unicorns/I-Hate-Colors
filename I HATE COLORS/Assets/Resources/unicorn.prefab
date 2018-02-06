@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 50595561919409864}
   - component: {fileID: 95938149315272084}
   - component: {fileID: 111699939986717160}
+  - component: {fileID: 114769023112928054}
   m_Layer: 0
   m_Name: unicorn
   m_TagString: Untagged
@@ -143,6 +144,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!114 &114769023112928054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1845804638312314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f685e5b6d53f774289cde8b020d69f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114940523881783102
 MonoBehaviour:
   m_ObjectHideFlags: 1

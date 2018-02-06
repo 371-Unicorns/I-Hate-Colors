@@ -1,0 +1,7 @@
+<enemies>
+   <enemy>
+      <id>unicorn</id>
+      <health>20</id>
+      <speed>2</speed>
+   </enemy>
+</enemies>

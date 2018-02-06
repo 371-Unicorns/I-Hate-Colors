@@ -17,7 +17,7 @@ public class Tower : MonoBehaviour, Upgradeable
     public GameObject canvas;
     public static GameObject upgradePanel;
 
-    public Transform target;
+    public Enemy target;
     public float countdownToFire = 0f;
     public int level = 1;
     public int upgradeCost;
@@ -73,10 +73,10 @@ public class Tower : MonoBehaviour, Upgradeable
     }
 
     //Activates upgradepanel for the first time
-    public void activateUpgradePanel()
+    public void ActivateUpgradePanel()
     {
         upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
-        GameManager.updateUpgradePanel(this);
+        GameManager.UpdateUpgradePanel(this);
         if (this.level == 5 || GameManager.money < this.upgradeCost)
         {
             GameManager.disableUpgradeButton();
@@ -97,12 +97,12 @@ public class Tower : MonoBehaviour, Upgradeable
 
     void UpdateTarget()
     {
-        ArrayList enemies = GameManager.GetEnemies();
+        List<Enemy> enemies = EnemyManager.GetEnemies();
 
         float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        Enemy nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (Enemy enemy in enemies)
         {
             float distToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distToEnemy < shortestDistance)
@@ -114,7 +114,7 @@ public class Tower : MonoBehaviour, Upgradeable
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
-            target = nearestEnemy.transform;
+            target = nearestEnemy;
         }
         else
         {
@@ -164,7 +164,7 @@ public class Tower : MonoBehaviour, Upgradeable
                     }
                     else
                     {
-                        GameManager.updateUpgradePanel(hitTower);
+                        GameManager.UpdateUpgradePanel(hitTower);
                     }
 
                 }
@@ -178,4 +178,17 @@ public class Tower : MonoBehaviour, Upgradeable
 
         hitTowerSometime = false;
     }
+
+    //Activates upgradepanel for the first time
+    public void activateUpgradePanel()
+    {
+        upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
+        GameManager.UpdateUpgradePanel(this);
+        if (this.level == 5 || GameManager.money < this.upgradeCost)
+        {
+            GameManager.disableUpgradeButton();
+        }
+        upgradePanel.gameObject.SetActive(true);
+    }
+
 }

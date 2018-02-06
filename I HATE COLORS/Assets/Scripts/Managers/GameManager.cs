@@ -33,11 +33,11 @@ public class GameManager : Singleton<GameManager>
     public static GameObject curTower;
     public static bool onTower = false;
 
-    public GameObject[] enemyList;
     public GameObject canvas;
     public static GameObject upgradePanel;
 
-    public static ArrayList activeEnemies = new ArrayList();
+    private GameTimer timer;
+    public int currentWave;
 
     public static int money = 0;
 
@@ -51,6 +51,9 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
 
         Transform infoObjects = canvas.transform.Find("InfoPanel");
+        timer = new GameTimer();
+        timer.SetTimer(30);
+        currentWave = 1;
 
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
@@ -64,9 +67,27 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        WaveManager.Update();
+
+        if (!timer.IsPaused() && timer.IsDone())
+        {
+            timer.SetPaused(true);
+            WaveManager.BeginWave(currentWave++);
+        }
+
+        if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
+        {
+            timer.Reset();
+            timer.SetPaused(false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            timer.SkipTimer();
+        }
+
         if (gameOver)
         {
-            healthText.text = "Health: 0";
             gameOverText.text = "GAME OVER";
             gameOverText.gameObject.SetActive(true);
         }
@@ -95,7 +116,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public static void updateUpgradePanel(Tower upgradeTower)
+    public static void UpdateUpgradePanel(Tower upgradeTower)
     {
         upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
         Text[] panelText = upgradePanel.GetComponentsInChildren<Text>(true);
@@ -130,25 +151,10 @@ public class GameManager : Singleton<GameManager>
         {
             money = money - upgradeTower.upgradeCost;
             upgradeTower.Upgrade();
-            updateUpgradePanel(upgradeTower);
+            UpdateUpgradePanel(upgradeTower);
         }
 
 
-    }
-
-    public static ArrayList GetEnemies()
-    {
-        return activeEnemies;
-    }
-
-    public static void PushEnemy(GameObject obj)
-    {
-        activeEnemies.Add(obj);
-    }
-
-    public static void RemoveEnemy(GameObject obj)
-    {
-        activeEnemies.Remove(obj);
     }
 
     /// <summary>
@@ -170,4 +176,8 @@ public class GameManager : Singleton<GameManager>
         this.SelectedTower = null;
     }
 
+    public static void AddMoney(int m)
+    {
+        GameManager.money += m;
+    }
 }

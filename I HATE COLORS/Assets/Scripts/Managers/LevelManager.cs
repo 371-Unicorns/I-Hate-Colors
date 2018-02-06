@@ -16,20 +16,14 @@ public class LevelManager : Singleton<LevelManager>
     public GameObject Map { get { return map; } }
 
     [SerializeField]
-    private GameObject enemies;
-
-    [SerializeField]
     private GameObject towerPrefab;
-
-    [SerializeField]
-    private GameObject unicornPrefab;
 
     [SerializeField]
     private GameObject candycanePrefab;
 
     private GridGraph gridGraph;
 
-    private Tile[] targetTiles;
+    private static Tile[] targetTiles;
 
     public Dictionary<Point, Tile> TileDict { get; private set; }
 
@@ -38,7 +32,7 @@ public class LevelManager : Singleton<LevelManager>
     /// </summary>
     private LevelManager() { }
 
-    void Start()
+    void Awake()
     {
         TileDict = new Dictionary<Point, Tile>();
         GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Height);
@@ -76,6 +70,11 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public static Tile[] GetTargetTiles()
+    {
+        return targetTiles;
+    }
+
     private void GenerateTiles(int width, int heigth, float tileSize)
     {
         // Start point for grid is bottom left
@@ -104,15 +103,5 @@ public class LevelManager : Singleton<LevelManager>
 
     public void SpawnUnicorn()
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
-        Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
-        GameObject unicorn = Instantiate(unicornPrefab, spawnTileScript.transform.position, Quaternion.identity);
-        unicorn.transform.SetParent(enemies.transform);
-
-        Tile randomTargetTileScript = targetTiles[Random.Range(0, targetTiles.Length)];
-        unicorn.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
-        GameManager.onTower = false;
-        GameManager.PushEnemy(unicorn);
     }
-
 }

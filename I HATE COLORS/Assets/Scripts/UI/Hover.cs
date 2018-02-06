@@ -18,7 +18,7 @@ public class Hover : Singleton<Hover>
     /// </summary>
     private Hover() { }
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }

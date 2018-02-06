@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public float damage;
 
     public float speed = 10f;
     public GameObject impactFX;
 
-    private Transform target;
+    private Enemy target;
 
-    public void Seek(Transform _target)
+    public void Seek(Enemy _target)
     {
         target = _target;
     }
@@ -19,10 +20,10 @@ public class Bullet : MonoBehaviour
     {
         GameObject fx = (GameObject)Instantiate(impactFX, transform.position, transform.rotation);
         Destroy(fx, 2f);
-        GameManager.RemoveEnemy(target.gameObject);
-        target.gameObject.SetActive(false);
+
+        target.TakeDamage(damage);
+
         Destroy(gameObject);
-        GameManager.money += 20;
     }
 
     void Update()
@@ -33,7 +34,7 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        Vector3 dir = target.position - transform.position;
+        Vector3 dir = target.transform.position - transform.position;
         float distFrame = speed * Time.deltaTime;
 
         if (dir.magnitude <= distFrame)

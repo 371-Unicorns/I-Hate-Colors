@@ -1,0 +1,20 @@
+<waves>
+   <wave>
+      <id>1</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>200</count>
+         </enemy>
+      </enemies>
+   </wave>
+   <wave>
+      <id>2</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>1000</count>
+         </enemy>
+      </enemies>
+   </wave>
+</waves>
