@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Wall : MonoBehaviour
 {
-    private ParticleSystem explosion;
-
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this object (2D physics only).
     /// Take damage, remove entered gameobject from list of active enemies and then destroy gameobject.
@@ -19,12 +17,5 @@ public class Wall : MonoBehaviour
         CastleManager.Instance.TakeDamage(1);
         EnemyManager.RemoveEnemy(other.gameObject.GetComponent<Enemy>());
         Destroy(other.gameObject);
-    }
-
-    public void Explode()
-    {
-        explosion = GetComponent<ParticleSystem>();
-        explosion.Play();
-        Destroy(gameObject, explosion.duration);
     }
 }
