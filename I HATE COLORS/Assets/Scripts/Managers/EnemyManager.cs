@@ -21,7 +21,7 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     public static void SpawnEnemy(Enemy obj)
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
+        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Length));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
 
         Enemy enemy = Instantiate(obj, spawnTileScript.transform.position, Quaternion.identity);
@@ -41,7 +41,7 @@ public class EnemyManager : Singleton<EnemyManager> {
         activeEnemies.Remove(obj);
         Destroy(obj.gameObject);
     }
-
+    
     public static int EnemiesRemaining()
     {
         return activeEnemies.Count;

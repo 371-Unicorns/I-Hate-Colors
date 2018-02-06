@@ -20,9 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4032057151554324}
   - component: {fileID: 212886114892803304}
-  - component: {fileID: 114151732517600178}
   - component: {fileID: 61716106735944588}
-  - component: {fileID: 114555940482824722}
+  - component: {fileID: 114468149326133764}
   m_Layer: 8
   m_Name: tower_tmp_01
   m_TagString: Tower
@@ -68,7 +67,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.2}
   m_EdgeRadius: 0
---- !u!114 &114151732517600178
+--- !u!114 &114468149326133764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -76,19 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1904437191444272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e157e2cd4bae4183806a71e70f5de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitTowerSometime: 0
---- !u!114 &114555940482824722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904437191444272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e037e39f05d91b142b2eb63f51712b52, type: 3}
+  m_Script: {fileID: 11500000, guid: de4bd368d26bc7842bc60176cbbf903b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
