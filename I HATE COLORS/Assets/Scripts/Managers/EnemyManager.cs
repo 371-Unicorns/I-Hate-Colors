@@ -33,7 +33,7 @@ public class EnemyManager : Singleton<EnemyManager> {
     public static void RemoveEnemy(Enemy obj)
     {
         activeEnemies.Remove(obj);
-        Destroy(obj);
+        Destroy(obj.gameObject);
     }
 
     public static Enemy EnemyFromXml(string id)
