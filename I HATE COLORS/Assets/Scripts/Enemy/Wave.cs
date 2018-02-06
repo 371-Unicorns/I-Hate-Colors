@@ -8,7 +8,10 @@ public class Wave {
     private int id;
     private Queue<Enemy> enemies;
 
-    public Wave() { }
+    public Wave() {
+        id = -1;
+        enemies = new Queue<Enemy>();
+    }
 
     public static Wave WaveFromXml(XmlNode waveNode)
     {
@@ -19,7 +22,10 @@ public class Wave {
         foreach (XmlNode enemyNode in enemyNodeList)
         {
             int count = int.Parse(enemyNode.SelectSingleNode("count").InnerText);
-            retWave.enemies.Enqueue(EnemyManager.EnemyFromXml(enemyNode.SelectSingleNode("id").InnerText));
+            for (int i = 0; i < count; i++)
+            {
+                retWave.enemies.Enqueue(EnemyManager.EnemyFromXml(enemyNode.SelectSingleNode("id").InnerText));
+            }
         }
 
         return retWave;

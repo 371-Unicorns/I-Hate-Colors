@@ -69,13 +69,13 @@ public class GameManager : Singleton<GameManager>
     {
         WaveManager.Update();
 
-        if (timer.IsDone())
+        if (!timer.IsPaused() && timer.IsDone())
         {
             timer.SetPaused(true);
-            WaveManager.BeginWave(++currentWave);
+            WaveManager.BeginWave(currentWave++);
         }
 
-        if (WaveManager.WaveFinished())
+        if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
         {
             timer.Reset();
             timer.SetPaused(false);
@@ -83,7 +83,6 @@ public class GameManager : Singleton<GameManager>
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            print("done");
             timer.SkipTimer();
         }
 

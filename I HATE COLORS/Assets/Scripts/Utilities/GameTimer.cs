@@ -33,7 +33,7 @@ public class GameTimer {
 
     public void SetPaused(bool paused)
     {
-        isPaused = !paused;
+        isPaused = paused;
     }
 
     public void SkipTimer()

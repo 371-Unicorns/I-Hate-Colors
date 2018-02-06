@@ -40,7 +40,6 @@ public class EnemyManager : Singleton<EnemyManager> {
     {
         Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
-        print(id);
         GameObject obj = Resources.Load("" + id, typeof(GameObject)) as GameObject;
         GameObject enemy = Instantiate(obj, spawnTileScript.transform.position, Quaternion.identity);
         enemy.SetActive(false);
@@ -49,5 +48,10 @@ public class EnemyManager : Singleton<EnemyManager> {
         GameManager.onTower = false; 
 
         return enemy.GetComponent<Enemy>();
+    }
+
+    public static int EnemiesRemaining()
+    {
+        return activeEnemies.Count;
     }
 }

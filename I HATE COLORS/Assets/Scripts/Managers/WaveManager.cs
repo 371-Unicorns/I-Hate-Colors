@@ -8,8 +8,6 @@ public class WaveManager : Singleton<WaveManager> {
     private static readonly float SPAWN_DELAY = 1.0f;
 
     public string waveXmlFile;
-    private XmlDocument doc;
-
     private static Wave currentWave;
     private static List<Wave> waves;
 
@@ -19,7 +17,7 @@ public class WaveManager : Singleton<WaveManager> {
     void Start () {
         waves = new List<Wave>();
         currentWave = null;
-        doc = new XmlDocument();
+        XmlDocument doc = new XmlDocument();
         doc.Load(Application.dataPath + "/" + waveXmlFile);
 
         waveSpawnTimer = new GameTimer();
@@ -47,12 +45,13 @@ public class WaveManager : Singleton<WaveManager> {
 
     public static void BeginWave(int wave)
     {
-        if (wave >= waves.Count)
+        if (wave > waves.Count)
         {
             print(string.Format("No wave at index {0}!! Add more waves!!", wave));
         } else
         {
-            currentWave = waves[wave];
+            currentWave = waves[wave - 1];
+            print("Enemies remaining: " + currentWave.EnemiesRemaining());
         }
     }
 
