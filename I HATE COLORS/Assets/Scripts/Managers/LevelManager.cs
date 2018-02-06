@@ -32,21 +32,21 @@ public class LevelManager : Singleton<LevelManager>
     void Awake()
     {
         TileDict = new Dictionary<Point, Tile>();
-        GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Height);
+        GenerateLevel(GameManager.Instance.Length, GameManager.Instance.Width);
         Hover.Instance.Deactivate();
     }
 
-    private void GenerateLevel(int width, int heigth)
+    private void GenerateLevel(int length, int width)
     {
         float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 
-        GenerateTiles(width, heigth, tileSize);
-        GridGraphManager.Instance.AdjustGridGraph(width, heigth, tileSize);
+        GenerateTiles(length, width, tileSize);
+        GridGraphManager.Instance.Setup(length, width, tileSize);
 
-        targetTiles = new Tile[GameManager.Instance.Height];
-        for (int i = 0; i < GameManager.Instance.Height; i++)
+        targetTiles = new Tile[GameManager.Instance.Width];
+        for (int i = 0; i < GameManager.Instance.Width; i++)
         {
-            Tile tile = TileDict[new Point(GameManager.Instance.Width - 1, i)];
+            Tile tile = TileDict[new Point(GameManager.Instance.Length - 1, i)];
             targetTiles[i] = tile;
         }
 
@@ -61,18 +61,18 @@ public class LevelManager : Singleton<LevelManager>
         return targetTiles;
     }
 
-    private void GenerateTiles(int width, int heigth, float tileSize)
+    private void GenerateTiles(int length, int width, float tileSize)
     {
         // Start point for grid is bottom left
-        float tileXStart = -((width - 1) / 2.0f * tileSize);
-        float tileYStart = -((heigth - 1) / 2.0f * tileSize);
+        float tileXStart = -((length - 1) / 2.0f * tileSize);
+        float tileYStart = -((width - 1) / 2.0f * tileSize);
 
-        for (int x = 0; x < width; x++)
+        for (int x = 0; x < length; x++)
         {
-            for (int y = 0; y < heigth; y++)
+            for (int y = 0; y < width; y++)
             {
                 // Last column is wall
-                if (x == width - 1)
+                if (x == length - 1)
                 {
                     Tile newWallTileScript = Instantiate(wallTile).GetComponent<Tile>();
                     newWallTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
