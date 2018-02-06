@@ -7,6 +7,12 @@ using UnityEngine;
 /// </summary>
 public class Wall : MonoBehaviour
 {
+    private Rigidbody2D rg2d;
+
+    private void Awake()
+    {
+        rg2d = GetComponent<Rigidbody2D>();
+    }
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this object (2D physics only).
     /// Take damage, remove entered gameobject from list of active enemies and then destroy gameobject.
@@ -19,4 +25,8 @@ public class Wall : MonoBehaviour
         Destroy(other.gameObject);
     }
 
+    private void Explode()
+    {
+        
+    }
 }
