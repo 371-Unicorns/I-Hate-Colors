@@ -4,14 +4,14 @@ using System.Xml;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyManager : Singleton<EnemyManager> {
-    
+public class EnemyManager : Singleton<EnemyManager>
+{
     public static List<Enemy> activeEnemies = new List<Enemy>();
 
-    public void Awake()
-    {
-        
-    }
+    /// <summary>
+    /// Prevent instance of this class, since it's a Singleton.
+    /// </summary>
+    private EnemyManager() { }
 
     public static List<Enemy> GetEnemies()
     {
@@ -32,21 +32,22 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     public static void RemoveEnemy(Enemy obj)
     {
-        GameManager.AddMoney(obj.GetValue());
+        GameManager.Instance.AddMoney(obj.GetValue());
         activeEnemies.Remove(obj);
         Destroy(obj.gameObject);
     }
 
     public static Enemy EnemyFromXml(string id)
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
+        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Width));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
         GameObject obj = Resources.Load("" + id, typeof(GameObject)) as GameObject;
         GameObject enemy = Instantiate(obj, spawnTileScript.transform.position, Quaternion.identity);
         enemy.SetActive(false);
 
         // TODO: what is this???
-        GameManager.onTower = false; 
+        // Bool to indicate whether player clicked on a tower and upgrade panel is showing... I guess (David)
+        GameManager.onTower = false;
 
         return enemy.GetComponent<Enemy>();
     }

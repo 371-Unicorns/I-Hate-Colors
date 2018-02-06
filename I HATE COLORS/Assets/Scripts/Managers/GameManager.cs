@@ -8,21 +8,21 @@ public class GameManager : Singleton<GameManager>
 {
 
     /// <summary>
-    /// Width of grid
+    /// Amount of tiles on the x-Axis.
+    /// </summary>
+    [SerializeField]
+    private int length = 22;
+    public int Length { get { return length; } }
+
+    /// <summary>
+    /// Amount of tiles on the y-Axis.
     /// </summary>
     [SerializeField]
     private int width = 15;
     public int Width { get { return width; } }
 
     /// <summary>
-    /// Height of grid
-    /// </summary>
-    [SerializeField]
-    private int height = 7;
-    public int Height { get { return height; } }
-
-    /// <summary>
-    /// Currently selected tower by player.
+    /// Currently selected tower by player to place.
     /// Public getter, private setter
     /// </summary>
     public TowerBtn SelectedTower { get; private set; }
@@ -176,7 +176,7 @@ public class GameManager : Singleton<GameManager>
         this.SelectedTower = null;
     }
 
-    public static void AddMoney(int m)
+    public void AddMoney(int m)
     {
         GameManager.money += m;
     }
