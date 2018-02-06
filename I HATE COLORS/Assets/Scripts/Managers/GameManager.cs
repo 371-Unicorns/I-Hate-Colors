@@ -6,24 +6,22 @@ using Pathfinding;
 
 public class GameManager : Singleton<GameManager>
 {
-
     /// <summary>
     /// Amount of tiles on the x-Axis.
     /// </summary>
     [SerializeField]
-    private int width = 40;
+    private int width = 22;
     public int Width { get { return width; } }
 
     /// <summary>
     /// Amount of tiles on the y-Axis.
     /// </summary>
     [SerializeField]
-    private int height = 22;
+    private int height = 14;
     public int Height { get { return height; } }
 
     /// <summary>
     /// Currently selected tower by player to place.
-    /// Public getter, private setter
     /// </summary>
     public TowerBtn SelectedTower { get; private set; }
 
@@ -49,19 +47,19 @@ public class GameManager : Singleton<GameManager>
     void Awake()
     {
         gameOver = false;
+        gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
+        gameOverText.gameObject.SetActive(false);
 
-        Transform infoObjects = canvas.transform.Find("InfoPanel");
         timer = new GameTimer();
         timer.SetTimer(30);
         currentWave = 1;
 
-        gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
-        gameOverText.gameObject.SetActive(false);
+        Transform infoObjects = canvas.transform.Find("InfoPanel");
         healthText = infoObjects.Find("HealthPanel").GetComponentInChildren<Text>();
         moneyText = infoObjects.Find("MoneyPanel").GetComponentInChildren<Text>();
-
         healthText.text = "Health: 100";
         moneyText.text = "$ ";
+
         upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
     }
 
@@ -93,7 +91,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            healthText.text = "Health: " + CastleController.Instance.CastleHealth.ToString();
+            healthText.text = "Health: " + CastleManager.Instance.CastleHealth.ToString();
             moneyText.text = "$ " + money.ToString();
             if (onTower == false)
             {
@@ -138,7 +136,7 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public static void disableUpgradeButton()
+    public static void DisableUpgradeButton()
     {
         Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
         upgradeButton.interactable = false;
@@ -153,8 +151,6 @@ public class GameManager : Singleton<GameManager>
             upgradeTower.Upgrade();
             UpdateUpgradePanel(upgradeTower);
         }
-
-
     }
 
     /// <summary>

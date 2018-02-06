@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class Hover : Singleton<Hover>
 {
-
     /// <summary>
     /// SpriteRenderer which displays currently selected tower.
     /// </summary>
@@ -25,14 +24,7 @@ public class Hover : Singleton<Hover>
 
     void Update()
     {
-        FollowMouse();
-    }
-
-    /// <summary>
-    /// Change hovers position to current mouse position.
-    /// </summary>
-    private void FollowMouse()
-    {
+        /// Change hovers position to current mouse position.
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(mousePosition.x, mousePosition.y, 0);          // Z = 0, because main camera's Z = -10.
     }

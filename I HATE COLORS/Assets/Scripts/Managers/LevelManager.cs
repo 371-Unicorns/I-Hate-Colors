@@ -18,10 +18,10 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private GameObject towerPrefab;
 
-    private GridGraph gridGraph;
-
-    private static Tile[] targetTiles;
-
+    /// <summary>
+    /// Dictionary mapping each point on the grid to its correspoing tile.!--
+    /// The grid starts at (0, 0) and goes up (GameManager.Instance.Width - 1, GameManager.Instance.Heigth - 1).
+    /// </summary>
     public Dictionary<Point, Tile> TileDict { get; private set; }
 
     /// <summary>
@@ -29,65 +29,51 @@ public class LevelManager : Singleton<LevelManager>
     /// </summary>
     private LevelManager() { }
 
+    /// <summary>
+    /// Build the whole level.
+    /// </summary>
     void Awake()
     {
         TileDict = new Dictionary<Point, Tile>();
-        GenerateLevel(GameManager.Instance.Width, GameManager.Instance.Height);
+        float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+
+        GenerateTiles(GameManager.Instance.Width, GameManager.Instance.Height, tileSize);
+        EnemyManager.Instance.FindTargetTiles();
+        SceneryGenerator.GenerateScenery();
+
+        GridGraphManager.Instance.Setup(GameManager.Instance.Width, GameManager.Instance.Height, tileSize);
         Hover.Instance.Deactivate();
     }
 
-    private void GenerateLevel(int width, int height)
+    /// <summary>
+    /// Instatiate the right tile for each element of the grid.
+    /// Start point of the grid is bottom left.
+    /// </summary>
+    /// <param name="width">Amount of tiles on the x-Axis.</param>
+    /// <param name="height">Amount of tiles on the y-Axis.</param>
+    /// <param name="tileSize">Length of one size.</param>
+    private void GenerateTiles(int width, int heigth, float tileSize)
     {
-        float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
+        float tileXStart = -((width - 1) / 2.0f * tileSize);
+        float tileYStart = -((heigth - 1) / 2.0f * tileSize);
 
-        GenerateTiles(width, height, tileSize);
-        GridGraphManager.Instance.Setup(width, height, tileSize);
-
-        targetTiles = new Tile[GameManager.Instance.Height];
-        for (int i = 0; i < GameManager.Instance.Height; i++)
+        for (int x = 0; x < width; x++)
         {
-            Tile tile = TileDict[new Point(GameManager.Instance.Width - 1, i)];
-            targetTiles[i] = tile;
-        }
-
-        SceneryGenerator.GenerateScenery();
-
-    }
-
-    
-
-    public static Tile[] GetTargetTiles()
-    {
-        return targetTiles;
-    }
-
-    private void GenerateTiles(int length, int width, float tileSize)
-    {
-        // Start point for grid is bottom left
-        float tileXStart = -((length - 1) / 2.0f * tileSize);
-        float tileYStart = -((width - 1) / 2.0f * tileSize);
-
-        for (int x = 0; x < length; x++)
-        {
-            for (int y = 0; y < width; y++)
+            for (int y = 0; y < heigth; y++)
             {
                 // Last column is wall
-                if (x == length - 1)
+                if (x == width - 1)
                 {
-                    Tile newWallTileScript = Instantiate(wallTile).GetComponent<Tile>();
-                    newWallTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
+                    Tile wallTileScript = Instantiate(wallTile).GetComponent<Tile>();
+                    wallTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
                 }
                 else
                 {
-                    Tile newGrassTileScript = Instantiate(grassTile).GetComponent<Tile>();
-                    newGrassTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
+                    Tile grassTileScript = Instantiate(grassTile).GetComponent<Tile>();
+                    grassTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
                 }
             }
         }
-
     }
 
-    public void SpawnUnicorn()
-    {
-    }
 }

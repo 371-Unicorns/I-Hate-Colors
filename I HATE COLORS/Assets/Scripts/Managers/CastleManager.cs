@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleController : Singleton<CastleController>
+public class CastleManager : Singleton<CastleManager>
 {
     public int CastleHealth { get; private set; }
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private CastleController() { }
+    private CastleManager() { }
 
     private void Start()
     {

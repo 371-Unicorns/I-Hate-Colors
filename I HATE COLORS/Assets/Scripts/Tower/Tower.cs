@@ -79,7 +79,7 @@ public class Tower : MonoBehaviour, Upgradeable
         GameManager.UpdateUpgradePanel(this);
         if (this.level == 5 || GameManager.money < this.upgradeCost)
         {
-            GameManager.disableUpgradeButton();
+            GameManager.DisableUpgradeButton();
         }
         upgradePanel.gameObject.SetActive(true);
     }
@@ -186,7 +186,7 @@ public class Tower : MonoBehaviour, Upgradeable
         GameManager.UpdateUpgradePanel(this);
         if (this.level == 5 || GameManager.money < this.upgradeCost)
         {
-            GameManager.disableUpgradeButton();
+            GameManager.DisableUpgradeButton();
         }
         upgradePanel.gameObject.SetActive(true);
     }

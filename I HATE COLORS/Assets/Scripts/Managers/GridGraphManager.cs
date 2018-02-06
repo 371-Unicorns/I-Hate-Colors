@@ -24,7 +24,7 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// Setup GridGraph to match tiles grid.
     /// </summary>
     /// <param name="width">Amount of tiles on the x-Axis.</param>
-    /// <param name="length">Amount of tiles on the y-Axis.</param>
+    /// <param name="height">Amount of tiles on the y-Axis.</param>
     /// <param name="tileSize">Length of one size.</param>
     public void Setup(int width, int height, float tileSize)
     {
