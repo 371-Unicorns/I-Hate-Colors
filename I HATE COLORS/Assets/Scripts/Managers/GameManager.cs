@@ -11,14 +11,14 @@ public class GameManager : Singleton<GameManager>
     /// Amount of tiles on the x-Axis.
     /// </summary>
     [SerializeField]
-    private int length = 22;
-    public int Length { get { return length; } }
+    private int height = 22;
+    public int Height { get { return height; } }
 
     /// <summary>
     /// Amount of tiles on the y-Axis.
     /// </summary>
     [SerializeField]
-    private int width = 15;
+    private int width = 40;
     public int Width { get { return width; } }
 
     /// <summary>
@@ -176,7 +176,7 @@ public class GameManager : Singleton<GameManager>
         this.SelectedTower = null;
     }
 
-    public void AddMoney(int m)
+    public static void AddMoney(int m)
     {
         GameManager.money += m;
     }

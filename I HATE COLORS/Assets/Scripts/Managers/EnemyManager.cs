@@ -21,7 +21,7 @@ public class EnemyManager : Singleton<EnemyManager> {
 
     public static void SpawnEnemy(Enemy obj)
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Length));
+        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
         Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
 
         Enemy enemy = Instantiate(obj, spawnTileScript.transform.position, Quaternion.identity);
