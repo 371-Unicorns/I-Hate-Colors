@@ -1633,6 +1633,8 @@ MonoBehaviour:
     type: 2}
   unicornPrefab: {fileID: 1845804638312314, guid: de5f0c82ef005b845ba4bcd93e057dc2,
     type: 2}
+  candycanePrefab: {fileID: 1679670024401648, guid: 7a2178eb2487e7e4e83a0cefdc3540e4,
+    type: 2}
 --- !u!4 &1800944729
 Transform:
   m_ObjectHideFlags: 0
