@@ -13,24 +13,6 @@ public class Wave {
         enemies = new Queue<Enemy>();
     }
 
-    public static Wave WaveFromXml(XmlNode waveNode)
-    {
-        Wave retWave = new Wave();
-
-        retWave.id = int.Parse(waveNode.SelectSingleNode("id").InnerText);
-        XmlNodeList enemyNodeList = waveNode.SelectSingleNode("enemies").SelectNodes("enemy");
-        foreach (XmlNode enemyNode in enemyNodeList)
-        {
-            int count = int.Parse(enemyNode.SelectSingleNode("count").InnerText);
-            for (int i = 0; i < count; i++)
-            {
-                retWave.enemies.Enqueue(EnemyManager.EnemyFromXml(enemyNode.SelectSingleNode("id").InnerText));
-            }
-        }
-
-        return retWave;
-    }
-
     public int EnemiesRemaining()
     {
         return enemies.Count;
@@ -39,5 +21,15 @@ public class Wave {
     public Enemy NextEnemy()
     {
         return enemies.Dequeue();
+    }
+
+    public void SetId(int id)
+    {
+        this.id = id;
+    }
+
+    public void EnqueueEnemy(Enemy e)
+    {
+        enemies.Enqueue(e);
     }
 }

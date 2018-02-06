@@ -1,7 +1,8 @@
 <enemies>
    <enemy>
       <id>unicorn</id>
-      <health>20</id>
+      <health>20</health>
       <speed>2</speed>
+      <value>10</value>
    </enemy>
 </enemies>

@@ -6,13 +6,21 @@ public class Enemy : MonoBehaviour {
 
     private float health;
     private float speed;
+    private int value;
 
     public Enemy() { }
 
-    public Enemy(float health, float speed) // number one
-    {
+    public void Initialize(float health, float speed, int value) {
         this.health = health;
         this.speed = speed;
+        this.value = value;
+    }
+
+    public void Initialize(Enemy other)
+    {
+        this.health = other.health;
+        this.speed = other.speed;
+        this.value = other.value;
     }
 
     public void TakeDamage(float damage)
@@ -20,6 +28,7 @@ public class Enemy : MonoBehaviour {
         health -= damage;
         if (health <= 0)
         {
+            GameManager.AddMoney(value);
             EnemyManager.RemoveEnemy(this);
         }
     }
@@ -34,8 +43,8 @@ public class Enemy : MonoBehaviour {
         this.speed = speed;
     }
 
-    public int GetValue()
+    public void printSelf()
     {
-        return 20;
+        print("health: " + health + ", speed: " + speed + ", value: " + value);
     }
 }
