@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     public TowerBtn SelectedTower { get; private set; }
 
     public bool gameOver;
-    private  Text gameOverText, healthText, moneyText;
+    private Text gameOverText, healthText, moneyText;
 
     public static GameObject curTower;
     public static bool onTower = false;
@@ -50,11 +50,12 @@ public class GameManager : Singleton<GameManager>
     {
         gameOver = false;
 
-        Transform textObjects = canvas.transform.Find("TextObjects");
+        Transform infoObjects = canvas.transform.Find("InfoPanel");
 
-        gameOverText = textObjects.Find("GameOverText").gameObject.GetComponent<Text>();
-        healthText = textObjects.Find("HealthText").gameObject.GetComponent<Text>();
-        moneyText = textObjects.Find("MoneyText").gameObject.GetComponent<Text>();
+        gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
+        gameOverText.gameObject.SetActive(false);
+        healthText = infoObjects.Find("HealthPanel").GetComponentInChildren<Text>();
+        moneyText = infoObjects.Find("MoneyPanel").GetComponentInChildren<Text>();
 
         healthText.text = "Health: 100";
         moneyText.text = "$ ";
@@ -67,24 +68,25 @@ public class GameManager : Singleton<GameManager>
         {
             healthText.text = "Health: 0";
             gameOverText.text = "GAME OVER";
+            gameOverText.gameObject.SetActive(true);
         }
         else
         {
             healthText.text = "Health: " + CastleController.Instance.CastleHealth.ToString();
             moneyText.text = "$ " + money.ToString();
-            if(onTower == false)
+            if (onTower == false)
             {
                 upgradePanel.gameObject.SetActive(false);
             }
-            else if(upgradePanel.activeSelf == true)
+            else if (upgradePanel.activeSelf == true)
             {
-                if(money >= (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost)
+                if (money >= (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost)
                 {
                     Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
                     upgradeButton.interactable = true;
                 }
-                if((money < (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost) ||
-                    (curTower.GetComponent(typeof(Tower)) as Tower).level >= 5 )
+                if ((money < (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost) ||
+                    (curTower.GetComponent(typeof(Tower)) as Tower).level >= 5)
                 {
                     Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
                     upgradeButton.interactable = false;
@@ -105,7 +107,7 @@ public class GameManager : Singleton<GameManager>
             }
             else if (t.name == "CurCost")
             {
-                if(upgradeTower.level == 5)
+                if (upgradeTower.level == 5)
                 {
                     t.text = "Fully Upgraded!";
                 }
@@ -124,13 +126,13 @@ public class GameManager : Singleton<GameManager>
     public void UpgradeTower()
     {
         Tower upgradeTower = curTower.GetComponent(typeof(Tower)) as Tower;
-        if(money >= upgradeTower.upgradeCost)
+        if (money >= upgradeTower.upgradeCost)
         {
             money = money - upgradeTower.upgradeCost;
             upgradeTower.Upgrade();
             updateUpgradePanel(upgradeTower);
         }
-        
+
 
     }
 

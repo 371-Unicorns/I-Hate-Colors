@@ -13,7 +13,12 @@ public class Tile : MonoBehaviour
     /// Public getter, public setter
     /// </summary>
     public Point GridPoint { get; set; }
-    public bool hitTowerSometime = false;
+
+    /// <summary>
+    /// Placed tower on this tile.
+    /// </summary>
+    private GameObject placedTower = null;
+
     /// <summary>
     /// Setup a new tile.
     /// </summary>
@@ -32,66 +37,21 @@ public class Tile : MonoBehaviour
     /// </summary>
     private void OnMouseOver()
     {
-
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.SelectedTower != null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && this.placedTower == null)
             {
                 PlaceTower();
             }
         }
-    }
-    /*
-     * Checks if any colliders overlap the mouse position on click, and if they're tagged tower the UpgradePanel will display, 
-     * otherwise nothing happenshitTowerSometime is  boolean that checks to see if in this cast a tower was hit, whereas 
-     * onTower checks whether or not the upgradepanel is on a tower currently. If we click and don't find a tower object within
-     * our position, we need to remove the upgradepanel, thus why we need both variables
-     */ 
-    void OnMouseUp()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 5f;
 
-        Vector2 v = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        Collider2D[] col = Physics2D.OverlapPointAll(v);
-
-        if (col.Length > 0)
+        // TODO Improve design
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.SelectedTower == null)
         {
-            foreach (Collider2D c in col)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (c.tag == "Tower")
-                {
-                    GameObject canvas = GameObject.Find("Canvas");
-                    GameObject upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
-                    GameManager.curTower = c.gameObject;
-                    GameManager.onTower = true;
-                    hitTowerSometime = true;
-                    Tower hitTower = c.gameObject.GetComponent(typeof(Tower)) as Tower;
-                    if (upgradePanel.activeSelf == false)
-                    {
-                        hitTower.activateUpgradePanel();
-                    }
-                    else
-                    {
-                        GameManager.updateUpgradePanel(hitTower);
-                    }
-
-                }
-
+                GameManager.onTower = false;
             }
-        }
-        if (hitTowerSometime == false)
-        {
-            GameManager.onTower = false;
-        }
-    }
-
-    private void OnMouseUpAsButton()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            print(GridPoint.x + " " + GridPoint.y);
         }
     }
 
@@ -100,12 +60,19 @@ public class Tile : MonoBehaviour
     /// </summary>
     private void PlaceTower()
     {
+        // Place tower and set sprite sorting order and parent.
         GameObject tower = Instantiate(GameManager.Instance.SelectedTower.TowerPrefab, transform.position, Quaternion.identity);
         tower.GetComponent<SpriteRenderer>().sortingOrder = -this.GridPoint.y;
         tower.transform.SetParent(this.transform);
-        Tower curTower = tower.GetComponent(typeof(Tower)) as Tower;
-        GameManager.Instance.ResetTower();
+
+        //  Set tile to be occupied by a tower
+        this.placedTower = tower;
+
+        // Update A*
         GridGraphManager.Instance.ScanGridGraph();
+
+        // Deactive all hover elements
+        GameManager.Instance.ResetTower();
         Hover.Instance.Deactivate();
     }
 

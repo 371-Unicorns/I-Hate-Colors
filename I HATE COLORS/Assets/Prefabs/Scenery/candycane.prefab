@@ -9,32 +9,31 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1904437191444272}
+  m_RootGameObject: {fileID: 1679670024401648}
   m_IsPrefabParent: 1
---- !u!1 &1904437191444272
+--- !u!1 &1679670024401648
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4032057151554324}
-  - component: {fileID: 212886114892803304}
-  - component: {fileID: 61716106735944588}
-  - component: {fileID: 114468149326133764}
-  m_Layer: 8
-  m_Name: tower_tmp_01
-  m_TagString: Tower
+  - component: {fileID: 4245066579893286}
+  - component: {fileID: 212247003671586050}
+  - component: {fileID: 114535428175465362}
+  m_Layer: 5
+  m_Name: candycane
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4032057151554324
+--- !u!4 &4245066579893286
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904437191444272}
+  m_GameObject: {fileID: 1679670024401648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,60 +41,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61716106735944588
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904437191444272}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0.25454545, y: 0.07272727, z: 0.25454545, w: 0.3090909}
-    pivot: {x: 0.5, y: 0.35}
-    oldSize: {x: 1.7454545, y: 1.7454545}
-    newSize: {x: 0.96, y: 0.96}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.2, y: 1.2}
-  m_EdgeRadius: 0
---- !u!114 &114468149326133764
+--- !u!114 &114535428175465362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904437191444272}
+  m_GameObject: {fileID: 1679670024401648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de4bd368d26bc7842bc60176cbbf903b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cf4022cb700cb6419e91bd3f945e5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  fireRate: 10
-  enemyTag: Enemy
-  bulletPrefab: {fileID: 1318892502327916, guid: d8007d426def7d441b8bf274d56180c2,
-    type: 2}
-  canvas: {fileID: 0}
-  target: {fileID: 0}
-  countdownToFire: 1
-  level: 1
-  upgradeCost: 10
-  baseUpgradeCost: 500
-  upgradeCostScale: 1.25
---- !u!212 &212886114892803304
+  candyCane: {fileID: 1679670024401648}
+  numCandyCanes: 9
+--- !u!212 &212247003671586050
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904437191444272}
+  m_GameObject: {fileID: 1679670024401648}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -124,12 +88,12 @@ SpriteRenderer:
   m_SortingLayerID: -601889635
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4c3cd26ba75bd1b43909e6d5a5b4b453, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0cae7269e1c98a4f8ade4c6e37406fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.96, y: 0.96}
+  m_Size: {x: 2.1, y: 2.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
