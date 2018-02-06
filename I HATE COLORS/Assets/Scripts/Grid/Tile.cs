@@ -70,11 +70,11 @@ public class Tile : MonoBehaviour
                     Tower hitTower = c.gameObject.GetComponent(typeof(Tower)) as Tower;
                     if (upgradePanel.activeSelf == false)
                     {
-                        hitTower.activateUpgradePanel();
+                        hitTower.ActivateUpgradePanel();
                     }
                     else
                     {
-                        GameManager.updateUpgradePanel(hitTower);
+                        GameManager.UpdateUpgradePanel(hitTower);
                     }
 
                 }
