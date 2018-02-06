@@ -43,10 +43,10 @@ public class LevelManager : Singleton<LevelManager>
         GenerateTiles(width, height, tileSize);
         GridGraphManager.Instance.Setup(width, height, tileSize);
 
-        targetTiles = new Tile[GameManager.Instance.Width];
-        for (int i = 0; i < GameManager.Instance.Width; i++)
+        targetTiles = new Tile[GameManager.Instance.Height];
+        for (int i = 0; i < GameManager.Instance.Height; i++)
         {
-            Tile tile = TileDict[new Point(GameManager.Instance.Height - 1, i)];
+            Tile tile = TileDict[new Point(GameManager.Instance.Width - 1, i)];
             targetTiles[i] = tile;
         }
 
