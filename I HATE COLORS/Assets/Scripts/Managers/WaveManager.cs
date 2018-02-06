@@ -15,18 +15,11 @@ public class WaveManager : Singleton<WaveManager> {
     
     // Use this for initialization
     void Start () {
-        waves = new List<Wave>();
+        waves = XmlImporter.GetWavesFromXml();
         currentWave = null;
-        XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + waveXmlFile);
 
         waveSpawnTimer = new GameTimer();
         waveSpawnTimer.SetTimer(SPAWN_DELAY);
-
-        XmlNode root = doc.SelectSingleNode("waves");
-        foreach (XmlNode node in root.SelectNodes("wave")) {
-            waves.Add(Wave.WaveFromXml(node));
-        }
     }
 	
 	public static void Update () {
@@ -51,7 +44,6 @@ public class WaveManager : Singleton<WaveManager> {
         } else
         {
             currentWave = waves[wave - 1];
-            print("Enemies remaining: " + currentWave.EnemiesRemaining());
         }
     }
 

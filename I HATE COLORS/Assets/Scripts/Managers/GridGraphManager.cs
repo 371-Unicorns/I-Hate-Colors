@@ -23,10 +23,10 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// <summary>
     /// Setup GridGraph to match tiles grid.
     /// </summary>
-    /// <param name="length">Amount of tiles on the x-Axis.</param>
-    /// <param name="width">Amount of tiles on the y-Axis.</param>
+    /// <param name="width">Amount of tiles on the x-Axis.</param>
+    /// <param name="length">Amount of tiles on the y-Axis.</param>
     /// <param name="tileSize">Length of one size.</param>
-    public void Setup(int length, int width, float tileSize)
+    public void Setup(int width, int height, float tileSize)
     {
         if (gridGraph == null)
         {
@@ -34,7 +34,7 @@ public class GridGraphManager : Singleton<GridGraphManager>
         }
 
         // Adjust in order to increase resolution of GridGraph
-        gridGraph.SetDimensions(length * 4, width * 4, tileSize / 4.0f);
+        gridGraph.SetDimensions(width * 4, height * 4, tileSize / 4.0f);
 
         ScanGridGraph();
     }

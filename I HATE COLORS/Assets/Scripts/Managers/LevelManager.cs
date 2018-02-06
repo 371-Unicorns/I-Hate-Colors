@@ -32,7 +32,7 @@ public class LevelManager : Singleton<LevelManager>
     void Awake()
     {
         TileDict = new Dictionary<Point, Tile>();
-        GenerateLevel(GameManager.Instance.Length, GameManager.Instance.Width);
+        GenerateLevel(GameManager.Instance.Height, GameManager.Instance.Width);
         Hover.Instance.Deactivate();
     }
 
@@ -46,7 +46,7 @@ public class LevelManager : Singleton<LevelManager>
         targetTiles = new Tile[GameManager.Instance.Width];
         for (int i = 0; i < GameManager.Instance.Width; i++)
         {
-            Tile tile = TileDict[new Point(GameManager.Instance.Length - 1, i)];
+            Tile tile = TileDict[new Point(GameManager.Instance.Height - 1, i)];
             targetTiles[i] = tile;
         }
 
