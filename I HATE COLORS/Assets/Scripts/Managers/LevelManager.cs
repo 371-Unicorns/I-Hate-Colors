@@ -18,6 +18,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private GameObject towerPrefab;
 
+    [SerializeField]
+    private GameObject candycanePrefab;
+
     private GridGraph gridGraph;
 
     private static Tile[] targetTiles;
