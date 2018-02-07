@@ -22,6 +22,11 @@ public class Wall : MonoBehaviour
         Explosion();
     }
     
+    /// <summary>
+    /// Creates Explosion at Wall's position.
+    /// 
+    /// Written by Courtney Chu
+    /// </summary>
     public void Explosion()
     {
         GameObject explosionClone = (GameObject)Instantiate(explosion, transform.position, transform.rotation);

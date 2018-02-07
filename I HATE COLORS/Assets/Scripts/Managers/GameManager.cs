@@ -21,6 +21,12 @@ public class GameManager : Singleton<GameManager>
     public int Height { get { return height; } }
 
     /// <summary>
+    /// Amount of tiles on the y-Axis.
+    /// </summary>
+    [SerializeField]
+    private Button toMenuButton;
+
+    /// <summary>
     /// Currently selected tower by player to place.
     /// </summary>
     public TowerBtn SelectedTower { get; private set; }
@@ -49,6 +55,8 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
+
+        toMenuButton.gameObject.SetActive(false);
 
         timer = new GameTimer();
         timer.SetTimer(30);
@@ -88,6 +96,7 @@ public class GameManager : Singleton<GameManager>
         {
             gameOverText.text = "GAME OVER";
             gameOverText.gameObject.SetActive(true);
+            toMenuButton.gameObject.SetActive(true);
         }
         else
         {
