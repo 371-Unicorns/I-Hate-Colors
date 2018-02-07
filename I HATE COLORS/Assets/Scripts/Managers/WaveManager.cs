@@ -5,36 +5,28 @@ using UnityEngine;
 
 public class WaveManager : Singleton<WaveManager> {
 
-    private static readonly float SPAWN_DELAY = 0.1f;
-
     public string waveXmlFile;
     private static Wave currentWave;
     private static List<Wave> waves;
-
-    private static GameTimer waveSpawnTimer;
     
     // Use this for initialization
     void Start () {
         waves = XmlImporter.GetWavesFromXml();
         currentWave = null;
-
-        waveSpawnTimer = new GameTimer();
-        waveSpawnTimer.SetTimer(SPAWN_DELAY);
     }
-	
-	public static void Update () {
-		if (currentWave != null && !waveSpawnTimer.IsPaused())
-        {
-            waveSpawnTimer.Update();
 
-            if (waveSpawnTimer.IsDone() && currentWave.EnemiesRemaining() > 0)
+    public static void Update()
+    {
+        if (currentWave != null)
+        {
+            currentWave.Update();
+
+            if (currentWave.SpawnReady())
             {
                 EnemyManager.SpawnEnemy(currentWave.NextEnemy());
-
-                waveSpawnTimer.Reset();
             }
         }
-	}
+    }
 
     public static void BeginWave(int wave)
     {

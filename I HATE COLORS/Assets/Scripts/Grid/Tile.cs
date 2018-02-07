@@ -58,22 +58,45 @@ public class Tile : MonoBehaviour
     /// <summary>
     /// Place tower on this tile.
     /// </summary>
+    // TODO: Move this code to tower (Tower.PlaceTower())
     private void PlaceTower()
     {
         // Place tower and set sprite sorting order and parent.
         GameObject tower = Instantiate(GameManager.Instance.SelectedTower.TowerPrefab, transform.position, Quaternion.identity);
-        tower.GetComponent<SpriteRenderer>().sortingOrder = -this.GridPoint.y;
-        tower.transform.SetParent(this.transform);
+        int cost = tower.GetComponent<Tower>().GetBaseCost();
 
-        //  Set tile to be occupied by a tower
-        this.placedTower = tower;
+        if (cost <= GameManager.money)
+        {
+            tower.GetComponent<SpriteRenderer>().sortingOrder = -this.GridPoint.y;
+            tower.transform.SetParent(this.transform);
 
-        // Update A*
-        GridGraphManager.Instance.ScanGridGraph();
+            //  Set tile to be occupied by a tower
+            this.placedTower = tower;
 
-        // Deactive all hover elements
-        GameManager.Instance.ResetTower();
-        Hover.Instance.Deactivate();
+            // Update A*
+            GridGraphManager.Instance.ScanGridGraph();
+            if (GridGraphManager.IsGraphBlocked())
+            {
+                // TODO: Display warning message with this.
+                print("Can't place tower here. Path is entirely blocked.");
+                Destroy(tower);
+            } else
+            {
+                GameManager.AddMoney(-cost);
+            }
+
+            // Deactive all hover elements
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                GameManager.Instance.ResetTower();
+                Hover.Instance.Deactivate();
+            }
+        } else
+        {
+            // TODO: Display warning message with this.
+            print("Can't place tower. Not enough funds.");
+            Destroy(tower);
+        }
     }
 
 }

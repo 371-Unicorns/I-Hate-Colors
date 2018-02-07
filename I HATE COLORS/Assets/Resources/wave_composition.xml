@@ -4,9 +4,10 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>200</count>
+            <count>20</count>
          </enemy>
       </enemies>
+      <spawn-timer>1</spawn-timer>
    </wave>
    <wave>
       <id>2</id>
@@ -16,5 +17,6 @@
             <count>1000</count>
          </enemy>
       </enemies>
+      <spawn-rate>0.9</spawn-rate>
    </wave>
 </waves>

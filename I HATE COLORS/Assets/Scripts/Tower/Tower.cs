@@ -24,6 +24,7 @@ public class Tower : MonoBehaviour, Upgradeable
     public int upgradeCost;
     public int baseUpgradeCost = 20;
     public double upgradeCostScale = 1.25;
+    public int baseCost = 20;
 
     public bool hitTowerOnCurCast = false;
 
@@ -173,4 +174,8 @@ public class Tower : MonoBehaviour, Upgradeable
         upgradePanel.gameObject.SetActive(true);
     }
 
+    public int GetBaseCost()
+    {
+        return baseCost;
+    }
 }

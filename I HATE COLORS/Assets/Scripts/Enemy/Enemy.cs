@@ -11,15 +11,15 @@ public class Enemy : Collidable {
     public Enemy() { }
 
     public void Initialize(float health, float speed, int value) {
-        this.health = health;
-        this.speed = speed;
+        SetHealth(health);
+        SetSpeed(speed);
         this.value = value;
     }
 
     public void Initialize(Enemy other)
     {
-        this.health = other.health;
-        this.speed = other.speed;
+        SetHealth(other.health);
+        SetSpeed(other.speed);
         this.value = other.value;
     }
 
@@ -31,9 +31,10 @@ public class Enemy : Collidable {
     public void SetSpeed(float speed)
     {
         this.speed = speed;
+        gameObject.GetComponent<Pathfinding.AIPath>().maxSpeed = speed;
     }
 
-    public override void ProcessCollision(Collidable collidable) 
+    public override void ProcessCollision(Collidable collidable)
     {
         if (collidable is Bullet)
         {

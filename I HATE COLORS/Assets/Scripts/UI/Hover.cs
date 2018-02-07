@@ -46,4 +46,9 @@ public class Hover : Singleton<Hover>
     {
         this.spriteRenderer.enabled = false;
     }
+
+    public bool IsActive()
+    {
+        return this.spriteRenderer.enabled;
+    }
 }

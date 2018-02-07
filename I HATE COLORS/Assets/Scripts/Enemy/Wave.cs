@@ -5,12 +5,24 @@ using UnityEngine;
 
 public class Wave {
 
+    private float spawnRate = 1.0f;
+
     private int id;
     private Queue<Enemy> enemies;
+
+    private GameTimer unitSpawnTimer;
 
     public Wave() {
         id = -1;
         enemies = new Queue<Enemy>();
+
+        unitSpawnTimer = new GameTimer();
+        unitSpawnTimer.SetTimer(spawnRate);
+    }
+
+    public void Update()
+    {
+        unitSpawnTimer.Update();
     }
 
     public int EnemiesRemaining()
@@ -20,6 +32,8 @@ public class Wave {
 
     public Enemy NextEnemy()
     {
+        unitSpawnTimer.Reset();
+
         return enemies.Dequeue();
     }
 
@@ -28,8 +42,19 @@ public class Wave {
         this.id = id;
     }
 
+    public void SetSpawnRate(float rate)
+    {
+        Debug.Log(rate);
+        this.spawnRate = rate;
+    }
+
     public void EnqueueEnemy(Enemy e)
     {
         enemies.Enqueue(e);
+    }
+
+    public bool SpawnReady()
+    {
+        return !unitSpawnTimer.IsPaused() && unitSpawnTimer.IsDone() && EnemiesRemaining() > 0;
     }
 }

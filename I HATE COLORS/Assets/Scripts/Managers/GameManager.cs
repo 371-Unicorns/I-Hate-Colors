@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     public TowerBtn SelectedTower { get; private set; }
 
     public bool gameOver;
-    private Text gameOverText, healthText, moneyText;
+    private Text gameOverText, healthText, moneyText, countdownTimerText;
 
     public static GameObject curTower;
     public static bool onTower = false;
@@ -40,10 +41,10 @@ public class GameManager : Singleton<GameManager>
     public GameObject canvas;
     public static GameObject upgradePanel;
 
-    private GameTimer timer;
+    private GameTimer waveTimer;
     public int currentWave;
 
-    public static int money = 0;
+    public static int money = 100;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -55,11 +56,12 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
+        countdownTimerText = canvas.transform.Find("CountdownTimerText").gameObject.GetComponent<Text>();
 
         toMenuButton.gameObject.SetActive(false);
 
-        timer = new GameTimer();
-        timer.SetTimer(30);
+        waveTimer = new GameTimer();
+        waveTimer.SetTimer(30);
         currentWave = 1;
 
         Transform infoObjects = canvas.transform.Find("InfoPanel");
@@ -73,23 +75,30 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
+        SetTimerText();
         WaveManager.Update();
 
-        if (!timer.IsPaused() && timer.IsDone())
+        if (!waveTimer.IsPaused() && waveTimer.IsDone())
         {
-            timer.SetPaused(true);
+            waveTimer.SetPaused(true);
             WaveManager.BeginWave(currentWave++);
         }
 
         if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
         {
-            timer.Reset();
-            timer.SetPaused(false);
+            waveTimer.Reset();
+            waveTimer.SetPaused(false);
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            timer.SkipTimer();
+            waveTimer.SkipTimer();
+        } else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Hover.Instance.IsActive())
+            {
+                Hover.Instance.Deactivate();
+            }
         }
 
         if (gameOver)
@@ -188,5 +197,19 @@ public class GameManager : Singleton<GameManager>
     public static void AddMoney(int m)
     {
         GameManager.money += m;
+    }
+
+    private void SetTimerText()
+    {
+        waveTimer.Update();
+
+        if (waveTimer.IsDone())
+        {
+            countdownTimerText.text = "Defend!";
+        } else
+        {
+            TimeSpan t = TimeSpan.FromSeconds(waveTimer.TimeRemaining());
+            countdownTimerText.text = string.Format("{0}:{1:00}", t.Minutes, t.Seconds);
+        }
     }
 }
