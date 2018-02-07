@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 198485437682631336}
   - component: {fileID: 199665573188762212}
   m_Layer: 0
-  m_Name: sprite_realExplosion_c_example
-  m_TagString: Untagged
+  m_Name: ExplosionParticles
+  m_TagString: UpgradePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,6 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4327211855444982}
+  - component: {fileID: 210857544601786968}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Untagged
@@ -209,7 +210,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -309548640
+  randomSeed: 1172085883
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3594,3 +3595,13 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210857544601786968
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1557532383956484}
+  m_Enabled: 1
+  m_SortingLayerID: -753745823
+  m_SortingLayer: 2
+  m_SortingOrder: 0
