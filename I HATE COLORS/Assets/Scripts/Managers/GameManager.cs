@@ -126,7 +126,6 @@ public class GameManager : Singleton<GameManager>
     public static void UpdateUpgradePanel(Tower upgradeTower)
     {
         upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
-
         Text[] panelText = upgradePanel.GetComponentsInChildren<Text>(true);
         foreach (Text t in panelText)
         {

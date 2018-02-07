@@ -74,17 +74,6 @@ public class Tower : MonoBehaviour, Upgradeable
         }
     }
 
-    //Activates upgradepanel for the first time
-    public void ActivateUpgradePanel()
-    {
-        GameManager.UpdateUpgradePanel(this);
-        if (this.level == 5 || GameManager.money < this.upgradeCost)
-        {
-            GameManager.DisableUpgradeButton();
-        }
-        upgradePanel.gameObject.SetActive(true);
-    }
-
     void Shoot()
     {
         GameObject goBullet = (GameObject)Instantiate(bulletPrefab, gameObject.transform.position, gameObject.transform.rotation);
@@ -133,6 +122,7 @@ public class Tower : MonoBehaviour, Upgradeable
     {
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = 5f;
+        bool changeLoc = true;
 
         Vector2 v = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -152,7 +142,7 @@ public class Tower : MonoBehaviour, Upgradeable
                     Tower hitTower = c.gameObject.GetComponent(typeof(Tower)) as Tower;
                     if (upgradePanel.activeSelf == false)
                     {
-                        hitTower.activateUpgradePanel();
+                        hitTower.ActivateUpgradePanel();
                     }
                     else
                     {
@@ -172,7 +162,7 @@ public class Tower : MonoBehaviour, Upgradeable
     }
 
     //Activates upgradepanel for the first time
-    public void activateUpgradePanel()
+    public void ActivateUpgradePanel()
     {
         upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
         GameManager.UpdateUpgradePanel(this);
