@@ -44,8 +44,8 @@ public class Wave {
 
     public void SetSpawnRate(float rate)
     {
-        Debug.Log(rate);
         this.spawnRate = rate;
+        unitSpawnTimer.SetTimer(rate);
     }
 
     public void EnqueueEnemy(Enemy e)

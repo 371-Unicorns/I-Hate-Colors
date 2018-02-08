@@ -7,16 +7,34 @@
             <count>20</count>
          </enemy>
       </enemies>
-      <spawn-timer>1</spawn-timer>
+      <spawn-rate>1</spawn-rate>
    </wave>
    <wave>
       <id>2</id>
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>1000</count>
+            <count>30</count>
          </enemy>
       </enemies>
-      <spawn-rate>0.9</spawn-rate>
+      <spawn-rate>0.67</spawn-rate>
+      <id>3</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>30</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.33</spawn-rate>
+   </wave>
+   <wave>
+      <id>4</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>100</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
    </wave>
 </waves>

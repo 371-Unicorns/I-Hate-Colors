@@ -41,10 +41,8 @@ public class XmlImporter {
             }
 
             XmlNode n = node.SelectSingleNode("spawn-rate");
-            Debug.Log(n);
             if (n != null)
             {
-                Debug.Log(float.Parse(n.InnerText));
                 wave.SetSpawnRate(float.Parse(n.InnerText));
             }
 
