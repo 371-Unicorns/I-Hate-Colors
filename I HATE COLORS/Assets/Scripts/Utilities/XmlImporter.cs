@@ -40,6 +40,12 @@ public class XmlImporter {
                 }
             }
 
+            XmlNode n = node.SelectSingleNode("spawn-rate");
+            if (n != null)
+            {
+                wave.SetSpawnRate(float.Parse(n.InnerText));
+            }
+
             retList.Add(wave);
         }
         

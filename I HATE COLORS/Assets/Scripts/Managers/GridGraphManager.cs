@@ -14,6 +14,7 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// GridGraph
     /// </summary>
     private GridGraph gridGraph;
+    private static GameObject pathChecker;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -31,6 +32,13 @@ public class GridGraphManager : Singleton<GridGraphManager>
         if (gridGraph == null)
         {
             gridGraph = AstarPath.active.data.gridGraph;
+        }
+        if (pathChecker == null)
+        {
+            pathChecker = GameObject.Find("PathChecker");
+            int targetTileLength = EnemyManager.Instance.TargetTiles.Length;
+            Tile randomTargetTileScript = EnemyManager.Instance.TargetTiles[Random.Range(0, targetTileLength)];
+            pathChecker.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
         }
 
         // Adjust in order to increase resolution of GridGraph
@@ -50,5 +58,14 @@ public class GridGraphManager : Singleton<GridGraphManager>
         }
 
         gridGraph.Scan();
+    }
+
+    public static bool IsGraphBlocked()
+    {
+        Vector3 targetLoc = pathChecker.GetComponent<AIDestinationSetter>().target.transform.position;
+        ABPath p = pathChecker.GetComponent<Seeker>().StartPath(pathChecker.transform.position, targetLoc) as ABPath;
+        AstarPath.BlockUntilCalculated(p);
+
+        return Vector3.Distance(p.endPoint, targetLoc) > 0.1;
     }
 }
