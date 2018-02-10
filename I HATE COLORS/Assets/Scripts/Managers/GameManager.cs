@@ -33,7 +33,7 @@ public class GameManager : Singleton<GameManager>
     public TowerBtn SelectedTower { get; private set; }
 
     public bool gameOver;
-    private Text gameOverText, healthText, moneyText, countdownTimerText;
+    private Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
 
     public static GameObject curTower;
     public static bool onTower = false;
@@ -64,11 +64,11 @@ public class GameManager : Singleton<GameManager>
         waveTimer.SetTimer(30);
         currentWave = 1;
 
-        Transform infoObjects = canvas.transform.Find("InfoPanel");
-        healthText = infoObjects.Find("HealthPanel").GetComponentInChildren<Text>();
-        moneyText = infoObjects.Find("MoneyPanel").GetComponentInChildren<Text>();
-        healthText.text = "Health: 100";
-        moneyText.text = "$ ";
+        Transform infoPanel = canvas.transform.Find("InfoPanel");
+        healthText = infoPanel.Find("HealthPanel").GetComponentInChildren<Text>();
+        moneyText = infoPanel.Find("MoneyPanel").GetComponentInChildren<Text>();
+        waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
+        waveText.text = currentWave.ToString();
 
         upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
     }
@@ -93,7 +93,8 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.A))
         {
             waveTimer.SkipTimer();
-        } else if (Input.GetKeyDown(KeyCode.Escape))
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Hover.Instance.IsActive())
             {
@@ -109,8 +110,8 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            healthText.text = "Health: " + CastleManager.Instance.CastleHealth.ToString();
-            moneyText.text = "$ " + money.ToString();
+            healthText.text = CastleManager.Instance.CastleHealth.ToString();
+            moneyText.text = money.ToString();
             if (onTower == false)
             {
                 upgradePanel.gameObject.SetActive(false);
@@ -152,7 +153,7 @@ public class GameManager : Singleton<GameManager>
                 {
                     t.text = "Upgrade Cost: " + upgradeTower.upgradeCost;
                 }
-                
+
             }
         }
 
@@ -206,7 +207,8 @@ public class GameManager : Singleton<GameManager>
         if (waveTimer.IsDone())
         {
             countdownTimerText.text = "Defend!";
-        } else
+        }
+        else
         {
             TimeSpan t = TimeSpan.FromSeconds(waveTimer.TimeRemaining());
             countdownTimerText.text = string.Format("{0}:{1:00}", t.Minutes, t.Seconds);

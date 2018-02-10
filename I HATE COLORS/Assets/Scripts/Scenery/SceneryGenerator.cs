@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneryGenerator {
+public class SceneryGenerator : MonoBehaviour
+{
 
     private static readonly int NUM_CANDYCANES = 9;
 
@@ -17,8 +18,8 @@ public class SceneryGenerator {
         {
             int posX = Random.Range(-GameManager.Instance.Width / 2, GameManager.Instance.Width / 2);
             int posY = Random.Range(-GameManager.Instance.Height / 2, GameManager.Instance.Height / 2);
-            GameObject candy = GameObject.Instantiate(Resources.Load("candycane"), 
-                                                      new Vector3(posX, posY, 0), 
+            GameObject candy = GameObject.Instantiate(Resources.Load("candycane"),
+                                                      new Vector3(posX, posY, 0),
                                                       Quaternion.identity) as GameObject;
             candy.transform.SetParent(GameObject.Find("Scenery").transform);
             curCandy++;
