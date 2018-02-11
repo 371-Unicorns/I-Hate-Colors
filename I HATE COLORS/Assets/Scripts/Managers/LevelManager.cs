@@ -18,6 +18,9 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField]
     private GameObject towerPrefab;
 
+    [HideInInspector]
+    public Tower SelectedTower { get; private set; }
+
     /// <summary>
     /// Dictionary mapping each point on the grid to its correspoing tile.!--
     /// The grid starts at (0, 0) and goes up (GameManager.Instance.Width - 1, GameManager.Instance.Heigth - 1).

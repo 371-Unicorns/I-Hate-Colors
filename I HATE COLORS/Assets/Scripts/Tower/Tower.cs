@@ -15,27 +15,20 @@ public class Tower : MonoBehaviour, Upgradeable
 
     public GameObject bulletPrefab;
     public GameObject canvas;
-    public static GameObject upgradePanel;
     public AudioSource upgradeSound;
 
     public Enemy target;
     public float countdownToFire = 0f;
     public int level = 1;
-    public int upgradeCost;
-    public int baseUpgradeCost = 20;
+    public int upgradeCost = 20;
     public double upgradeCostScale = 1.25;
     public int baseCost = 20;
-
-    public bool hitTowerOnCurCast = false;
 
     void Start()
     {
         upgradeSound = GetComponent<AudioSource>();
         target = null;
-        baseUpgradeCost = 20;
-        upgradeCost = baseUpgradeCost;
         canvas = GameObject.Find("Canvas");
-        upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
     }
 
     void Update()
@@ -113,69 +106,9 @@ public class Tower : MonoBehaviour, Upgradeable
         }
     }
 
-    /*
-     * Checks if any colliders overlap the mouse position on click, and if they're tagged tower the UpgradePanel will display, 
-     * otherwise nothing happenshitTowerOnCurCast is  boolean that checks to see if in this cast a tower was hit, whereas 
-     * onTower checks whether or not the upgradepanel is on a tower currently. If we click and don't find a tower object within
-     * our position, we need to remove the upgradepanel, thus why we need both variables
-     */
-    void OnMouseUp()
+    private void OnMouseUpAsButton()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition.z = 5f;
-        bool changeLoc = true;
-
-        Vector2 v = Camera.main.ScreenToWorldPoint(mousePosition);
-
-        Collider2D[] col = Physics2D.OverlapPointAll(v);
-
-        if (col.Length > 0)
-        {
-            foreach (Collider2D c in col)
-            {
-                if (c.tag == "Tower")
-                {
-                    GameObject canvas = GameObject.Find("Canvas");
-                    GameObject upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
-                    GameManager.curTower = c.gameObject;
-                    GameManager.onTower = true;
-                    hitTowerOnCurCast = true;
-                    Tower hitTower = c.gameObject.GetComponent(typeof(Tower)) as Tower;
-                    if (upgradePanel.activeSelf == false)
-                    {
-                        hitTower.ActivateUpgradePanel();
-                    }
-                    else
-                    {
-                        GameManager.UpdateUpgradePanel(hitTower);
-                    }
-
-                }
-
-            }
-        }
-        if (hitTowerOnCurCast == false)
-        {
-            GameManager.onTower = false;
-        }
-
-        hitTowerOnCurCast = false;
-    }
-
-    //Activates upgradepanel for the first time
-    public void ActivateUpgradePanel()
-    {
-        upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
-        GameManager.UpdateUpgradePanel(this);
-        if (this.level == 5 || GameManager.money < this.upgradeCost)
-        {
-            GameManager.DisableUpgradeButton();
-        }
-        upgradePanel.gameObject.SetActive(true);
-    }
-
-    public int GetBaseCost()
-    {
-        return baseCost;
+        GameManager.Instance.newSelectedTower = this;
+        TowerInformation.Instance.ShowPlacedTower(this);
     }
 }

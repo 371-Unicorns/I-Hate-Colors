@@ -47,10 +47,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
                     {
                         Debug.Log("[Singleton] An instance of " + typeof(T) + " is needed in the scene.");
                     }
-                    else
-                    {
-                        Debug.Log("[Singleton] Using instance already created: " + _instance.gameObject.name);
-                    }
                 }
 
                 return _instance;

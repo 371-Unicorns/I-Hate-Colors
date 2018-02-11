@@ -35,6 +35,7 @@ public class Tile : MonoBehaviour
     /// <summary>
     /// Called every frame while the mouse is over the GUIElement or Collider.
     /// </summary>
+    /*
     private void OnMouseOver()
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.SelectedTower != null)
@@ -44,13 +45,20 @@ public class Tile : MonoBehaviour
                 PlaceTower();
             }
         }
+    }
+    */
 
-        // TODO Improve design
-        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.SelectedTower == null)
+    private void OnMouseUpAsButton()
+    {
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.newSelectedTower != null && this.placedTower == null)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Hover.Instance.IsActive())
             {
-                GameManager.onTower = false;
+                PlaceTower();
+            }
+            else
+            {
+                TowerInformation.Instance.Reset();
             }
         }
     }
@@ -61,41 +69,44 @@ public class Tile : MonoBehaviour
     // TODO: Move this code to tower (Tower.PlaceTower())
     private void PlaceTower()
     {
-        // Place tower and set sprite sorting order and parent.
-        GameObject tower = Instantiate(GameManager.Instance.SelectedTower.TowerPrefab, transform.position, Quaternion.identity);
-        int cost = tower.GetComponent<Tower>().GetBaseCost();
+        int cost = GameManager.Instance.SelectedTower.baseCost;
 
-        if (cost <= GameManager.money)
-        {
-            tower.GetComponent<SpriteRenderer>().sortingOrder = -this.GridPoint.y;
-            tower.transform.SetParent(this.transform);
-
-            //  Set tile to be occupied by a tower
-            this.placedTower = tower;
-
-            // Update A*
-            GridGraphManager.Instance.ScanGridGraph();
-            if (GridGraphManager.IsGraphBlocked())
-            {
-                // TODO: Display warning message with this.
-                print("Can't place tower here. Path is entirely blocked.");
-                Destroy(tower);
-            } else
-            {
-                GameManager.AddMoney(-cost);
-            }
-
-            // Deactive all hover elements
-            if (!Input.GetKey(KeyCode.LeftShift))
-            {
-                GameManager.Instance.ResetTower();
-                Hover.Instance.Deactivate();
-            }
-        } else
+        if (cost > GameManager.money)
         {
             // TODO: Display warning message with this.
             print("Can't place tower. Not enough funds.");
+        }
+
+        // Place tower
+        GameObject tower = Instantiate(GameManager.Instance.SelectedTower.gameObject, transform.position, Quaternion.identity);
+
+        // Update A* and check if path is blocked.
+        GridGraphManager.Instance.ScanGridGraph();
+        if (GridGraphManager.IsGraphBlocked())
+        {
+            // TODO: Display warning message with this.
+            print("Can't place tower here. Path is entirely blocked.");
             Destroy(tower);
+            return;
+        }
+
+        //  Set sprite sorting order and parent.
+        tower.transform.SetParent(this.transform);
+        tower.GetComponent<SpriteRenderer>().sortingOrder = -this.GridPoint.y;
+
+        // Set tile to be occupied by a tower.
+        this.placedTower = tower;
+
+        GameManager.Instance.SelectTower(tower.GetComponent<Tower>());
+        TowerInformation.Instance.ShowPlacedTower(GameManager.Instance.newSelectedTower);
+
+        GameManager.AddMoney(-cost);
+
+        // Deactive all hover elements
+        // TODO check
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            Hover.Instance.Deactivate();
         }
     }
 

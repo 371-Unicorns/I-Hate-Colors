@@ -21,22 +21,17 @@ public class GameManager : Singleton<GameManager>
     private int height = 14;
     public int Height { get { return height; } }
 
-    /// <summary>
-    /// Amount of tiles on the y-Axis.
-    /// </summary>
     [SerializeField]
     private Button toMenuButton;
 
     /// <summary>
-    /// Currently selected tower by player to place.
+    /// Currently selected tower by player. Could either be a ready to place tower or an already placed tower.
     /// </summary>
-    public TowerBtn SelectedTower { get; private set; }
+    public Tower SelectedTower { get; private set; }
+    public Tower newSelectedTower;
 
     public bool gameOver;
     private Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
-
-    public static GameObject curTower;
-    public static bool onTower = false;
 
     public GameObject canvas;
     public static GameObject upgradePanel;
@@ -69,8 +64,6 @@ public class GameManager : Singleton<GameManager>
         moneyText = infoPanel.Find("MoneyPanel").GetComponentInChildren<Text>();
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
-
-        upgradePanel = canvas.transform.Find("UpgradePanel").gameObject;
     }
 
     void Update()
@@ -112,67 +105,6 @@ public class GameManager : Singleton<GameManager>
         {
             healthText.text = CastleManager.Instance.CastleHealth.ToString();
             moneyText.text = money.ToString();
-            if (onTower == false)
-            {
-                upgradePanel.gameObject.SetActive(false);
-            }
-            else if (upgradePanel.activeSelf == true)
-            {
-                if (money >= (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost)
-                {
-                    Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
-                    upgradeButton.interactable = true;
-                }
-                if ((money < (curTower.GetComponent(typeof(Tower)) as Tower).upgradeCost) ||
-                    (curTower.GetComponent(typeof(Tower)) as Tower).level >= 5)
-                {
-                    Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
-                    upgradeButton.interactable = false;
-                }
-            }
-        }
-    }
-
-    public static void UpdateUpgradePanel(Tower upgradeTower)
-    {
-        upgradePanel.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y + 30);
-        Text[] panelText = upgradePanel.GetComponentsInChildren<Text>(true);
-        foreach (Text t in panelText)
-        {
-            if (t.name == "CurLevel")
-            {
-                t.text = "Current Level: " + upgradeTower.level;
-            }
-            else if (t.name == "CurCost")
-            {
-                if (upgradeTower.level == 5)
-                {
-                    t.text = "Fully Upgraded!";
-                }
-                else
-                {
-                    t.text = "Upgrade Cost: " + upgradeTower.upgradeCost;
-                }
-
-            }
-        }
-
-    }
-
-    public static void DisableUpgradeButton()
-    {
-        Button upgradeButton = upgradePanel.GetComponentInChildren(typeof(Button)) as Button;
-        upgradeButton.interactable = false;
-    }
-
-    public void UpgradeTower()
-    {
-        Tower upgradeTower = curTower.GetComponent(typeof(Tower)) as Tower;
-        if (money >= upgradeTower.upgradeCost)
-        {
-            money = money - upgradeTower.upgradeCost;
-            upgradeTower.Upgrade();
-            UpdateUpgradePanel(upgradeTower);
         }
     }
 
@@ -182,9 +114,19 @@ public class GameManager : Singleton<GameManager>
     /// <param name="towerBtn">TowerBtn to select.</param>
     public void SelectTower(TowerBtn towerBtn)
     {
-        this.SelectedTower = towerBtn;
+        this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
         Hover.Instance.Activate(towerBtn.TowerHoverSprite);
-        onTower = false;
+        newSelectedTower = this.SelectedTower;
+    }
+
+    /// <summary>
+    /// Signals player that tower is ready to place by hovering it with the mouse cursor.
+    /// </summary>
+    /// <param name="towerBtn">TowerBtn to select.</param>
+    public void SelectTower(Tower tower)
+    {
+        this.SelectedTower = tower;
+        this.newSelectedTower = tower;
     }
 
     /// <summary>
@@ -193,6 +135,7 @@ public class GameManager : Singleton<GameManager>
     public void ResetTower()
     {
         this.SelectedTower = null;
+        this.newSelectedTower = null;
     }
 
     public static void AddMoney(int m)
