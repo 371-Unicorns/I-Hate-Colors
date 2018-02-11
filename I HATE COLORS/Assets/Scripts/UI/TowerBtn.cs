@@ -30,7 +30,9 @@ public class TowerBtn : MonoBehaviour
         priceText.text = towerPrefab.GetComponent<Tower>().baseCost.ToString();
     }
 
-    // TODO write doc
+    /// <summary>
+    /// Setup trigger, when mouse enters or exits the TowerBtn.
+    /// </summary>
     private void InitalizeEventTrigger()
     {
         EventTrigger trigger = this.gameObject.AddComponent<EventTrigger>();
@@ -46,17 +48,24 @@ public class TowerBtn : MonoBehaviour
         trigger.triggers.Add(pointExitEntry);
     }
 
+    /// <summary>
+    /// Belongs to InitalizeEventTrigger().
+    /// </summary>
+    /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
     {
-        TowerInformation.Instance.ShowHoverinTower(towerPrefab.GetComponent<Tower>());
+        TowerInformation.Instance.ShowHoveringTower(towerPrefab.GetComponent<Tower>());
     }
 
+    /// <summary>
+    /// Belongs to InitalizeEventTrigger().
+    /// </summary>
+    /// <param name="data">Information about the event.</param>
     public void OnPointerExitDelegate(PointerEventData data)
     {
-        if (GameManager.Instance.newSelectedTower == null)
+        if (!Hover.Instance.IsActive())
         {
             TowerInformation.Instance.Reset();
         }
     }
-
 }

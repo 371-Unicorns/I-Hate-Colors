@@ -28,8 +28,8 @@ public class GameManager : Singleton<GameManager>
     /// Currently selected tower by player. Could either be a ready to place tower or an already placed tower.
     /// </summary>
     public Tower SelectedTower { get; private set; }
-    public Tower newSelectedTower;
 
+    [HideInInspector]
     public bool gameOver;
     private Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
 
@@ -40,6 +40,12 @@ public class GameManager : Singleton<GameManager>
     public int currentWave;
 
     public static int money = 100;
+
+    /// <summary>
+    /// Whether the game is currently running or not.
+    /// </summary>
+    [HideInInspector]
+    public bool gameRunning = true;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -92,6 +98,8 @@ public class GameManager : Singleton<GameManager>
             if (Hover.Instance.IsActive())
             {
                 Hover.Instance.Deactivate();
+                GameManager.Instance.ResetTower();
+                TowerInformation.Instance.Reset();
             }
         }
 
@@ -109,24 +117,22 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
-    /// Signals player that tower is ready to place by hovering it with the mouse cursor.
+    /// Set currently selected tower and activate hovering effect for this tower.
     /// </summary>
     /// <param name="towerBtn">TowerBtn to select.</param>
-    public void SelectTower(TowerBtn towerBtn)
+    public void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
         Hover.Instance.Activate(towerBtn.TowerHoverSprite);
-        newSelectedTower = this.SelectedTower;
+        this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
     }
 
     /// <summary>
-    /// Signals player that tower is ready to place by hovering it with the mouse cursor.
+    /// Set currently selected tower.
     /// </summary>
-    /// <param name="towerBtn">TowerBtn to select.</param>
+    /// <param name="towerBtn">Tower to select.</param>
     public void SelectTower(Tower tower)
     {
         this.SelectedTower = tower;
-        this.newSelectedTower = tower;
     }
 
     /// <summary>
@@ -135,7 +141,6 @@ public class GameManager : Singleton<GameManager>
     public void ResetTower()
     {
         this.SelectedTower = null;
-        this.newSelectedTower = null;
     }
 
     public static void AddMoney(int m)

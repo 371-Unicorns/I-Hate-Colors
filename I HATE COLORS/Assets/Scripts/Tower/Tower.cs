@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Tower : MonoBehaviour, Upgradeable
 {
-
     [Header("Attributes")]
     public float range = 0f;
     public float fireRate = 0f;
@@ -106,9 +105,58 @@ public class Tower : MonoBehaviour, Upgradeable
         }
     }
 
+    /// <summary>
+    /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
+    /// </summary>
     private void OnMouseUpAsButton()
     {
-        GameManager.Instance.newSelectedTower = this;
+        GameManager.Instance.SelectTower(this);
         TowerInformation.Instance.ShowPlacedTower(this);
+    }
+
+    /// <summary>
+    /// Place tower on passed tile.
+    /// </summary>
+    /// <param name="parentTile">Parent tile for this tower.</param>
+    /// <returns>Created tower GameObject.</returns>
+    public static GameObject PlaceTower(Tile parentTile)
+    {
+        int cost = GameManager.Instance.SelectedTower.baseCost;
+
+        if (cost > GameManager.money)
+        {
+            // TODO: Display warning message with this.
+            print("Can't place tower. Not enough funds.");
+            return null;
+        }
+        GameManager.AddMoney(-cost);
+
+        // Place tower
+        GameObject tower = Instantiate(GameManager.Instance.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity);
+
+        // Update A* and check if path is blocked.
+        GridGraphManager.Instance.ScanGridGraph();
+        if (GridGraphManager.IsGraphBlocked())
+        {
+            // TODO: Display warning message with this.
+            print("Can't place tower here. Path is entirely blocked.");
+            Destroy(tower);
+            return null;
+        }
+
+        //  Set sprite sorting order and parent.
+        tower.transform.SetParent(parentTile.transform);
+        tower.GetComponent<SpriteRenderer>().sortingOrder = -parentTile.GridPoint.y;
+
+
+        GameManager.Instance.SelectTower(tower.GetComponent<Tower>());
+        TowerInformation.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
+
+        // Allow multi tower placement by pressing LeftShift.
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            Hover.Instance.Deactivate();
+        }
+        return tower;
     }
 }

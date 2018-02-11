@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
+/// </summary>
 public class TowerInformation : Singleton<TowerInformation>
 {
     // Header
@@ -15,6 +18,11 @@ public class TowerInformation : Singleton<TowerInformation>
     // Button panel
     private Button deleteButton;
     private Button upgradeButton;
+
+    /// <summary>
+    /// Prevent instance of this class, since it's a Singleton.
+    /// </summary>
+    private TowerInformation() { }
 
     private void Start()
     {
@@ -33,6 +41,10 @@ public class TowerInformation : Singleton<TowerInformation>
         Reset();
     }
 
+    /// <summary>
+    /// Fill the panel with informations about the currently selected placed tower.
+    /// </summary>
+    /// <param name="tower">Tower to show.</param>
     public void ShowPlacedTower(Tower tower)
     {
         currentLevel.text = "Current level: " + tower.level.ToString();
@@ -42,17 +54,22 @@ public class TowerInformation : Singleton<TowerInformation>
         upgradeButton.interactable = true;
     }
 
-    // TODO better method name
-    public void ShowHoverinTower(Tower tower)
+    /// <summary>
+    /// Fill the panel with informations about the currently hovering tower, ready to place.
+    /// </summary>
+    /// <param name="tower">Tower to show.</param>
+    public void ShowHoveringTower(Tower tower)
     {
         currentLevel.text = "Current level: " + tower.level.ToString();
         upgradeCost.text = "Base cost: " + tower.baseCost.ToString();
 
         deleteButton.interactable = false;
         upgradeButton.interactable = false;
-
     }
 
+    /// <summary>
+    /// Reset panel to represent that no tower is currently selected.
+    /// </summary>
     public void Reset()
     {
         currentLevel.text = "";
@@ -62,9 +79,12 @@ public class TowerInformation : Singleton<TowerInformation>
         upgradeButton.interactable = false;
     }
 
+    /// <summary>
+    /// Check whether it's possible to upgrade the currently selected tower and if it is, do so.
+    /// </summary>
     public void CheckUpgrade()
     {
-        Tower selectedTower = GameManager.Instance.newSelectedTower;
+        Tower selectedTower = GameManager.Instance.SelectedTower;
         int upgradeCost = selectedTower.upgradeCost;
 
         if (upgradeCost <= GameManager.money)
@@ -74,5 +94,4 @@ public class TowerInformation : Singleton<TowerInformation>
             GameManager.AddMoney(-upgradeCost);
         }
     }
-
 }

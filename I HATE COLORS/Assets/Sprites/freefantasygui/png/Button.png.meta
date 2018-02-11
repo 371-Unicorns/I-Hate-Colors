@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5a20525b11444944cbcc2d0d2170585a
-timeCreated: 1518044952
+timeCreated: 1518351053
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -1128,7 +1128,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 2992
-        width: 179
+        width: 175
         height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1140,9 +1140,9 @@ TextureImporter:
       name: Button_62
       rect:
         serializedVersion: 2
-        x: 189
+        x: 193
         y: 2992
-        width: 183
+        width: 175
         height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1154,9 +1154,9 @@ TextureImporter:
       name: Button_63
       rect:
         serializedVersion: 2
-        x: 382
+        x: 386
         y: 2992
-        width: 183
+        width: 175
         height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1168,9 +1168,9 @@ TextureImporter:
       name: Button_64
       rect:
         serializedVersion: 2
-        x: 575
+        x: 579
         y: 2992
-        width: 183
+        width: 175
         height: 185
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
