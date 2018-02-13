@@ -85,6 +85,7 @@ public class GameManager : Singleton<GameManager>
 
         if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
         {
+            waveText.text = currentWave.ToString();
             waveTimer.Reset();
             waveTimer.SetPaused(false);
         }

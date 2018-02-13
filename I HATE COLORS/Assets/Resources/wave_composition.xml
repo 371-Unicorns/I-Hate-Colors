@@ -18,6 +18,8 @@
          </enemy>
       </enemies>
       <spawn-rate>0.67</spawn-rate>
+   </wave>
+   <wave>
       <id>3</id>
       <enemies>
          <enemy>
@@ -29,6 +31,26 @@
    </wave>
    <wave>
       <id>4</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>100</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
+   </wave>
+   <wave>
+      <id>5</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>100</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
+   </wave>
+   <wave>
+      <id>6</id>
       <enemies>
          <enemy>
             <id>unicorn</id>
