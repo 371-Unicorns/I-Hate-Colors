@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
-public class XmlImporter {
-
-    private static readonly string ENEMIES_XML_FILEPATH = "Resources/enemies.xml";
-    private static readonly string WAVE_COMPOSITION_FILEPATH = "Resources/wave_composition.xml";
+public class XmlImporter
+{
+    private static readonly string ENEMIES_XML_FILEPATH = "enemies";
+    private static readonly string WAVE_COMPOSITION_FILEPATH = "wave_composition";
 
     private static Dictionary<string, Enemy> enemies = null;
 
@@ -19,8 +19,9 @@ public class XmlImporter {
 
         List<Wave> retList = new List<Wave>();
 
+        TextAsset temp = Resources.Load(WAVE_COMPOSITION_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + WAVE_COMPOSITION_FILEPATH);
+        doc.LoadXml(temp.text);
 
         XmlNode root = doc.SelectSingleNode("waves");
         foreach (XmlNode node in root.SelectNodes("wave"))
@@ -48,7 +49,7 @@ public class XmlImporter {
 
             retList.Add(wave);
         }
-        
+
         return retList;
     }
 
@@ -56,16 +57,17 @@ public class XmlImporter {
     {
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
+        TextAsset temp = Resources.Load(ENEMIES_XML_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
-        
+        doc.LoadXml(temp.text);
+
         foreach (XmlNode node in doc.SelectSingleNode("enemies").SelectNodes("enemy"))
         {
             string id = node.SelectSingleNode("id").InnerText;
             float health = float.Parse(node.SelectSingleNode("health").InnerText);
             float speed = float.Parse(node.SelectSingleNode("speed").InnerText);
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
-            
+
             Enemy e = (GameObject.Instantiate(Resources.Load(id)) as GameObject).GetComponent<Enemy>();
             e.transform.Translate(new Vector3(-1000, -1000, 0));
             e.Initialize(health, speed, value);
