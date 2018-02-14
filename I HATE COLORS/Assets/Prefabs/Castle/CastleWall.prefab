@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339398199059858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.7, y: 1.63, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 12.6, y: -0.03, z: 0}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,8 +58,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 76.799995, y: 51.68}
-    newSize: {x: 76.799995, y: 51.68}
+    oldSize: {x: 4.64, y: 20.01}
+    newSize: {x: 4.64, y: 20.01}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -79,7 +79,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1557532383956484, guid: 2e96384eed98fa1459ca77b77ba84d90, type: 2}
-  splat: {fileID: 8300000, guid: f21073111253c804cadf18a69da6a5d4, type: 3}
   audioSource: {fileID: 82747076536467052, guid: bb112ac700cbe7140b0e8d29a0c0d70e,
     type: 2}
 --- !u!212 &212045165444671260
@@ -116,12 +115,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 927c591df2e56b746b19233b0b4354c6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6221c5b6072d1846a921392e2ac1483, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 76.799995, y: 51.68}
+  m_Size: {x: 4.64, y: 20.01}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

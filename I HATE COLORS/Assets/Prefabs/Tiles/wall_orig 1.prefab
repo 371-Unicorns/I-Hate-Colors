@@ -79,8 +79,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9348c794b1cb709458645ac3011ac135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 1557532383956484, guid: 2e96384eed98fa1459ca77b77ba84d90, type: 2}
-  splat: {fileID: 8300000, guid: f21073111253c804cadf18a69da6a5d4, type: 3}
+  explosion: {fileID: 198913861749684202, guid: 98ed2599855b7574a901763f6f866920,
+    type: 2}
   audioSource: {fileID: 82747076536467052, guid: bb112ac700cbe7140b0e8d29a0c0d70e,
     type: 2}
 --- !u!114 &114243505353438388
