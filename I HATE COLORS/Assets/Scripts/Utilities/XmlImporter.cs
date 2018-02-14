@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
-public class XmlImporter {
+public class XmlImporter
+{
 
     private static readonly string ENEMIES_XML_FILEPATH = "Resources/XML/enemies.xml";
     private static readonly string WAVE_COMPOSITION_FILEPATH = "Resources/XML/wave_composition.xml";
@@ -19,9 +20,8 @@ public class XmlImporter {
 
         List<Wave> retList = new List<Wave>();
 
-        TextAsset temp = Resources.Load(WAVE_COMPOSITION_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.LoadXml(temp.text);
+        doc.Load(Application.dataPath + "/" + WAVE_COMPOSITION_FILEPATH);
 
         XmlNode root = doc.SelectSingleNode("waves");
         foreach (XmlNode node in root.SelectNodes("wave"))
@@ -57,9 +57,8 @@ public class XmlImporter {
     {
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
-        TextAsset temp = Resources.Load(ENEMIES_XML_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.LoadXml(temp.text);
+        doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
 
         foreach (XmlNode node in doc.SelectSingleNode("enemies").SelectNodes("enemy"))
         {
@@ -67,7 +66,8 @@ public class XmlImporter {
             float health = float.Parse(node.SelectSingleNode("health").InnerText);
             float speed = float.Parse(node.SelectSingleNode("speed").InnerText);
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
-            
+
+            Debug.Log(id);
             Enemy e = (GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id)) as GameObject).GetComponent<Enemy>();
             e.transform.Translate(new Vector3(-1000, -1000, 0));
             e.Initialize(health, speed, value);
