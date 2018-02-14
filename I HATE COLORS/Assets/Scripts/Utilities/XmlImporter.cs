@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class XmlImporter {
 
-    private static readonly string ENEMIES_XML_FILEPATH = "Resources/enemies.xml";
-    private static readonly string WAVE_COMPOSITION_FILEPATH = "Resources/wave_composition.xml";
+    private static readonly string ENEMIES_XML_FILEPATH = "Resources/XML/enemies.xml";
+    private static readonly string WAVE_COMPOSITION_FILEPATH = "Resources/XML/wave_composition.xml";
 
     private static Dictionary<string, Enemy> enemies = null;
 
@@ -66,7 +66,7 @@ public class XmlImporter {
             float speed = float.Parse(node.SelectSingleNode("speed").InnerText);
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
             
-            Enemy e = (GameObject.Instantiate(Resources.Load(id)) as GameObject).GetComponent<Enemy>();
+            Enemy e = (GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id)) as GameObject).GetComponent<Enemy>();
             e.transform.Translate(new Vector3(-1000, -1000, 0));
             e.Initialize(health, speed, value);
 
