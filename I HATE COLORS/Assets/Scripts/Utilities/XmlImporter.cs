@@ -19,8 +19,9 @@ public class XmlImporter {
 
         List<Wave> retList = new List<Wave>();
 
+        TextAsset temp = Resources.Load(WAVE_COMPOSITION_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + WAVE_COMPOSITION_FILEPATH);
+        doc.LoadXml(temp.text);
 
         XmlNode root = doc.SelectSingleNode("waves");
         foreach (XmlNode node in root.SelectNodes("wave"))
@@ -48,7 +49,7 @@ public class XmlImporter {
 
             retList.Add(wave);
         }
-        
+
         return retList;
     }
 
@@ -56,9 +57,10 @@ public class XmlImporter {
     {
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
+        TextAsset temp = Resources.Load(ENEMIES_XML_FILEPATH) as TextAsset;
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
-        
+        doc.LoadXml(temp.text);
+
         foreach (XmlNode node in doc.SelectSingleNode("enemies").SelectNodes("enemy"))
         {
             string id = node.SelectSingleNode("id").InnerText;

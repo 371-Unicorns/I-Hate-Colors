@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f583d7d461aa8cf4db66c8b8ceda27bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
+  towerPrefab: {fileID: 1971874603920920, guid: 8d9f6c35e37ceef46bc8183e558a0c13,
     type: 2}
-  towerHoverSprite: {fileID: 21300000, guid: b67b0f7469952ef4a803e0a3e4f02454, type: 3}
+  towerHoverSprite: {fileID: 21300000, guid: 548eb7f360d2986499b06e59ea18120b, type: 3}
 --- !u!114 &114778480325478618
 MonoBehaviour:
   m_ObjectHideFlags: 1

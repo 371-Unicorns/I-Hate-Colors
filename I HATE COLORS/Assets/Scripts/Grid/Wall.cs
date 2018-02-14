@@ -8,10 +8,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     [SerializeField]
-    private GameObject explosion;
-
-    [SerializeField]
-    public AudioClip splat;
+    private ParticleSystem explosion;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -38,14 +35,12 @@ public class Wall : MonoBehaviour
     /// </summary>
     public void Explosion()
     {
-        GameObject explosionClone = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
-        AudioSource sourceClone = (AudioSource)Instantiate(audioSource, transform.position, transform.rotation);
+        ParticleSystem explosionClone = Instantiate(explosion, transform.position, transform.rotation);
+        AudioSource sourceClone = Instantiate(audioSource, transform.position, transform.rotation);
         // You can also access other components / scripts of the clone
-        Instantiate(explosionClone.GetComponent<ParticleSystem>(), transform.position, transform.rotation);
-        sourceClone.PlayOneShot(splat, Random.Range(volumeLow, volumeHigh));
+        sourceClone.Play();
 
-        Destroy(explosionClone.GetComponent<ParticleSystem>().gameObject);
-        Destroy(explosionClone.gameObject);
-        Destroy(sourceClone.gameObject);
+        //Destroy(explosionClone);
+        //Destroy(sourceClone);
     }
 }
