@@ -9,66 +9,76 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1971874603920920}
+  m_RootGameObject: {fileID: 1904437191444272}
   m_IsPrefabParent: 1
---- !u!1 &1971874603920920
+--- !u!1 &1904437191444272
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4758222999828808}
-  - component: {fileID: 212325460523764080}
-  - component: {fileID: 82921670578877308}
-  - component: {fileID: 114192938229887596}
-  - component: {fileID: 58878500112480522}
+  - component: {fileID: 4032057151554324}
+  - component: {fileID: 212886114892803304}
+  - component: {fileID: 61716106735944588}
+  - component: {fileID: 114593678020265286}
+  - component: {fileID: 82313557443488418}
   m_Layer: 8
-  m_Name: lasertower_tmp
+  m_Name: LaserTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4758222999828808
+--- !u!4 &4032057151554324
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971874603920920}
+  m_GameObject: {fileID: 1904437191444272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58878500112480522
-CircleCollider2D:
+--- !u!61 &61716106735944588
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971874603920920}
+  m_GameObject: {fileID: 1904437191444272}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6, y: 1.6}
+    newSize: {x: 0.96, y: 0.96}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 4.37
---- !u!82 &82921670578877308
+  m_Size: {x: 1.2, y: 1.2}
+  m_EdgeRadius: 0
+--- !u!82 &82313557443488418
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971874603920920}
+  m_GameObject: {fileID: 1904437191444272}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 597e3b3d8de53fd4aba0d41243e91c26, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -138,37 +148,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114192938229887596
+--- !u!114 &114593678020265286
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971874603920920}
+  m_GameObject: {fileID: 1904437191444272}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 407a2d0e64672c54988d9da79ce7605a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0
-  fireRate: 0
+  range: 5
+  fireRate: 0.5
   enemyTag: Enemy
   bulletPrefab: {fileID: 0}
   canvas: {fileID: 0}
   upgradeSound: {fileID: 0}
   target: {fileID: 0}
-  countdownToFire: 0
+  countdownToFire: 1
   level: 1
   upgradeCost: 20
   upgradeCostScale: 1.25
   baseCost: 20
   laserPrefab: {fileID: 1193944767498372, guid: 62da00515c3748b4b9e3cb1036f61ec2,
     type: 2}
---- !u!212 &212325460523764080
+--- !u!212 &212886114892803304
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1971874603920920}
+  m_GameObject: {fileID: 1904437191444272}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -194,15 +204,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -601889635
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 548eb7f360d2986499b06e59ea18120b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.2, y: 7.2}
+  m_Size: {x: 0.96, y: 0.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
