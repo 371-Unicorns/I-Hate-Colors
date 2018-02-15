@@ -1,0 +1,9 @@
+<towers>
+   <tower>
+      <id>basic_tower</id>
+      <damage>20</damage>
+      <fire-rate>3</fire-rate>
+      <range>3</range>
+      <cost>20</cost>
+   </tower>
+</towers>

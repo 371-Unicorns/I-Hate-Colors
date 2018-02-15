@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class Tower : MonoBehaviour, Upgradeable
 {
-    [Header("Attributes")]
-    public float range = 0f;
-    public float fireRate = 0f;
+    private string id;
+    
+    private float range, fireRate;
+    private int cost;
+
+    private GameTimer shotTimer;
 
     [Header("Unity Tags")]
     public string enemyTag = "Enemy";
@@ -17,37 +20,43 @@ public class Tower : MonoBehaviour, Upgradeable
     public AudioSource upgradeSound;
 
     public Enemy target;
-    public float countdownToFire = 0f;
     public int level = 1;
     public int upgradeCost = 20;
     public double upgradeCostScale = 1.25;
-    public int baseCost = 20;
 
     void Start()
     {
         upgradeSound = GetComponent<AudioSource>();
         target = null;
         canvas = GameObject.Find("Canvas");
+        shotTimer = new GameTimer();
+    }
+
+    public void Initialize(string id, float damage, float range, float fireRate, int cost)
+    {
+        this.id = id;
+        this.range = range;
+        shotTimer.SetTimer(fireRate);
+        shotTimer.SkipTimer();
+        shotTimer.SetPaused(false);
+        this.cost = cost;
     }
 
     void Update()
     {
-        //where to rotate turrets
+        shotTimer.Update();
         UpdateTarget();
-
-
+        
         if (target == null || !target.gameObject.activeInHierarchy)
         {
             return;
         }
 
-        if (countdownToFire <= 0f)
+        if (shotTimer.IsDone())
         {
             Shoot();
-            countdownToFire = 1f / fireRate;
+            shotTimer.Reset();
         }
-
-        countdownToFire -= Time.deltaTime;
     }
 
     public void LevelUp()
@@ -119,10 +128,8 @@ public class Tower : MonoBehaviour, Upgradeable
     /// </summary>
     /// <param name="parentTile">Parent tile for this tower.</param>
     /// <returns>Created tower GameObject.</returns>
-    public static GameObject PlaceTower(Tile parentTile)
+    public Tower PlaceTower(Tile parentTile)
     {
-        int cost = GameManager.Instance.SelectedTower.baseCost;
-
         if (cost > GameManager.money)
         {
             // TODO: Display warning message with this.
@@ -157,6 +164,11 @@ public class Tower : MonoBehaviour, Upgradeable
         {
             Hover.Instance.Deactivate();
         }
-        return tower;
+        return tower.GetComponent<Tower>();
+    }
+
+    public int GetCost()
+    {
+        return cost;
     }
 }

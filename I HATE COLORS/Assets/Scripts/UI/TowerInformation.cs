@@ -61,7 +61,7 @@ public class TowerInformation : Singleton<TowerInformation>
     public void ShowHoveringTower(Tower tower)
     {
         currentLevel.text = "Current level: " + tower.level.ToString();
-        upgradeCost.text = "Base cost: " + tower.baseCost.ToString();
+        upgradeCost.text = "Base cost: " + tower.GetCost().ToString();
 
         deleteButton.interactable = false;
         upgradeButton.interactable = false;

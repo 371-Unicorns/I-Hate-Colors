@@ -27,7 +27,7 @@ public class TowerBtn : MonoBehaviour
     {
         InitalizeEventTrigger();
         Text priceText = this.transform.Find("PricePanel").GetComponentInChildren<Text>();
-        priceText.text = towerPrefab.GetComponent<Tower>().baseCost.ToString();
+        priceText.text = towerPrefab.GetComponent<Tower>().GetCost().ToString();
     }
 
     /// <summary>

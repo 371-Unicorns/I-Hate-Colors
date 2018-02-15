@@ -16,7 +16,7 @@ public class Tile : MonoBehaviour
     /// <summary>
     /// Placed tower on this tile.
     /// </summary>
-    private GameObject placedTower = null;
+    private Tower placedTower = null;
 
     /// <summary>
     /// Setup a new tile.
@@ -40,7 +40,7 @@ public class Tile : MonoBehaviour
         {
             if (Hover.Instance.IsActive())
             {
-                GameObject possiblyPlacedTower = Tower.PlaceTower(this);
+                Tower possiblyPlacedTower = GameManager.Instance.SelectedTower.PlaceTower(this);
                 this.placedTower = possiblyPlacedTower == null ? null : possiblyPlacedTower;
             }
             else
