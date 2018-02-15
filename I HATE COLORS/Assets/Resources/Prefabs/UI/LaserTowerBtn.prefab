@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114618753542339918}
   - component: {fileID: 114742206519800560}
   m_Layer: 5
-  m_Name: Tower_01Btn
+  m_Name: LaserTowerBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,9 +144,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f583d7d461aa8cf4db66c8b8ceda27bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerPrefab: {fileID: 1904437191444272, guid: 6e51ebdbd9018a645ac323c9ec401419,
+  towerPrefab: {fileID: 1904437191444272, guid: 360a121fb1881924ab7bc1960dba5e30,
     type: 2}
-  towerHoverSprite: {fileID: 21300000, guid: b67b0f7469952ef4a803e0a3e4f02454, type: 3}
+  towerHoverSprite: {fileID: 21300000, guid: 548eb7f360d2986499b06e59ea18120b, type: 3}
 --- !u!114 &114778480325478618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +226,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b67b0f7469952ef4a803e0a3e4f02454, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32d1cda3018a70148a584912594cc2a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
