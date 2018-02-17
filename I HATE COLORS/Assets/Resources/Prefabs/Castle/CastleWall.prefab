@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4312871830962600}
   - component: {fileID: 212045165444671260}
   - component: {fileID: 61724271086342114}
-  - component: {fileID: 114614771348276790}
   m_Layer: 0
   m_Name: CastleWall
   m_TagString: Untagged
@@ -67,20 +66,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.6, y: 42.54}
   m_EdgeRadius: 0
---- !u!114 &114614771348276790
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1339398199059858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9348c794b1cb709458645ac3011ac135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosion: {fileID: 1557532383956484, guid: 2e96384eed98fa1459ca77b77ba84d90, type: 2}
-  audioSource: {fileID: 82747076536467052, guid: bb112ac700cbe7140b0e8d29a0c0d70e,
-    type: 2}
 --- !u!212 &212045165444671260
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61451370332939350}
   - component: {fileID: 114133205775867306}
   m_Layer: 0
-  m_Name: wall_orig 1
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,8 +79,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9348c794b1cb709458645ac3011ac135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosion: {fileID: 198913861749684202, guid: 98ed2599855b7574a901763f6f866920,
+  explosionPrefab: {fileID: 198913861749684202, guid: 98ed2599855b7574a901763f6f866920,
     type: 2}
+  explosionParent: {fileID: 0}
   audioSource: {fileID: 82747076536467052, guid: bb112ac700cbe7140b0e8d29a0c0d70e,
     type: 2}
 --- !u!114 &114243505353438388

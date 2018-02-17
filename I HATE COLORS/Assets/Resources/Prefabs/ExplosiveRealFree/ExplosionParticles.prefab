@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4480614061478480}
   - component: {fileID: 198913861749684202}
   - component: {fileID: 199469940272603758}
+  - component: {fileID: 210880690955904440}
   m_Layer: 0
   m_Name: ExplosionParticles
   m_TagString: UpgradePanel
@@ -3486,3 +3487,13 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &210880690955904440
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1544414932253640}
+  m_Enabled: 1
+  m_SortingLayerID: -784907773
+  m_SortingLayer: 6
+  m_SortingOrder: 0
