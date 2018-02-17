@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95938149315272084}
   - component: {fileID: 114769023112928054}
   m_Layer: 0
-  m_Name: unicorn
+  m_Name: Unicorn
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
