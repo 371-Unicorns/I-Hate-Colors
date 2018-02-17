@@ -49,6 +49,9 @@ TagManager:
   - name: Fog
     uniqueID: 1580665901
     locked: 0
+  - name: Wall
+    uniqueID: 3456358465
+    locked: 0
   - name: Bullets
     uniqueID: 3541221473
     locked: 0

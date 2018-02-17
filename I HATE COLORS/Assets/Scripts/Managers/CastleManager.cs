@@ -7,7 +7,7 @@ public class CastleManager : Singleton<CastleManager>
     public int CastleHealth { get; private set; }
 
     [SerializeField]
-    private GameObject castle;
+    private GameObject castleWallPrefab;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -17,8 +17,7 @@ public class CastleManager : Singleton<CastleManager>
     private void Start()
     {
         CastleHealth = 100;
-        GameObject castleClone = Instantiate(castle, castle.transform.position, castle.transform.rotation);
-        castleClone.SetActive(true);
+        Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation);
     }
 
     public void TakeDamage(int damage)

@@ -8,13 +8,25 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     [SerializeField]
-    private ParticleSystem explosion;
+    private ParticleSystem explosionPrefab;
+
+    /// <summary>
+    /// Parent in hierachy for explosions to appear in.
+    /// </summary>
+    [SerializeField]
+    private Transform explosionParent;
 
     [SerializeField]
     private AudioSource audioSource;
 
-    private float volumeLow = 0.5f;
-    private float volumeHigh = 1.0f;
+    /// <summary>
+    /// Set explosionParent.
+    /// </summary>
+    private void Start()
+    {
+        explosionParent = LevelManager.Instance.Map.transform.Find("Explosions");
+    }
+
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this object (2D physics only).
     /// Take damage, remove entered gameobject from list of active enemies and then destroy gameobject.
@@ -27,7 +39,7 @@ public class Wall : MonoBehaviour
         Destroy(other.gameObject);
         Explosion();
     }
-    
+
     /// <summary>
     /// Creates Explosion at Wall's position.
     /// 
@@ -35,12 +47,11 @@ public class Wall : MonoBehaviour
     /// </summary>
     public void Explosion()
     {
-        ParticleSystem explosionClone = Instantiate(explosion, transform.position, transform.rotation);
-        AudioSource sourceClone = Instantiate(audioSource, transform.position, transform.rotation);
-        // You can also access other components / scripts of the clone
-        sourceClone.Play();
+        ParticleSystem explosionParticle = Instantiate(explosionPrefab, transform.position, transform.rotation);
+        explosionParticle.transform.SetParent(explosionParent);
+        Destroy(explosionParticle.gameObject, explosionParticle.main.duration);
 
-        //Destroy(explosionClone);
-        //Destroy(sourceClone);
+        AudioSource sourceClone = Instantiate(audioSource, transform.position, transform.rotation);
+        sourceClone.Play();
     }
 }
