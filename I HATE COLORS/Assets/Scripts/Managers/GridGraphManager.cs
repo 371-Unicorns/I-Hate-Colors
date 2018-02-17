@@ -9,12 +9,15 @@ using Pathfinding;
 /// </summary>
 public class GridGraphManager : Singleton<GridGraphManager>
 {
-
     /// <summary>
     /// GridGraph
     /// </summary>
     private GridGraph gridGraph;
-    private static GameObject pathChecker;
+
+    /// <summary>
+    /// Random target tile to check the graph for blocking placements against.
+    /// </summary>
+    private Tile randomTargetTile;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -26,46 +29,33 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// </summary>
     /// <param name="width">Amount of tiles on the x-Axis.</param>
     /// <param name="height">Amount of tiles on the y-Axis.</param>
-    /// <param name="tileSize">Length of one size.</param>
+    /// <param name="tileSize">Length of one tile.</param>
     public void Setup(int width, int height, float tileSize)
     {
-        if (gridGraph == null)
-        {
-            gridGraph = AstarPath.active.data.gridGraph;
-        }
-        if (pathChecker == null)
-        {
-            pathChecker = GameObject.Find("PathChecker");
-            int targetTileLength = EnemyManager.Instance.TargetTiles.Length;
-            Tile randomTargetTileScript = EnemyManager.Instance.TargetTiles[Random.Range(0, targetTileLength)];
-            pathChecker.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
-        }
+        if (gridGraph == null) { gridGraph = AstarPath.active.data.gridGraph; }
 
         // Adjust in order to increase resolution of GridGraph
         gridGraph.SetDimensions(width * 4, height * 4, tileSize / 4.0f);
 
-        ScanGridGraph();
-    }
-
-    /// <summary>
-    /// Update GridGraph for changed nodes.
-    /// </summary>
-    public void ScanGridGraph()
-    {
-        if (gridGraph == null)
-        {
-            gridGraph = AstarPath.active.data.gridGraph;
-        }
+        randomTargetTile = EnemyManager.Instance.GetRandomTargetTile();
 
         gridGraph.Scan();
     }
 
-    public static bool IsGraphBlocked()
+    /// <summary>
+    /// Check whether the passed Tower will block the path between spawn and target tiles for the enemies.
+    /// Uses Pathfinding.GraphUpdateUtilities.UpdateGraphsNoBlock(...) to do so, which first updates the graph and then checks if all nodes are still reachable from each other.
+    /// If the path is blocked, the effect by the new tower on the graph is reverted.
+    /// https://arongranberg.com/astar/docs/graphupdates.html#blocking for more information.
+    /// </summary>
+    /// <param name="newTower">New tower, player wants to place.</param>
+    /// <returns>True if path would be blocked by the new tower, false otherwise.</returns>
+    public bool IsGraphNotBlocked(GameObject newTower)
     {
-        Vector3 targetLoc = pathChecker.GetComponent<AIDestinationSetter>().target.transform.position;
-        ABPath p = pathChecker.GetComponent<Seeker>().StartPath(pathChecker.transform.position, targetLoc) as ABPath;
-        AstarPath.BlockUntilCalculated(p);
+        var guo = new GraphUpdateObject(newTower.GetComponent<BoxCollider2D>().bounds);
+        var spawnNode = AstarPath.active.GetNearest(LevelManager.Instance.TileDict[new Point(0, 0)].transform.position).node;
+        var targetNode = AstarPath.active.GetNearest(randomTargetTile.transform.position).node;
 
-        return Vector3.Distance(p.endPoint, targetLoc) > 0.1;
+        return GraphUpdateUtilities.UpdateGraphsNoBlock(guo, spawnNode, targetNode, false);
     }
 }

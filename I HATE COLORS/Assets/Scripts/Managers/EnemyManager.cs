@@ -5,7 +5,6 @@ using Pathfinding;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
-
     public static Dictionary<string, Enemy> enemyDictionary;
     public static List<Enemy> activeEnemies = new List<Enemy>();
 
@@ -34,9 +33,8 @@ public class EnemyManager : Singleton<EnemyManager>
         enemy.Initialize(obj);
         enemy.transform.SetParent(GameObject.Find("Enemies").transform);
 
-        int targetTileLength = EnemyManager.Instance.TargetTiles.Length;
-        Tile randomTargetTileScript = EnemyManager.Instance.TargetTiles[Random.Range(0, targetTileLength)];
-        enemy.GetComponent<AIDestinationSetter>().target = randomTargetTileScript.transform;
+        Tile randomTargetTile = EnemyManager.Instance.GetRandomTargetTile();
+        enemy.GetComponent<AIDestinationSetter>().target = randomTargetTile.transform;
         enemy.gameObject.SetActive(true);
 
         activeEnemies.Add(enemy);
@@ -63,6 +61,16 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             TargetTiles[i] = LevelManager.Instance.TileDict[new Point(GameManager.Instance.Width - 1, i)];
         }
+    }
+
+    /// <summary>
+    /// Gets a random target tile.
+    /// </summary>
+    /// <returns>Random target tile.</returns>
+    public Tile GetRandomTargetTile()
+    {
+        int targetTileLength = EnemyManager.Instance.TargetTiles.Length;
+        return EnemyManager.Instance.TargetTiles[Random.Range(0, targetTileLength)];
     }
 
 }

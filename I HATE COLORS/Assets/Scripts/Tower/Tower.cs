@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Tower : MonoBehaviour, Upgradeable
 {
     private string id;
-    
+
     private float range, fireRate;
     private int cost;
 
@@ -46,7 +46,7 @@ public class Tower : MonoBehaviour, Upgradeable
     {
         shotTimer.Update();
         UpdateTarget();
-        
+
         if (target == null || !target.gameObject.activeInHierarchy)
         {
             return;
@@ -132,26 +132,25 @@ public class Tower : MonoBehaviour, Upgradeable
     {
         if (cost > GameManager.money)
         {
-            // TODO: Display warning message with this.
+            // TODO Display warning message with this.
             print("Can't place tower. Not enough funds.");
             return null;
         }
         GameManager.AddMoney(-cost);
 
-        // Place tower
+        // Place tower.
         GameObject tower = Instantiate(GameManager.Instance.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity);
 
-        // Update A* and check if path is blocked.
-        GridGraphManager.Instance.ScanGridGraph();
-        if (GridGraphManager.IsGraphBlocked())
+        // Check if path is blocked.
+        if (!GridGraphManager.Instance.IsGraphNotBlocked(tower))
         {
-            // TODO: Display warning message with this.
+            // TODO Display warning message with this.
             print("Can't place tower here. Path is entirely blocked.");
             Destroy(tower);
             return null;
         }
 
-        //  Set sprite sorting order and parent.
+        // Set sprite sorting order and parent.
         tower.transform.SetParent(parentTile.transform);
         tower.GetComponent<SpriteRenderer>().sortingOrder = -parentTile.GridPoint.y;
 

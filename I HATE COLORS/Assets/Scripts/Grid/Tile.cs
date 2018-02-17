@@ -14,6 +14,11 @@ public class Tile : MonoBehaviour
     public Point GridPoint { get; private set; }
 
     /// <summary>
+    /// Vector3 positon of this tiles center.
+    /// </summary>
+    public Vector3 Position { get { return new Vector3(GridPoint.x, GridPoint.y, 0); } }
+
+    /// <summary>
     /// Placed tower on this tile.
     /// </summary>
     private Tower placedTower = null;
