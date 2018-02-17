@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114468149326133764}
   - component: {fileID: 82313557443488418}
   m_Layer: 8
-  m_Name: tower_tmp_01
+  m_Name: BulletTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,20 +159,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4bd368d26bc7842bc60176cbbf903b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
-  fireRate: 0.5
   enemyTag: Enemy
   bulletPrefab: {fileID: 1318892502327916, guid: d8007d426def7d441b8bf274d56180c2,
     type: 2}
   canvas: {fileID: 0}
   upgradeSound: {fileID: 0}
   target: {fileID: 0}
-  countdownToFire: 1
   level: 1
   upgradeCost: 10
-  baseUpgradeCost: 500
   upgradeCostScale: 1.25
-  hitTowerOnCurCast: 0
 --- !u!212 &212886114892803304
 SpriteRenderer:
   m_ObjectHideFlags: 1
