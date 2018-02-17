@@ -15,15 +15,18 @@ public class CastleWall : MonoBehaviour
     /// </summary>
     private Transform explosionParent;
 
-    [SerializeField]
-    private AudioSource audioSource;
+    /// <summary>
+    /// AudioSource to be played, once a enemy reaches this castle wall.
+    /// </summary>
+    private AudioSource deathSound;
 
     /// <summary>
-    /// Set explosionParent.
+    /// Set explosionParent and deathSound.
     /// </summary>
     private void Start()
     {
         explosionParent = LevelManager.Instance.Map.transform.Find("Explosions");
+        deathSound = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -39,8 +42,7 @@ public class CastleWall : MonoBehaviour
             ParticleSystem explosionParticle = Instantiate(explosionPrefab, other.transform.position, transform.rotation);
             explosionParticle.transform.SetParent(explosionParent);
 
-            AudioSource sourceClone = Instantiate(audioSource, transform.position, transform.rotation);
-            sourceClone.Play();
+            deathSound.PlayOneShot(deathSound.clip);
 
             EnemyManager.RemoveEnemy(other.gameObject.GetComponent<Enemy>());
             Destroy(explosionParticle.gameObject, explosionParticle.main.duration);
