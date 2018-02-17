@@ -20,7 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4312871830962600}
   - component: {fileID: 212045165444671260}
-  - component: {fileID: 61724271086342114}
+  - component: {fileID: 61066865236457526}
+  - component: {fileID: 114314805158718368}
   m_Layer: 0
   m_Name: CastleWall
   m_TagString: Untagged
@@ -41,7 +42,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61724271086342114
+--- !u!61 &61066865236457526
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -53,7 +54,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 12.2, y: -4}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -64,8 +65,23 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 8.6, y: 42.54}
+  m_Size: {x: 4, y: 20}
   m_EdgeRadius: 0
+--- !u!114 &114314805158718368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339398199059858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9348c794b1cb709458645ac3011ac135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 198913861749684202, guid: 98ed2599855b7574a901763f6f866920,
+    type: 2}
+  audioSource: {fileID: 82747076536467052, guid: bb112ac700cbe7140b0e8d29a0c0d70e,
+    type: 2}
 --- !u!212 &212045165444671260
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -9,9 +9,6 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject grassTile;
 
     [SerializeField]
-    private GameObject wallTile;
-
-    [SerializeField]
     private GameObject map;
     public GameObject Map { get { return map; } }
 
@@ -64,17 +61,8 @@ public class LevelManager : Singleton<LevelManager>
         {
             for (int y = 0; y < heigth; y++)
             {
-                // Last column is wall
-                if (x == width - 1)
-                {
-                    Tile wallTileScript = Instantiate(wallTile).GetComponent<Tile>();
-                    wallTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
-                }
-                else
-                {
-                    Tile grassTileScript = Instantiate(grassTile).GetComponent<Tile>();
-                    grassTileScript.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
-                }
+                Tile grassTile = Instantiate(this.grassTile).GetComponent<Tile>();
+                grassTile.Setup(new Point(x, y), new Vector3(tileXStart + tileSize * x, tileYStart + tileSize * y, 0));
             }
         }
     }
