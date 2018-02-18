@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameTimer {
-
+[System.Serializable]
+public class GameTimer
+{
     private bool isPaused;
 
-    private float timeRemaining, lastTimeSet;
+    public float timeRemaining;
+    public float lastTimeSet;
 
-	// Use this for initialization
-	void Start () {
-        isPaused = false;
-        timeRemaining = lastTimeSet = 0;
-	}
-	
-	public void Update () {
-		if (!isPaused)
+    public void Update()
+    {
+        if (!isPaused)
         {
             timeRemaining -= Time.deltaTime;
         }
-	}
+    }
 
     public float TimeRemaining()
     {

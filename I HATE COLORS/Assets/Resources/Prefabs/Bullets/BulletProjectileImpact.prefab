@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198039748199385376}
   - component: {fileID: 199970259966744544}
   m_Layer: 0
-  m_Name: bullet_tmp_impact
+  m_Name: BulletProjectileImpact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -10,7 +10,7 @@ public class Hover : Singleton<Hover>
     /// <summary>
     /// SpriteRenderer which displays currently selected tower.
     /// </summary>
-    private SpriteRenderer spriteRenderer, radiusRenderer;
+    private SpriteRenderer spriteRenderer, rangeIndicatorRenderer;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -20,7 +20,7 @@ public class Hover : Singleton<Hover>
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        radiusRenderer = GameObject.Find("HoverRadius").GetComponent<SpriteRenderer>();
+        rangeIndicatorRenderer = transform.Find("RangeIndicator").GetComponent<SpriteRenderer>();
 
         Deactivate();
     }
@@ -40,7 +40,7 @@ public class Hover : Singleton<Hover>
     {
         this.spriteRenderer.sprite = sprite;
         this.spriteRenderer.enabled = true;
-        this.radiusRenderer.enabled = true;
+        this.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class Hover : Singleton<Hover>
     public void Deactivate()
     {
         this.spriteRenderer.enabled = false;
-        this.radiusRenderer.enabled = false;
+        this.rangeIndicatorRenderer.enabled = false;
     }
 
     public bool IsActive()

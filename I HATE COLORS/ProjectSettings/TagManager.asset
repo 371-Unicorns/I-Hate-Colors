@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tower
   - Enemy
+  - UpgradePanel
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - A* Obstacles
-  - World UI
+  - 
   - 
   - 
   - 
@@ -52,11 +53,11 @@ TagManager:
   - name: Wall
     uniqueID: 3456358465
     locked: 0
-  - name: Bullets
-    uniqueID: 3541221473
-    locked: 0
   - name: Towers
     uniqueID: 3693077661
+    locked: 0
+  - name: Bullets
+    uniqueID: 3541221473
     locked: 0
   - name: Enemies
     uniqueID: 3510059523

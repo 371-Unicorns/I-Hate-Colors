@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : Bullet {
-    
+// TODO redo as LaserProjectileEffect
+public class Laser : MonoBehaviour
+{
+
     private Enemy target;
     private Vector3 ourDir;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         ourDir = Vector3.left;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		if(target == null)
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (target == null)
         {
             Destroy(gameObject);
             return;
@@ -26,13 +30,13 @@ public class Laser : Bullet {
             ourDir = dir;
             transform.LookAt(target.transform);
         }
-        if((dir - ourDir).magnitude > 5)
+        if ((dir - ourDir).magnitude > 5)
         {
             Destroy(gameObject);
             return;
         }
-	}
-    
+    }
+
     public new void Seek(Enemy _target)
     {
         target = _target;

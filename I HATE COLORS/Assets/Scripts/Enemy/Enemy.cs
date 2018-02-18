@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Collidable {
-
+public class Enemy : MonoBehaviour
+{
     private float health;
     private float speed;
     private int value;
 
-    public Enemy() { }
+    private Enemy() { }
 
-    public void Initialize(float health, float speed, int value) {
+    public void Initialize(float health, float speed, int value)
+    {
         SetHealth(health);
         SetSpeed(speed);
         this.value = value;
@@ -23,31 +24,28 @@ public class Enemy : Collidable {
         this.value = other.value;
     }
 
-    public void SetHealth(float health)
+    private void SetHealth(float health)
     {
         this.health = health;
     }
 
-    public void SetSpeed(float speed)
+    private void SetSpeed(float speed)
     {
         this.speed = speed;
         gameObject.GetComponent<Pathfinding.AIPath>().maxSpeed = speed;
     }
 
-    public override void ProcessCollision(Collidable collidable)
+    /// <summary>
+    /// Take damage and check whether for death.
+    /// </summary>
+    /// <param name="damage">Damage to take.</param>
+    public void TakeDamage(float damage)
     {
-        if (collidable is Bullet)
+        health -= damage;
+        if (health <= 0)
         {
-            Bullet bullet = (Bullet)collidable;
-            
-            health -= bullet.GetDamage();
-            if (health <= 0)
-            {
-                GameManager.AddMoney(value);
-                EnemyManager.RemoveEnemy(this);
-            }
-
-            bullet.ProcessCollision(this);
+            GameManager.AddMoney(value);
+            EnemyManager.RemoveEnemy(this);
         }
     }
 }

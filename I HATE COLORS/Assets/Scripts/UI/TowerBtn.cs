@@ -12,9 +12,7 @@ public class TowerBtn : MonoBehaviour
     /// <summary>
     /// Prefab of tower.
     /// </summary>
-    [SerializeField]
-    private GameObject towerPrefab;
-    public GameObject TowerPrefab { get { return towerPrefab; } }
+    public GameObject TowerPrefab { get; set; }
 
     /// <summary>
     /// Sprite of tower used for hover effect.
@@ -27,7 +25,18 @@ public class TowerBtn : MonoBehaviour
     {
         InitalizeEventTrigger();
         Text priceText = this.transform.Find("PricePanel").GetComponentInChildren<Text>();
-        priceText.text = towerPrefab.GetComponent<Tower>().GetCost().ToString();
+        priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString();
+
+        GetComponent<Button>().onClick.AddListener(OnClickListener);
+    }
+
+    /// <summary>
+    /// Listenen, what to do at button's OnClick.
+    /// If button is clicked, update selected tower and activate hover.
+    /// </summary>
+    void OnClickListener()
+    {
+        GameManager.Instance.SelectTowerAndHover(this);
     }
 
     /// <summary>
@@ -54,7 +63,7 @@ public class TowerBtn : MonoBehaviour
     /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
     {
-        TowerInformation.Instance.ShowHoveringTower(towerPrefab.GetComponent<Tower>());
+        TowerInformation.Instance.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
     }
 
     /// <summary>

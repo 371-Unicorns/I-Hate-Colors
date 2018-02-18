@@ -9,74 +9,75 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1318892502327916}
+  m_RootGameObject: {fileID: 1333892431645770}
   m_IsPrefabParent: 1
---- !u!1 &1318892502327916
+--- !u!1 &1333892431645770
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4619864304020116}
-  - component: {fileID: 212731323748949940}
-  - component: {fileID: 114036081079384716}
-  - component: {fileID: 58902231094639166}
+  - component: {fileID: 4874550105488862}
+  - component: {fileID: 212821295249019144}
+  - component: {fileID: 114489868221911670}
+  - component: {fileID: 58015453860236338}
   m_Layer: 0
-  m_Name: bullet_tmp
+  m_Name: BulletProjectileEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4619864304020116
+--- !u!4 &4874550105488862
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318892502327916}
+  m_GameObject: {fileID: 1333892431645770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 6.03, y: 3.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58902231094639166
+--- !u!58 &58015453860236338
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318892502327916}
+  m_GameObject: {fileID: 1333892431645770}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.24
---- !u!114 &114036081079384716
+  m_Radius: 0.2
+--- !u!114 &114489868221911670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318892502327916}
+  m_GameObject: {fileID: 1333892431645770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f3b14af2198a884eaf09ac19e86e1fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 4feb2d4fabfd1064f87394ff457ffdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  speed: 10
-  impactFX: {fileID: 1487270573388396, guid: 3f3f98a1b2ccc61419054224ab519898, type: 2}
---- !u!212 &212731323748949940
+  target: {fileID: 0}
+  running: 0
+  projectileImpact: {fileID: 1487270573388396, guid: 3f3f98a1b2ccc61419054224ab519898,
+    type: 2}
+--- !u!212 &212821295249019144
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1318892502327916}
+  m_GameObject: {fileID: 1333892431645770}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -103,7 +104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -753745823
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b224c79b7ea828742bb3d067462f2e1a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

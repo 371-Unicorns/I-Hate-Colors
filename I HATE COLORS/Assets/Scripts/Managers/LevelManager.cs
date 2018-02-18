@@ -12,11 +12,19 @@ public class LevelManager : Singleton<LevelManager>
     private GameObject map;
     public GameObject Map { get { return map; } }
 
+    /// <summary>
+    /// Parent for all projectiles effects to keep hierachy clean.
+    /// </summary>
     [SerializeField]
-    private GameObject towerPrefab;
+    private Transform projectilesEffectParent;
+    public Transform ProjectilesEffectParent { get { return projectilesEffectParent; } }
 
-    [HideInInspector]
-    public Tower SelectedTower { get; private set; }
+    /// <summary>
+    /// Parent for all instantiated prefabs (towers & enemies) to keep hierachy clean.
+    /// </summary>
+    [SerializeField]
+    private Transform prefabHolderParent;
+    public Transform PrefabHolderParent { get { return prefabHolderParent; } }
 
     /// <summary>
     /// Dictionary mapping each point on the grid to its correspoing tile.

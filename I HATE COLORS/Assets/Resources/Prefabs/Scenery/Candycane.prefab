@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 212963897472947326}
   - component: {fileID: 114238849393004814}
   - component: {fileID: 60464826272003268}
-  - component: {fileID: 114623568440436828}
-  m_Layer: 0
-  m_Name: candycane
+  - component: {fileID: 50567083491473402}
+  m_Layer: 8
+  m_Name: Candycane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,6 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50567083491473402
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217158430669232}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!60 &60464826272003268
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -113,17 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   candyCane: {fileID: 1217158430669232}
   numCandyCanes: 9
---- !u!114 &114623568440436828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1217158430669232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6f3826e9b7f7742a1694dd82233d3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212963897472947326
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -73,7 +73,6 @@ public class XmlImporter
         }
 
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
-        Transform prefabHolder = GameObject.Find("PrefabHolder").transform;
 
         XmlDocument doc = new XmlDocument();
         doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
@@ -85,10 +84,8 @@ public class XmlImporter
             float speed = float.Parse(node.SelectSingleNode("speed").InnerText);
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
 
-            Enemy e = (GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id)) as GameObject).GetComponent<Enemy>();
-            e.transform.Translate(new Vector3(-1000, -1000, 0));
+            Enemy e = GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id) as GameObject, LevelManager.Instance.PrefabHolderParent).GetComponent<Enemy>();
             e.Initialize(health, speed, value);
-            e.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, e);
         }
@@ -125,7 +122,7 @@ public class XmlImporter
 
             Tower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/" + id)) as GameObject).GetComponent<Tower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
-            tower.Initialize(id, damage, range, fireRate, cost);
+            //            tower.Initialize(id, damage, range, fireRate, cost);
             tower.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, tower);

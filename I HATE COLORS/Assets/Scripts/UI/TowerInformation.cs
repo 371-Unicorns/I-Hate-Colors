@@ -13,7 +13,7 @@ public class TowerInformation : Singleton<TowerInformation>
 
     // Stats panel
     private Text currentLevel;
-    private Text upgradeCost;
+    private Text upgradeCosts;
 
     // Button panel
     private Button deleteButton;
@@ -32,7 +32,7 @@ public class TowerInformation : Singleton<TowerInformation>
 
         Transform statsPanel = body.Find("StatsPanel");
         currentLevel = statsPanel.Find("CurrentLevelText").GetComponent<Text>();
-        upgradeCost = statsPanel.Find("UpgradeCostText").GetComponent<Text>();
+        upgradeCosts = statsPanel.Find("UpgradeCostText").GetComponent<Text>();
 
         Transform buttonsPanel = body.Find("ButtonsPanel");
         deleteButton = buttonsPanel.Find("DeleteButton").GetComponent<Button>();
@@ -47,8 +47,8 @@ public class TowerInformation : Singleton<TowerInformation>
     /// <param name="tower">Tower to show.</param>
     public void ShowPlacedTower(Tower tower)
     {
-        currentLevel.text = "Current level: " + tower.level.ToString();
-        upgradeCost.text = "Upgrade cost: " + tower.upgradeCost.ToString();
+        currentLevel.text = "Current level: " + tower.Level.ToString();
+        upgradeCosts.text = "Upgrade cost: " + tower.UpgradeCosts.ToString();
 
         deleteButton.interactable = true;
         upgradeButton.interactable = true;
@@ -60,8 +60,8 @@ public class TowerInformation : Singleton<TowerInformation>
     /// <param name="tower">Tower to show.</param>
     public void ShowHoveringTower(Tower tower)
     {
-        currentLevel.text = "Current level: " + tower.level.ToString();
-        upgradeCost.text = "Base cost: " + tower.GetCost().ToString();
+        currentLevel.text = "Current level: " + tower.Level.ToString();
+        upgradeCosts.text = "Base cost: " + tower.BaseCosts.ToString();
 
         deleteButton.interactable = false;
         upgradeButton.interactable = false;
@@ -73,7 +73,7 @@ public class TowerInformation : Singleton<TowerInformation>
     public void Reset()
     {
         currentLevel.text = "";
-        upgradeCost.text = "";
+        upgradeCosts.text = "";
 
         deleteButton.interactable = false;
         upgradeButton.interactable = false;
@@ -85,13 +85,13 @@ public class TowerInformation : Singleton<TowerInformation>
     public void CheckUpgrade()
     {
         Tower selectedTower = GameManager.Instance.SelectedTower;
-        int upgradeCost = selectedTower.upgradeCost;
+        int upgradeCosts = selectedTower.UpgradeCosts;
 
-        if (upgradeCost <= GameManager.money)
+        if (upgradeCosts <= GameManager.money)
         {
             selectedTower.Upgrade();
             this.ShowPlacedTower(selectedTower);
-            GameManager.AddMoney(-upgradeCost);
+            GameManager.AddMoney(-upgradeCosts);
         }
     }
 }
