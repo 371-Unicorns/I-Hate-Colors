@@ -13,6 +13,8 @@ public class SettingsPanel : Singleton<SettingsPanel>
     /// </summary>
     private Button pauseResumeButton;
 
+    private Button settingsButton;
+
     /// <summary>
     /// Four sprites for pause.
     /// </summary>
@@ -33,6 +35,8 @@ public class SettingsPanel : Singleton<SettingsPanel>
     private void Start()
     {
         pauseResumeButton = transform.Find("PauseResumeButton").GetComponentInChildren<Button>();
+        settingsButton = transform.Find("SettingsButton").GetComponentInChildren<Button>();
+        settingsButton.interactable = false;
     }
 
     /// <summary>
