@@ -94,4 +94,16 @@ public class TowerInformation : Singleton<TowerInformation>
             GameManager.AddMoney(-upgradeCosts);
         }
     }
+
+    /// <summary>
+    /// Deletes selected tower and returns a subset of money spent on tower
+    /// </summary>
+    public void DeleteTower() 
+    {
+        Tower selectedTower = GameManager.Instance.SelectedTower;
+        int returnedMoney = selectedTower.BaseCosts / 2;
+        GameManager.AddMoney(returnedMoney);
+        Destroy(selectedTower.gameObject);
+        Reset();
+    }
 }
