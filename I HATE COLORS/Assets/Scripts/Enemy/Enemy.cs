@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             GameManager.AddMoney(value);
+            this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }
     }

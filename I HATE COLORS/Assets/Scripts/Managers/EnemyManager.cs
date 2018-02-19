@@ -43,7 +43,8 @@ public class EnemyManager : Singleton<EnemyManager>
     public static void RemoveEnemy(Enemy obj)
     {
         activeEnemies.Remove(obj);
-        Destroy(obj.gameObject);
+        obj.gameObject.GetComponent<Animator>().SetBool("isDead", true);
+        Destroy(obj.gameObject, obj.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
     public static int EnemiesRemaining()
