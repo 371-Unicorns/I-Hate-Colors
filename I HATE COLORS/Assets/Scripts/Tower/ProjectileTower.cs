@@ -83,12 +83,14 @@ public class ProjectileTower : Tower
 
     public override void Upgrade()
     {
+        AudioSource upgradeSound = GetComponent<AudioSource>();
         if (level < maxLevel)
         {
             level += 1;
             range += 1;
             fireRate += 5;
             upgradeCosts *= (int)(level * upgradeCostsScale);
+            upgradeSound.Play();
         }
     }
 
