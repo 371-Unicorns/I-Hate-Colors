@@ -34,7 +34,11 @@ public class GameManager : Singleton<GameManager>
     private Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
 
     public GameObject canvas;
-    public static GameObject upgradePanel;
+
+    /// <summary>
+    /// Where the coins should fly to.
+    /// </summary>
+    public GameObject coinFlyTarget;
 
     private GameTimer waveTimer;
     public int currentWave;
@@ -71,6 +75,7 @@ public class GameManager : Singleton<GameManager>
         currentWave = 1;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
+        coinFlyTarget = infoPanel.Find("MoneyPanel").gameObject;
         healthText = infoPanel.Find("HealthPanel").GetComponentInChildren<Text>();
         moneyText = infoPanel.Find("MoneyPanel").GetComponentInChildren<Text>();
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();

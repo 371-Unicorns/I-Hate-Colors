@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // TODO doc
+    [SerializeField]
+    private CoinFly coinFly;
+
     private float health;
     private float speed;
     private int value;
@@ -44,6 +49,15 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
+            foreach (var i in Enumerable.Range(0, value))
+            {
+                CoinFly newCoinFly = Instantiate(coinFly, GameManager.Instance.canvas.transform);
+                RectTransform coinFlyRect = newCoinFly.GetComponent<RectTransform>();
+                coinFlyRect.anchorMin = enemyScreenPos;
+                coinFlyRect.anchorMax = enemyScreenPos;
+                coinFlyRect.anchoredPosition = new Vector2(0, 0);
+            }
             GameManager.AddMoney(value);
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
