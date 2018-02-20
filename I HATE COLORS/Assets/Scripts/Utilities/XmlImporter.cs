@@ -6,8 +6,8 @@ using UnityEngine;
 public class XmlImporter
 {
 
-    private static readonly string ENEMIES_XML_FILEPATH = "Resources/XML/enemies.xml";
-    private static readonly string WAVE_COMPOSITION_FILEPATH = "Resources/XML/wave_composition.xml";
+    private static readonly string ENEMIES_XML_FILEPATH = "XML/enemies";
+    private static readonly string WAVE_COMPOSITION_FILEPATH = "XML/wave_composition";
 
     private static Dictionary<string, Enemy> enemies = null;
     private static List<Wave> waves = null;
@@ -28,7 +28,8 @@ public class XmlImporter
         List<Wave> retList = new List<Wave>();
 
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + WAVE_COMPOSITION_FILEPATH);
+        TextAsset textasset = (TextAsset)Resources.Load(WAVE_COMPOSITION_FILEPATH, typeof(TextAsset));
+        doc.LoadXml(textasset.text);
 
         XmlNode root = doc.SelectSingleNode("waves");
         foreach (XmlNode node in root.SelectNodes("wave"))
@@ -75,7 +76,8 @@ public class XmlImporter
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
+        TextAsset textasset = (TextAsset)Resources.Load(ENEMIES_XML_FILEPATH, typeof(TextAsset));
+        doc.LoadXml(textasset.text);
 
         foreach (XmlNode node in doc.SelectSingleNode("enemies").SelectNodes("enemy"))
         {
@@ -108,7 +110,8 @@ public class XmlImporter
         Dictionary<string, Tower> retDictionary = new Dictionary<string, Tower>();
 
         XmlDocument doc = new XmlDocument();
-        doc.Load(Application.dataPath + "/" + ENEMIES_XML_FILEPATH);
+        TextAsset textasset = (TextAsset)Resources.Load(ENEMIES_XML_FILEPATH, typeof(TextAsset));
+        doc.LoadXml(textasset.text);
 
         Transform prefabHolder = GameObject.Find("PrefabHolder").transform;
 
