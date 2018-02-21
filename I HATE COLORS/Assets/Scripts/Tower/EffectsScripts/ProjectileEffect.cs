@@ -10,6 +10,7 @@ public abstract class ProjectileEffect : Effect, ICollidable
     /// <summary>
     /// Speed of this projectile.
     /// </summary>
+    [SerializeField, HideInInspector]
     protected float speed;
 
     /// <summary>
@@ -18,6 +19,7 @@ public abstract class ProjectileEffect : Effect, ICollidable
     [SerializeField]
     protected GameObject projectileImpact;
 
+    public float getdamage() { return damage; }
     public void Initialize(float speed, float damage)
     {
         base.Initialize(damage);

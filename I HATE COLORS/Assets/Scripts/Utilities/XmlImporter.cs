@@ -128,7 +128,6 @@ public class XmlImporter
             double upgradeCostScale = double.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
             int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
 
-            Debug.Log("Prefabs/Towers/TowerPrefabs/" + id);
             ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<ProjectileTower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
             tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage);

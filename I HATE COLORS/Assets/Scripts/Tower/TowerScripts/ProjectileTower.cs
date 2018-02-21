@@ -17,7 +17,7 @@ public class ProjectileTower : Tower
     /// Speed of the projectile.
     /// </summary>
     [SerializeField, HideInInspector]
-    private float projetileSpeed;
+    private float projectileSpeed;
 
     /// <summary>
     /// Damage of the projectile.
@@ -47,8 +47,8 @@ public class ProjectileTower : Tower
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="fireRate">Fire rate of this tower.</param>
     /// <param name="projectileSpeed">Speed of the projectile.</param>
-    /// <param name="projetileDamage">Damage of the projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projetileDamage)
+    /// <param name="projectileSpeed">Damage of the projectile.</param>
+    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
         projectileEffect.Initialize(projectileSpeed, projectileDamage);

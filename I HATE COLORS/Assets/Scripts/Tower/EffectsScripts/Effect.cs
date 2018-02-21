@@ -10,6 +10,7 @@ public abstract class Effect : MonoBehaviour
     /// <summary>
     /// Amount of damage the effet deals.
     /// </summary>
+    [SerializeField, HideInInspector]
     protected float damage;
 
     /// <summary>
