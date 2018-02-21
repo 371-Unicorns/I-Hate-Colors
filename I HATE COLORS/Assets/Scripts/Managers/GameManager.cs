@@ -56,6 +56,8 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector]
     public bool gameRunning = true;
 
+    private Dictionary<string, Tower> towerDictionary;
+
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
@@ -83,8 +85,8 @@ public class GameManager : Singleton<GameManager>
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
 
-        // TEMPORARY CODE --- Showcase of how to add towers with new tower design.
-        CreateBulletProjectileTower();
+        towerDictionary = XmlImporter.GetTowersFromXml();
+        LoadTowerButtons();
     }
 
     void Update()
@@ -201,7 +203,7 @@ public class GameManager : Singleton<GameManager>
 
         // 2.
         ProjectileTower bulletProjectileTower = Instantiate(bulletProjectileTowerPrefab, LevelManager.Instance.PrefabHolderParent);
-        bulletProjectileTower.Setup("Bullet Tower", 20, 10, 1.25, 5, 5, 2, 10, 10);
+        //bulletProjectileTower.Setup("Bullet Tower", 20, 10, 1.25, 5, 5, 2, 10, 10);
 
 
         // 3.
@@ -214,6 +216,22 @@ public class GameManager : Singleton<GameManager>
 
         // 4.
         bulletProjectileTowerBtn.TowerPrefab = bulletProjectileTower.gameObject;
+    }
+
+    private void LoadTowerButtons()
+    {
+        foreach (Tower tower in towerDictionary.Values)
+        {
+            TowerBtn bulletProjectileTowerBtn = Instantiate(Resources.Load("Prefabs/UI/BulletTowerBtn", typeof(TowerBtn)) as TowerBtn, towerScrollViewContent);
+            if (bulletProjectileTowerBtn == null)
+            {
+                Debug.Log("Tried to load and instantiate bulletProjectileTowerBtn, but an error occured.");
+                return;
+            }
+
+            // 4.
+            bulletProjectileTowerBtn.TowerPrefab = tower.gameObject;
+        }
     }
 
 }

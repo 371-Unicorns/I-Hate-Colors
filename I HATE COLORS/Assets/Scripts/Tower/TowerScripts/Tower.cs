@@ -50,7 +50,7 @@ public abstract class Tower : MonoBehaviour
     /// Range tower can attack within.
     /// </summary>
     [SerializeField, HideInInspector]
-    protected int range;
+    protected float range;
 
     /// <summary>
     /// Tower's current target.
@@ -67,7 +67,7 @@ public abstract class Tower : MonoBehaviour
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
-    protected void Setup(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, int range)
+    protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range)
     {
         this.towerName = name;
         this.baseCosts = baseCosts;
@@ -89,6 +89,14 @@ public abstract class Tower : MonoBehaviour
     /// Attack target with tower's specific attack.
     /// </summary>
     public abstract void Attack();
+
+    public virtual void Update()
+    {
+        if (target == null)
+        {
+            FindClosestTarget();
+        }
+    }
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.

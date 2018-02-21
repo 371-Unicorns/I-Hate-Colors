@@ -11,7 +11,7 @@ public class ProjectileTower : Tower
     /// Fire rate of this tower.
     /// </summary>
     [SerializeField, HideInInspector]
-    private int fireRate;
+    private float fireRate;
 
     /// <summary>
     /// Speed of the projectile.
@@ -37,7 +37,7 @@ public class ProjectileTower : Tower
     public ProjectileEffect projectileEffect;
 
     /// <summary>
-    /// Setup this tower and activte attackTimer.
+    /// Initialize this tower and activte attackTimer.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
     /// <param name="baseCosts">Base costs to build tower.</param>
@@ -46,17 +46,14 @@ public class ProjectileTower : Tower
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="fireRate">Fire rate of this tower.</param>
-    /// <param name="projetileSpeed">Speed of the projectile.</param>
+    /// <param name="projectileSpeed">Speed of the projectile.</param>
     /// <param name="projetileDamage">Damage of the projectile.</param>
-    public void Setup(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, int range, int fireRate, float projetileSpeed, float projetileDamage)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projetileDamage)
     {
-        Setup(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
-        this.fireRate = fireRate;
-        this.projetileSpeed = projetileSpeed;
-        this.projectileDamage = projetileDamage;
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
+        projectileEffect.Initialize(projectileSpeed, projectileDamage);
 
-        attackTimer = new GameTimer();
-        attackTimer.SetTimer(this.fireRate);
+        attackTimer = new GameTimer(fireRate);
         attackTimer.SkipTimer();
         attackTimer.SetPaused(false);
     }
@@ -64,17 +61,12 @@ public class ProjectileTower : Tower
     /// <summary>
     /// Update attackTimer and attack if there's a target and it's time to attack.
     /// </summary>
-    private void Update()
+    public override void Update()
     {
+        base.Update();
+
         attackTimer.Update();
-        FindClosestTarget();
-        if (target == null || !target.gameObject.activeInHierarchy)
-        {
-            return;
-        }
-
-
-        if (attackTimer.IsDone())
+        if (target != null && attackTimer.IsDone())
         {
             Attack();
             attackTimer.Reset();
@@ -84,6 +76,7 @@ public class ProjectileTower : Tower
     public override void Upgrade()
     {
         AudioSource upgradeSound = GetComponent<AudioSource>();
+        /* TODO: Make these values NOT hardcoded.
         if (level < maxLevel)
         {
             level += 1;
@@ -92,11 +85,12 @@ public class ProjectileTower : Tower
             upgradeCosts *= (int)(level * upgradeCostsScale);
             upgradeSound.Play();
         }
+        */
     }
 
     public override void Attack()
     {
         ProjectileEffect projectileEffect = Instantiate(this.projectileEffect, transform.position, Quaternion.identity, LevelManager.Instance.ProjectilesEffectParent);
-        projectileEffect.Setup(projetileSpeed, projectileDamage, target);
+        projectileEffect.SetTarget(target);
     }
 }

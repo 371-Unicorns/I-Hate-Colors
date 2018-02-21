@@ -13,46 +13,27 @@ public abstract class ProjectileEffect : Effect, ICollidable
     protected float speed;
 
     /// <summary>
-    /// Damage this projectile inflicts.
-    /// </summary>
-    protected float damage;
-
-    /// <summary>
     /// GameObject containing impact FX of this projectile.
     /// </summary>
     [SerializeField]
     protected GameObject projectileImpact;
 
-    /// <summary>
-    /// Setup this projectile and activate it.
-    /// </summary>
-    /// <param name="speed">Speed of this projectile.</param>
-    /// <param name="damage">Damage this projectile inflicts.</param>
-    /// <param name="target">Target of this effect.</param>
-    public void Setup(float speed, float damage, Enemy target)
+    public void Initialize(float speed, float damage)
     {
+        base.Initialize(damage);
+
         this.speed = speed;
-        this.damage = damage;
-        this.target = target;
-        this.active = true;
     }
 
     /// <summary>
-    /// If active, destroy this projectile if target does not exist anymore. If it still exists, move this projectile towards target.
+    /// Destroy this projectile if target does not exist anymore. Otherwise, move this projectile towards target.
     /// </summary>
-    private void Update()
+    public override void Update()
     {
-        if (active)
-        {
-            if (target == null)
-            {
-                Destroy(gameObject);
-                return;
-            }
+        base.Update();
 
-            float step = speed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
-        }
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
     }
 
     /// <summary>

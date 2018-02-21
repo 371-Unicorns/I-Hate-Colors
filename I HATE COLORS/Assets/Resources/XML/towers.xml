@@ -1,9 +1,13 @@
 <towers>
-   <tower>
-      <id>basic_tower</id>
-      <damage>20</damage>
+   <proj-tower>
+      <id>BulletTower</id>
+      <proj-damage>10</proj-damage>
+      <proj-speed>10</proj-speed>
       <fire-rate>3</fire-rate>
       <range>3</range>
       <cost>20</cost>
-   </tower>
+      <upgrade-cost>10</upgrade-cost>
+      <upgrade-cost-scale>1.25</upgrade-cost-scale>
+      <max-level>5</max-level>
+   </proj-tower>
 </towers>

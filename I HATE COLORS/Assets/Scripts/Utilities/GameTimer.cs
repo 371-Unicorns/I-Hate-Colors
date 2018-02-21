@@ -10,6 +10,12 @@ public class GameTimer
     public float timeRemaining;
     public float lastTimeSet;
 
+    public GameTimer() { }
+    public GameTimer(float initialTime)
+    {
+        timeRemaining = lastTimeSet = initialTime;
+    }
+
     public void Update()
     {
         if (!isPaused)
