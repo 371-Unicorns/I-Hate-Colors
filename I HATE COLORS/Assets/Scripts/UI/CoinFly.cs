@@ -13,11 +13,17 @@ public class CoinFly : MonoBehaviour
     private GameObject target;
 
     /// <summary>
+    /// AudioSource to be played, once a coin reaches the bank.
+    /// </summary>
+    private AudioSource coinSound;
+
+    /// <summary>
     /// Take target from GameManager.
     /// </summary>
     private void Start()
     {
         target = GameManager.Instance.coinFlyTarget;
+        coinSound = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -28,6 +34,9 @@ public class CoinFly : MonoBehaviour
         transform.position = Vector2.Lerp(transform.position, target.transform.position, 1.5f * Time.deltaTime);
         if (Vector2.Distance(transform.position, target.transform.position) <= 30)
         {
+            //coinSound.PlayDelayed(50);
+            new WaitForSeconds(2);
+            coinSound.PlayOneShot(coinSound.clip);
             Destroy(this.gameObject);
         }
     }
