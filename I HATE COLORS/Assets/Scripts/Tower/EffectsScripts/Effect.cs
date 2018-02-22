@@ -23,11 +23,6 @@ public abstract class Effect : MonoBehaviour
         this.damage = damage;
     }
 
-    public void SetTarget(Enemy e)
-    {
-        this.target = e;
-    }
-
     public virtual void Update()
     {
         if (target == null)
@@ -36,4 +31,11 @@ public abstract class Effect : MonoBehaviour
             return;
         }
     }
+
+    public void SetTarget(Enemy e)
+    {
+        target = e;
+    }
+
+    public abstract void SpawnEffect(GameObject prefab, Vector3 position, Enemy target);
 }
