@@ -14,13 +14,20 @@ public abstract class Effect : MonoBehaviour
     protected float damage;
 
     /// <summary>
+    /// How far the effect can travel/grow before it despawns.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    protected float range;
+
+    /// <summary>
     /// Target of this effect.
     /// </summary>
     protected Enemy target;
 
-    public void Initialize(float damage)
+    public void Initialize(float damage, float range)
     {
         this.damage = damage;
+        this.range = range;
     }
 
     public virtual void Update()
@@ -32,9 +39,9 @@ public abstract class Effect : MonoBehaviour
         }
     }
 
-    public void SetTarget(Enemy e)
+    public void SetTarget(Enemy enemy)
     {
-        target = e;
+        target = enemy;
     }
 
     public abstract void SpawnEffect(GameObject prefab, Vector3 position, Enemy target);

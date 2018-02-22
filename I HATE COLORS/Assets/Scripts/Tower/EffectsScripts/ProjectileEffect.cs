@@ -20,9 +20,9 @@ public abstract class ProjectileEffect : Effect, ICollidable
     protected GameObject projectileImpact;
 
     public float getdamage() { return damage; }
-    public void Initialize(float speed, float damage)
+    public void Initialize(float speed, float damage, float range)
     {
-        base.Initialize(damage);
+        base.Initialize(damage, range);
 
         this.speed = speed;
     }
