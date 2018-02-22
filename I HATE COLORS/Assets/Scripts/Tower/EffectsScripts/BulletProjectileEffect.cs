@@ -14,7 +14,10 @@ public class BulletProjectileEffect : ProjectileEffect
         base.Update();
 
         float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
+        if(target != null)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)

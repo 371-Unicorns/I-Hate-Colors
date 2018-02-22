@@ -71,6 +71,7 @@ public class ProjectileTower : Tower
     public override void Upgrade()
     {
         AudioSource upgradeSound = GetComponent<AudioSource>();
+        upgradeSound.Play();
         /* TODO: Make these values NOT hardcoded.
         if (level < maxLevel)
         {
