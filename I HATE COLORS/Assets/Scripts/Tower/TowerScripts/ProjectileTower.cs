@@ -34,7 +34,7 @@ public class ProjectileTower : Tower
     /// <summary>
     /// Projectile of this tower.
     /// </summary>
-    public ProjectileEffect projectileEffect;
+    public GameObject projectileEffectPrefab;
 
     /// <summary>
     /// Initialize this tower and activte attackTimer.
@@ -51,7 +51,7 @@ public class ProjectileTower : Tower
     public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
-        projectileEffect.Initialize(projectileSpeed, projectileDamage);
+        projectileEffectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage);
 
         attackTimer = new GameTimer(fireRate);
         attackTimer.SkipTimer();
@@ -90,7 +90,6 @@ public class ProjectileTower : Tower
 
     public override void Attack()
     {
-        ProjectileEffect projectileEffect = Instantiate(this.projectileEffect, transform.position, Quaternion.identity, LevelManager.Instance.ProjectilesEffectParent);
-        projectileEffect.SetTarget(target);
+        projectileEffectPrefab.GetComponent<ProjectileEffect>().SpawnEffect(projectileEffectPrefab, transform.position, target);
     }
 }
