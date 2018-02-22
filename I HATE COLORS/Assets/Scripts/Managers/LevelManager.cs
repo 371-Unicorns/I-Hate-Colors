@@ -20,6 +20,13 @@ public class LevelManager : Singleton<LevelManager>
     public Transform ProjectilesEffectParent { get { return projectilesEffectParent; } }
 
     /// <summary>
+    /// Parent for all DoT effects to keep hierachy clean.
+    /// </summary>
+    [SerializeField]
+    private Transform dotEffectParent;
+    public Transform DoTEffectParent { get { return dotEffectParent; } }
+
+    /// <summary>
     /// Parent for all instantiated prefabs (towers & enemies) to keep hierachy clean.
     /// </summary>
     [SerializeField]

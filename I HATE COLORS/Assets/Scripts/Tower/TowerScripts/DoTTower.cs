@@ -5,8 +5,6 @@ using UnityEngine;
 public class DoTTower : Tower
 {
 
-    public GameObject dotEffectPrefab;
-
     public override void Update()
     {
         base.Update();
@@ -19,16 +17,14 @@ public class DoTTower : Tower
 
     public override void Attack()
     {
-
+        DoTEffect dotEffect = (DoTEffect)Instantiate(effectPrefab.gameObject.GetComponent<Effect>(), transform.position, Quaternion.identity, LevelManager.Instance.DoTEffectParent);
+        dotEffect.SetTarget(target);
+        dotEffect.ApplyDoTEffect();
     }
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
-    }
-
-    private void ApplyDoTEffect()
-    {
-
+        AudioSource upgradeSound = GetComponent<AudioSource>();
+        upgradeSound.Play();
     }
 }
