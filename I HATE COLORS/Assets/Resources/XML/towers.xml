@@ -21,4 +21,13 @@
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
   </proj-tower>
+  <dot-tower>
+    <id>LaserTower</id>
+    <dot-damage>5</dot-damage>
+    <range>5</range>
+    <cost>20</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+  </dot-tower>
 </towers>
