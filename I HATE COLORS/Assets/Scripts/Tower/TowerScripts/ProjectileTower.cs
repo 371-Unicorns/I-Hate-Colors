@@ -32,11 +32,6 @@ public class ProjectileTower : Tower
     private GameTimer attackTimer;
 
     /// <summary>
-    /// Projectile of this tower.
-    /// </summary>
-    public GameObject projectileEffectPrefab;
-
-    /// <summary>
     /// Initialize this tower and activte attackTimer.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
@@ -51,7 +46,7 @@ public class ProjectileTower : Tower
     public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
-        projectileEffectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage);
+        effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage);
 
         attackTimer = new GameTimer(fireRate);
         attackTimer.SkipTimer();
@@ -90,6 +85,6 @@ public class ProjectileTower : Tower
 
     public override void Attack()
     {
-        projectileEffectPrefab.GetComponent<ProjectileEffect>().SpawnEffect(projectileEffectPrefab, transform.position, target);
+        effectPrefab.GetComponent<ProjectileEffect>().SpawnEffect(effectPrefab, transform.position, target);
     }
 }

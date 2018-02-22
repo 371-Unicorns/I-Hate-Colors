@@ -8,6 +8,15 @@ using UnityEngine;
 /// </summary>
 public class BulletProjectileEffect : ProjectileEffect
 {
+
+    public override void Update()
+    {
+        base.Update();
+
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
+    }
+
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (target != null && other.gameObject == target.gameObject)

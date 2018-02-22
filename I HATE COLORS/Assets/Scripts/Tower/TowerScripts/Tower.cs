@@ -59,6 +59,11 @@ public abstract class Tower : MonoBehaviour
     protected Enemy target;
 
     /// <summary>
+    /// Effect prefab attached to each tower.
+    /// </summary>
+    public GameObject effectPrefab; 
+
+    /// <summary>
     /// Setup this tower.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
