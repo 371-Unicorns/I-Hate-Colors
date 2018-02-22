@@ -18,8 +18,6 @@ public abstract class ProjectileEffect : Effect, ICollidable
     /// </summary>
     [SerializeField]
     protected GameObject projectileImpact;
-
-    public float getdamage() { return damage; }
     public void Initialize(float speed, float damage, float range)
     {
         base.Initialize(damage, range);
