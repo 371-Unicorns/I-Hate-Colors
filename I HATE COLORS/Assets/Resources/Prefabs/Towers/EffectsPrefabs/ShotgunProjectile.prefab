@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5415c20f08a6243a4f9014dfdbf016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  speed: 0
-  projectileImpact: {fileID: 0}
+  damage: 10
+  speed: 10
+  projectileImpact: {fileID: 1956807649471506}
 --- !u!212 &212565854547413374
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -167,13 +167,14 @@ MonoBehaviour:
   maxLevel: 0
   range: 0
   target: {fileID: 0}
+  effectPrefab: {fileID: 1956807649471506, guid: d7f847885792ff449a3167c989367930,
+    type: 2}
   fireRate: 0
   projectileSpeed: 0
   projectileDamage: 0
   attackTimer:
     timeRemaining: 0
     lastTimeSet: 0
-  projectileEffect: {fileID: 0}
 --- !u!212 &212400712977513832
 SpriteRenderer:
   m_ObjectHideFlags: 1
