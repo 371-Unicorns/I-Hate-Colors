@@ -4590,6 +4590,7 @@ Transform:
   - {fileID: 1324839625}
   - {fileID: 1896321512}
   - {fileID: 1441321756}
+  - {fileID: 772141322}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4774,6 +4775,34 @@ Transform:
   - {fileID: 1549632074}
   - {fileID: 2110045392}
   m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &772141321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 772141322}
+  m_Layer: 0
+  m_Name: DoTEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &772141322
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 772141321}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.8726754, y: -1.4825759, z: -0.068359375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 644048563}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775595803
@@ -10173,6 +10202,7 @@ MonoBehaviour:
   grassTile: {fileID: 1421935461526844, guid: 61c6a6fa53cfa094aa880139c7b0fc25, type: 2}
   map: {fileID: 644048562}
   projectilesEffectParent: {fileID: 1441321756}
+  dotEffectParent: {fileID: 772141322}
   prefabHolderParent: {fileID: 1854845731}
 --- !u!4 &1800944729
 Transform:

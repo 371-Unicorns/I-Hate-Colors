@@ -46,7 +46,7 @@ public class ProjectileTower : Tower
     public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
-        effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage);
+        effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range);
 
         attackTimer = new GameTimer(fireRate);
         attackTimer.SkipTimer();
@@ -71,6 +71,7 @@ public class ProjectileTower : Tower
     public override void Upgrade()
     {
         AudioSource upgradeSound = GetComponent<AudioSource>();
+        upgradeSound.Play();
         /* TODO: Make these values NOT hardcoded.
         if (level < maxLevel)
         {
