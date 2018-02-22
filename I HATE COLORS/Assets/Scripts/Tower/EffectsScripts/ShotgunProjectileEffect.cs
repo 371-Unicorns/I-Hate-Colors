@@ -26,6 +26,11 @@ public class ShotgunProjectileEffect : ProjectileEffect
     {
         float step = speed * Time.deltaTime;
         transform.position = Vector2.MoveTowards(transform.position, enemyPos, step);
+
+        if (transform.position == enemyPos)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
@@ -50,7 +55,7 @@ public class ShotgunProjectileEffect : ProjectileEffect
         {
             ShotgunProjectileEffect shell = Instantiate(prefab, position, Quaternion.identity).GetComponent<ShotgunProjectileEffect>();
             shell.SetTarget(target);
-            shell.SetEnemyPosition(target.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 1));
+            shell.SetEnemyPosition(target.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0));
         }
     }
 }
