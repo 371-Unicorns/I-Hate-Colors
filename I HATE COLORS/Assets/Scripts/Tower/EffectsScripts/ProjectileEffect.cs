@@ -28,17 +28,6 @@ public abstract class ProjectileEffect : Effect, ICollidable
     }
 
     /// <summary>
-    /// Destroy this projectile if target does not exist anymore. Otherwise, move this projectile towards target.
-    /// </summary>
-    public override void Update()
-    {
-        base.Update();
-
-        float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, target.transform.position, step);
-    }
-
-    /// <summary>
     /// Collision with another collider. Could be a enemy or a scenery element.
     /// Expected behaviour is to check whether other is equal to target, activate this projectiles effect. 
     /// Call ProcessCollision(...) everytime, since this projectile could for example collide with a scenery object.
