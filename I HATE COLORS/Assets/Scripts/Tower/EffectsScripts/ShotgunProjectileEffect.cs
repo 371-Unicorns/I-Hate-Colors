@@ -9,8 +9,10 @@ using UnityEngine;
 public class ShotgunProjectileEffect : ProjectileEffect
 {
 
-    private static readonly int numShells = 3;
+    private static readonly int NUM_SHELLS = 3;
+    private static readonly float SHELL_SPREAD = 1.5f;
     private Vector3 enemyPos;
+    private Vector3 spawnPos;
 
     public Vector3 GetEnemyPosition()
     {
@@ -22,15 +24,26 @@ public class ShotgunProjectileEffect : ProjectileEffect
         enemyPos = pos;
     }
 
+    public Vector3 GetSpawnPosition()
+    {
+        return spawnPos;
+    }
+
+    public void SetSpawnPosition(Vector3 pos)
+    {
+        spawnPos = pos;
+    }
+
     public override void Update()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, enemyPos, step);
-
-        if (transform.position == enemyPos)
+        transform.position = Vector2.MoveTowards(transform.position, this.GetEnemyPosition(), step);
+        
+        if (Vector3.Distance(transform.position, this.GetSpawnPosition()) >= this.range
+            || Vector3.Distance(transform.position, this.GetEnemyPosition()) < 0.2f)
         {
             Destroy(gameObject);
-        }
+        } 
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)
@@ -51,11 +64,12 @@ public class ShotgunProjectileEffect : ProjectileEffect
 
     public override void SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
-        for (int i = 0; i < numShells; i++)
+        for (int i = 0; i < NUM_SHELLS; i++)
         {
             ShotgunProjectileEffect shell = Instantiate(prefab, position, Quaternion.identity).GetComponent<ShotgunProjectileEffect>();
+            shell.SetSpawnPosition(position);
             shell.SetTarget(target);
-            shell.SetEnemyPosition(target.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0));
+            shell.SetEnemyPosition(target.transform.position + new Vector3(Random.Range(-SHELL_SPREAD, SHELL_SPREAD), Random.Range(-SHELL_SPREAD, SHELL_SPREAD), 0));
         }
     }
 }

@@ -12,11 +12,11 @@
    </proj-tower>
   <proj-tower>
     <id>ShotgunTower</id>
-    <proj-damage>10</proj-damage>
-    <proj-speed>10</proj-speed>
+    <proj-damage>5</proj-damage>
+    <proj-speed>5</proj-speed>
     <fire-rate>3</fire-rate>
     <range>3</range>
-    <cost>20</cost>
+    <cost>25</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
