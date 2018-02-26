@@ -26,6 +26,10 @@
             <id>unicorn</id>
             <count>30</count>
          </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>5</count>
+         </enemy>
       </enemies>
       <spawn-rate>0.33</spawn-rate>
    </wave>
@@ -35,6 +39,10 @@
          <enemy>
             <id>unicorn</id>
             <count>100</count>
+         </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>20</count>
          </enemy>
       </enemies>
       <spawn-rate>0.1</spawn-rate>
@@ -46,6 +54,10 @@
             <id>unicorn</id>
             <count>100</count>
          </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>40</count>
+         </enemy>
       </enemies>
       <spawn-rate>0.1</spawn-rate>
    </wave>
@@ -54,6 +66,10 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
+            <count>100</count>
+         </enemy>
+         <enemy>
+            <id>derrgon</id>
             <count>100</count>
          </enemy>
       </enemies>

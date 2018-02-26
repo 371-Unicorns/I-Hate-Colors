@@ -5,4 +5,10 @@
       <speed>2</speed>
       <value>2</value>
    </enemy>
+   <enemy>
+      <id>derrgon</id>
+      <health>50</health>
+      <speed>4</speed>
+      <value>4</value>
+   </enemy>
 </enemies>

@@ -23,6 +23,16 @@ public class LaserDoTEffect : DoTEffect {
         }
     }
 
+    public override void Update()
+    {
+        base.Update();
+
+        if ((target.transform.position - towerPosition).magnitude > range)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
         GameObject newEffect = Instantiate(prefab, position, Quaternion.identity);

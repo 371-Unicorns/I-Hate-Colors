@@ -10362,7 +10362,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 724278177}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999999
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10579,7 +10579,7 @@ MonoBehaviour:
   grassTile: {fileID: 1421935461526844, guid: 61c6a6fa53cfa094aa880139c7b0fc25, type: 2}
   map: {fileID: 644048562}
   projectilesEffectParent: {fileID: 1441321756}
-  dotEffectParent: {fileID: 772141322}
+  dotEffectParent: {fileID: 0}
   prefabHolderParent: {fileID: 1854845731}
 --- !u!4 &1800944729
 Transform:

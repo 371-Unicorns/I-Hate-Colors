@@ -102,7 +102,7 @@ public abstract class Tower : MonoBehaviour
 
     public virtual void Update()
     {
-        if (target == null || target.isDead())
+        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
         {
             FindClosestTarget();
         }
@@ -169,7 +169,7 @@ public abstract class Tower : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             float distToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distToEnemy < shortestDistance)
+            if (distToEnemy < shortestDistance && distToEnemy < range)
             {
                 shortestDistance = distToEnemy;
                 nearestEnemy = enemy;
