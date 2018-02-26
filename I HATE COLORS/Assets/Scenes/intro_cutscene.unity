@@ -357,8 +357,8 @@ MonoBehaviour:
     textPosition: {x: 525, y: 0}
   - frameImage: {fileID: 2800000, guid: e97d032fd82bae24482310adcc762e61, type: 3}
     frameScripts:
-    - 'Mono: Well, I suppose I''d better prepare for a fight...'
-    textPosition: {x: 525, y: 212.6}
+    - Well, I suppose I'd better prepare for a fight...
+    textPosition: {x: 718, y: 212.6}
 --- !u!4 &1345081689
 Transform:
   m_ObjectHideFlags: 0
