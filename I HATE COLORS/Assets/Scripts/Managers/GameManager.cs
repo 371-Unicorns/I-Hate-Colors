@@ -192,11 +192,31 @@ public class GameManager : Singleton<GameManager>
         if (waveTimer.IsDone())
         {
             countdownTimerText.text = "Defend!";
+            if(waveTimer.startBlinking) {
+                StartCoroutine(BlinkText());
+                waveTimer.startBlinking = false;
+            }
+
         }
         else
         {
+            StopAllCoroutines();
+            countdownTimerText.color = Color.white;
             TimeSpan t = TimeSpan.FromSeconds(waveTimer.TimeRemaining());
             countdownTimerText.text = string.Format("{0}:{1:00}", t.Minutes, t.Seconds);
+        }
+    }
+
+    public IEnumerator BlinkText(){
+        //blink it forever. You can set a terminating condition depending upon your requirement
+        while(true){
+        //set the Text's text to blank
+        countdownTimerText.text= "";
+        //display blank text for 0.5 seconds
+        yield return new WaitForSeconds(1);
+        //display “I AM FLASHING TEXT” for the next 0.5 seconds
+        countdownTimerText.text= "Defend!";
+        yield return new WaitForSeconds(1);
         }
     }
 

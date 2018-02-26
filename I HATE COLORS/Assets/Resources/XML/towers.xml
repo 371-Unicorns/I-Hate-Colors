@@ -9,6 +9,7 @@
       <upgrade-cost>10</upgrade-cost>
       <upgrade-cost-scale>1.25</upgrade-cost-scale>
       <max-level>5</max-level>
+      <description>A standard one bullet at a time tower.</description>
    </proj-tower>
   <proj-tower>
     <id>ShotgunTower</id>
@@ -20,6 +21,7 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
+    <description>A tower that fires off a spread of bullets.</description>
   </proj-tower>
   <dot-tower>
     <id>LaserTower</id>
@@ -29,5 +31,6 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
+    <description>A tower that shoots out a target tracking laser.</description>
   </dot-tower>
 </towers>

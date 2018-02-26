@@ -55,19 +55,6 @@ public class TowerInformation : Singleton<TowerInformation>
     }
 
     /// <summary>
-    /// Fill the panel with informations about the currently hovering tower, ready to place.
-    /// </summary>
-    /// <param name="tower">Tower to show.</param>
-    public void ShowHoveringTower(Tower tower)
-    {
-        currentLevel.text = "Current level: " + tower.Level.ToString();
-        upgradeCosts.text = "Base cost: " + tower.BaseCosts.ToString();
-
-        deleteButton.interactable = false;
-        upgradeButton.interactable = false;
-    }
-
-    /// <summary>
     /// Reset panel to represent that no tower is currently selected.
     /// </summary>
     public void Reset()
