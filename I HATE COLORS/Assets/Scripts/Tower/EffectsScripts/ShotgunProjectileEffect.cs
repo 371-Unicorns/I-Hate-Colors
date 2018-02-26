@@ -66,14 +66,18 @@ public class ShotgunProjectileEffect : ProjectileEffect
         Destroy(gameObject);
     }
 
-    public override void SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
+    public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
+        ShotgunProjectileEffect shell = null;
+
         for (int i = 0; i < NUM_SHELLS; i++)
         {
-            ShotgunProjectileEffect shell = Instantiate(prefab, position, Quaternion.identity).GetComponent<ShotgunProjectileEffect>();
+            shell = Instantiate(prefab, position, Quaternion.identity).GetComponent<ShotgunProjectileEffect>();
             shell.SetSpawnPosition(position);
             shell.SetTarget(target);
             shell.SetEnemyPosition(target.transform.position + new Vector3(Random.Range(-SHELL_SPREAD, SHELL_SPREAD), Random.Range(-SHELL_SPREAD, SHELL_SPREAD), 0));
         }
+
+        return shell;
     }
 }

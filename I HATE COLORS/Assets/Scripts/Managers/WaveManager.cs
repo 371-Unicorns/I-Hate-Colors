@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class WaveManager : Singleton<WaveManager> {
 
+    private static bool waveRunning = false;
+
     public string waveXmlFile;
     private static Wave currentWave;
-    private static List<Wave> waves;
+    private static Queue<Wave> waves;
     
     // Use this for initialization
     void Start () {
         waves = XmlImporter.GetWavesFromXml();
-        currentWave = null;
+        WaveManager.SetNextWave();
     }
 
     public static void Update()
     {
-        if (currentWave != null)
+        if (currentWave != null && waveRunning)
         {
             currentWave.Update();
 
@@ -27,15 +29,24 @@ public class WaveManager : Singleton<WaveManager> {
         }
     }
 
-    public static void BeginWave(int wave)
+    public static void SetNextWave()
     {
-        if (wave > waves.Count)
+        if (waves.Count == 0)
         {
-            print(string.Format("No wave at index {0}!! Add more waves!!", wave));
-        } else
-        {
-            currentWave = waves[wave - 1];
+            print(string.Format("No more waves, add more!!"));
         }
+        else
+        {
+            currentWave = waves.Dequeue();
+            waveRunning = false;
+        }
+    }
+
+    public static void BeginWave()
+    {
+        waveRunning = true;
+
+        EnemyManager.ClearDeadEnemies();
     }
 
     public static bool WaveFinished()
@@ -43,7 +54,7 @@ public class WaveManager : Singleton<WaveManager> {
         return currentWave != null && currentWave.EnemiesRemaining() == 0;
     }
 
-    public static List<Wave> GetWaves()
+    public static Queue<Wave> GetWaves()
     {
         return waves;
     }

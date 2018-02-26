@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114574722398167338}
   - component: {fileID: 58567151691678734}
   m_Layer: 0
-  m_Name: ShotgunProjectileEffect
+  m_Name: ShotgunProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   range: 3
-  speed: 1
+  speed: 5
   projectileImpact: {fileID: 1487270573388396, guid: 3f3f98a1b2ccc61419054224ab519898,
     type: 2}
 --- !u!212 &212565854547413374

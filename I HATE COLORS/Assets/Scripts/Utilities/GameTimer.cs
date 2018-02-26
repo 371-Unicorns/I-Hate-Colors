@@ -10,10 +10,13 @@ public class GameTimer
     public float timeRemaining;
     public float lastTimeSet;
 
+    public bool startBlinking;
+
     public GameTimer() { }
     public GameTimer(float initialTime)
     {
         timeRemaining = lastTimeSet = initialTime;
+        startBlinking = false;
     }
 
     public void Update()
@@ -52,10 +55,14 @@ public class GameTimer
     public void Reset()
     {
         timeRemaining = lastTimeSet;
+        startBlinking = false;
     }
 
     public bool IsDone()
     {
+        if(timeRemaining <= 0) {
+            startBlinking = true;
+        }
         return timeRemaining <= 0;
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DoTTower : Tower
 {
+
+    private bool shouldSpawnEffect = true;
+    private DoTEffect spawnedEffect;
+
     /// <summary>
     /// Initialize this tower and activte attackTimer.
     /// </summary>
@@ -14,9 +18,9 @@ public class DoTTower : Tower
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="effectDamage">Damage of the projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float effectDamage)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float effectDamage, string description)
     {
-        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range);
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
         effectPrefab.GetComponent<DoTEffect>().Initialize(effectDamage, range);
     }
 
@@ -32,9 +36,12 @@ public class DoTTower : Tower
 
     public override void Attack()
     {
-        DoTEffect dotEffect = (DoTEffect)Instantiate(effectPrefab.gameObject.GetComponent<Effect>(), transform.position, Quaternion.identity, LevelManager.Instance.DoTEffectParent);
-        dotEffect.SetTarget(target);
-        dotEffect.ApplyDoTEffect();
+        if (spawnedEffect == null)
+        {
+            spawnedEffect = effectPrefab.GetComponent<DoTEffect>().SpawnEffect(effectPrefab, transform.position, target) as DoTEffect;
+        }
+
+        spawnedEffect.ApplyDoTEffect();
     }
 
     public override void Upgrade()

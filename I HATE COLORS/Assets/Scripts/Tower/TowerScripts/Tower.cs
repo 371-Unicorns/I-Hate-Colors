@@ -13,6 +13,9 @@ public abstract class Tower : MonoBehaviour
     [SerializeField, HideInInspector]
     protected string towerName;
 
+    protected string description;
+    public string Descrpition { get { return description; }}
+
     /// <summary>
     /// Base costs to build tower.
     /// </summary>
@@ -51,6 +54,7 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     [SerializeField, HideInInspector]
     protected float range;
+    public float Range { get { return range; } }
 
     /// <summary>
     /// Tower's current target.
@@ -72,7 +76,7 @@ public abstract class Tower : MonoBehaviour
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
-    protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range)
+    protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description)
     {
         this.towerName = name;
         this.baseCosts = baseCosts;
@@ -80,6 +84,7 @@ public abstract class Tower : MonoBehaviour
         this.upgradeCostsScale = upgradeCostsScale;
         this.maxLevel = maxLevel;
         this.range = range;
+        this.description = description;
 
         this.level = 1;
         this.target = null;
@@ -97,11 +102,13 @@ public abstract class Tower : MonoBehaviour
 
     public virtual void Update()
     {
-        if (target == null)
+        if (target == null || target.isDead())
         {
             FindClosestTarget();
         }
     }
+
+    public float GetRange() { return range; }
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.

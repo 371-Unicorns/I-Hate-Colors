@@ -11,10 +11,10 @@ public class XmlImporter
     private static readonly string TOWERS_XML_FILEPATH = "XML/towers";
 
     private static Dictionary<string, Enemy> enemies = null;
-    private static List<Wave> waves = null;
+    private static Queue<Wave> waves = null;
     private static Dictionary<string, Tower> towers = null;
 
-    public static List<Wave> GetWavesFromXml()
+    public static Queue<Wave> GetWavesFromXml()
     {
         if (waves != null)
         {
@@ -26,7 +26,7 @@ public class XmlImporter
             enemies = GetEnemiesFromXml();
         }
 
-        List<Wave> retList = new List<Wave>();
+        Queue<Wave> retQueue = new Queue<Wave>();
 
         XmlDocument doc = new XmlDocument();
         TextAsset textasset = (TextAsset)Resources.Load(WAVE_COMPOSITION_FILEPATH, typeof(TextAsset));
@@ -56,15 +56,15 @@ public class XmlImporter
                 wave.SetSpawnRate(float.Parse(n.InnerText));
             }
 
-            retList.Add(wave);
+            retQueue.Enqueue(wave);
         }
 
         if (waves == null)
         {
-            waves = retList;
+            waves = retQueue;
         }
 
-        return retList;
+        return retQueue;
     }
 
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
@@ -127,10 +127,11 @@ public class XmlImporter
             int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
             double upgradeCostScale = double.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
             int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            string description = node.SelectSingleNode("description").InnerText;
 
             ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<ProjectileTower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage);
+            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage, description);
             tower.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, tower);
@@ -150,10 +151,11 @@ public class XmlImporter
             int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
             double upgradeCostScale = double.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
             int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            string description = node.SelectSingleNode("description").InnerText;
 
             DoTTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<DoTTower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage);
+            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage, description);
             tower.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, tower);

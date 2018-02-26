@@ -36,6 +36,8 @@ public class Wave {
         return enemies.Dequeue();
     }
 
+    public int GetId() { return id; }
+
     public void SetId(int id)
     {
         this.id = id;
