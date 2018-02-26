@@ -103,6 +103,8 @@ public abstract class Tower : MonoBehaviour
         }
     }
 
+    public float GetRange() { return range; }
+
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
     /// </summary>

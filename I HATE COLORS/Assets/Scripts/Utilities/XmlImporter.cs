@@ -11,10 +11,10 @@ public class XmlImporter
     private static readonly string TOWERS_XML_FILEPATH = "XML/towers";
 
     private static Dictionary<string, Enemy> enemies = null;
-    private static List<Wave> waves = null;
+    private static Queue<Wave> waves = null;
     private static Dictionary<string, Tower> towers = null;
 
-    public static List<Wave> GetWavesFromXml()
+    public static Queue<Wave> GetWavesFromXml()
     {
         if (waves != null)
         {
@@ -26,7 +26,7 @@ public class XmlImporter
             enemies = GetEnemiesFromXml();
         }
 
-        List<Wave> retList = new List<Wave>();
+        Queue<Wave> retQueue = new Queue<Wave>();
 
         XmlDocument doc = new XmlDocument();
         TextAsset textasset = (TextAsset)Resources.Load(WAVE_COMPOSITION_FILEPATH, typeof(TextAsset));
@@ -56,15 +56,15 @@ public class XmlImporter
                 wave.SetSpawnRate(float.Parse(n.InnerText));
             }
 
-            retList.Add(wave);
+            retQueue.Enqueue(wave);
         }
 
         if (waves == null)
         {
-            waves = retList;
+            waves = retQueue;
         }
 
-        return retList;
+        return retQueue;
     }
 
     public static Dictionary<string, Enemy> GetEnemiesFromXml()

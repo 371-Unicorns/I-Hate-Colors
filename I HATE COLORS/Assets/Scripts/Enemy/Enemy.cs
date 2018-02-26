@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private float health;
     private float speed;
     private int value;
+    private bool dead;
 
     private Enemy() { }
 
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour
         SetHealth(health);
         SetSpeed(speed);
         this.value = value;
+        this.dead = false;
     }
 
     public void Initialize(Enemy other)
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
         SetHealth(other.health);
         SetSpeed(other.speed);
         this.value = other.value;
+        this.dead = other.dead;
     }
 
     private void SetHealth(float health)
@@ -47,8 +50,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !dead)
         {
+            dead = true;
+
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
             foreach (var i in Enumerable.Range(0, value))
             {

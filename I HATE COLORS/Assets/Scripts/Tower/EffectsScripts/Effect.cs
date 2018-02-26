@@ -44,5 +44,5 @@ public abstract class Effect : MonoBehaviour
         target = enemy;
     }
 
-    public abstract void SpawnEffect(GameObject prefab, Vector3 position, Enemy target);
+    public abstract Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target);
 }

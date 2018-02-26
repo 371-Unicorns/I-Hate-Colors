@@ -4827,12 +4827,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 775595803}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 897200653}
-  m_RootOrder: 0
+  m_Father: {fileID: 2110045392}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &775595805
 SpriteRenderer:
@@ -5033,10 +5033,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 775595804}
+  m_Children: []
   m_Father: {fileID: 2110045392}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &899537645
 GameObject:
@@ -5073,7 +5072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -112.66, y: 4.97}
+  m_AnchoredPosition: {x: -112.66, y: 4.9699707}
   m_SizeDelta: {x: 567.51, y: 45}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &899537647
@@ -5263,7 +5262,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1919212525}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5708,6 +5707,7 @@ MonoBehaviour:
   width: 22
   height: 14
   toMenuButton: {fileID: 545219213}
+  rangeIndicatorRenderer: {fileID: 775595805}
   gameOver: 0
   canvas: {fileID: 522868056}
   coinFlyTarget: {fileID: 562494089}
@@ -14386,6 +14386,7 @@ Transform:
   m_Children:
   - {fileID: 522868060}
   - {fileID: 385806141}
+  - {fileID: 775595804}
   - {fileID: 897200653}
   m_Father: {fileID: 738701219}
   m_RootOrder: 3

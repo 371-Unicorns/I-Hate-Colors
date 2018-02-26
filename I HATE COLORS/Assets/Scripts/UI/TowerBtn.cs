@@ -17,7 +17,6 @@ public class TowerBtn : MonoBehaviour
     /// <summary>
     /// Sprite of tower used for hover effect.
     /// </summary>
-    [SerializeField]
     private Sprite towerHoverSprite;
     public Sprite TowerHoverSprite { get { return towerHoverSprite; } }
 
@@ -28,6 +27,13 @@ public class TowerBtn : MonoBehaviour
         priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString();
 
         GetComponent<Button>().onClick.AddListener(OnClickListener);
+    }
+
+    public void SetSprites(GameObject tower)
+    {
+        TowerPrefab = tower;
+        towerHoverSprite = tower.GetComponent<SpriteRenderer>().sprite;
+        GetComponent<Button>().image.sprite = TowerHoverSprite;
     }
 
     /// <summary>

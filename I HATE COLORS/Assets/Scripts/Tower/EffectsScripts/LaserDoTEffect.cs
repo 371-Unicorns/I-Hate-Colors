@@ -4,20 +4,40 @@ using UnityEngine;
 
 public class LaserDoTEffect : DoTEffect {
 
+    private Sprite sprite;
+    private Vector3 towerPosition;
+
     public override void ApplyDoTEffect()
     {
-        transform.LookAt(target.transform);
         if (target != null)
         {
-            target.TakeDamage(damage);
-            SpawnEffect(dotEffectImpact, this.transform.position, target);
+            transform.position = (target.transform.position + towerPosition) / 2.0f;
+
+            Vector3 targetDir = target.transform.position - towerPosition;
+            float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            transform.localScale = new Vector3((target.transform.position - towerPosition).magnitude / sprite.bounds.size.x, 1, 1);
+
+            target.TakeDamage(damage * Time.deltaTime);
         }
     }
 
-    public override void SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
+    public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
-        DoTEffect effect = (DoTEffect) Instantiate(prefab.gameObject.GetComponent<Effect>(), target.transform, LevelManager.Instance.DoTEffectParent);
-        Destroy(effect, dotEffectImpact.GetComponent<ParticleSystem>().main.duration);
-        Destroy(gameObject);
+        GameObject newEffect = Instantiate(prefab, position, Quaternion.identity);
+        LaserDoTEffect effect = newEffect.GetComponent<LaserDoTEffect>();
+        effect.SetTarget(target);
+        effect.SetTowerPosition(position);
+        effect.SetSprite(newEffect.GetComponent<SpriteRenderer>().sprite);
+
+        return effect;
+    }
+
+    private void SetSprite(Sprite s) { sprite = s; }
+
+    private void SetTowerPosition(Vector3 position)
+    {
+        towerPosition = position;
     }
 }

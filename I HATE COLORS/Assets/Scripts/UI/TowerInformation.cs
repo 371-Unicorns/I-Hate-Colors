@@ -77,6 +77,8 @@ public class TowerInformation : Singleton<TowerInformation>
 
         deleteButton.interactable = false;
         upgradeButton.interactable = false;
+
+        GameManager.Instance.ResetTower();
     }
 
     /// <summary>

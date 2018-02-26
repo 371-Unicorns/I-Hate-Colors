@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DoTTower : Tower
 {
+
+    private bool shouldSpawnEffect = true;
+    private DoTEffect spawnedEffect;
+
     /// <summary>
     /// Initialize this tower and activte attackTimer.
     /// </summary>
@@ -32,9 +36,12 @@ public class DoTTower : Tower
 
     public override void Attack()
     {
-        DoTEffect dotEffect = (DoTEffect)Instantiate(effectPrefab.gameObject.GetComponent<Effect>(), transform.position, Quaternion.identity, LevelManager.Instance.DoTEffectParent);
-        dotEffect.SetTarget(target);
-        dotEffect.ApplyDoTEffect();
+        if (spawnedEffect == null)
+        {
+            spawnedEffect = effectPrefab.GetComponent<DoTEffect>().SpawnEffect(effectPrefab, transform.position, target) as DoTEffect;
+        }
+
+        spawnedEffect.ApplyDoTEffect();
     }
 
     public override void Upgrade()

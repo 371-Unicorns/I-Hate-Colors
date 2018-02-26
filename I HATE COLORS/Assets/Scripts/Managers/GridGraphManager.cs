@@ -35,7 +35,6 @@ public class GridGraphManager : Singleton<GridGraphManager>
         if (gridGraph == null) { gridGraph = AstarPath.active.data.gridGraph; }
 
         // Adjust in order to increase resolution of GridGraph
-        print(gridGraph);
         gridGraph.SetDimensions(width * 4, height * 4, tileSize / 4.0f);
 
         randomTargetTile = EnemyManager.Instance.GetRandomTargetTile();

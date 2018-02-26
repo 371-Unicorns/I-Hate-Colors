@@ -36,9 +36,11 @@ public class BulletProjectileEffect : ProjectileEffect
         Destroy(gameObject);
     }
 
-    public override void SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
+    public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
         BulletProjectileEffect newEffect = Instantiate(prefab, position, Quaternion.identity).GetComponent<BulletProjectileEffect>();
         newEffect.SetTarget(target);
+
+        return newEffect;
     }
 }

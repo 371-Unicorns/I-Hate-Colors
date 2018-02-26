@@ -10,7 +10,7 @@ public class Hover : Singleton<Hover>
     /// <summary>
     /// SpriteRenderer which displays currently selected tower.
     /// </summary>
-    private SpriteRenderer spriteRenderer, rangeIndicatorRenderer;
+    private SpriteRenderer spriteRenderer;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -20,7 +20,6 @@ public class Hover : Singleton<Hover>
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rangeIndicatorRenderer = transform.Find("RangeIndicator").GetComponent<SpriteRenderer>();
 
         Deactivate();
     }
@@ -36,11 +35,10 @@ public class Hover : Singleton<Hover>
     /// Activate hovering effect by passing sprite to show.
     /// </summary>
     /// <param name="sprite">Sprite to display.</param>
-    public void Activate(Sprite sprite)
+    public void Activate(float range, Sprite sprite)
     {
         this.spriteRenderer.sprite = sprite;
         this.spriteRenderer.enabled = true;
-        this.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
@@ -49,11 +47,12 @@ public class Hover : Singleton<Hover>
     public void Deactivate()
     {
         this.spriteRenderer.enabled = false;
-        this.rangeIndicatorRenderer.enabled = false;
     }
 
     public bool IsActive()
     {
         return this.spriteRenderer.enabled;
     }
+
+    public Vector3 GetPosition() { return spriteRenderer.transform.position; }
 }

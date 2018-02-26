@@ -28,6 +28,7 @@ public class GameManager : Singleton<GameManager>
     /// Currently selected tower by player. Could either be a ready to place tower or an already placed tower.
     /// </summary>
     public Tower SelectedTower { get; private set; }
+    public SpriteRenderer rangeIndicatorRenderer;
 
     [HideInInspector]
     public bool gameOver;
@@ -70,6 +71,8 @@ public class GameManager : Singleton<GameManager>
         gameOverText.gameObject.SetActive(false);
         countdownTimerText = canvas.transform.Find("CountdownTimerText").gameObject.GetComponent<Text>();
 
+        SelectedTower = null;
+
         toMenuButton.gameObject.SetActive(false);
 
         waveTimer = new GameTimer();
@@ -97,7 +100,7 @@ public class GameManager : Singleton<GameManager>
         if (!waveTimer.IsPaused() && waveTimer.IsDone())
         {
             waveTimer.SetPaused(true);
-            WaveManager.BeginWave(currentWave++);
+            WaveManager.BeginWave();
         }
 
         if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
@@ -105,6 +108,12 @@ public class GameManager : Singleton<GameManager>
             waveText.text = currentWave.ToString();
             waveTimer.Reset();
             waveTimer.SetPaused(false);
+            WaveManager.SetNextWave();
+        }
+
+        if (Hover.Instance.IsActive())
+        {
+            this.rangeIndicatorRenderer.transform.position = Hover.Instance.GetPosition();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -115,6 +124,7 @@ public class GameManager : Singleton<GameManager>
         {
             if (Hover.Instance.IsActive())
             {
+                this.rangeIndicatorRenderer.enabled = false;
                 Hover.Instance.Deactivate();
                 GameManager.Instance.ResetTower();
                 TowerInformation.Instance.Reset();
@@ -140,8 +150,12 @@ public class GameManager : Singleton<GameManager>
     /// <param name="towerBtn">TowerBtn to select.</param>
     public void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        Hover.Instance.Activate(towerBtn.TowerHoverSprite);
+        Hover.Instance.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
         this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
+        
+        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange()* .66f, SelectedTower.GetRange() * .66f, 1);
+        this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
+        this.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
@@ -151,6 +165,10 @@ public class GameManager : Singleton<GameManager>
     public void SelectTower(Tower tower)
     {
         this.SelectedTower = tower;
+
+        this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
+        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        this.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
@@ -159,6 +177,7 @@ public class GameManager : Singleton<GameManager>
     public void ResetTower()
     {
         this.SelectedTower = null;
+        this.rangeIndicatorRenderer.enabled = false;
     }
 
     public static void AddMoney(int m)
@@ -181,56 +200,18 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    /// <summary>
-    /// TEMPORARY CODE
-    /// 
-    /// Showcase of how to add towers with new tower design.
-    /// 
-    /// 1. Load tower prefab
-    /// 2. Instatiate tower prefab and fill with values.
-    /// 3. Load and instatiate corresponding TowerBtn prefab. Set its parent to towerScrollViewContent in order to add it to showed tower buttons.
-    /// 4. Set tower button's tower prefab to previously instatited tower.
-    /// </summary>
-    private void CreateBulletProjectileTower()
-    {
-        // 1.
-        ProjectileTower bulletProjectileTowerPrefab = Resources.Load("Prefabs/Towers/BulletTower", typeof(ProjectileTower)) as ProjectileTower;
-        if (bulletProjectileTowerPrefab == null)
-        {
-            Debug.Log("Tried to load bulletProjectileTowerPrefab, but it does not exist.");
-            return;
-        }
-
-        // 2.
-        ProjectileTower bulletProjectileTower = Instantiate(bulletProjectileTowerPrefab, LevelManager.Instance.PrefabHolderParent);
-        //bulletProjectileTower.Setup("Bullet Tower", 20, 10, 1.25, 5, 5, 2, 10, 10);
-
-
-        // 3.
-        TowerBtn bulletProjectileTowerBtn = Instantiate(Resources.Load("Prefabs/UI/BulletTowerBtn", typeof(TowerBtn)) as TowerBtn, towerScrollViewContent);
-        if (bulletProjectileTowerBtn == null)
-        {
-            Debug.Log("Tried to load and instantiate bulletProjectileTowerBtn, but an error occured.");
-            return;
-        }
-
-        // 4.
-        bulletProjectileTowerBtn.TowerPrefab = bulletProjectileTower.gameObject;
-    }
-
     private void LoadTowerButtons()
     {
         foreach (Tower tower in towerDictionary.Values)
         {
-            TowerBtn bulletProjectileTowerBtn = Instantiate(Resources.Load("Prefabs/UI/BulletTowerBtn", typeof(TowerBtn)) as TowerBtn, towerScrollViewContent);
-            if (bulletProjectileTowerBtn == null)
+            TowerBtn towerButton = Instantiate(Resources.Load("Prefabs/UI/TowerButton", typeof(TowerBtn)) as TowerBtn, towerScrollViewContent);
+            if (towerButton == null)
             {
-                Debug.Log("Tried to load and instantiate bulletProjectileTowerBtn, but an error occured.");
+                Debug.Log(string.Format("Tried to load and instantiate {0}'s GUI button, but an error occured.", tower.name));
                 return;
             }
 
-            // 4.
-            bulletProjectileTowerBtn.TowerPrefab = tower.gameObject;
+            towerButton.SetSprites(tower.gameObject);
         }
     }
 
