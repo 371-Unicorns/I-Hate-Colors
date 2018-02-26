@@ -11,6 +11,10 @@ public class ShotgunProjectileEffect : ProjectileEffect
 
     private static readonly int NUM_SHELLS = 3;
     private static readonly float SHELL_SPREAD = 1.5f;
+
+    /// <summary>
+    /// The position of the enemy on instantiation of a new shell
+    /// </summary>
     private Vector3 enemyPos;
     private Vector3 spawnPos;
 
