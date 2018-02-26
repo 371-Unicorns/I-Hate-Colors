@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
         gameObject.GetComponent<Pathfinding.AIPath>().maxSpeed = speed;
     }
 
+    public bool isDead() { return dead; }
+
     /// <summary>
     /// Take damage and check whether for death.
     /// </summary>

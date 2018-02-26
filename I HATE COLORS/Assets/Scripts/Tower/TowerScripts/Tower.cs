@@ -97,7 +97,7 @@ public abstract class Tower : MonoBehaviour
 
     public virtual void Update()
     {
-        if (target == null)
+        if (target == null || target.isDead())
         {
             FindClosestTarget();
         }
