@@ -7,6 +7,7 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     public static Dictionary<string, Enemy> enemyDictionary;
     public static List<Enemy> activeEnemies = new List<Enemy>();
+    public static List<Enemy> deadEnemies = new List<Enemy>();
 
     /// <summary>
     /// Tiles to be used by enemies as target tiles.
@@ -40,11 +41,22 @@ public class EnemyManager : Singleton<EnemyManager>
         activeEnemies.Add(enemy);
     }
 
+    public static void ClearDeadEnemies()
+    {
+        foreach (Enemy e in deadEnemies)  {
+            Destroy(e.gameObject);
+        }
+
+        deadEnemies.Clear();
+    }
+
     public static void RemoveEnemy(Enemy obj)
     {
+        obj.GetComponent<Collider2D>().enabled = false;
+
         activeEnemies.Remove(obj);
+        deadEnemies.Add(obj);
         obj.gameObject.GetComponent<Animator>().SetBool("isDead", true);
-        Destroy(obj.gameObject, obj.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
     }
 
     public static int EnemiesRemaining()

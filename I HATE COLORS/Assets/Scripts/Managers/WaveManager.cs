@@ -45,6 +45,8 @@ public class WaveManager : Singleton<WaveManager> {
     public static void BeginWave()
     {
         waveRunning = true;
+
+        EnemyManager.ClearDeadEnemies();
     }
 
     public static bool WaveFinished()
