@@ -69,7 +69,6 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
-        countdownTimerText = canvas.transform.Find("CountdownTimerText").gameObject.GetComponent<Text>();
 
         SelectedTower = null;
 
@@ -80,10 +79,11 @@ public class GameManager : Singleton<GameManager>
         currentWave = 1;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
-        coinFlyTarget = infoPanel.Find("MoneyPanel").gameObject;
+        coinFlyTarget = infoPanel.Find("BloodPanel").gameObject;
         healthText = infoPanel.Find("HealthPanel").GetComponentInChildren<Text>();
-        moneyText = infoPanel.Find("MoneyPanel").GetComponentInChildren<Text>();
+        moneyText = infoPanel.Find("BloodPanel").GetComponentInChildren<Text>();
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
+        countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
@@ -153,8 +153,8 @@ public class GameManager : Singleton<GameManager>
     {
         Hover.Instance.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
         this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
-        
-        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange()* .66f, SelectedTower.GetRange() * .66f, 1);
+
+        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
         this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         this.rangeIndicatorRenderer.enabled = true;
     }
@@ -203,16 +203,20 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public IEnumerator BlinkText(){
+    public IEnumerator BlinkText()
+    {
 
-        while(true){
-            if(waveTimer.startBlinking) {
-                countdownTimerText.text= "";
+        while (true)
+        {
+            if (waveTimer.startBlinking)
+            {
+                countdownTimerText.text = "";
             }
             yield return new WaitForSeconds(1);
 
-            if(waveTimer.startBlinking) {
-                countdownTimerText.text= "Defend!";
+            if (waveTimer.startBlinking)
+            {
+                countdownTimerText.text = "0:00";
             }
             yield return new WaitForSeconds(1);
 
