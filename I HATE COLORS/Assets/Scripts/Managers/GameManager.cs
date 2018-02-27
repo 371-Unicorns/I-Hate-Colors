@@ -51,12 +51,6 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     private Transform towerScrollViewContent;
 
-    /// <summary>
-    /// Whether the game is currently running or not.
-    /// </summary>
-    [HideInInspector]
-    public bool gameRunning = true;
-
     private Dictionary<string, Tower> towerDictionary;
 
     /// <summary>
