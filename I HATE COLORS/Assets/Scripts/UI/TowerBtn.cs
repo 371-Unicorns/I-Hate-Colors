@@ -78,6 +78,9 @@ public class TowerBtn : MonoBehaviour
     /// <param name="data">Information about the event.</param>
     public void OnPointerExitDelegate(PointerEventData data)
     {
-        TowerInformation.Instance.Reset();
+        if (!Hover.Instance.IsActive())
+        {
+            TowerInformation.Instance.Reset();
+        }
     }
 }

@@ -117,7 +117,7 @@ public abstract class Tower : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         GameManager.Instance.SelectTower(this);
-        TowerInformationOld.Instance.ShowPlacedTower(this);
+        TowerInformation.Instance.ShowPlacedTower(this);
     }
 
     /// <summary>
@@ -155,7 +155,7 @@ public abstract class Tower : MonoBehaviour
         {
             Hover.Instance.Deactivate();
             GameManager.Instance.SelectTower(tower.GetComponent<Tower>());
-            TowerInformationOld.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
+            TowerInformation.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
         }
         return tower.GetComponent<Tower>();
     }

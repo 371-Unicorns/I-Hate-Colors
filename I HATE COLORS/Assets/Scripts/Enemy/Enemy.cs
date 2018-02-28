@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
         {
             dead = true;
 
+            // Setup coinfly
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
             foreach (var i in Enumerable.Range(0, value))
             {
@@ -65,7 +66,9 @@ public class Enemy : MonoBehaviour
                 coinFlyRect.anchorMax = enemyScreenPos;
                 coinFlyRect.anchoredPosition = new Vector2(0, 0);
             }
+
             GameManager.AddMoney(value);
+            TowerInformation.Instance.CheckUpgrade();
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }

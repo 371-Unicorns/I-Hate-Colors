@@ -50,7 +50,7 @@ public class Tile : MonoBehaviour
             }
             else
             {
-                TowerInformationOld.Instance.Reset();
+                TowerInformation.Instance.Reset();
             }
         }
     }
