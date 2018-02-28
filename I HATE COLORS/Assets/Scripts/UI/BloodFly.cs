@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Let's coins fly to a target.
 /// </summary>
-public class CoinFly : MonoBehaviour
+public class BloodFly : MonoBehaviour
 {
     /// <summary>
     /// Target to fly to.
@@ -15,7 +15,7 @@ public class CoinFly : MonoBehaviour
     /// <summary>
     /// AudioSource to be played, once a coin reaches the bank.
     /// </summary>
-    private AudioSource coinSound;
+    private AudioSource bloodSound;
 
     /// <summary>
     /// Take target from GameManager.
@@ -23,7 +23,7 @@ public class CoinFly : MonoBehaviour
     private void Start()
     {
         target = GameManager.Instance.coinFlyTarget;
-        coinSound = GetComponent<AudioSource>();
+        bloodSound = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class CoinFly : MonoBehaviour
         {
             //coinSound.PlayDelayed(50);
             new WaitForSeconds(2);
-            coinSound.PlayOneShot(coinSound.clip);
+            bloodSound.PlayOneShot(bloodSound.clip);
             Destroy(this.gameObject);
         }
     }

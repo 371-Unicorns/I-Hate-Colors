@@ -8,6 +8,8 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class Tile : MonoBehaviour
 {
+    public Sprite[] grassSprites;
+
     /// <summary>
     /// Position of the tile on the grid. Grid starts at (0, 0).
     /// </summary>
@@ -31,6 +33,7 @@ public class Tile : MonoBehaviour
     public void Setup(Point gridPoint, Vector3 gridPosition)
     {
         this.GridPoint = gridPoint;
+        this.GetComponent<SpriteRenderer>().sprite = grassSprites[Random.Range(0, grassSprites.Length)];
         this.transform.position = gridPosition;
         this.transform.SetParent(LevelManager.Instance.Map.transform);
         LevelManager.Instance.TileDict.Add(gridPoint, this);

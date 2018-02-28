@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // TODO doc
     [SerializeField]
-    private CoinFly coinFly;
+    private BloodFly bloodFly;
 
     private float health;
     private float speed;
@@ -60,7 +59,7 @@ public class Enemy : MonoBehaviour
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
             foreach (var i in Enumerable.Range(0, value))
             {
-                CoinFly newCoinFly = Instantiate(coinFly, GameManager.Instance.canvas.transform);
+                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.Instance.canvas.transform);
                 RectTransform coinFlyRect = newCoinFly.GetComponent<RectTransform>();
                 coinFlyRect.anchorMin = enemyScreenPos;
                 coinFlyRect.anchorMax = enemyScreenPos;

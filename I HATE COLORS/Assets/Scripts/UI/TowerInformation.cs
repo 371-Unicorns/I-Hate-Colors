@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// TODO doc
-
 /// <summary>
 /// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
 /// </summary>
@@ -23,7 +21,6 @@ public class TowerInformation : Singleton<TowerInformation>
     private Transform placedBody;
     private Text levelText;
     private Text upgradeCostText;
-    private Button sellButton;
     private Button upgradeButton;
 
     void Start()
@@ -40,7 +37,6 @@ public class TowerInformation : Singleton<TowerInformation>
         placedBody = transform.Find("PlacedBody").transform;
         levelText = placedBody.transform.Find("LevelText").GetComponent<Text>();
         upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<Text>();
-        sellButton = placedBody.transform.Find("SellButton").GetComponent<Button>();
         upgradeButton = placedBody.transform.Find("UpgradeButton").GetComponent<Button>();
 
         Reset();
@@ -61,7 +57,7 @@ public class TowerInformation : Singleton<TowerInformation>
     }
 
     /// <summary>
-    /// Fill the panel with informations about the currently selected placed tower.
+    /// Fill the panel with informations about the currently selected hovering tower.
     /// </summary>
     /// <param name="tower">Tower to show.</param>
     public void ShowHoveringTower(Tower tower)
@@ -103,7 +99,7 @@ public class TowerInformation : Singleton<TowerInformation>
     }
 
     /// <summary>
-    /// Check whether it's possible to upgrade the currently selected tower and if it is, do so.
+    /// Upgrade the currently selected tower.
     /// </summary>
     public void UpgradeTower()
     {
@@ -113,7 +109,7 @@ public class TowerInformation : Singleton<TowerInformation>
     }
 
     /// <summary>
-    /// Check whether it's possible to upgrade the currently selected tower and if it is, do so.
+    /// Check whether it's possible to upgrade the currently selected tower and if it is, enable the upgrade button.
     /// </summary>
     public void CheckUpgrade()
     {
