@@ -3,96 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
-/// </summary>
+// TODO doc
 public class TowerInformation : Singleton<TowerInformation>
 {
-    // Header
+    private Tower selectedTower;
+
+    private Image background;
+    private Transform head;
     private Text nameText;
+    private Text rangeText;
 
-    // Stats panel
-    private Text currentLevel;
-    private Text upgradeCosts;
+    private Transform hoverBody;
+    private Text descriptionText;
 
-    // Button panel
-    private Button deleteButton;
-    private Button upgradeButton;
-
-    /// <summary>
-    /// Prevent instance of this class, since it's a Singleton.
-    /// </summary>
-    private TowerInformation() { }
-
-    private void Start()
+    void Start()
     {
-        nameText = this.transform.Find("Header").Find("NameImage").gameObject.GetComponentInChildren<Text>();
+        background = GetComponent<Image>();
 
-        Transform body = this.transform.Find("Body");
+        head = transform.Find("Head").transform;
+        nameText = head.transform.Find("Name").GetComponent<Text>();
+        rangeText = head.transform.Find("Range").GetComponent<Text>();
 
-        Transform statsPanel = body.Find("StatsPanel");
-        currentLevel = statsPanel.Find("CurrentLevelText").GetComponent<Text>();
-        upgradeCosts = statsPanel.Find("UpgradeCostText").GetComponent<Text>();
-
-        Transform buttonsPanel = body.Find("ButtonsPanel");
-        deleteButton = buttonsPanel.Find("DeleteButton").GetComponent<Button>();
-        upgradeButton = buttonsPanel.Find("UpgradeButton").GetComponent<Button>();
+        hoverBody = transform.Find("HoverBody").transform;
+        descriptionText = hoverBody.transform.Find("Description").GetComponent<Text>();
 
         Reset();
     }
 
-    /// <summary>
-    /// Fill the panel with informations about the currently selected placed tower.
-    /// </summary>
-    /// <param name="tower">Tower to show.</param>
-    public void ShowPlacedTower(Tower tower)
-    {
-        currentLevel.text = "Current level: " + tower.Level.ToString();
-        upgradeCosts.text = "Upgrade cost: " + tower.UpgradeCosts.ToString();
-
-        deleteButton.interactable = true;
-        upgradeButton.interactable = true;
-    }
-
-    /// <summary>
-    /// Reset panel to represent that no tower is currently selected.
-    /// </summary>
     public void Reset()
     {
-        currentLevel.text = "";
-        upgradeCosts.text = "";
-
-        deleteButton.interactable = false;
-        upgradeButton.interactable = false;
-
-        GameManager.Instance.ResetTower();
+        background.enabled = false;
+        head.gameObject.SetActive(false);
+        hoverBody.gameObject.SetActive(false);
     }
 
-    /// <summary>
-    /// Check whether it's possible to upgrade the currently selected tower and if it is, do so.
-    /// </summary>
-    public void CheckUpgrade()
+    public void ShowHoveringTower(Tower tower)
     {
-        Tower selectedTower = GameManager.Instance.SelectedTower;
-        int upgradeCosts = selectedTower.UpgradeCosts;
-
-        if (upgradeCosts <= GameManager.money)
-        {
-            selectedTower.Upgrade();
-            this.ShowPlacedTower(selectedTower);
-            GameManager.AddMoney(-upgradeCosts);
-        }
+        selectedTower = tower;
+        FillHead();
+        descriptionText.text = selectedTower.Description;
+        background.enabled = true;
+        head.gameObject.SetActive(true);
+        hoverBody.gameObject.SetActive(true);
     }
 
-    /// <summary>
-    /// Deletes selected tower and returns a subset of money spent on tower
-    /// </summary>
-    public void DeleteTower() 
+    private void FillHead()
     {
-        Tower selectedTower = GameManager.Instance.SelectedTower;
-        int returnedMoney = selectedTower.BaseCosts / 2;
-        GameManager.AddMoney(returnedMoney);
-        Destroy(selectedTower.gameObject);
-        Reset();
+        nameText.text = selectedTower.Name;
+        rangeText.text = "Range: " + selectedTower.Range.ToString();
     }
 }

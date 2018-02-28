@@ -122,7 +122,7 @@ public class GameManager : Singleton<GameManager>
                 this.rangeIndicatorRenderer.enabled = false;
                 Hover.Instance.Deactivate();
                 GameManager.Instance.ResetTower();
-                TowerInformation.Instance.Reset();
+                TowerInformationOld.Instance.Reset();
             }
         }
 

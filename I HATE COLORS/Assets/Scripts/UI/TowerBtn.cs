@@ -69,8 +69,7 @@ public class TowerBtn : MonoBehaviour
     /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
     {
-        print("entered button!");
-        TowerDescription.Instance.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
+        TowerInformation.Instance.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
     }
 
     /// <summary>
@@ -79,6 +78,6 @@ public class TowerBtn : MonoBehaviour
     /// <param name="data">Information about the event.</param>
     public void OnPointerExitDelegate(PointerEventData data)
     {
-        TowerDescription.Instance.Reset();
+        TowerInformation.Instance.Reset();
     }
 }

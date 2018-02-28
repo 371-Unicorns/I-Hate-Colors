@@ -12,9 +12,10 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     [SerializeField, HideInInspector]
     protected string towerName;
+    public string Name { get { return towerName; } }
 
     protected string description;
-    public string Descrpition { get { return description; }}
+    public string Description { get { return description; } }
 
     /// <summary>
     /// Base costs to build tower.
@@ -65,7 +66,7 @@ public abstract class Tower : MonoBehaviour
     /// <summary>
     /// Effect prefab attached to each tower.
     /// </summary>
-    public GameObject effectPrefab; 
+    public GameObject effectPrefab;
 
     /// <summary>
     /// Setup this tower.
@@ -116,7 +117,7 @@ public abstract class Tower : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         GameManager.Instance.SelectTower(this);
-        TowerInformation.Instance.ShowPlacedTower(this);
+        TowerInformationOld.Instance.ShowPlacedTower(this);
     }
 
     /// <summary>
@@ -154,7 +155,7 @@ public abstract class Tower : MonoBehaviour
         {
             Hover.Instance.Deactivate();
             GameManager.Instance.SelectTower(tower.GetComponent<Tower>());
-            TowerInformation.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
+            TowerInformationOld.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
         }
         return tower.GetComponent<Tower>();
     }
