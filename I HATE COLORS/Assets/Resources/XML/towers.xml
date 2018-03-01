@@ -33,4 +33,15 @@
     <max-level>5</max-level>
     <description>A tower that shoots out a target tracking laser.</description>
   </dot-tower>
+  <aoe-tower>
+    <id>BlackHoleTower</id>
+    <aoe-damage>0</aoe-damage>
+    <fire-rate>3</fire-rate>
+    <range>5</range>
+    <cost>20</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <description>A tower that opens a black hole. The black hole holds enemies in place.</description>
+  </aoe-tower>
 </towers>

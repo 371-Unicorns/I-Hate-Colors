@@ -139,7 +139,22 @@ public class XmlImporter
 
         foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("aoe-tower"))
         {
-            // initialize aoe towers here
+            string id = node.SelectSingleNode("id").InnerText;
+            float aoeDamage = float.Parse(node.SelectSingleNode("aoe-damage").InnerText);
+            float fireRate = float.Parse(node.SelectSingleNode("fire-rate").InnerText);
+            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
+            int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
+            float upgradeCostScale = float.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
+            int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            string description = node.SelectSingleNode("description").InnerText;
+
+            AoETower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<AoETower>();
+            tower.transform.Translate(new Vector3(-1000, -1000, 0));
+            tower.Initialize(id, cost, aoeDamage, fireRate, upgradeCost, upgradeCostScale, maxLevel, range, description);
+            tower.transform.SetParent(prefabHolder);
+
+            retDictionary.Add(id, tower);
         }
 
         foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("dot-tower"))
