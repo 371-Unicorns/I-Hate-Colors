@@ -78,6 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199e157e2cd4bae4183806a71e70f5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grassSprites:
+  - {fileID: 21300000, guid: e217e9df2001330449ed71959c4a907a, type: 3}
+  - {fileID: 21300000, guid: 04b11dc38406e37439e3e68faa7c930c, type: 3}
+  - {fileID: 21300000, guid: c9acfb29855cc4d43a5b852362fb56e3, type: 3}
+  - {fileID: 21300000, guid: cb42421cc913cbd4296a5dfbb0d0da78, type: 3}
+  - {fileID: 21300000, guid: 58a2fbf64aca99a44a5abf4a9996d562, type: 3}
 --- !u!212 &212078871807569204
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +118,7 @@ SpriteRenderer:
   m_SortingLayerID: 2074376427
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c369709da1232cb4abf4e7d8e4addb0e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb42421cc913cbd4296a5dfbb0d0da78, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
