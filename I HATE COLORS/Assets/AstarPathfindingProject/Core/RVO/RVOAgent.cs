@@ -434,15 +434,6 @@ namespace Pathfinding.RVO.Sampled {
 				segment = false;
 			}
 
-			/** Complex number multiplication.
-			 * Used to rotate vectors in an efficient way.
-			 *
-			 * \see https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division
-			 */
-			static Vector2 ComplexMultiply (Vector2 a, Vector2 b) {
-				return new Vector2(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
-			}
-
 			/** Creates a VO for avoiding another agent.
 			 * Note that the segment is directed, the agent will want to be on the left side of the segment.
 			 */
@@ -488,9 +479,9 @@ namespace Pathfinding.RVO.Sampled {
 					// See documentation for details
 					// The call to Max is just to prevent floating point errors causing NaNs to appear
 					var startSqrMagnitude = segmentStart.sqrMagnitude;
-					var normal1 = -ComplexMultiply(segmentStart, new Vector2(radius, Mathf.Sqrt(Mathf.Max(0, startSqrMagnitude - radius*radius)))) / startSqrMagnitude;
+					var normal1 = -VectorMath.ComplexMultiply(segmentStart, new Vector2(radius, Mathf.Sqrt(Mathf.Max(0, startSqrMagnitude - radius*radius)))) / startSqrMagnitude;
 					var endSqrMagnitude = segmentEnd.sqrMagnitude;
-					var normal2 = -ComplexMultiply(segmentEnd, new Vector2(radius, -Mathf.Sqrt(Mathf.Max(0, endSqrMagnitude - radius*radius)))) / endSqrMagnitude;
+					var normal2 = -VectorMath.ComplexMultiply(segmentEnd, new Vector2(radius, -Mathf.Sqrt(Mathf.Max(0, endSqrMagnitude - radius*radius)))) / endSqrMagnitude;
 
 					vo.line1 = segmentStart + normal1 * radius + offset;
 					vo.line2 = segmentEnd + normal2 * radius + offset;

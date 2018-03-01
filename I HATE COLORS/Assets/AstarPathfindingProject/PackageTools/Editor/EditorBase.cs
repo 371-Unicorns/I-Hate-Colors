@@ -135,7 +135,8 @@ namespace Pathfinding {
 			content.tooltip = tooltip ?? FindTooltip(propertyPath);
 			var contextClick = IsContextClick();
 			EditorGUILayout.PropertyField(prop, content, true, noOptions);
-			if (contextClick && Event.current.type == EventType.Used) CaptureContextClick(propertyPath);
+			// Disable context clicking on arrays (as Unity has its own very useful context menu for the array elements)
+			if (contextClick && !prop.isArray && Event.current.type == EventType.Used) CaptureContextClick(propertyPath);
 			return prop.propertyType == SerializedPropertyType.Boolean ? !prop.hasMultipleDifferentValues && prop.boolValue : true;
 		}
 
@@ -166,6 +167,22 @@ namespace Pathfinding {
 			if (EditorGUI.EndChangeCheck()) {
 				if (prop.propertyType == SerializedPropertyType.Enum) prop.enumValueIndex = newVal;
 				else prop.intValue = newVal;
+			}
+			EditorGUI.showMixedValue = false;
+			if (contextClick && GUILayoutUtility.GetLastRect().Contains(Event.current.mousePosition)) CaptureContextClick(propertyPath);
+		}
+
+		protected void Mask (string propertyPath, string[] options, string label = null) {
+			var prop = FindProperty(propertyPath);
+
+			content.text = label ?? prop.displayName;
+			content.tooltip = FindTooltip(propertyPath);
+			var contextClick = IsContextClick();
+			EditorGUI.BeginChangeCheck();
+			EditorGUI.showMixedValue = prop.hasMultipleDifferentValues;
+			int newVal = EditorGUILayout.MaskField(content, prop.intValue, options);
+			if (EditorGUI.EndChangeCheck()) {
+				prop.intValue = newVal;
 			}
 			EditorGUI.showMixedValue = false;
 			if (contextClick && GUILayoutUtility.GetLastRect().Contains(Event.current.mousePosition)) CaptureContextClick(propertyPath);

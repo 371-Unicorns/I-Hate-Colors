@@ -142,13 +142,14 @@ namespace Pathfinding {
 
 				for (int i = 0; i < nodes.Length; i++) {
 					var startNode = nodes[i];
-					// The third check is a fast check for if the node has connections in all grid directions, if it has then we can skip processing it
-					if (startNode != null && startNode.Walkable && !startNode.HasConnectionsToAllEightNeighbours) {
+					// The third check is a fast check for if the node has connections in all grid directions, if it has then we can skip processing it (unless the nodes parameter was used in which case we have to handle the edge cases)
+					if (startNode != null && startNode.Walkable && (!startNode.HasConnectionsToAllEightNeighbours || nodeSet != null)) {
 						for (int startDir = 0; startDir < neighbourIndices.Length; startDir++) {
 							int startState = (startNode.NodeIndex << 4) | startDir;
 
 							// Check if there is an obstacle in that direction
-							if (startNode.GetNeighbourAlongDirection(neighbourIndices[startDir]) == null && !seenStates.Contains(startState)) {
+							var startNeighbour = startNode.GetNeighbourAlongDirection(neighbourIndices[startDir]);
+							if ((startNeighbour == null || (nodeSet != null && !nodeSet.Contains(startNeighbour))) && !seenStates.Contains(startState)) {
 								// Start tracing a contour here
 								trace.ClearFast();
 								int dir = startDir;

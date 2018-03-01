@@ -240,20 +240,12 @@ namespace Pathfinding {
 			var sr = new Pathfinding.Serialization.AstarSerializer(this, settings);
 
 			sr.OpenSerialize();
-			SerializeGraphsPart(sr);
+			sr.SerializeGraphs(graphs);
+			sr.SerializeExtraInfo();
 			byte[] bytes = sr.CloseSerialize();
 			checksum = sr.GetChecksum();
 			graphLock.Release();
 			return bytes;
-		}
-
-		/** Serializes common info to the serializer.
-		 * Common info is what is shared between the editor serialization and the runtime serializer.
-		 * This is mostly everything except the graph inspectors which serialize some extra data in the editor
-		 */
-		public void SerializeGraphsPart (Pathfinding.Serialization.AstarSerializer sr) {
-			sr.SerializeGraphs(graphs);
-			sr.SerializeExtraInfo();
 		}
 
 		/** Deserializes graphs from #data */
@@ -321,27 +313,8 @@ namespace Pathfinding {
 			graphLock.Release();
 		}
 
-		/** Deserializes common info.
-		 * Common info is what is shared between the editor serialization and the runtime serializer.
-		 * This is mostly everything except the graph inspectors which serialize some extra data in the editor
-		 *
-		 * In most cases you should use the #DeserializeGraphs or #DeserializeGraphsAdditive method instead.
-		 */
-		public void DeserializeGraphsPart (Pathfinding.Serialization.AstarSerializer sr) {
-			var graphLock = AssertSafe();
-
-			ClearGraphs();
-			DeserializeGraphsPartAdditive(sr);
-			graphLock.Release();
-		}
-
-		/** Deserializes common info additively
-		 * Common info is what is shared between the editor serialization and the runtime serializer.
-		 * This is mostly everything except the graph inspectors which serialize some extra data in the editor
-		 *
-		 * In most cases you should use the #DeserializeGraphs or #DeserializeGraphsAdditive method instead.
-		 */
-		public void DeserializeGraphsPartAdditive (Pathfinding.Serialization.AstarSerializer sr) {
+		/** Helper function for deserializing graphs */
+		void DeserializeGraphsPartAdditive (Pathfinding.Serialization.AstarSerializer sr) {
 			if (graphs == null) graphs = new NavGraph[0];
 
 			var gr = new List<NavGraph>(graphs);
@@ -353,6 +326,7 @@ namespace Pathfinding {
 			gr.AddRange(sr.DeserializeGraphs());
 			graphs = gr.ToArray();
 
+			sr.DeserializeEditorSettingsCompatibility();
 			sr.DeserializeExtraInfo();
 
 			//Assign correct graph indices.

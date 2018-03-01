@@ -46,22 +46,45 @@ namespace Pathfinding {
 		 */
 		public System.Func<Vector3> adjustStartPoint;
 
-		/** Sets where the start and end points of a path should be placed */
+		/** Sets where the start and end points of a path should be placed.
+		 *
+		 * Here is a legend showing what the different items in the above images represent.
+		 * The images above show a path coming in from the top left corner and ending at a node next to an obstacle as well as 2 different possible end points of the path and how they would be modified.
+		 * \shadowimage{startend/exactness_legend.png}
+		 */
 		public enum Exactness {
-			/** The point is snapped to the position of the first/last node in the path */
+			/** The point is snapped to the position of the first/last node in the path.
+			 * Use this if your game is very tile based and you want your agents to stop precisely at the center of the nodes.
+			 * If you recalculate the path while the agent is moving you may want the start point snapping to be ClosestOnNode and the end point snapping to be SnapToNode however
+			 * as while an agent is moving it will likely not be right at the center of a node.
+			 *
+			 * \shadowimage{startend/exactness_snap_to_node.png}
+			 */
 			SnapToNode,
-			/** The point is set to the exact point which was passed when creating the path request */
+			/** The point is set to the exact point which was passed when creating the path request.
+			 * Note that if a path was for example requested to a point inside an obstacle, then the last point of the path will be inside that obstacle, which is usually not what you want.
+			 * Consider using the #ClosestOnNode option instead.
+			 *
+			 * \shadowimage{startend/exactness_original.png}
+			 */
 			Original,
 			/** The point is set to the closest point on the line between either the two first points or the two last points.
 			 * Usually you will want to use the NodeConnection mode instead since that is usually the behaviour that you really want.
 			 * This mode exists mostly for compatibility reasons.
-			 *
+			 * \shadowimage{startend/exactness_interpolate.png}
 			 * \deprecated Use NodeConnection instead.
 			 */
 			Interpolate,
-			/** The point is set to the closest point on the surface of the node. Note that some node types (point nodes) do not have a surface, so the "closest point" is simply the node's position which makes this identical to #Exactness.SnapToNode */
+			/** The point is set to the closest point on the surface of the node. Note that some node types (point nodes) do not have a surface, so the "closest point" is simply the node's position which makes this identical to #Exactness.SnapToNode.
+			 * This is the mode that you almost always want to use in a free movement 3D world.
+			 * \shadowimage{startend/exactness_closest_on_node.png}
+			 */
 			ClosestOnNode,
-			/** The point is set to the closest point on one of the connections from the start/end node */
+			/** The point is set to the closest point on one of the connections from the start/end node.
+			 * This mode may be useful in a grid based or point graph based world when using the AILerp script.
+			 *
+			 * \shadowimage{startend/exactness_connection.png}
+			 */
 			NodeConnection,
 		}
 

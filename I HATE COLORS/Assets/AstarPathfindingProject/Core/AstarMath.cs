@@ -82,6 +82,29 @@ namespace Pathfinding {
 	 * \ingroup utils
 	 */
 	public static class VectorMath {
+		/** Complex number multiplication.
+		 * \returns a * b
+		 *
+		 * Used to rotate vectors in an efficient way.
+		 *
+		 * \see https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division
+		 */
+		public static Vector2 ComplexMultiply (Vector2 a, Vector2 b) {
+			return new Vector2(a.x * b.x - a.y * b.y, a.x * b.y + a.y * b.x);
+		}
+
+		/** Complex number multiplication.
+		 * \returns a * conjugate(b)
+		 *
+		 * Used to rotate vectors in an efficient way.
+		 *
+		 * \see https://en.wikipedia.org/wiki/Complex_number#Multiplication_and_division
+		 * \see https://en.wikipedia.org/wiki/Complex_conjugate
+		 */
+		public static Vector2 ComplexMultiplyConjugate (Vector2 a, Vector2 b) {
+			return new Vector2(a.x * b.x + a.y * b.y, a.y * b.x - a.x * b.y);
+		}
+
 		/** Returns the closest point on the line.
 		 * The line is treated as infinite.
 		 * \see ClosestPointOnSegment

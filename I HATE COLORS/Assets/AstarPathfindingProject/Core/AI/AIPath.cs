@@ -59,6 +59,18 @@ namespace Pathfinding {
 	 */
 	[AddComponentMenu("Pathfinding/AI/AIPath (2D,3D)")]
 	public partial class AIPath : AIBase, IAstarAI {
+		/** How quickly the agent accelerates.
+		 * Positive values represent an acceleration in world units per second squared.
+		 * Negative values are interpreted as an inverse time of how long it should take for the agent to reach its max speed.
+		 * For example if it should take roughly 0.4 seconds for the agent to reach its max speed then this field should be set to -1/0.4 = -2.5.
+		 * For a negative value the final acceleration will be: -acceleration*maxSpeed.
+		 * This behaviour exists mostly for compatibility reasons.
+		 *
+		 * In the Unity inspector there are two modes: Default and Custom. In the Default mode this field is set to -2.5 which means that it takes about 0.4 seconds for the agent to reach its top speed.
+		 * In the Custom mode you can set the acceleration to any positive value.
+		 */
+		public float maxAcceleration = -2.5f;
+
 		/** Rotation speed in degrees per second.
 		 * Rotation is calculated using Quaternion.RotateTowards. This variable represents the rotation speed in degrees per second.
 		 * The higher it is, the faster the character will be able to rotate.
@@ -234,8 +246,10 @@ namespace Pathfinding {
 
 		/** Called during either Update or FixedUpdate depending on if rigidbodies are used for movement or not */
 		protected override void MovementUpdateInternal (float deltaTime, out Vector3 nextPosition, out Quaternion nextRotation) {
-			// a = v/t, should probably expose as a variable
-			float acceleration = maxSpeed / 0.4f;
+			float currentAcceleration = maxAcceleration;
+
+			// If negative, calculate the acceleration from the max speed
+			if (currentAcceleration < 0) currentAcceleration *= -maxSpeed;
 
 			if (updatePosition) {
 				// Get our current position. We read from transform.position as few times as possible as it is relatively slow
@@ -259,6 +273,9 @@ namespace Pathfinding {
 			if (!prevTargetReached && reachedEndOfPath) OnTargetReached();
 			float slowdown;
 
+			// Normalized direction of where the agent is looking
+			var forwards = movementPlane.ToPlane(simulatedRotation * (rotationIn2D ? Vector3.up : Vector3.forward));
+
 			// Check if we have a valid path to follow and some other script has not stopped the character
 			if (interpolator.valid && !isStopped) {
 				// How fast to move depending on the distance to the destination.
@@ -268,17 +285,17 @@ namespace Pathfinding {
 
 				if (reachedEndOfPath && whenCloseToDestination == CloseToDestinationMode.Stop) {
 					// Slow down as quickly as possible
-					velocity2D -= Vector2.ClampMagnitude(velocity2D, acceleration * deltaTime);
+					velocity2D -= Vector2.ClampMagnitude(velocity2D, currentAcceleration * deltaTime);
 				} else {
-					velocity2D += MovementUtilities.CalculateAccelerationToReachPoint(dir, dir.normalized*maxSpeed, velocity2D, acceleration, maxSpeed) * deltaTime;
+					velocity2D += MovementUtilities.CalculateAccelerationToReachPoint(dir, dir.normalized*maxSpeed, velocity2D, currentAcceleration, rotationSpeed, maxSpeed, forwards) * deltaTime;
 				}
 			} else {
 				slowdown = 1;
 				// Slow down as quickly as possible
-				velocity2D -= Vector2.ClampMagnitude(velocity2D, acceleration * deltaTime);
+				velocity2D -= Vector2.ClampMagnitude(velocity2D, currentAcceleration * deltaTime);
 			}
 
-			velocity2D = MovementUtilities.ClampVelocity(velocity2D, maxSpeed, slowdown, slowWhenNotFacingTarget, movementPlane.ToPlane(rotationIn2D ? tr.up : tr.forward));
+			velocity2D = MovementUtilities.ClampVelocity(velocity2D, maxSpeed, slowdown, slowWhenNotFacingTarget, forwards);
 
 			ApplyGravity(deltaTime);
 
