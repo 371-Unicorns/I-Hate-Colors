@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoTTower : Tower
-{
+public class DoTTower : Tower {
 
-    private bool shouldSpawnEffect = true;
     private DoTEffect spawnedEffect;
 
     /// <summary>
