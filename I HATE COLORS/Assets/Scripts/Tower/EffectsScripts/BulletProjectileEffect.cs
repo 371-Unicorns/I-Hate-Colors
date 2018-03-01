@@ -24,7 +24,7 @@ public class BulletProjectileEffect : ProjectileEffect
     {
         if (target != null && other.gameObject == target.gameObject)
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, color);
         }
         ProcessCollision();
     }

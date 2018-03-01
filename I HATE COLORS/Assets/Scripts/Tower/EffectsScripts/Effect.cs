@@ -14,6 +14,12 @@ public abstract class Effect : MonoBehaviour
     protected float damage;
 
     /// <summary>
+    /// Color of the effect's damage.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    public ColorType color;
+
+    /// <summary>
     /// How far the effect can travel/grow before it despawns.
     /// </summary>
     [SerializeField, HideInInspector]
@@ -24,10 +30,11 @@ public abstract class Effect : MonoBehaviour
     /// </summary>
     protected Enemy target;
 
-    public void Initialize(float damage, float range)
+    public void Initialize(float damage, float range, ColorType color)
     {
         this.damage = damage;
         this.range = range;
+        this.color = color;
     }
 
     public virtual void Update()

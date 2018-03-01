@@ -19,7 +19,7 @@ public class LaserDoTEffect : DoTEffect {
 
             transform.localScale = new Vector3((target.transform.position - towerPosition).magnitude / sprite.bounds.size.x, 1, 1);
 
-            target.TakeDamage(damage * Time.deltaTime);
+            target.TakeDamage(damage * Time.deltaTime, color);
         }
     }
 
