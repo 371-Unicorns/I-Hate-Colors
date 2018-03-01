@@ -22,7 +22,7 @@ public class BlackHoleAoEEffect : AoEEffect {
         {
             GameObject target = c.gameObject;
 
-            transform.localScale = new Vector3(radius, radius, 0);
+            //transform.localScale = new Vector3(radius, radius, 0);
             target.transform.position = Vector2.Lerp(target.transform.position, transform.position, 1.5f * Time.deltaTime);
         }
 
@@ -39,7 +39,7 @@ public class BlackHoleAoEEffect : AoEEffect {
         BlackHoleAoEEffect effect = newEffect.GetComponent<BlackHoleAoEEffect>();
         effect.SetTarget(target);
         effect.SetSprite(newEffect.GetComponent<SpriteRenderer>().sprite);
-
+        transform.localScale = new Vector3(radius, radius, 0);
         radius = 5;
         isField = true;
 

@@ -44,7 +44,10 @@ public class EnemyManager : Singleton<EnemyManager>
     public static void ClearDeadEnemies()
     {
         foreach (Enemy e in deadEnemies)  {
-            Destroy(e.gameObject);
+            if (e != null)
+            {
+                Destroy(e.gameObject);
+            }
         }
 
         deadEnemies.Clear();

@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f685e5b6d53f774289cde8b020d69f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinFly: {fileID: 114189671122330494, guid: 407233b1645e40f40b9ff41e1ac1b676, type: 2}
+  bloodFly: {fileID: 114189671122330494, guid: 407233b1645e40f40b9ff41e1ac1b676, type: 2}
 --- !u!114 &114940523881783102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,6 +166,7 @@ MonoBehaviour:
     useGraphRaycasting: 0
   traversableTags: -1
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask: -1
 --- !u!114 &114975554382027444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,6 +190,7 @@ MonoBehaviour:
   centerOffset: 1
   rotationIn2D: 1
   targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
   rotationSpeed: 0
   slowdownDistance: 0.75
   pickNextWaypointDist: 0.75

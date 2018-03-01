@@ -44,7 +44,7 @@ namespace Pathfinding {
 		/** The tags which the Seeker can traverse.
 		 *
 		 * \note This field is a bitmask.
-		 * \see https://en.wikipedia.org/wiki/Mask_(computing)
+		 * \see \ref bitmasks
 		 */
 		[HideInInspector]
 		public int traversableTags = -1;
@@ -59,6 +59,31 @@ namespace Pathfinding {
 		 */
 		[HideInInspector]
 		public int[] tagPenalties = new int[32];
+
+		/** Graphs that this Seeker can use.
+		 * This field determines which graphs will be considered when searching for the start and end nodes of a path.
+		 * It is useful in numerous situations, for example if you want to make one graph for small units and one graph for large units.
+		 *
+		 * This is a bitmask so if you for example want to make the agent only use graph index 3 then you can set this to:
+		 * \code seeker.graphMask = 1 << 3; \endcode
+		 *
+		 * \see \ref bitmasks
+		 *
+		 * Note that this field only stores which graph indices that are allowed. This means that if the graphs change their ordering
+		 * then this mask may no longer be correct.
+		 *
+		 * If you know the name of the graph you can set the mask like this:
+		 * \snippet MiscSnippets.cs Masks.FromGraphName
+		 *
+		 * Some overloads of the #StartPath methods take a graphMask parameter. If those overloads are used then they
+		 * will override the graph mask for that path request.
+		 *
+		 * \shadowimage{multiple_agents/seeker.png}
+		 *
+		 * \see \ref multiple-agent-types
+		 */
+		[HideInInspector]
+		public int graphMask = -1;
 
 		/** Callback for when a path is completed.
 		 * Movement scripts should register to this delegate.\n
@@ -330,7 +355,7 @@ namespace Pathfinding {
 		 * \param start		The start point of the path
 		 * \param end		The end point of the path
 		 * \param callback	The function to call when the path has been calculated
-		 * \param graphMask	Mask used to specify which graphs should be searched for close nodes. See #Pathfinding.NNConstraint.graphMask.
+		 * \param graphMask	Mask used to specify which graphs should be searched for close nodes. See #Pathfinding.NNConstraint.graphMask. This will override #graphMask for this path request.
 		 *
 		 * \a callback will be called when the path has completed.
 		 * \a Callback will not be called if the path is canceled (e.g when a new path is requested before the previous one has completed) */
@@ -352,11 +377,12 @@ namespace Pathfinding {
 		 * \version Since 4.1.x this method will no longer overwrite the graphMask on the path unless it is explicitly passed as a parameter (see other overloads of this method).
 		 */
 		public Path StartPath (Path p, OnPathDelegate callback = null) {
-			p.callback += onPathDelegate;
-
-			p.enabledTags = traversableTags;
-			p.tagPenalties = tagPenalties;
-
+			// Set the graph mask only if the user has not changed it from the default value.
+			// This is not perfect as the user may have wanted it to be precisely -1
+			// however it is the best detection that I can do.
+			// The non-default check is primarily for compatibility reasons to avoid breaking peoples existing code.
+			// The StartPath overloads with an explicit graphMask field should be used instead to set the graphMask.
+			if (p.nnConstraint.graphMask == -1) p.nnConstraint.graphMask = graphMask;
 			StartPathInternal(p, callback);
 			return p;
 		}
@@ -365,7 +391,7 @@ namespace Pathfinding {
 		 *
 		 * \param p			The path to start calculating
 		 * \param callback	The function to call when the path has been calculated
-		 * \param graphMask	Mask used to specify which graphs should be searched for close nodes. See #Pathfinding.NNConstraint.graphMask.
+		 * \param graphMask	Mask used to specify which graphs should be searched for close nodes. See #Pathfinding.NNConstraint.graphMask. This will override #graphMask for this path request.
 		 *
 		 * The \a callback will be called when the path has been calculated (which may be several frames into the future).
 		 * The \a callback will not be called if a new path request is started before this path request has been calculated.
@@ -375,11 +401,17 @@ namespace Pathfinding {
 		 */
 		public Path StartPath (Path p, OnPathDelegate callback, int graphMask) {
 			p.nnConstraint.graphMask = graphMask;
-			return StartPath(p, callback);
+			StartPathInternal(p, callback);
+			return p;
 		}
 
 		/** Internal method to start a path and mark it as the currently active path */
 		void StartPathInternal (Path p, OnPathDelegate callback) {
+			p.callback += onPathDelegate;
+
+			p.enabledTags = traversableTags;
+			p.tagPenalties = tagPenalties;
+
 			// Cancel a previously requested path is it has not been processed yet and also make sure that it has not been recycled and used somewhere else
 			if (path != null && path.PipelineState <= PathState.Processing && path.CompleteState != PathCompleteState.Error && lastPathID == path.pathID) {
 				path.FailWithError("Canceled path because a new one was requested.\n"+

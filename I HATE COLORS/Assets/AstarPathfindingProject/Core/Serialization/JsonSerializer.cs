@@ -462,25 +462,6 @@ namespace Pathfinding.Serialization {
 			return stream.ToArray();
 		}
 
-		public void SerializeEditorSettings (GraphEditorBase[] editors) {
-			if (editors == null || !settings.editorSettings) return;
-
-			for (int i = 0; i < editors.Length; i++) {
-				if (editors[i] == null) return;
-
-				var output = GetStringBuilder();
-				TinyJsonSerializer.Serialize(editors[i], output);
-				var bytes = encoding.GetBytes(output.ToString());
-
-				//Less or equal to 2 bytes means that nothing was saved (file is "{}")
-				if (bytes.Length <= 2)
-					continue;
-
-				AddChecksum(bytes);
-				AddEntry("graph"+i+"_editor"+jsonExt, bytes);
-			}
-		}
-
 		#endregion
 
 		#region Deserialize
@@ -741,22 +722,16 @@ namespace Pathfinding.Serialization {
 		 * It searches for a matching graph (matching if graphEditor.target == graph) for every graph editor.
 		 * Multiple graph editors should not refer to the same graph.\n
 		 * \note Stored in files named "graph#_editor.json" where # is the graph number.
+		 *
+		 * \note This method is only used for compatibility, newer versions store everything in the graph.serializedEditorSettings field which is already serialized.
 		 */
-		public void DeserializeEditorSettings (GraphEditorBase[] graphEditors) {
-			if (graphEditors == null) return;
+		public void DeserializeEditorSettingsCompatibility () {
+			for (int i = 0; i < graphs.Length; i++) {
+				var zipIndex = graphIndexInZip[graphs[i]];
+				ZipEntry entry = GetEntry("graph"+zipIndex+"_editor"+jsonExt);
+				if (entry == null) continue;
 
-			for (int i = 0; i < graphEditors.Length; i++) {
-				if (graphEditors[i] == null) continue;
-				for (int j = 0; j < graphs.Length; j++) {
-					if (graphEditors[i].target != graphs[j]) continue;
-
-					var zipIndex = graphIndexInZip[graphs[j]];
-					ZipEntry entry = GetEntry("graph"+zipIndex+"_editor"+jsonExt);
-					if (entry == null) continue;
-
-					TinyJsonDeserializer.Deserialize(GetString(entry), graphEditors[i].GetType(), graphEditors[i]);
-					break;
-				}
+				(graphs[i] as IGraphInternals).SerializedEditorSettings = GetString(entry);
 			}
 		}
 

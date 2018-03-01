@@ -8,37 +8,69 @@ using UnityEngine.UI;
 /// </summary>
 public class TowerInformation : Singleton<TowerInformation>
 {
-    // Header
+    private Tower selectedTower;
+
+    private Image background;
+    private Transform head;
     private Text nameText;
+    private Text rangeText;
 
-    // Stats panel
-    private Text currentLevel;
-    private Text upgradeCosts;
+    private Transform hoverBody;
+    private Text descriptionText;
 
-    // Button panel
-    private Button deleteButton;
+    private Transform placedBody;
+    private Text levelText;
+    private Text upgradeCostText;
     private Button upgradeButton;
 
-    /// <summary>
-    /// Prevent instance of this class, since it's a Singleton.
-    /// </summary>
-    private TowerInformation() { }
-
-    private void Start()
+    void Start()
     {
-        nameText = this.transform.Find("Header").Find("NameImage").gameObject.GetComponentInChildren<Text>();
+        background = GetComponent<Image>();
 
-        Transform body = this.transform.Find("Body");
+        head = transform.Find("Head").transform;
+        nameText = head.transform.Find("NameText").GetComponent<Text>();
+        rangeText = head.transform.Find("RangeText").GetComponent<Text>();
 
-        Transform statsPanel = body.Find("StatsPanel");
-        currentLevel = statsPanel.Find("CurrentLevelText").GetComponent<Text>();
-        upgradeCosts = statsPanel.Find("UpgradeCostText").GetComponent<Text>();
+        hoverBody = transform.Find("HoverBody").transform;
+        descriptionText = hoverBody.transform.Find("Description").GetComponent<Text>();
 
-        Transform buttonsPanel = body.Find("ButtonsPanel");
-        deleteButton = buttonsPanel.Find("DeleteButton").GetComponent<Button>();
-        upgradeButton = buttonsPanel.Find("UpgradeButton").GetComponent<Button>();
+        placedBody = transform.Find("PlacedBody").transform;
+        levelText = placedBody.transform.Find("LevelText").GetComponent<Text>();
+        upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<Text>();
+        upgradeButton = placedBody.transform.Find("UpgradeButton").GetComponent<Button>();
 
         Reset();
+    }
+
+
+    /// <summary>
+    /// Reset panel to represent that no tower is currently selected.
+    /// </summary>
+    public void Reset()
+    {
+        background.enabled = false;
+        head.gameObject.SetActive(false);
+        hoverBody.gameObject.SetActive(false);
+        placedBody.gameObject.SetActive(false);
+
+        GameManager.Instance.ResetTower();
+    }
+
+    /// <summary>
+    /// Fill the panel with informations about the currently selected hovering tower.
+    /// </summary>
+    /// <param name="tower">Tower to show.</param>
+    public void ShowHoveringTower(Tower tower)
+    {
+        selectedTower = tower;
+        FillHead();
+
+        descriptionText.text = selectedTower.Description;
+
+        background.enabled = true;
+        head.gameObject.SetActive(true);
+        hoverBody.gameObject.SetActive(true);
+        placedBody.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -47,49 +79,48 @@ public class TowerInformation : Singleton<TowerInformation>
     /// <param name="tower">Tower to show.</param>
     public void ShowPlacedTower(Tower tower)
     {
-        currentLevel.text = "Current level: " + tower.Level.ToString();
-        upgradeCosts.text = "Upgrade cost: " + tower.UpgradeCosts.ToString();
+        selectedTower = tower;
+        FillHead();
 
-        deleteButton.interactable = true;
-        upgradeButton.interactable = true;
+        levelText.text = "Level: " + selectedTower.Level.ToString();
+        upgradeCostText.text = "Upgrade: " + selectedTower.UpgradeCosts.ToString();
+        CheckUpgrade();
+
+        background.enabled = true;
+        head.gameObject.SetActive(true);
+        hoverBody.gameObject.SetActive(false);
+        placedBody.gameObject.SetActive(true);
     }
 
-    /// <summary>
-    /// Reset panel to represent that no tower is currently selected.
-    /// </summary>
-    public void Reset()
+    private void FillHead()
     {
-        currentLevel.text = "";
-        upgradeCosts.text = "";
-
-        deleteButton.interactable = false;
-        upgradeButton.interactable = false;
-
-        GameManager.Instance.ResetTower();
+        nameText.text = selectedTower.Name;
+        rangeText.text = "Range: " + selectedTower.Range.ToString();
     }
 
     /// <summary>
-    /// Check whether it's possible to upgrade the currently selected tower and if it is, do so.
+    /// Upgrade the currently selected tower.
+    /// </summary>
+    public void UpgradeTower()
+    {
+        selectedTower.Upgrade();
+        this.ShowPlacedTower(selectedTower);
+        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+    }
+
+    /// <summary>
+    /// Check whether it's possible to upgrade the currently selected tower and if it is, enable the upgrade button.
     /// </summary>
     public void CheckUpgrade()
     {
-        Tower selectedTower = GameManager.Instance.SelectedTower;
-        int upgradeCosts = selectedTower.UpgradeCosts;
-
-        if (upgradeCosts <= GameManager.money)
-        {
-            selectedTower.Upgrade();
-            this.ShowPlacedTower(selectedTower);
-            GameManager.AddMoney(-upgradeCosts);
-        }
+        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money ? true : false;
     }
 
     /// <summary>
     /// Deletes selected tower and returns a subset of money spent on tower
     /// </summary>
-    public void DeleteTower() 
+    public void SellTower()
     {
-        Tower selectedTower = GameManager.Instance.SelectedTower;
         int returnedMoney = selectedTower.BaseCosts / 2;
         GameManager.AddMoney(returnedMoney);
         Destroy(selectedTower.gameObject);

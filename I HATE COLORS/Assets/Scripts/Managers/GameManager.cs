@@ -51,12 +51,6 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     private Transform towerScrollViewContent;
 
-    /// <summary>
-    /// Whether the game is currently running or not.
-    /// </summary>
-    [HideInInspector]
-    public bool gameRunning = true;
-
     private Dictionary<string, Tower> towerDictionary;
 
     /// <summary>
@@ -69,7 +63,6 @@ public class GameManager : Singleton<GameManager>
         gameOver = false;
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
-        countdownTimerText = canvas.transform.Find("CountdownTimerText").gameObject.GetComponent<Text>();
 
         SelectedTower = null;
 
@@ -80,16 +73,18 @@ public class GameManager : Singleton<GameManager>
         currentWave = 1;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
-        coinFlyTarget = infoPanel.Find("MoneyPanel").gameObject;
+        coinFlyTarget = infoPanel.Find("BloodPanel").gameObject;
         healthText = infoPanel.Find("HealthPanel").GetComponentInChildren<Text>();
-        moneyText = infoPanel.Find("MoneyPanel").GetComponentInChildren<Text>();
+        moneyText = infoPanel.Find("BloodPanel").GetComponentInChildren<Text>();
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
+        countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
 
         towerDictionary = XmlImporter.GetTowersFromXml();
         LoadTowerButtons();
+        StartCoroutine(BlinkText());
     }
 
     void Update()
@@ -152,8 +147,8 @@ public class GameManager : Singleton<GameManager>
     {
         Hover.Instance.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
         this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
-        
-        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange()* .66f, SelectedTower.GetRange() * .66f, 1);
+
+        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
         this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         this.rangeIndicatorRenderer.enabled = true;
     }
@@ -191,32 +186,34 @@ public class GameManager : Singleton<GameManager>
 
         if (waveTimer.IsDone())
         {
-            countdownTimerText.text = "Defend!";
-            if(waveTimer.startBlinking) {
-                StartCoroutine(BlinkText());
-                waveTimer.startBlinking = false;
-            }
+            waveTimer.startBlinking = true;
 
         }
         else
         {
-            StopAllCoroutines();
             countdownTimerText.color = Color.white;
             TimeSpan t = TimeSpan.FromSeconds(waveTimer.TimeRemaining());
             countdownTimerText.text = string.Format("{0}:{1:00}", t.Minutes, t.Seconds);
         }
     }
 
-    public IEnumerator BlinkText(){
-        //blink it forever. You can set a terminating condition depending upon your requirement
-        while(true){
-        //set the Text's text to blank
-        countdownTimerText.text= "";
-        //display blank text for 0.5 seconds
-        yield return new WaitForSeconds(1);
-        //display “I AM FLASHING TEXT” for the next 0.5 seconds
-        countdownTimerText.text= "Defend!";
-        yield return new WaitForSeconds(1);
+    public IEnumerator BlinkText()
+    {
+
+        while (true)
+        {
+            if (waveTimer.startBlinking)
+            {
+                countdownTimerText.text = "";
+            }
+            yield return new WaitForSeconds(1);
+
+            if (waveTimer.startBlinking)
+            {
+                countdownTimerText.text = "0:00";
+            }
+            yield return new WaitForSeconds(1);
+
         }
     }
 

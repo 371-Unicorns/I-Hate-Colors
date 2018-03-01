@@ -26,7 +26,7 @@ using Thread = System.Threading.Thread;
 [HelpURL("http://arongranberg.com/astar/docs/class_astar_path.php")]
 public class AstarPath : VersionedMonoBehaviour {
 	/** The version number for the A* %Pathfinding Project */
-	public static readonly System.Version Version = new System.Version(4, 1, 10);
+	public static readonly System.Version Version = new System.Version(4, 1, 12);
 
 	/** Information about where the package was downloaded */
 	public enum AstarDistribution { WebsiteDownload, AssetStore };
@@ -591,17 +591,25 @@ public class AstarPath : VersionedMonoBehaviour {
 		return tagNames;
 	}
 
+	/** Used outside of play mode to initialize the AstarPath object even if it has not been selected in the inspector yet.
+	 * This will set the #active property and deserialize all graphs.
+	 *
+	 * This is useful if you want to do changes to the graphs in the editor outside of play mode, but cannot be sure that the graphs have been deserialized yet.
+	 * In play mode this method does nothing.
+	 */
+	public static void FindAstarPath () {
+		if (Application.isPlaying) return;
+		if (active == null) active = GameObject.FindObjectOfType<AstarPath>();
+		if (active != null && (active.data.graphs == null || active.data.graphs.Length == 0)) active.data.DeserializeGraphs();
+	}
+
 	/** Tries to find an AstarPath object and return tag names.
 	 * If an AstarPath object cannot be found, it returns an array of length 1 with an error message.
 	 * \see AstarPath.GetTagNames
 	 */
 	public static string[] FindTagNames () {
-		if (active == null) active = GameObject.FindObjectOfType<AstarPath>();
-		if (active != null) {
-			return active.GetTagNames();
-		} else {
-			return new string[1] { "There is no AstarPath component in the scene" };
-		}
+		FindAstarPath();
+		return active != null ? active.GetTagNames() : new string[1] { "There is no AstarPath component in the scene" };
 	}
 
 	/** Returns the next free path ID */

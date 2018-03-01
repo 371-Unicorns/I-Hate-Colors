@@ -12,9 +12,10 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     [SerializeField, HideInInspector]
     protected string towerName;
+    public string Name { get { return towerName; } }
 
     protected string description;
-    public string Descrpition { get { return description; }}
+    public string Description { get { return description; } }
 
     /// <summary>
     /// Base costs to build tower.
@@ -65,7 +66,7 @@ public abstract class Tower : MonoBehaviour
     /// <summary>
     /// Effect prefab attached to each tower.
     /// </summary>
-    public GameObject effectPrefab; 
+    public GameObject effectPrefab;
 
     /// <summary>
     /// Setup this tower.
@@ -102,7 +103,7 @@ public abstract class Tower : MonoBehaviour
 
     public virtual void Update()
     {
-        if (target == null || target.isDead())
+        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
         {
             FindClosestTarget();
         }
@@ -169,7 +170,7 @@ public abstract class Tower : MonoBehaviour
         foreach (Enemy enemy in enemies)
         {
             float distToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distToEnemy < shortestDistance)
+            if (distToEnemy < shortestDistance && distToEnemy < range)
             {
                 shortestDistance = distToEnemy;
                 nearestEnemy = enemy;

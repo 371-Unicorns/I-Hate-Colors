@@ -1,8 +1,9 @@
 <towers>
-   <proj-tower>
+  <proj-tower>
       <id>BulletTower</id>
       <proj-damage>10</proj-damage>
       <proj-speed>10</proj-speed>
+      <proj-color>RED</proj-color>
       <fire-rate>3</fire-rate>
       <range>3</range>
       <cost>20</cost>
@@ -10,29 +11,31 @@
       <upgrade-cost-scale>1.25</upgrade-cost-scale>
       <max-level>5</max-level>
       <description>A standard one bullet at a time tower.</description>
-   </proj-tower>
-  <proj-tower>
-    <id>ShotgunTower</id>
-    <proj-damage>5</proj-damage>
-    <proj-speed>5</proj-speed>
-    <fire-rate>3</fire-rate>
-    <range>5</range>
-    <cost>25</cost>
-    <upgrade-cost>10</upgrade-cost>
-    <upgrade-cost-scale>1.25</upgrade-cost-scale>
-    <max-level>5</max-level>
-    <description>A tower that fires off a spread of bullets.</description>
   </proj-tower>
-  <dot-tower>
-    <id>LaserTower</id>
-    <dot-damage>5</dot-damage>
-    <range>5</range>
-    <cost>20</cost>
-    <upgrade-cost>10</upgrade-cost>
-    <upgrade-cost-scale>1.25</upgrade-cost-scale>
-    <max-level>5</max-level>
-    <description>A tower that shoots out a target tracking laser.</description>
-  </dot-tower>
+  <proj-tower>
+      <id>ShotgunTower</id>
+      <proj-damage>5</proj-damage>
+      <proj-speed>5</proj-speed>
+      <proj-color>BLACK</proj-color>
+      <fire-rate>3</fire-rate>
+      <range>5</range>
+      <cost>25</cost>
+      <upgrade-cost>10</upgrade-cost>
+      <upgrade-cost-scale>1.25</upgrade-cost-scale>
+      <max-level>5</max-level>
+      <description>A tower that fires off a spread of bullets.</description>
+   </proj-tower>
+   <dot-tower>
+      <id>LaserTower</id>
+      <dot-damage>5</dot-damage>
+      <dot-color>ORANGE</dot-color>
+      <range>5</range>
+      <cost>20</cost>
+      <upgrade-cost>10</upgrade-cost>
+      <upgrade-cost-scale>1.25</upgrade-cost-scale>
+      <max-level>5</max-level>
+      <description>A tower that shoots out a target tracking laser.</description>
+   </dot-tower>
   <aoe-tower>
     <id>BlackHoleTower</id>
     <aoe-damage>0</aoe-damage>

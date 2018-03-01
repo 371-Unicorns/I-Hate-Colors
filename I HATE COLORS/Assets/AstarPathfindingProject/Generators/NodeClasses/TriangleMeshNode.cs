@@ -45,18 +45,16 @@ namespace Pathfinding {
 		 * \warning Internal method
 		 */
 		public static void SetNavmeshHolder (int graphIndex, INavmeshHolder graph) {
-			if (_navmeshHolders.Length <= graphIndex) {
-				// We need to lock and then check again to make sure
-				// that this the resize operation is thread safe
-				lock (lockObject) {
-					if (_navmeshHolders.Length <= graphIndex) {
-						var gg = new INavmeshHolder[graphIndex+1];
-						for (int i = 0; i < _navmeshHolders.Length; i++) gg[i] = _navmeshHolders[i];
-						_navmeshHolders = gg;
-					}
+			// We need to lock to make sure that
+			// the resize operation is thread safe
+			lock (lockObject) {
+				if (graphIndex >= _navmeshHolders.Length) {
+					var gg = new INavmeshHolder[graphIndex+1];
+					_navmeshHolders.CopyTo(gg, 0);
+					_navmeshHolders = gg;
 				}
+				_navmeshHolders[graphIndex] = graph;
 			}
-			_navmeshHolders[graphIndex] = graph;
 		}
 
 		/** Set the position of this node to the average of its 3 vertices */

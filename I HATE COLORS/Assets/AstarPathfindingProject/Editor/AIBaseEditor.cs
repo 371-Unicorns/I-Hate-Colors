@@ -5,7 +5,7 @@ namespace Pathfinding {
 	[CustomEditor(typeof(AIBase), true)]
 	[CanEditMultipleObjects]
 	public class BaseAIEditor : EditorBase {
-		protected SerializedProperty gravity, groundMask, centerOffset, rotationIn2D;
+		protected SerializedProperty gravity, groundMask, centerOffset, rotationIn2D, acceleration;
 		float lastSeenCustomGravity = float.NegativeInfinity;
 
 		protected override void OnEnable () {
@@ -14,6 +14,7 @@ namespace Pathfinding {
 			groundMask = serializedObject.FindProperty("groundMask");
 			centerOffset = serializedObject.FindProperty("centerOffset");
 			rotationIn2D = serializedObject.FindProperty("rotationIn2D");
+			acceleration = serializedObject.FindProperty("maxAcceleration");
 		}
 
 		protected override void Inspector () {
@@ -23,7 +24,24 @@ namespace Pathfinding {
 			p.Next(true);
 			while (p.NextVisible(false)) {
 				if (!SerializedProperty.EqualContents(p, groundMask) && !SerializedProperty.EqualContents(p, centerOffset) && !SerializedProperty.EqualContents(p, gravity) && !SerializedProperty.EqualContents(p, rotationIn2D)) {
-					PropertyField(p);
+					if (SerializedProperty.EqualContents(p, acceleration) && typeof(AIPath).IsAssignableFrom(target.GetType())) {
+						EditorGUI.BeginChangeCheck();
+						int grav = acceleration.hasMultipleDifferentValues ? -1 : (acceleration.floatValue >= 0 ? 1 : 0);
+						var ngrav = EditorGUILayout.Popup("Max Acceleration", grav, new [] { "Default", "Custom" });
+						if (EditorGUI.EndChangeCheck()) {
+							if (ngrav == 0) acceleration.floatValue = -2.5f;
+							else if (acceleration.floatValue < 0) acceleration.floatValue = 10;
+						}
+
+						if (!acceleration.hasMultipleDifferentValues && ngrav == 1) {
+							EditorGUI.indentLevel++;
+							PropertyField(acceleration.propertyPath);
+							EditorGUI.indentLevel--;
+							acceleration.floatValue = Mathf.Max(acceleration.floatValue, 0.01f);
+						}
+					} else {
+						PropertyField(p);
+					}
 				}
 			}
 

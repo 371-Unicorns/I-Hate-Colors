@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61974657350789296}
   - component: {fileID: 82088125076708216}
   - component: {fileID: 114125604805254932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlackHoleTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,8 +168,6 @@ MonoBehaviour:
   range: 0
   target: {fileID: 0}
   effectPrefab: {fileID: 1790365561161644, guid: 7bccf5859902b9c46b448815139040d2,
-    type: 2}
-  aoeEffect: {fileID: 114067491242818598, guid: 7bccf5859902b9c46b448815139040d2,
     type: 2}
   shotTimer:
     timeRemaining: 0

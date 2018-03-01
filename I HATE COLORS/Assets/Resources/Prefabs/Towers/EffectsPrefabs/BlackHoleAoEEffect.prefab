@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212788895642946098}
   - component: {fileID: 58525670186657078}
   - component: {fileID: 114067491242818598}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BlackHoleAoEEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  color: 7
   range: 5
 --- !u!212 &212788895642946098
 SpriteRenderer:

@@ -17,7 +17,7 @@ public class AoETower : Tower
     public void Initialize(string id, int baseCost, float damage, float fireRate, int upgradeCost, float upgradeCostScale, int maxLevel, float range, string description)
     {
         base.Initialize(id, baseCost, upgradeCost, upgradeCostScale, maxLevel, range, description);
-        effectPrefab.GetComponent<AoEEffect>().Initialize(damage, range);
+        effectPrefab.GetComponent<AoEEffect>().Initialize(damage, range, ColorType.BLACK);
 
         shotTimer = new GameTimer(fireRate);
         shotTimer.SkipTimer();

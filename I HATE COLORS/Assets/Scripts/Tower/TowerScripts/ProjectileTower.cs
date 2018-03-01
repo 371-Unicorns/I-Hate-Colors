@@ -43,10 +43,10 @@ public class ProjectileTower : Tower
     /// <param name="fireRate">Fire rate of this tower.</param>
     /// <param name="projectileSpeed">Speed of the projectile.</param>
     /// <param name="projectileSpeed">Damage of the projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage, string description)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage, ColorType color, string description)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
-        effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range);
+        effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
 
         attackTimer = new GameTimer(fireRate);
         attackTimer.SkipTimer();
