@@ -8,7 +8,17 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class Tile : MonoBehaviour
 {
-    public Sprite[] grassSprites;
+    /// <summary>
+    /// All possible sprite this tile can have.
+    /// </summary>
+    [SerializeField]
+    private Sprite[] possibleSprites;
+
+    /// <summary>
+    /// Weight of all possible sprites. possibleSpritesWeight[0] defines the weight of possibleSprites[0]. Sum of all weights can be greater than 1.
+    /// </summary>
+    [SerializeField]
+    private float[] possibleSpritesWeight;
 
     /// <summary>
     /// Position of the tile on the grid. Grid starts at (0, 0).
@@ -33,8 +43,7 @@ public class Tile : MonoBehaviour
     public void Setup(Point gridPoint, Vector3 gridPosition)
     {
         this.GridPoint = gridPoint;
-        this.GetComponent<SpriteRenderer>().sprite = grassSprites[Random.Range(0, grassSprites.Length)];
-        this.transform.position = gridPosition;
+        this.GetComponent<SpriteRenderer>().sprite = Helper.WeightedRandom(possibleSprites, possibleSpritesWeight); this.transform.position = gridPosition;
         this.transform.SetParent(LevelManager.Instance.Map.transform);
         LevelManager.Instance.TileDict.Add(gridPoint, this);
     }
