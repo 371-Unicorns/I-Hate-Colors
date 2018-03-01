@@ -18,10 +18,10 @@ public class DoTTower : Tower
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="effectDamage">Damage of the projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float effectDamage, string description)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float effectDamage, ColorType color, string description)
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
-        effectPrefab.GetComponent<DoTEffect>().Initialize(effectDamage, range);
+        effectPrefab.GetComponent<DoTEffect>().Initialize(effectDamage, range, color);
     }
 
     public override void Update()

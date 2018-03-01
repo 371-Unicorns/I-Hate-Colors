@@ -122,6 +122,7 @@ public class XmlImporter
             string id = node.SelectSingleNode("id").InnerText;
             float projectileDamage = float.Parse(node.SelectSingleNode("proj-damage").InnerText);
             float projectileSpeed = float.Parse(node.SelectSingleNode("proj-speed").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("proj-color").InnerText);
             float fireRate = float.Parse(node.SelectSingleNode("fire-rate").InnerText);
             float range = float.Parse(node.SelectSingleNode("range").InnerText);
             int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
@@ -132,7 +133,7 @@ public class XmlImporter
 
             ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<ProjectileTower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage, description);
+            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage, color, description);
             tower.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, tower);
@@ -147,6 +148,7 @@ public class XmlImporter
         {
             string id = node.SelectSingleNode("id").InnerText;
             float effectDamage = float.Parse(node.SelectSingleNode("dot-damage").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("dot-color").InnerText);
             float range = float.Parse(node.SelectSingleNode("range").InnerText);
             int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
             int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
@@ -156,7 +158,7 @@ public class XmlImporter
 
             DoTTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id)) as GameObject).GetComponent<DoTTower>();
             tower.transform.Translate(new Vector3(-1000, -1000, 0));
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage, description);
+            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage, color, description);
             tower.transform.SetParent(prefabHolder);
 
             retDictionary.Add(id, tower);

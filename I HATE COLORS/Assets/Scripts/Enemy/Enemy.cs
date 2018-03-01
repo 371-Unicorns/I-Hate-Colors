@@ -51,9 +51,16 @@ public class Enemy : MonoBehaviour
     /// Take damage and check whether for death.
     /// </summary>
     /// <param name="damage">Damage to take.</param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, ColorType damageType)
     {
-        health -= damage;
+        if (damageType == ColorType.BLACK || damageType == color)
+        {
+            health -= damage * 2.0f;
+        } else
+        {
+            health -= damage;
+        }
+
         if (health <= 0 && !dead)
         {
             dead = true;
