@@ -13,15 +13,17 @@ public class Enemy : MonoBehaviour
     private float speed;
     private int value;
     private bool dead;
+    private ColorType color;
 
     private Enemy() { }
 
-    public void Initialize(float health, float speed, int value)
+    public void Initialize(float health, float speed, int value, ColorType color)
     {
         SetHealth(health);
         SetSpeed(speed);
         this.value = value;
         this.dead = false;
+        this.color = color;
     }
 
     public void Initialize(Enemy other)
@@ -30,6 +32,7 @@ public class Enemy : MonoBehaviour
         SetSpeed(other.speed);
         this.value = other.value;
         this.dead = other.dead;
+        this.color = other.color;
     }
 
     private void SetHealth(float health)

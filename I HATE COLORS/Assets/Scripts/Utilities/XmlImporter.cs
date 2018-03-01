@@ -86,9 +86,10 @@ public class XmlImporter
             float health = float.Parse(node.SelectSingleNode("health").InnerText);
             float speed = float.Parse(node.SelectSingleNode("speed").InnerText);
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("color").InnerText);
 
             Enemy e = GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id) as GameObject, LevelManager.Instance.PrefabHolderParent).GetComponent<Enemy>();
-            e.Initialize(health, speed, value);
+            e.Initialize(health, speed, value, color);
 
             retDictionary.Add(id, e);
         }
