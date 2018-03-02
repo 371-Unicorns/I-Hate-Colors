@@ -52,12 +52,13 @@ public class GameManager : MonoBehaviour
 
     private static Dictionary<string, Tower> towerDictionary;
 
+    /*
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private GameManager() { }
+    public GameManager() { } */
 
-    public void Awake()
+    public void Start()
     {
         gameOver = false;
         canvas = GameObject.Find("Canvas");
@@ -108,9 +109,9 @@ public class GameManager : MonoBehaviour
             WaveManager.SetNextWave();
         }
 
-        if (Hover.Instance.IsActive())
+        if (Hover.IsActive())
         {
-            GameManager.rangeIndicatorRenderer.transform.position = Hover.Instance.GetPosition();
+            GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
@@ -119,12 +120,12 @@ public class GameManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Hover.Instance.IsActive())
+            if (Hover.IsActive())
             {
                 GameManager.rangeIndicatorRenderer.enabled = false;
-                Hover.Instance.Deactivate();
+                Hover.Deactivate();
                 GameManager.ResetTower();
-                TowerInformation.Instance.Reset();
+                TowerInformation.Reset();
             }
         }
 
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
     /// <param name="towerBtn">TowerBtn to select.</param>
     public static void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        Hover.Instance.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
+        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
         GameManager.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
 
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);

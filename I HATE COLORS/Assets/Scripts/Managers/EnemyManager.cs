@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public static Tile[] TargetTiles { get; private set; }
 
-    public void Awake()
+    public void Start()
     {
         enemyDictionary = XmlImporter.GetEnemiesFromXml();
         TargetTiles = new Tile[GameManager.Height];

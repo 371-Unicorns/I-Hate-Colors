@@ -117,7 +117,7 @@ public abstract class Tower : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         GameManager.SelectTower(this);
-        TowerInformation.Instance.ShowPlacedTower(this);
+        TowerInformation.ShowPlacedTower(this);
     }
 
     /// <summary>
@@ -153,9 +153,9 @@ public abstract class Tower : MonoBehaviour
         // Allow multi tower placement by pressing LeftShift.
         if (!Input.GetKey(KeyCode.LeftShift))
         {
-            Hover.Instance.Deactivate();
+            Hover.Deactivate();
             GameManager.SelectTower(tower.GetComponent<Tower>());
-            TowerInformation.Instance.ShowPlacedTower(GameManager.SelectedTower);
+            TowerInformation.ShowPlacedTower(GameManager.SelectedTower);
         }
         return tower.GetComponent<Tower>();
     }

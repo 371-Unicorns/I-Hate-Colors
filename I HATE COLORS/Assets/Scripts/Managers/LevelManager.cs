@@ -40,12 +40,12 @@ public class LevelManager : MonoBehaviour
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private LevelManager() { }
+    public LevelManager() { }
 
     /// <summary>
     /// Build the whole level.
     /// </summary>
-    void Awake()
+    public void Start()
     {
         map = GameObject.Find("Map");
         grassTile = (GameObject)Resources.Load("Prefabs/Tiles/Grass");
@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
         SceneryGenerator.GenerateScenery();
 
         GridGraphManager.Setup(GameManager.Width, GameManager.Height, tileSize);
-        Hover.Instance.Deactivate();
+        Hover.Deactivate();
     }
 
     /// <summary>

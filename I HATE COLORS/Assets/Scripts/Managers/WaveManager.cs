@@ -11,7 +11,8 @@ public class WaveManager : MonoBehaviour
     private static Queue<Wave> waves;
     
     // Use this for initialization
-    void Start () {
+    public void Start()
+    {
         waves = XmlImporter.GetWavesFromXml();
         WaveManager.SetNextWave();
     }

@@ -55,14 +55,14 @@ public class Tile : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject() && GameManager.SelectedTower != null && this.placedTower == null)
         {
-            if (Hover.Instance.IsActive())
+            if (Hover.IsActive())
             {
                 Tower possiblyPlacedTower = GameManager.SelectedTower.PlaceTower(this);
                 this.placedTower = possiblyPlacedTower == null ? null : possiblyPlacedTower;
             }
             else
             {
-                TowerInformation.Instance.Reset();
+                TowerInformation.Reset();
             }
         }
     }

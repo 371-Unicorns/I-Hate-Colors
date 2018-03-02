@@ -12,7 +12,7 @@ public class CastleManager : MonoBehaviour
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private CastleManager() { }
+    public CastleManager() { }
 
     private void Start()
     {

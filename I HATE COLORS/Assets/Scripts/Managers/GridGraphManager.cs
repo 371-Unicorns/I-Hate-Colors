@@ -22,7 +22,7 @@ public class GridGraphManager : MonoBehaviour
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private GridGraphManager() { }
+    public GridGraphManager() { }
 
     /// <summary>
     /// Setup GridGraph to match tiles grid.

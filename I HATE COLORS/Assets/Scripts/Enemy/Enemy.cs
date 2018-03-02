@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             }
 
             GameManager.AddMoney(value);
-            TowerInformation.Instance.CheckUpgrade();
+            TowerInformation.CheckUpgrade();
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }

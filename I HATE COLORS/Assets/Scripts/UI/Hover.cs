@@ -5,26 +5,26 @@ using UnityEngine;
 /// <summary>
 /// Handels sprite of selected tower following mouse cursor, resulting in a hover effect.
 /// </summary>
-public class Hover : Singleton<Hover>
+public class Hover : MonoBehaviour
 {
     /// <summary>
     /// SpriteRenderer which displays currently selected tower.
     /// </summary>
-    private SpriteRenderer spriteRenderer;
+    private static SpriteRenderer spriteRenderer;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private Hover() { }
+    public Hover() { }
 
-    void Awake()
+    public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         Deactivate();
     }
 
-    void Update()
+    public void Update()
     {
         /// Change hovers position to current mouse position.
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -35,24 +35,24 @@ public class Hover : Singleton<Hover>
     /// Activate hovering effect by passing sprite to show.
     /// </summary>
     /// <param name="sprite">Sprite to display.</param>
-    public void Activate(float range, Sprite sprite)
+    public static void Activate(float range, Sprite sprite)
     {
-        this.spriteRenderer.sprite = sprite;
-        this.spriteRenderer.enabled = true;
+        Hover.spriteRenderer.sprite = sprite;
+        Hover.spriteRenderer.enabled = true;
     }
 
     /// <summary>
     /// Disable hovering effect.
     /// </summary>
-    public void Deactivate()
+    public static void Deactivate()
     {
-        this.spriteRenderer.enabled = false;
+        Hover.spriteRenderer.enabled = false;
     }
 
-    public bool IsActive()
+    public static bool IsActive()
     {
-        return this.spriteRenderer.enabled;
+        return Hover.spriteRenderer.enabled;
     }
 
-    public Vector3 GetPosition() { return spriteRenderer.transform.position; }
+    public static Vector3 GetPosition() { return spriteRenderer.transform.position; }
 }
