@@ -10,14 +10,12 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Amount of tiles on the x-Axis.
     /// </summary>
-    [SerializeField]
     private static int width = 22;
     public static int Width { get { return width; } }
 
     /// <summary>
     /// Amount of tiles on the y-Axis.
     /// </summary>
-    [SerializeField]
     private static int height = 14;
     public static int Height { get { return height; } }
     
@@ -94,52 +92,57 @@ public class GameManager : MonoBehaviour
     {
         SetTimerText();
         WaveManager.Update();
-
-        if (!waveTimer.IsPaused() && waveTimer.IsDone())
-        {
-            waveTimer.SetPaused(true);
-            WaveManager.BeginWave();
-        }
-
-        if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
-        {
-            waveText.text = currentWave.ToString();
-            waveTimer.Reset();
-            waveTimer.SetPaused(false);
-            WaveManager.SetNextWave();
-        }
-
-        if (Hover.IsActive())
-        {
-            GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            waveTimer.SkipTimer();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Hover.IsActive())
-            {
-                GameManager.rangeIndicatorRenderer.enabled = false;
-                Hover.Deactivate();
-                GameManager.ResetTower();
-                TowerInformation.Reset();
-            }
-        }
-
+        
         if (gameOver)
         {
-            gameOverText.text = "GAME OVER";
+            waveTimer.SetPaused(true);
+            if (CastleManager.CastleHealth <= 0)
+                gameOverText.text = "GAME OVER";
+            else
+                gameOverText.text = "CONGRATULATIONS";
+
             gameOverText.gameObject.SetActive(true);
             toMenuButton.gameObject.SetActive(true);
         }
         else
         {
-            healthText.text = CastleManager.CastleHealth.ToString();
-            moneyText.text = money.ToString();
+            if (!waveTimer.IsPaused() && waveTimer.IsDone())
+            {
+                waveTimer.SetPaused(true);
+                WaveManager.BeginWave();
+            }
+
+            if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
+            {
+                waveText.text = currentWave.ToString();
+                waveTimer.Reset();
+                waveTimer.SetPaused(false);
+                WaveManager.SetNextWave();
+            }
+
+            if (Hover.IsActive())
+            {
+                GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                waveTimer.SkipTimer();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Hover.IsActive())
+                {
+                    GameManager.rangeIndicatorRenderer.enabled = false;
+                    Hover.Deactivate();
+                    GameManager.ResetTower();
+                    TowerInformation.Reset();
+                }
+            }
         }
+
+        healthText.text = CastleManager.CastleHealth.ToString();
+        moneyText.text = money.ToString();
     }
 
     /// <summary>

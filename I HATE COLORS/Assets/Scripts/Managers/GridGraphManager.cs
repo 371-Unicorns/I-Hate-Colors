@@ -32,7 +32,8 @@ public class GridGraphManager : MonoBehaviour
     /// <param name="tileSize">Length of one tile.</param>
     public static void Setup(int width, int height, float tileSize)
     {
-        if (gridGraph == null) { gridGraph = AstarPath.active.data.gridGraph; }
+        //if (gridGraph == null)
+        gridGraph = AstarPath.active.data.gridGraph;
 
         // Adjust in order to increase resolution of GridGraph
         gridGraph.SetDimensions(width * 4, height * 4, tileSize / 4.0f);

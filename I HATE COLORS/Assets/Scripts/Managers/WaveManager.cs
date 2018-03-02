@@ -28,6 +28,10 @@ public class WaveManager : MonoBehaviour
                 EnemyManager.SpawnEnemy(currentWave.NextEnemy());
             }
         }
+        if(waves.Count == 0)
+        {
+            GameManager.gameOver = true;
+        }
     }
 
     public static void SetNextWave()
