@@ -5,67 +5,68 @@ using UnityEngine;
 using UnityEngine.UI;
 using Pathfinding;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     /// <summary>
     /// Amount of tiles on the x-Axis.
     /// </summary>
-    [SerializeField]
-    private int width = 22;
-    public int Width { get { return width; } }
+    private static int width = 22;
+    public static int Width { get { return width; } }
 
     /// <summary>
     /// Amount of tiles on the y-Axis.
     /// </summary>
-    [SerializeField]
-    private int height = 14;
-    public int Height { get { return height; } }
-
-    [SerializeField]
-    private Button toMenuButton;
+    private static int height = 14;
+    public static int Height { get { return height; } }
+    
+    private static Button toMenuButton;
 
     /// <summary>
     /// Currently selected tower by player. Could either be a ready to place tower or an already placed tower.
     /// </summary>
-    public Tower SelectedTower { get; private set; }
-    public SpriteRenderer rangeIndicatorRenderer;
+    public static Tower SelectedTower { get; private set; }
+    public static SpriteRenderer rangeIndicatorRenderer;
 
     [HideInInspector]
-    public bool gameOver;
-    private Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
+    public static bool gameOver;
+    private static Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
 
-    public GameObject canvas;
+    public static GameObject canvas;
 
     /// <summary>
     /// Where the coins should fly to.
     /// </summary>
-    public GameObject coinFlyTarget;
+    public static GameObject coinFlyTarget;
 
-    private GameTimer waveTimer;
-    public int currentWave;
+    private static GameTimer waveTimer;
+    public static int currentWave;
 
     public static int money = 100;
 
     /// <summary>
     /// Content of the towerScrollView. Add available TowerBtn to this.
     /// </summary>
-    private Transform towerScrollViewContent;
+    private static Transform towerScrollViewContent;
 
-    private Dictionary<string, Tower> towerDictionary;
+    private static Dictionary<string, Tower> towerDictionary;
 
+    /*
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
     /// </summary>
-    private GameManager() { }
+    public GameManager() { } */
 
-    void Awake()
+    public void Start()
     {
         gameOver = false;
+        canvas = GameObject.Find("Canvas");
+        rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
         gameOverText.gameObject.SetActive(false);
 
         SelectedTower = null;
 
+        toMenuButton = canvas.transform.Find("ToMenuButton").gameObject.GetComponent<Button>();
         toMenuButton.gameObject.SetActive(false);
 
         waveTimer = new GameTimer();
@@ -87,92 +88,97 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(BlinkText());
     }
 
-    void Update()
+    public void Update()
     {
         SetTimerText();
         WaveManager.Update();
-
-        if (!waveTimer.IsPaused() && waveTimer.IsDone())
-        {
-            waveTimer.SetPaused(true);
-            WaveManager.BeginWave();
-        }
-
-        if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
-        {
-            waveText.text = currentWave.ToString();
-            waveTimer.Reset();
-            waveTimer.SetPaused(false);
-            WaveManager.SetNextWave();
-        }
-
-        if (Hover.Instance.IsActive())
-        {
-            this.rangeIndicatorRenderer.transform.position = Hover.Instance.GetPosition();
-        }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            waveTimer.SkipTimer();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Hover.Instance.IsActive())
-            {
-                this.rangeIndicatorRenderer.enabled = false;
-                Hover.Instance.Deactivate();
-                GameManager.Instance.ResetTower();
-                TowerInformation.Instance.Reset();
-            }
-        }
-
+        
         if (gameOver)
         {
-            gameOverText.text = "GAME OVER";
+            waveTimer.SetPaused(true);
+            if (CastleManager.CastleHealth <= 0)
+                gameOverText.text = "GAME OVER";
+            else
+                gameOverText.text = "CONGRATULATIONS";
+
             gameOverText.gameObject.SetActive(true);
             toMenuButton.gameObject.SetActive(true);
         }
         else
         {
-            healthText.text = CastleManager.Instance.CastleHealth.ToString();
-            moneyText.text = money.ToString();
+            if (!waveTimer.IsPaused() && waveTimer.IsDone())
+            {
+                waveTimer.SetPaused(true);
+                WaveManager.BeginWave();
+            }
+
+            if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
+            {
+                waveText.text = currentWave.ToString();
+                waveTimer.Reset();
+                waveTimer.SetPaused(false);
+                WaveManager.SetNextWave();
+            }
+
+            if (Hover.IsActive())
+            {
+                GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                waveTimer.SkipTimer();
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Hover.IsActive())
+                {
+                    GameManager.rangeIndicatorRenderer.enabled = false;
+                    Hover.Deactivate();
+                    GameManager.ResetTower();
+                    TowerInformation.Reset();
+                }
+            }
         }
+
+        healthText.text = CastleManager.CastleHealth.ToString();
+        moneyText.text = money.ToString();
     }
 
     /// <summary>
     /// Set currently selected tower and activate hovering effect for this tower.
     /// </summary>
     /// <param name="towerBtn">TowerBtn to select.</param>
-    public void SelectTowerAndHover(TowerBtn towerBtn)
+    public static void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        Hover.Instance.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
-        this.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
+        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
+        GameManager.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
 
-        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
-        this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
-        this.rangeIndicatorRenderer.enabled = true;
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
+        GameManager.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
     /// Set currently selected tower.
     /// </summary>
     /// <param name="tower">Tower to select.</param>
-    public void SelectTower(Tower tower)
+    public static void SelectTower(Tower tower)
     {
-        this.SelectedTower = tower;
+        GameManager.SelectedTower = tower;
 
-        this.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
-        this.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
-        this.rangeIndicatorRenderer.enabled = true;
+        GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.enabled = true;
     }
 
     /// <summary>
     /// Singals player that no tower is currently selected and no tower can be placed.
     /// </summary>
-    public void ResetTower()
+    public static void ResetTower()
     {
-        this.SelectedTower = null;
-        this.rangeIndicatorRenderer.enabled = false;
+        GameManager.SelectedTower = null;
+        GameManager.rangeIndicatorRenderer.enabled = false;
     }
 
     public static void AddMoney(int m)
@@ -197,7 +203,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public IEnumerator BlinkText()
+    public static IEnumerator BlinkText()
     {
 
         while (true)
@@ -227,7 +233,11 @@ public class GameManager : Singleton<GameManager>
                 Debug.Log(string.Format("Tried to load and instantiate {0}'s GUI button, but an error occured.", tower.name));
                 return;
             }
-
+            if(tower == null)
+            {
+                Debug.Log(string.Format("Tried to load and instantiate Tower, but an error occured."));
+                return;
+            }
             towerButton.SetSprites(tower.gameObject);
         }
     }

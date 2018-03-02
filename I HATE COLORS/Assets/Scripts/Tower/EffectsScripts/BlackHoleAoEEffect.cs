@@ -5,11 +5,27 @@ using UnityEngine;
 
 public class BlackHoleAoEEffect : AoEEffect {
 
+    private readonly float LIFESPAN = 5.0f;
+
     private Sprite sprite;
+
+    private GameTimer gTimer;
 
     public BlackHoleAoEEffect()
     {
         radius = 5;
+        gTimer = new GameTimer(LIFESPAN);
+        gTimer.SetPaused(false);
+    }
+
+    public override void Update()
+    {
+        gTimer.Update();
+
+        if (gTimer.IsDone())
+        {
+            Destroy(gameObject);
+        }
     }
 
     public override void ApplyAoEEffect()
@@ -30,7 +46,7 @@ public class BlackHoleAoEEffect : AoEEffect {
         BlackHoleAoEEffect effect = newEffect.GetComponent<BlackHoleAoEEffect>();
         effect.SetTarget(target);
         effect.SetSprite(newEffect.GetComponent<SpriteRenderer>().sprite);
-        transform.localScale = new Vector3(radius, radius, 0);
+        transform.localScale = new Vector3(radius * 0.66f, radius * 0.66f, 0);
         radius = 5;
 
         return effect;

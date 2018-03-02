@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveManager : Singleton<WaveManager> {
-
+public class WaveManager : MonoBehaviour
+{
     private static bool waveRunning = false;
 
-    public string waveXmlFile;
+    public static string waveXmlFile;
     private static Wave currentWave;
     private static Queue<Wave> waves;
     
     // Use this for initialization
-    void Start () {
+    public void Start()
+    {
         waves = XmlImporter.GetWavesFromXml();
         WaveManager.SetNextWave();
     }
@@ -26,6 +27,10 @@ public class WaveManager : Singleton<WaveManager> {
             {
                 EnemyManager.SpawnEnemy(currentWave.NextEnemy());
             }
+        }
+        if(waves.Count == 0)
+        {
+            GameManager.gameOver = true;
         }
     }
 

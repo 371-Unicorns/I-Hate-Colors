@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
             foreach (var i in Enumerable.Range(0, value))
             {
-                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.Instance.canvas.transform);
+                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.canvas.transform);
                 RectTransform coinFlyRect = newCoinFly.GetComponent<RectTransform>();
                 coinFlyRect.anchorMin = enemyScreenPos;
                 coinFlyRect.anchorMax = enemyScreenPos;
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
             }
 
             GameManager.AddMoney(value);
-            TowerInformation.Instance.CheckUpgrade();
+            TowerInformation.CheckUpgrade();
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }

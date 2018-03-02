@@ -44,8 +44,8 @@ public class Tile : MonoBehaviour
     {
         this.GridPoint = gridPoint;
         this.GetComponent<SpriteRenderer>().sprite = Helper.WeightedRandom(possibleSprites, possibleSpritesWeight); this.transform.position = gridPosition;
-        this.transform.SetParent(LevelManager.Instance.Map.transform);
-        LevelManager.Instance.TileDict.Add(gridPoint, this);
+        this.transform.SetParent(LevelManager.Map.transform);
+        LevelManager.TileDict.Add(gridPoint, this);
     }
 
     /// <summary>
@@ -53,16 +53,16 @@ public class Tile : MonoBehaviour
     /// </summary>
     private void OnMouseUpAsButton()
     {
-        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.Instance.SelectedTower != null && this.placedTower == null)
+        if (!EventSystem.current.IsPointerOverGameObject() && GameManager.SelectedTower != null && this.placedTower == null)
         {
-            if (Hover.Instance.IsActive())
+            if (Hover.IsActive())
             {
-                Tower possiblyPlacedTower = GameManager.Instance.SelectedTower.PlaceTower(this);
+                Tower possiblyPlacedTower = GameManager.SelectedTower.PlaceTower(this);
                 this.placedTower = possiblyPlacedTower == null ? null : possiblyPlacedTower;
             }
             else
             {
-                TowerInformation.Instance.Reset();
+                TowerInformation.Reset();
             }
         }
     }

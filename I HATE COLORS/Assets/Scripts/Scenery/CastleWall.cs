@@ -25,7 +25,7 @@ public class CastleWall : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        explosionParent = LevelManager.Instance.Map.transform.Find("Explosions");
+        explosionParent = LevelManager.Map.transform.Find("Explosions");
         deathSound = GetComponent<AudioSource>();
     }
 
@@ -37,7 +37,7 @@ public class CastleWall : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            CastleManager.Instance.TakeDamage(1);
+            CastleManager.TakeDamage(1);
 
             ParticleSystem explosionParticle = Instantiate(explosionPrefab, other.transform.position, transform.rotation);
             explosionParticle.transform.SetParent(explosionParent);

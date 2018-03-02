@@ -28,29 +28,26 @@ public class AoETower : Tower
     {
         base.Update();
 
+        shotTimer.Update();
+
         if (target != null)
         {
-            Attack();
-        }
-        else
-        {
-            shotTimer.Update();
-            if (shotTimer.IsDone() && target != null)
+            if (shotTimer.IsDone())
             {
-                Attack();
+                aoeEffect = effectPrefab.GetComponent<AoEEffect>().SpawnEffect(effectPrefab, transform.position, target) as AoEEffect;
                 shotTimer.Reset();
             }
+
+            Attack();
         }
     }
 
     public override void Attack()
     {
-        if (aoeEffect == null)
+        if (aoeEffect != null)
         {
-            aoeEffect = effectPrefab.GetComponent<AoEEffect>().SpawnEffect(effectPrefab, transform.position, target) as AoEEffect;
+            aoeEffect.ApplyAoEEffect();
         }
-        
-        aoeEffect.ApplyAoEEffect();
     }
 
     public override void Upgrade()

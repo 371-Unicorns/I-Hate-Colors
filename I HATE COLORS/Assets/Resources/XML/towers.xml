@@ -39,7 +39,7 @@
   <aoe-tower>
     <id>BlackHoleTower</id>
     <aoe-damage>0</aoe-damage>
-    <fire-rate>3</fire-rate>
+    <fire-rate>10</fire-rate>
     <range>5</range>
     <cost>20</cost>
     <upgrade-cost>10</upgrade-cost>
