@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CastleManager : Singleton<CastleManager>
+public class CastleManager : MonoBehaviour
 {
-    public int CastleHealth { get; private set; }
+    public static int CastleHealth { get; private set; }
 
     [SerializeField]
-    private GameObject castleWallPrefab;
+    private static GameObject castleWallPrefab;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -17,15 +17,16 @@ public class CastleManager : Singleton<CastleManager>
     private void Start()
     {
         CastleHealth = 100;
+        castleWallPrefab = (GameObject)Resources.Load("Prefabs/Castle/CastleWall");
         Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation);
     }
 
-    public void TakeDamage(int damage)
+    public static void TakeDamage(int damage)
     {
         CastleHealth -= damage;
         if (CastleHealth <= 0)
         {
-            GameManager.Instance.gameOver = true;
+            GameManager.gameOver = true;
         }
     }
 }

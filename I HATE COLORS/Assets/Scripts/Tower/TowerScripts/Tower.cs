@@ -116,7 +116,7 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     private void OnMouseUpAsButton()
     {
-        GameManager.Instance.SelectTower(this);
+        GameManager.SelectTower(this);
         TowerInformation.Instance.ShowPlacedTower(this);
     }
 
@@ -136,10 +136,10 @@ public abstract class Tower : MonoBehaviour
         GameManager.AddMoney(-baseCosts);
 
         // Place tower.
-        GameObject tower = Instantiate(GameManager.Instance.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity, parentTile.transform);
+        GameObject tower = Instantiate(GameManager.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity, parentTile.transform);
 
         // Check if path is blocked.
-        if (!GridGraphManager.Instance.IsGraphNotBlocked(tower))
+        if (!GridGraphManager.IsGraphNotBlocked(tower))
         {
             // TODO Display warning message with this.
             print("Can't place tower here. Path is entirely blocked.");
@@ -154,8 +154,8 @@ public abstract class Tower : MonoBehaviour
         if (!Input.GetKey(KeyCode.LeftShift))
         {
             Hover.Instance.Deactivate();
-            GameManager.Instance.SelectTower(tower.GetComponent<Tower>());
-            TowerInformation.Instance.ShowPlacedTower(GameManager.Instance.SelectedTower);
+            GameManager.SelectTower(tower.GetComponent<Tower>());
+            TowerInformation.Instance.ShowPlacedTower(GameManager.SelectedTower);
         }
         return tower.GetComponent<Tower>();
     }

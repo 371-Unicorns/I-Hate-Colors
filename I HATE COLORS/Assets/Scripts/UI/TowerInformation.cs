@@ -53,7 +53,7 @@ public class TowerInformation : Singleton<TowerInformation>
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(false);
 
-        GameManager.Instance.ResetTower();
+        GameManager.ResetTower();
     }
 
     /// <summary>

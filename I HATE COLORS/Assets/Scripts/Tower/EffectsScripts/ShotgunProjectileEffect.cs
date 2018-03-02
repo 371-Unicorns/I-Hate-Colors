@@ -61,7 +61,7 @@ public class ShotgunProjectileEffect : ProjectileEffect
 
     public override void ProcessCollision()
     {
-        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.Instance.ProjectilesEffectParent);
+        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.ProjectilesEffectParent);
         Destroy(fx, projectileImpact.GetComponent<ParticleSystem>().main.duration);
         Destroy(gameObject);
     }

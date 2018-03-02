@@ -42,7 +42,7 @@ public class TowerBtn : MonoBehaviour
     /// </summary>
     void OnClickListener()
     {
-        GameManager.Instance.SelectTowerAndHover(this);
+        GameManager.SelectTowerAndHover(this);
     }
 
     /// <summary>

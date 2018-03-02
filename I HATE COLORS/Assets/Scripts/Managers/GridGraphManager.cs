@@ -7,17 +7,17 @@ using Pathfinding;
 /// Manager for GridGraph of A* Pathfinding.
 /// The GridGraph is used to let A* know, which nodes are walkable and which are not.
 /// </summary>
-public class GridGraphManager : Singleton<GridGraphManager>
+public class GridGraphManager : MonoBehaviour
 {
     /// <summary>
     /// GridGraph
     /// </summary>
-    private GridGraph gridGraph;
+    private static GridGraph gridGraph;
 
     /// <summary>
     /// Random target tile to check the graph for blocking placements against.
     /// </summary>
-    private Tile randomTargetTile;
+    private static Tile randomTargetTile;
 
     /// <summary>
     /// Prevent instance of this class, since it's a Singleton.
@@ -30,14 +30,14 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// <param name="width">Amount of tiles on the x-Axis.</param>
     /// <param name="height">Amount of tiles on the y-Axis.</param>
     /// <param name="tileSize">Length of one tile.</param>
-    public void Setup(int width, int height, float tileSize)
+    public static void Setup(int width, int height, float tileSize)
     {
         if (gridGraph == null) { gridGraph = AstarPath.active.data.gridGraph; }
 
         // Adjust in order to increase resolution of GridGraph
         gridGraph.SetDimensions(width * 4, height * 4, tileSize / 4.0f);
 
-        randomTargetTile = EnemyManager.Instance.GetRandomTargetTile();
+        randomTargetTile = EnemyManager.GetRandomTargetTile();
 
         gridGraph.Scan();
     }
@@ -50,10 +50,10 @@ public class GridGraphManager : Singleton<GridGraphManager>
     /// </summary>
     /// <param name="newTower">New tower, player wants to place.</param>
     /// <returns>True if path would be blocked by the new tower, false otherwise.</returns>
-    public bool IsGraphNotBlocked(GameObject newTower)
+    public static bool IsGraphNotBlocked(GameObject newTower)
     {
         var guo = new GraphUpdateObject(newTower.GetComponent<BoxCollider2D>().bounds);
-        var spawnNode = AstarPath.active.GetNearest(LevelManager.Instance.TileDict[new Point(0, 0)].transform.position).node;
+        var spawnNode = AstarPath.active.GetNearest(LevelManager.TileDict[new Point(0, 0)].transform.position).node;
         var targetNode = AstarPath.active.GetNearest(randomTargetTile.transform.position).node;
 
         return GraphUpdateUtilities.UpdateGraphsNoBlock(guo, spawnNode, targetNode, false);
