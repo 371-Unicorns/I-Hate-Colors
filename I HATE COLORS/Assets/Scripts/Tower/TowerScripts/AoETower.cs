@@ -28,12 +28,7 @@ public class AoETower : Tower
     {
         base.Update();
 
-        if (aoeEffect == null)
-        {
-            aoeEffect = effectPrefab.GetComponent<AoEEffect>().SpawnEffect(effectPrefab, transform.position, target) as AoEEffect;
-        }
-
-        if (aoeEffect.IsField)
+        if (target != null)
         {
             Attack();
         }

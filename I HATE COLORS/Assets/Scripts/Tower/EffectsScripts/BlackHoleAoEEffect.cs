@@ -10,7 +10,6 @@ public class BlackHoleAoEEffect : AoEEffect {
     public BlackHoleAoEEffect()
     {
         radius = 5;
-        isField = true;
     }
 
     public override void ApplyAoEEffect()
@@ -21,16 +20,8 @@ public class BlackHoleAoEEffect : AoEEffect {
         foreach (Collider2D c in targets)
         {
             GameObject target = c.gameObject;
-
-            //transform.localScale = new Vector3(radius, radius, 0);
             target.transform.position = Vector2.Lerp(target.transform.position, transform.position, 1.5f * Time.deltaTime);
         }
-
-        //if (target != null)
-        //{
-        //    transform.localScale = new Vector3(radius, radius, 0);
-        //    target.transform.position = Vector2.Lerp(target.transform.position, transform.position, 1.5f * Time.deltaTime);
-        //}
     }
 
     public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
@@ -41,7 +32,6 @@ public class BlackHoleAoEEffect : AoEEffect {
         effect.SetSprite(newEffect.GetComponent<SpriteRenderer>().sprite);
         transform.localScale = new Vector3(radius, radius, 0);
         radius = 5;
-        isField = true;
 
         return effect;
     }

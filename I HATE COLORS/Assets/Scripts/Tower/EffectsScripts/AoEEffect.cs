@@ -9,16 +9,6 @@ public abstract class AoEEffect : Effect {
     /// </summary>
     protected float radius;
 
-    protected bool isField = false;
-
-    public bool IsField
-    {
-        get
-        {
-            return isField;
-        }
-    }
-
     public override void Update()
     {
         base.Update();
