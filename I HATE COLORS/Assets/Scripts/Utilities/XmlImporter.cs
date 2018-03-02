@@ -16,15 +16,17 @@ public class XmlImporter
 
     public static Queue<Wave> GetWavesFromXml()
     {
+        /*
         if (waves != null)
         {
             return waves;
-        }
+        }*/
 
+        /*
         if (enemies == null)
-        {
+        { */
             enemies = GetEnemiesFromXml();
-        }
+        //}
 
         Queue<Wave> retQueue = new Queue<Wave>();
 
@@ -59,20 +61,22 @@ public class XmlImporter
             retQueue.Enqueue(wave);
         }
 
+        /*
         if (waves == null)
         {
             waves = retQueue;
-        }
+        }*/
 
         return retQueue;
     }
 
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
     {
+        /*
         if (enemies != null)
         {
             return enemies;
-        }
+        }*/
 
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
@@ -94,20 +98,22 @@ public class XmlImporter
             retDictionary.Add(id, e);
         }
 
+        /*
         if (enemies == null)
         {
             enemies = retDictionary;
-        }
+        }*/
 
         return retDictionary;
     }
 
     public static Dictionary<string, Tower> GetTowersFromXml()
     {
+        /*
         if (towers != null)
         {
             return towers;
-        }
+        } */
 
         Dictionary<string, Tower> retDictionary = new Dictionary<string, Tower>();
 
@@ -179,10 +185,11 @@ public class XmlImporter
             retDictionary.Add(id, tower);
         }
 
+        /*
         if (towers == null)
         {
             towers = retDictionary;
-        }
+        }*/
 
         return retDictionary;
     }

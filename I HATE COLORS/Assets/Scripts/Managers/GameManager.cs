@@ -230,7 +230,11 @@ public class GameManager : MonoBehaviour
                 Debug.Log(string.Format("Tried to load and instantiate {0}'s GUI button, but an error occured.", tower.name));
                 return;
             }
-
+            if(tower == null)
+            {
+                Debug.Log(string.Format("Tried to load and instantiate Tower, but an error occured."));
+                return;
+            }
             towerButton.SetSprites(tower.gameObject);
         }
     }
