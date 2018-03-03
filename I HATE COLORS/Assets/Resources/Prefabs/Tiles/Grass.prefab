@@ -85,9 +85,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1e3bffe9083141a4f98d888540058fd8, type: 3}
   possibleSpritesWeight:
   - 1
+  - 0.2
   - 2
   - 1
-  - 0.2
 --- !u!212 &212078871807569204
 SpriteRenderer:
   m_ObjectHideFlags: 1
