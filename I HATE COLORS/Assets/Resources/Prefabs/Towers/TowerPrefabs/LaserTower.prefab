@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61365369784118160}
   - component: {fileID: 114291499477020322}
   - component: {fileID: 82419070433240346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LaserTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     private GameTimer waveTimer;
     public int currentWave;
 
-    public static int money = 100;
+    public static int money = 1000;
 
     /// <summary>
     /// Content of the towerScrollView. Add available TowerBtn to this.

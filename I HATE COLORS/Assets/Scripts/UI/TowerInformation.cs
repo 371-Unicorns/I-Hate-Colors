@@ -12,11 +12,13 @@ public class TowerInformation : Singleton<TowerInformation>
 
     private Image background;
     private Transform head;
+    private Transform informationPanel;
     private Text nameText;
     private Text rangeText;
 
     private Transform hoverBody;
     private Text descriptionText;
+    private Vector2 hoverPanelPosition;
 
     private Transform placedBody;
     private Text levelText;
@@ -27,6 +29,8 @@ public class TowerInformation : Singleton<TowerInformation>
     {
         background = GetComponent<Image>();
 
+        hoverPanelPosition = this.gameObject.transform.position;
+        informationPanel = this.gameObject.transform;
         head = transform.Find("Head").transform;
         nameText = head.transform.Find("NameText").GetComponent<Text>();
         rangeText = head.transform.Find("RangeText").GetComponent<Text>();
@@ -64,9 +68,8 @@ public class TowerInformation : Singleton<TowerInformation>
     {
         selectedTower = tower;
         FillHead();
-
+        informationPanel.transform.position = hoverPanelPosition;
         descriptionText.text = selectedTower.Description;
-
         background.enabled = true;
         head.gameObject.SetActive(true);
         hoverBody.gameObject.SetActive(true);
@@ -82,6 +85,7 @@ public class TowerInformation : Singleton<TowerInformation>
         selectedTower = tower;
         FillHead();
 
+        informationPanel.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         levelText.text = "Level: " + selectedTower.Level.ToString();
         upgradeCostText.text = "Upgrade: " + selectedTower.UpgradeCosts.ToString();
         CheckUpgrade();
