@@ -12,6 +12,7 @@ namespace Pathfinding {
 	 * Hiding the internal methods cleans up the documentation and IntelliSense suggestions.
 	 */
 	public interface IGraphInternals {
+		string SerializedEditorSettings { get; set; }
 		void OnDestroy ();
 		void DestroyAllNodes ();
 		IEnumerable<Progress> ScanInternal ();
@@ -62,6 +63,11 @@ namespace Pathfinding {
 		 */
 		[JsonMember]
 		public bool infoScreenOpen;
+
+		/** Used in the Unity editor to store serialized settings for graph inspectors */
+		[JsonMember]
+		string serializedEditorSettings;
+
 
 		/** True if the graph exists, false if it has been destroyed */
 		internal bool exists { get { return active != null; } }
@@ -334,7 +340,7 @@ namespace Pathfinding {
 		}
 
 		#region IGraphInternals implementation
-
+		string IGraphInternals.SerializedEditorSettings { get { return serializedEditorSettings; } set { serializedEditorSettings = value; } }
 		void IGraphInternals.OnDestroy () { OnDestroy(); }
 		void IGraphInternals.DestroyAllNodes () { DestroyAllNodes(); }
 		IEnumerable<Progress> IGraphInternals.ScanInternal () { return ScanInternal(); }

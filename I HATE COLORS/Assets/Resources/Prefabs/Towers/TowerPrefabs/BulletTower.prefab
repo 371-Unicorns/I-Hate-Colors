@@ -175,6 +175,7 @@ MonoBehaviour:
   attackTimer:
     timeRemaining: 0
     lastTimeSet: 0
+    startBlinking: 0
 --- !u!212 &212886114892803304
 SpriteRenderer:
   m_ObjectHideFlags: 1

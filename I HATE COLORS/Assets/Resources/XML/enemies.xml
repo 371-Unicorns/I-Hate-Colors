@@ -4,11 +4,13 @@
       <health>5</health>
       <speed>2</speed>
       <value>2</value>
+      <color>VIOLET</color>
    </enemy>
    <enemy>
       <id>derrgon</id>
       <health>50</health>
       <speed>4</speed>
       <value>4</value>
+      <color>ORANGE</color>
    </enemy>
 </enemies>

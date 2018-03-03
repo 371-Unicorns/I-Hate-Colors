@@ -16,8 +16,8 @@ public class SceneryGenerator : MonoBehaviour
 
         while (curCandy < NUM_CANDYCANES)
         {
-            int posX = Random.Range(-GameManager.Instance.Width / 2, GameManager.Instance.Width / 2);
-            int posY = Random.Range(-GameManager.Instance.Height / 2, GameManager.Instance.Height / 2);
+            int posX = Random.Range(-GameManager.Width / 2, GameManager.Width / 2);
+            int posY = Random.Range(-GameManager.Height / 2, GameManager.Height / 2);
             GameObject candy = GameObject.Instantiate(Resources.Load("Prefabs/Scenery/candycane"),
                                                       new Vector3(posX, posY, 0),
                                                       Quaternion.identity) as GameObject;

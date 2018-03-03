@@ -6,26 +6,26 @@ using UnityEngine.UI;
 /// <summary>
 /// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
 /// </summary>
-public class TowerInformation : Singleton<TowerInformation>
+public class TowerInformation : MonoBehaviour
 {
-    private Tower selectedTower;
+    private static Tower selectedTower;
 
-    private Image background;
-    private Transform head;
-    private Transform informationPanel;
-    private Text nameText;
-    private Text rangeText;
+    private static Image background;
+    private static Transform head;
+    private static Transform informationPanel;
+    private static Text nameText;
+    private static Text rangeText;
 
-    private Transform hoverBody;
-    private Text descriptionText;
-    private Vector2 hoverPanelPosition;
+    private static Transform hoverBody;
+    private static Text descriptionText;
+    private static Vector2 hoverPanelPosition;
 
-    private Transform placedBody;
-    private Text levelText;
-    private Text upgradeCostText;
-    private Button upgradeButton;
+    private static Transform placedBody;
+    private static Text levelText;
+    private static Text upgradeCostText;
+    private static Button upgradeButton;
 
-    void Start()
+    public void Start()
     {
         background = GetComponent<Image>();
 
@@ -50,21 +50,21 @@ public class TowerInformation : Singleton<TowerInformation>
     /// <summary>
     /// Reset panel to represent that no tower is currently selected.
     /// </summary>
-    public void Reset()
+    public static void Reset()
     {
         background.enabled = false;
         head.gameObject.SetActive(false);
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(false);
 
-        GameManager.Instance.ResetTower();
+        GameManager.ResetTower();
     }
 
     /// <summary>
     /// Fill the panel with informations about the currently selected hovering tower.
     /// </summary>
     /// <param name="tower">Tower to show.</param>
-    public void ShowHoveringTower(Tower tower)
+    public static void ShowHoveringTower(Tower tower)
     {
         selectedTower = tower;
         FillHead();
@@ -80,7 +80,7 @@ public class TowerInformation : Singleton<TowerInformation>
     /// Fill the panel with informations about the currently selected placed tower.
     /// </summary>
     /// <param name="tower">Tower to show.</param>
-    public void ShowPlacedTower(Tower tower)
+    public static void ShowPlacedTower(Tower tower)
     {
         selectedTower = tower;
         FillHead();
@@ -96,26 +96,26 @@ public class TowerInformation : Singleton<TowerInformation>
         placedBody.gameObject.SetActive(true);
     }
 
-    private void FillHead()
+    private static void FillHead()
     {
-        nameText.text = selectedTower.Name;
-        rangeText.text = "Range: " + selectedTower.Range.ToString();
+        nameText.text = TowerInformation.selectedTower.Name;
+        rangeText.text = "Range: " + TowerInformation.selectedTower.Range.ToString();
     }
 
     /// <summary>
     /// Upgrade the currently selected tower.
     /// </summary>
-    public void UpgradeTower()
+    public static void UpgradeTower()
     {
         selectedTower.Upgrade();
-        this.ShowPlacedTower(selectedTower);
+        TowerInformation.ShowPlacedTower(selectedTower);
         GameManager.AddMoney(-selectedTower.UpgradeCosts);
     }
 
     /// <summary>
     /// Check whether it's possible to upgrade the currently selected tower and if it is, enable the upgrade button.
     /// </summary>
-    public void CheckUpgrade()
+    public static void CheckUpgrade()
     {
         upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money ? true : false;
     }
@@ -123,7 +123,7 @@ public class TowerInformation : Singleton<TowerInformation>
     /// <summary>
     /// Deletes selected tower and returns a subset of money spent on tower
     /// </summary>
-    public void SellTower()
+    public static void SellTower()
     {
         int returnedMoney = selectedTower.BaseCosts / 2;
         GameManager.AddMoney(returnedMoney);

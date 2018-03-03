@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  color: 1
   range: 5
   dotEffectImpact: {fileID: 1930043798541788, guid: 3a96e0e8478b2e045bccc1eb3fa0896a,
     type: 2}

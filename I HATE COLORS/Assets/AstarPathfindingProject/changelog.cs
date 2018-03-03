@@ -1,7 +1,22 @@
 /** \page changelog Changelog
 \order{-10}
 
-- 4.1.10
+- 4.1.12 (2018-02-27)
+	- Fixed right clicking on array elements in the Unity inspector would bring up the 'Show in online documentation' context menu instead of the Unity built-in context menu (which is very useful).
+	- Navmesh assets used in the navmesh graph no longer have to be at the root of the Resources folder, they can be in any subfolder to the Resources folder.
+
+- 4.1.11 (2018-02-22)
+	- You can now set which graphs an agent should use directly on the Seeker component instead of having to do it through code.
+		\shadowimage{multiple_agents/seeker.png}
+	- Added tutorial for how to deal with agents of different sizes: \ref multiple-agent-types.
+	- Fixed scanning recast graphs could in rare cases throw an exception due to a multithreading race condition. Thanks emrys90 for reporting the bug.
+	- Fixed a regression in 4.0.6 which caused position based penalty to stop working for layered grid graphs. Thanks DougW for reporting the bug.
+	- Rotation speed and acceleration are now decoupled for AIPath and RichAI. Previously the acceleration limited how quickly the agents could rotate due to how the math for <a href="https://en.wikipedia.org/wiki/Centripetal_force">centripetal acceleration</a> works out.
+	- Acceleration can now be set to a custom value on the AIPath class. It defaults to a 'Default' mode which calculates an acceleration such that the agent reaches its top speed in about 0.4 seconds. This is the same behaviour that was hardcoded in earlier versions.
+	- Fixed a bug in \link Pathfinding.GraphUtilities.GetContours GraphUtilities.GetContours\endlink for grid graphs when the nodes parameter was explicitly passed as non null that could cause some contours not to be generated. Thanks andrewBeers for reporting the bug.
+	- Improved documentation for \link Pathfinding.StartEndModifier.Exactness StartEndModifier.Exactness\endlink.
+
+- 4.1.10 (2018-01-21)
 	- 4.1.0 through 4.1.9 were beta versions, all their changelogs have been merged into this one.
 	- Upgrade notes
 		- Fixed the AIPath script with rotationIn2D would rotate so that the Z axis pointed in the -Z direction instead of as is common for Unity 2D objects: to point in the +Z direction.

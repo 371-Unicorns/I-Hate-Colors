@@ -18,9 +18,9 @@ public abstract class ProjectileEffect : Effect, ICollidable
     /// </summary>
     [SerializeField]
     protected GameObject projectileImpact;
-    public void Initialize(float speed, float damage, float range)
+    public void Initialize(float speed, float damage, float range, ColorType color)
     {
-        base.Initialize(damage, range);
+        base.Initialize(damage, range, color);
 
         this.speed = speed;
     }

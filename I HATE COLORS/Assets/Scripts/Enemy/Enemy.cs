@@ -12,15 +12,17 @@ public class Enemy : MonoBehaviour
     private float speed;
     private int value;
     private bool dead;
+    private ColorType color;
 
     private Enemy() { }
 
-    public void Initialize(float health, float speed, int value)
+    public void Initialize(float health, float speed, int value, ColorType color)
     {
         SetHealth(health);
         SetSpeed(speed);
         this.value = value;
         this.dead = false;
+        this.color = color;
     }
 
     public void Initialize(Enemy other)
@@ -29,6 +31,7 @@ public class Enemy : MonoBehaviour
         SetSpeed(other.speed);
         this.value = other.value;
         this.dead = other.dead;
+        this.color = other.color;
     }
 
     private void SetHealth(float health)
@@ -48,9 +51,16 @@ public class Enemy : MonoBehaviour
     /// Take damage and check whether for death.
     /// </summary>
     /// <param name="damage">Damage to take.</param>
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, ColorType damageType)
     {
-        health -= damage;
+        if (damageType == ColorType.BLACK || damageType == color)
+        {
+            health -= damage * 2.0f;
+        } else
+        {
+            health -= damage;
+        }
+
         if (health <= 0 && !dead)
         {
             dead = true;
@@ -59,7 +69,7 @@ public class Enemy : MonoBehaviour
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
             foreach (var i in Enumerable.Range(0, value))
             {
-                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.Instance.canvas.transform);
+                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.canvas.transform);
                 RectTransform coinFlyRect = newCoinFly.GetComponent<RectTransform>();
                 coinFlyRect.anchorMin = enemyScreenPos;
                 coinFlyRect.anchorMax = enemyScreenPos;
@@ -67,7 +77,7 @@ public class Enemy : MonoBehaviour
             }
 
             GameManager.AddMoney(value);
-            TowerInformation.Instance.CheckUpgrade();
+            TowerInformation.CheckUpgrade();
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }

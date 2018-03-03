@@ -11,6 +11,10 @@ public class ShotgunProjectileEffect : ProjectileEffect
 
     private static readonly int NUM_SHELLS = 3;
     private static readonly float SHELL_SPREAD = 1.5f;
+
+    /// <summary>
+    /// The position of the enemy on instantiation of a new shell
+    /// </summary>
     private Vector3 enemyPos;
     private Vector3 spawnPos;
 
@@ -50,14 +54,14 @@ public class ShotgunProjectileEffect : ProjectileEffect
     {
         if (target != null && other.gameObject == target.gameObject)
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, color);
         }
         ProcessCollision();
     }
 
     public override void ProcessCollision()
     {
-        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.Instance.ProjectilesEffectParent);
+        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.ProjectilesEffectParent);
         Destroy(fx, projectileImpact.GetComponent<ParticleSystem>().main.duration);
         Destroy(gameObject);
     }

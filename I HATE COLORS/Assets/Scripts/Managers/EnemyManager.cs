@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
-public class EnemyManager : Singleton<EnemyManager>
+public class EnemyManager : MonoBehaviour
 {
     public static Dictionary<string, Enemy> enemyDictionary;
     public static List<Enemy> activeEnemies = new List<Enemy>();
@@ -12,12 +12,12 @@ public class EnemyManager : Singleton<EnemyManager>
     /// <summary>
     /// Tiles to be used by enemies as target tiles.
     /// </summary>
-    public Tile[] TargetTiles { get; private set; }
+    public static Tile[] TargetTiles { get; private set; }
 
-    public void Awake()
+    public void Start()
     {
         enemyDictionary = XmlImporter.GetEnemiesFromXml();
-        TargetTiles = new Tile[GameManager.Instance.Height];
+        TargetTiles = new Tile[GameManager.Height];
     }
 
     public static List<Enemy> GetEnemies()
@@ -27,14 +27,14 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public static void SpawnEnemy(Enemy obj)
     {
-        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Instance.Height));
-        Tile spawnTileScript = LevelManager.Instance.TileDict[spawnPoint];
+        Point spawnPoint = new Point(0, Random.Range(0, GameManager.Height));
+        Tile spawnTileScript = LevelManager.TileDict[spawnPoint];
 
         Enemy enemy = Instantiate(obj, spawnTileScript.transform.position, Quaternion.identity);
         enemy.Initialize(obj);
         enemy.transform.SetParent(GameObject.Find("Enemies").transform);
 
-        Tile randomTargetTile = EnemyManager.Instance.GetRandomTargetTile();
+        Tile randomTargetTile = EnemyManager.GetRandomTargetTile();
         enemy.GetComponent<AIDestinationSetter>().target = randomTargetTile.transform;
         enemy.gameObject.SetActive(true);
 
@@ -71,11 +71,11 @@ public class EnemyManager : Singleton<EnemyManager>
     /// Find tiles to be used by enemies as target tiles.
     /// Currently those are the most right column of the grid.
     /// </summary>
-    public void FindTargetTiles()
+    public static void FindTargetTiles()
     {
-        for (int i = 0; i < GameManager.Instance.Height; i++)
+        for (int i = 0; i < GameManager.Height; i++)
         {
-            TargetTiles[i] = LevelManager.Instance.TileDict[new Point(GameManager.Instance.Width - 1, i)];
+            TargetTiles[i] = LevelManager.TileDict[new Point(GameManager.Width - 1, i)];
         }
     }
 
@@ -83,10 +83,10 @@ public class EnemyManager : Singleton<EnemyManager>
     /// Gets a random target tile.
     /// </summary>
     /// <returns>Random target tile.</returns>
-    public Tile GetRandomTargetTile()
+    public static Tile GetRandomTargetTile()
     {
-        int targetTileLength = EnemyManager.Instance.TargetTiles.Length;
-        return EnemyManager.Instance.TargetTiles[Random.Range(0, targetTileLength)];
+        int targetTileLength = EnemyManager.TargetTiles.Length;
+        return EnemyManager.TargetTiles[Random.Range(0, targetTileLength)];
     }
 
 }

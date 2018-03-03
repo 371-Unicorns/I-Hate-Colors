@@ -69,7 +69,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  range: 3
+  color: 7
+  range: 5
   speed: 5
   projectileImpact: {fileID: 1487270573388396, guid: 3f3f98a1b2ccc61419054224ab519898,
     type: 2}

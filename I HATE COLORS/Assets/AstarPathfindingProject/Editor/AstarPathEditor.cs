@@ -1240,17 +1240,16 @@ namespace Pathfinding {
 			byte[] bytes = null;
 			uint tmpChecksum = 0;
 
-			// Add a work item since we cannot be sure that pathfinding (or graph updates)
-			// is not running at the same time
-			AstarPath.active.AddWorkItem(new AstarWorkItem(force => {
-				var sr = new Pathfinding.Serialization.AstarSerializer(script.data, settings);
-				sr.OpenSerialize();
-				script.data.SerializeGraphsPart(sr);
-				sr.SerializeEditorSettings(graphEditors);
-				bytes = sr.CloseSerialize();
-				tmpChecksum = sr.GetChecksum();
-				return true;
-			}));
+			// Serialize all graph editors
+			var output = new System.Text.StringBuilder();
+			for (int i = 0; i < graphEditors.Length; i++) {
+				if (graphEditors[i] == null) continue;
+				output.Length = 0;
+				Pathfinding.Serialization.TinyJsonSerializer.Serialize(graphEditors[i], output);
+				(graphEditors[i].target as IGraphInternals).SerializedEditorSettings = output.ToString();
+			}
+			// Serialize all graphs (including serialized editor data)
+			bytes = script.data.SerializeGraphs(settings, out tmpChecksum);
 
 			// Make sure the above work item is executed immediately
 			AstarPath.active.FlushWorkItems();
@@ -1268,19 +1267,13 @@ namespace Pathfinding {
 
 		void DeserializeGraphs (byte[] bytes) {
 			try {
-				var sr = new Pathfinding.Serialization.AstarSerializer(script.data);
-				if (sr.OpenDeserialize(bytes)) {
-					script.data.DeserializeGraphsPart(sr);
-
-					// Make sure every graph has a graph editor
-					CheckGraphEditors();
-					sr.DeserializeEditorSettings(graphEditors);
-
-					sr.CloseDeserialize();
-				} else {
-					Debug.LogWarning("Invalid data file (cannot read zip).\nThe data is either corrupt or it was saved using a 3.0.x or earlier version of the system");
-					// Make sure every graph has a graph editor
-					CheckGraphEditors();
+				script.data.DeserializeGraphs(bytes);
+				// Make sure every graph has a graph editor
+				CheckGraphEditors();
+				// Deserialize editor settings
+				for (int i = 0; i < graphEditors.Length; i++) {
+					var data = (graphEditors[i].target as IGraphInternals).SerializedEditorSettings;
+					if (data != null) Pathfinding.Serialization.TinyJsonDeserializer.Deserialize(data, graphEditors[i].GetType(), graphEditors[i]);
 				}
 			} catch (System.Exception e) {
 				Debug.LogError("Failed to deserialize graphs");

@@ -24,14 +24,14 @@ public class BulletProjectileEffect : ProjectileEffect
     {
         if (target != null && other.gameObject == target.gameObject)
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(damage, color);
         }
         ProcessCollision();
     }
 
     public override void ProcessCollision()
     {
-        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.Instance.ProjectilesEffectParent);
+        GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.ProjectilesEffectParent);
         Destroy(fx, projectileImpact.GetComponent<ParticleSystem>().main.duration);
         Destroy(gameObject);
     }

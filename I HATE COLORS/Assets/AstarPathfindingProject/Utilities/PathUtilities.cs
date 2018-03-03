@@ -4,23 +4,25 @@ using UnityEngine;
 
 namespace Pathfinding {
 	/** Contains useful functions for working with paths and nodes.
-	 * This class works a lot with the Node class, a useful function to get nodes is AstarPath.GetNearest.
+	 * This class works a lot with the \link Pathfinding.GraphNode GraphNode\endlink class, a useful function to get nodes is AstarPath.GetNearest.
 	 * \see #AstarPath.GetNearest
 	 * \see #Pathfinding.GraphUpdateUtilities
-	 * \since Added in version 3.2
+	 * \see #Pathfinding.GraphUtilities
 	 * \ingroup utils
 	 *
 	 */
 	public static class PathUtilities {
-		/** Returns if there is a walkable path from \a n1 to \a n2.
+		/** Returns if there is a walkable path from \a node1 to \a node2.
+		 * This method is extremely fast because it only uses precalculated information.
+		 *
+		 * \snippet MiscSnippets.cs PathUtilities.IsPathPossible
 		 *
 		 * \note If you are making changes to the graph without using e.g #AstarPath.UpdateGraphs or the \link Pathfinding.GraphUpdateScene GraphUpdateScene\endlink component, areas must first be recaculated using AstarPath.FloodFill().
 		 * \see \ref graph-updates
-		 *
 		 * \see #AstarPath.GetNearest
 		 */
-		public static bool IsPathPossible (GraphNode n1, GraphNode n2) {
-			return n1.Walkable && n2.Walkable && n1.Area == n2.Area;
+		public static bool IsPathPossible (GraphNode node1, GraphNode node2) {
+			return node1.Walkable && node2.Walkable && node1.Area == node2.Area;
 		}
 
 		/** Returns if there are walkable paths between all nodes.

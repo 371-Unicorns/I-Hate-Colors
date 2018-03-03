@@ -4456,7 +4456,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fc6170e9a0e6b448b5d20e1b69ad9d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveXmlFile: Resources/XML/wave_composition.xml
 --- !u!1 &738334715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4497,8 +4496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffeed6a1a068dcd4d80545c58510023c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castleWallPrefab: {fileID: 1339398199059858, guid: ce1bdc1f95554804cbdd072eb628140c,
-    type: 2}
 --- !u!1 &738701218
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,14 +5525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b791ce6e542bb864dae68d63842f0ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 22
-  height: 14
-  toMenuButton: {fileID: 545219213}
-  rangeIndicatorRenderer: {fileID: 775595805}
-  gameOver: 0
-  canvas: {fileID: 522868056}
-  coinFlyTarget: {fileID: 562494089}
-  currentWave: 0
 --- !u!4 &1294420089
 Transform:
   m_ObjectHideFlags: 0
@@ -9347,7 +9336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAABIIexXF6xwCgIAAGwEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE2P2jAQ/SvI57JKEATRWxt2aQ8saGm1Z+NMEgvHjvxRFlb8944dZ5Oy6gnz3puZNx/wTrg0LTCr9EbzYqsKIF8nxL/JlwmhgXuhliuEU0S4UQ1Yzdk3WQmvTRB0kpdKN49FBbky1iBcUmEAKa2sj5YIvU/IG35MVz7kgq/Z0r+u+Folkxs+GUgLepD2wl7WqZxkgjYtFAd+hUGcRnEaRBI7ibwnmBKCm+iD2Esb2sxpaxx2gYKCU+wrFE8fFgjUwKvaepfj8F1ZGrDRkqaXNdc4oC4v+a5s7XM11Jw6X3+ocL7SbJEFV13S7Sd+2pkutWp+9HXTxNewNWenF3ph1NjRWMfwemQ9jOdMxYkeBbzWIJ/VRisnCyStdj7UGZith68freU1sNOAd1bvQNd+Xk46LOcWmn/LBW+OHnmYd8BBqDDwsHnQuJqf6DfchYmZEPUmfhv4RavxAUXiiWtjkYoFpXd3VE57KXkMI/PNOJsrLUGPM7QgqbCXPeax9yu84/4f9UT9byRWj1z/E4jDGaODPEnuqL06f+zK1Oq8BVPvnBVcjnJ54hnnlCspuwMbd9SHHZwuKRuFVY4X/14WOa7KeZkt57NVxkpaLKfZbMmyFDIoEpgvFgsSTo9LbJOKfWc0Tge3JofkEs+s/3OYbDRtw7EXmp43/NooMyi5LNWBaQC5GzLc/gJQSwMEFAAACAgAAEgh7IECIosuAAAANgAAABIAJABncmFwaDBfZWRpdG9yLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVsrJT85OTVGyUigpKk3VUVAqzsgvd60oKUpECBVkluWXALlKzql5JalFSrUAUEsDBBQAAAgIAABIIezRREf3bQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz1DM00FFQSi9KLMgoBooYgjilmSkgdrRSkmWaSZqZuYmRpVlyWmKKua6ZkXmymWGqWWqKQaqJqampUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAABIIexXF6xwCgIAAGwEAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAABIIeyBAiKLLgAAADYAAAASACQAAAAAAAAAAAAAAFcCAABncmFwaDBfZWRpdG9yLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAASCHs0URH920AAAB4AAAACQAkAAAAAAAAAAAAAADZAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAADAAMAHAEAAJEDAAAAAA==
+    dataString: UEsDBBQAAAgIAACAn+tB+DlgOwIAAMoEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEuP2jAQ/ivI57IiiIforQ0s7YEFLa32wsXYE2Lh2JEfy2PFf+/YSUiWVU8M33wz883D+SBC2RKY02ZpBF9pDuR7jwSbfOsRGn2v1AmNcIKIsLoAZwT7oQ4ycAcIeiUybYoFP0CqrbMIZ1RaQJfRLkQrhD565Iw//VkIuaA1nAbritZs0LuhyUA5MC21ITa0iuUVk7QogW/FFVpyUpOTSFLYSe0PDqalFLbWQdyljG2mtLQeu0ACFxT7isWTpzECOYhD7oLKbvg6yyy4WpKhl7kwOKAqL/mpXR5yFdQeK13vVPpQaTieRFVV0tUXf78SnRld/GrqJoNQw+WCHV/phVHrOmPtwvOO9DieE5VHupfwloN60UujveLodMaHUG9hOG//3ltLc2DHFq+kPoC+/LqcpF3OLTZ/TqUo9gF5GlXAVuo48Lh5MLia36g33oWtMyEaRPy18IceugdUO56FsQ5ddUEV1O21N4FKFnFkoRnvUm0UmG6GEhSV7rLBPO5xhQ++/0c90/BG6uq1r3kC9XC6aEsfDB5cG32678rm+rQCm6+9k0J1cgXHC84p1UpVB9btqAnbepNR1gk7eME/XxbZz7JRNpmOhrMJyyif9ifDKZskMAE+gNF4PCbx9ITCNqncVELr6eDWVJtc4Zk1H4fe0tAyHjs39LQU10LblilUprfMAKj1pwwWDNbAV8kXXOB8tuCcUHHd5GNHpGZH4Ls7fxcbXZydoV2wFO/aBWBH0vjB2JEbuf0DUEsDBBQAAAgIAACAn+tH7/DmbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz1DM00lFQSi9KLMgoBooYgjilmSkgdrRSkmWaSZqZuYmRpVlyWmKKua6ZkXmymWGqWWqKQaqJqampUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+tB+DlgOwIAAMoEAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+tH7/DmbQAAAHgAAAAJACQAAAAAAAAAAAAAAIgCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAQAMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -9659,7 +9648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -107.84}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611473674
@@ -9981,7 +9970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.00005340576, y: 0.000022884573}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743294333
@@ -10047,11 +10036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c5d3b7176b3ab4b807a468ee98c093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassTile: {fileID: 1421935461526844, guid: 61c6a6fa53cfa094aa880139c7b0fc25, type: 2}
-  map: {fileID: 644048562}
-  projectilesEffectParent: {fileID: 1441321756}
-  dotEffectParent: {fileID: 772141322}
-  prefabHolderParent: {fileID: 1854845731}
 --- !u!4 &1800944729
 Transform:
   m_ObjectHideFlags: 0
