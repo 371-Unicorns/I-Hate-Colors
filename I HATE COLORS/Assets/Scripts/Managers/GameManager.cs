@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject coinFlyTarget;
 
+    public static GameObject towerInformationPanel;
+
     private static GameTimer waveTimer;
     public static int currentWave;
 
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         gameOver = false;
+        towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
@@ -153,10 +156,10 @@ public class GameManager : MonoBehaviour
     {
         Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
         GameManager.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
-
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
+        towerInformationPanel.SetActive(false);
     }
 
     /// <summary>
@@ -170,6 +173,7 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
+        towerInformationPanel.SetActive(true);
     }
 
     /// <summary>
