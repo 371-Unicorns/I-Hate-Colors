@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4218997627198846}
   - component: {fileID: 212898822138144934}
   - component: {fileID: 61974657350789296}
-  - component: {fileID: 82088125076708216}
   - component: {fileID: 114125604805254932}
+  - component: {fileID: 82088125076708216}
   m_Layer: 8
   m_Name: BlackHoleTower
   m_TagString: Untagged
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -601889635
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0594d841eb192b940b6c8fea8d69e9e4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

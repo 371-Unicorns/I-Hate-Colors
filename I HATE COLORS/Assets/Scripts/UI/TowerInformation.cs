@@ -103,16 +103,6 @@ public class TowerInformation : MonoBehaviour
     }
 
     /// <summary>
-    /// Upgrade the currently selected tower.
-    /// </summary>
-    public static void UpgradeTower()
-    {
-        selectedTower.Upgrade();
-        TowerInformation.ShowPlacedTower(selectedTower);
-        GameManager.AddMoney(-selectedTower.UpgradeCosts);
-    }
-
-    /// <summary>
     /// Check whether it's possible to upgrade the currently selected tower and if it is, enable the upgrade button.
     /// </summary>
     public static void CheckUpgrade()
@@ -121,13 +111,24 @@ public class TowerInformation : MonoBehaviour
     }
 
     /// <summary>
+    /// Upgrade the currently selected tower.
+    /// </summary>
+    public void UpgradeTower()
+    {
+        selectedTower.Upgrade();
+        TowerInformation.ShowPlacedTower(selectedTower);
+        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+    }
+
+    /// <summary>
     /// Deletes selected tower and returns a subset of money spent on tower
     /// </summary>
-    public static void SellTower()
+    public void SellTower()
     {
         int returnedMoney = selectedTower.BaseCosts / 2;
         GameManager.AddMoney(returnedMoney);
         Destroy(selectedTower.gameObject);
+        GridGraphManager.ScanGrid();
         Reset();
     }
 }

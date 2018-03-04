@@ -154,9 +154,9 @@ public class GameManager : MonoBehaviour
     /// <param name="towerBtn">TowerBtn to select.</param>
     public static void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
+        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().Range, towerBtn.TowerHoverSprite);
         GameManager.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
-        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
         towerInformationPanel.SetActive(false);
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
         GameManager.SelectedTower = tower;
 
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
-        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
         towerInformationPanel.SetActive(true);
     }
