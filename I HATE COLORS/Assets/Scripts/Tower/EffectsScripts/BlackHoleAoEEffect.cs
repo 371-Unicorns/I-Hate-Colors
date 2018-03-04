@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BlackHoleAoEEffect : AoEEffect {
+public class BlackHoleAoEEffect : AoEEffect
+{
 
     private readonly float LIFESPAN = 5.0f;
 
@@ -31,7 +32,7 @@ public class BlackHoleAoEEffect : AoEEffect {
     public override void ApplyAoEEffect()
     {
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
-        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radius, LayerMask.NameToLayer("Enemies"));
+        Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radius, LayerMask.NameToLayer("IgnoreAoE"));
 
         foreach (Collider2D c in targets)
         {

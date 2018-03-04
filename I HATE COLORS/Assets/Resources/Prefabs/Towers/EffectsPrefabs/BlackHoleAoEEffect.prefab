@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212788895642946098}
   - component: {fileID: 58525670186657078}
   - component: {fileID: 114067491242818598}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BlackHoleAoEEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
