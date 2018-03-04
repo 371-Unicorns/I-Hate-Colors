@@ -56,7 +56,8 @@ public class Enemy : MonoBehaviour
         if (damageType == ColorType.BLACK || damageType == color)
         {
             health -= damage * 2.0f;
-        } else
+        }
+        else
         {
             health -= damage;
         }
@@ -65,16 +66,13 @@ public class Enemy : MonoBehaviour
         {
             dead = true;
 
-            // Setup coinfly
+            // Setup bloodFly
             Vector3 enemyScreenPos = Camera.main.WorldToViewportPoint(transform.position);
-            foreach (var i in Enumerable.Range(0, value))
-            {
-                BloodFly newCoinFly = Instantiate(bloodFly, GameManager.canvas.transform);
-                RectTransform coinFlyRect = newCoinFly.GetComponent<RectTransform>();
-                coinFlyRect.anchorMin = enemyScreenPos;
-                coinFlyRect.anchorMax = enemyScreenPos;
-                coinFlyRect.anchoredPosition = new Vector2(0, 0);
-            }
+            BloodFly newBloodFly = Instantiate(bloodFly, GameManager.canvas.transform);
+            RectTransform bloodFlyRect = newBloodFly.GetComponent<RectTransform>();
+            bloodFlyRect.anchorMin = enemyScreenPos;
+            bloodFlyRect.anchorMax = enemyScreenPos;
+            bloodFlyRect.anchoredPosition = new Vector2(0, 0);
 
             GameManager.AddMoney(value);
             TowerInformation.CheckUpgrade();
