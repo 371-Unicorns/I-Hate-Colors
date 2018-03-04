@@ -4231,8 +4231,37 @@ Transform:
   - {fileID: 1896321512}
   - {fileID: 1441321756}
   - {fileID: 772141322}
+  - {fileID: 714868396}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &714868395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 714868396}
+  m_Layer: 0
+  m_Name: AoEEffects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &714868396
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 714868395}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.654507, y: -1.111932, z: -0.068359375}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_Children: []
+  m_Father: {fileID: 644048563}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724278176
 GameObject:
@@ -9364,7 +9393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAACAn+tB+DlgOwIAAMoEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEuP2jAQ/ivI57IiiIforQ0s7YEFLa32wsXYE2Lh2JEfy2PFf+/YSUiWVU8M33wz883D+SBC2RKY02ZpBF9pDuR7jwSbfOsRGn2v1AmNcIKIsLoAZwT7oQ4ycAcIeiUybYoFP0CqrbMIZ1RaQJfRLkQrhD565Iw//VkIuaA1nAbritZs0LuhyUA5MC21ITa0iuUVk7QogW/FFVpyUpOTSFLYSe0PDqalFLbWQdyljG2mtLQeu0ACFxT7isWTpzECOYhD7oLKbvg6yyy4WpKhl7kwOKAqL/mpXR5yFdQeK13vVPpQaTieRFVV0tUXf78SnRld/GrqJoNQw+WCHV/phVHrOmPtwvOO9DieE5VHupfwloN60UujveLodMaHUG9hOG//3ltLc2DHFq+kPoC+/LqcpF3OLTZ/TqUo9gF5GlXAVuo48Lh5MLia36g33oWtMyEaRPy18IceugdUO56FsQ5ddUEV1O21N4FKFnFkoRnvUm0UmG6GEhSV7rLBPO5xhQ++/0c90/BG6uq1r3kC9XC6aEsfDB5cG32678rm+rQCm6+9k0J1cgXHC84p1UpVB9btqAnbepNR1gk7eME/XxbZz7JRNpmOhrMJyyif9ifDKZskMAE+gNF4PCbx9ITCNqncVELr6eDWVJtc4Zk1H4fe0tAyHjs39LQU10LblilUprfMAKj1pwwWDNbAV8kXXOB8tuCcUHHd5GNHpGZH4Ls7fxcbXZydoV2wFO/aBWBH0vjB2JEbuf0DUEsDBBQAAAgIAACAn+tH7/DmbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz1DM00lFQSi9KLMgoBooYgjilmSkgdrRSkmWaSZqZuYmRpVlyWmKKua6ZkXmymWGqWWqKQaqJqampUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAACAn+tB+DlgOwIAAMoEAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAACAn+tH7/DmbQAAAHgAAAAJACQAAAAAAAAAAAAAAIgCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAQAMAAAAA
+    dataString: UEsDBBQAAAgIAACAn+vYhGnyPQIAAMsEAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VEuP2jAQ/ivI57IiiIforQ0s7YEFLa32kouxJ8TCsSM/lseK/96xE0iWVU8M33wz883D+SBC2QqY02ZpBF9pDuR7jwSbfOsRGn2v1AmNcIKIsLoEZwT7ofYycAcIeiVybcoF30OqrbMI51RaQJfRLkQrhD565IQ//VkIOaM1nAbrgtZs0LuiyUA5MC31RrzRapZXTNKyAr4VF2jJSUNOIklhJ40/OJiWUthGB3HnKraZ0sp67AIJXFDsKxZPnsYIFCD2hQsqu+HrPLfgGkmGnufC4IDqvOSndkXIVVJ7qHW9U+lDpeF4ElXVSVdf/P1adG50+etWNxmEGq4Q7PBKz4xa1xlrF553pMfxHKk80J2EtwLUi14a7RVHpzM+hHoLw3n7995aWgA7tHgt9QH01dflJO1yrrH5UypFuQvI06gGtlLHgcfNg8HV/Ea98S5skwnRIOKvhT903z2gxvEsjHXoagqqoG6nvQlUsogjC814l2qjwHQzVKCodOcN5nGPK3zw/T/qmYY30lRvfLcn0Ayni7b0weDBtdHH+65soY8rsMXaOylUJ1dwvOCcUq1UfWDdjm5hW29yyjphey/458siu1k+yifT0XA2YTnl0/5kOGWTBCbABzAaj8cknp5Q2CaVm1poMx3cmmqTKzyz28ehtzS0isfODT0uxaXUtmUKlestMwBq/SmDBYM18FXyBRc4ny04J1RcN/nIiNTsADy787PY6OLkDM3a7jNSiXftApKRNH4xMnIl139QSwMEFAAACAgAAICf60fv8OZtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPUMzTSUVBKL0osyCgGihiCOKWZKSB2tFKSZZpJmpm5iZGlWXJaYoq5rpmRebKZYapZaopBqompqalSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAICf69iEafI9AgAAywQAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAICf60fv8OZtAAAAeAAAAAkAJAAAAAAAAAAAAAAAigIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABCAwAAAAA=
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -9794,7 +9823,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 724278177}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9998,7 +10027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00005340576, y: -0.0000076148563}
+  m_AnchoredPosition: {x: -0.00005340576, y: 0.0000005778841}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743294333

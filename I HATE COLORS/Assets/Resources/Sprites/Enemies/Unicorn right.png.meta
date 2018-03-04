@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 69be6e7aeead6ee46814b02dac0db1c4
-timeCreated: 1517375889
+timeCreated: 1520131650
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,7 @@ TextureImporter:
     21300010: Unicorn right_5
     21300012: Unicorn right_6
     21300014: Unicorn right_7
+    21300016: Unicorn right_8
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -92,9 +93,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1820
-        width: 224
-        height: 188
+        y: 2091
+        width: 225
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -106,9 +107,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1568
-        width: 224
-        height: 180
+        y: 1839
+        width: 225
+        height: 182
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -120,9 +121,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1316
-        width: 224
-        height: 172
+        y: 1587
+        width: 225
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,9 +135,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1064
-        width: 224
-        height: 172
+        y: 1335
+        width: 225
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,9 +149,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 808
-        width: 224
-        height: 176
+        y: 1079
+        width: 225
+        height: 178
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,9 +163,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 552
-        width: 224
-        height: 172
+        y: 823
+        width: 225
+        height: 174
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,9 +177,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 292
-        width: 224
-        height: 172
+        y: 562
+        width: 225
+        height: 175
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,9 +191,23 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
-        width: 224
-        height: 180
+        y: 303
+        width: 225
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Unicorn right_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 41
+        width: 225
+        height: 175
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

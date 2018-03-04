@@ -22,7 +22,7 @@ public class BloodFly : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        target = GameManager.coinFlyTarget;
+        target = GameManager.bloodFlyTarget;
         bloodSound = GetComponent<AudioSource>();
     }
 
