@@ -47,6 +47,9 @@ TagManager:
   - name: Background
     uniqueID: 2074376427
     locked: 0
+  - name: Tile
+    uniqueID: 2717153929
+    locked: 0
   - name: Fog
     uniqueID: 1580665901
     locked: 0

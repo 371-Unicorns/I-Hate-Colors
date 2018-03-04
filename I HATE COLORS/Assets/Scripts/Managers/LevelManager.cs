@@ -8,7 +8,17 @@ public class LevelManager : MonoBehaviour
     private static GameObject grassTile;
 
     private static GameObject map;
-    public static GameObject Map { get { return map; } }
+    public static GameObject Map
+    {
+        get
+        {
+            if (map == null)
+            {
+                map = GameObject.Find("Map");
+            }
+            return map;
+        }
+    }
 
     /// <summary>
     /// Parent for all projectiles effects to keep hierachy clean.
@@ -62,7 +72,6 @@ public class LevelManager : MonoBehaviour
     public void Start()
     {
         grassTile = (GameObject)Resources.Load("Prefabs/Tiles/Grass");
-        map = GameObject.Find("Map");
         projectilesEffectParent = map.transform.Find("ProjectilesEffects").transform;
         dotEffectParent = map.transform.Find("DoTEffects").transform;
         aoEEffects = map.transform.Find("AoEEffects").transform;
