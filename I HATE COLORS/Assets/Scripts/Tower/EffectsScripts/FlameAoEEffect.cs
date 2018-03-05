@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlameAoEEffect : AoEEffect {
+public class FlameAoEEffect : AoEEffect
+{
 
     private readonly float LIFESPAN = 5.0f;
 
@@ -29,17 +30,17 @@ public class FlameAoEEffect : AoEEffect {
 
     public override void ApplyAoEEffect()
     {
-		Vector2 pos = new Vector2(transform.position.x, transform.position.y);
+        Vector2 pos = new Vector2(transform.position.x, transform.position.y);
         Collider2D[] targets = Physics2D.OverlapCircleAll(pos, radius, LayerMask.NameToLayer("Enemies"));
 
         foreach (Collider2D c in targets)
         {
-			print("tag is " + c.gameObject.tag);
-			if(c.gameObject.tag == "Enemy") {
-				GameObject target = c.gameObject;
-				target.GetComponent<Enemy>().TakeDamage(damage, ColorType.BLACK);
-			}
-			
+            if (c.gameObject.tag == "Enemy")
+            {
+                GameObject target = c.gameObject;
+                target.GetComponent<Enemy>().TakeDamage(damage, ColorType.BLACK);
+            }
+
         }
     }
 
