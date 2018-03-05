@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoTTower : Tower {
+public class DoTTower : Tower
+{
 
     private DoTEffect spawnedEffect;
 
@@ -44,7 +45,6 @@ public class DoTTower : Tower {
 
     public override void Upgrade()
     {
-        AudioSource upgradeSound = GetComponent<AudioSource>();
-        upgradeSound.Play();
+        base.Upgrade();
     }
 }

@@ -32,7 +32,6 @@ public class GridGraphManager : MonoBehaviour
     /// <param name="tileSize">Length of one tile.</param>
     public static void Setup(int width, int height, float tileSize)
     {
-        //if (gridGraph == null)
         gridGraph = AstarPath.active.data.gridGraph;
 
         // Adjust in order to increase resolution of GridGraph
@@ -40,6 +39,16 @@ public class GridGraphManager : MonoBehaviour
 
         randomTargetTile = EnemyManager.GetRandomTargetTile();
 
+        gridGraph.Scan();
+    }
+
+    /// <summary>
+    /// Scan the GridGraph for any changes.
+    /// 
+    /// Author: David Askari
+    /// </summary>
+    public static void ScanGrid()
+    {
         gridGraph.Scan();
     }
 

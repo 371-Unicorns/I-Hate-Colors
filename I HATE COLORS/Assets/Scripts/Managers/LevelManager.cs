@@ -6,30 +6,54 @@ using Pathfinding;
 public class LevelManager : MonoBehaviour
 {
     private static GameObject grassTile;
-    
+
     private static GameObject map;
-    public static GameObject Map { get { return map; } }
+    public static GameObject Map
+    {
+        get
+        {
+            if (map == null)
+            {
+                map = GameObject.Find("Map");
+            }
+            return map;
+        }
+    }
 
     /// <summary>
     /// Parent for all projectiles effects to keep hierachy clean.
     /// </summary>
-    [SerializeField]
     private static Transform projectilesEffectParent;
     public static Transform ProjectilesEffectParent { get { return projectilesEffectParent; } }
 
     /// <summary>
     /// Parent for all DoT effects to keep hierachy clean.
     /// </summary>
-    [SerializeField]
     private static Transform dotEffectParent;
     public static Transform DoTEffectParent { get { return dotEffectParent; } }
+
+
+    /// <summary>
+    /// Parent for all AoE effects to keep hierachy clean.
+    /// </summary>
+    private static Transform aoEEffects;
+    public static Transform AoEEffects { get { return aoEEffects; } }
 
     /// <summary>
     /// Parent for all instantiated prefabs (towers & enemies) to keep hierachy clean.
     /// </summary>
-    [SerializeField]
     private static Transform prefabHolderParent;
-    public static Transform PrefabHolderParent { get { return prefabHolderParent; } }
+    public static Transform PrefabHolderParent
+    {
+        get
+        {
+            if (prefabHolderParent == null)
+            {
+                prefabHolderParent = GameObject.Find("PrefabHolder").transform;
+            }
+            return prefabHolderParent;
+        }
+    }
 
     /// <summary>
     /// Dictionary mapping each point on the grid to its correspoing tile.
@@ -47,8 +71,10 @@ public class LevelManager : MonoBehaviour
     /// </summary>
     public void Start()
     {
-        map = GameObject.Find("Map");
         grassTile = (GameObject)Resources.Load("Prefabs/Tiles/Grass");
+        projectilesEffectParent = map.transform.Find("ProjectilesEffects").transform;
+        dotEffectParent = map.transform.Find("DoTEffects").transform;
+        aoEEffects = map.transform.Find("AoEEffects").transform;
         TileDict = new Dictionary<Point, Tile>();
         float tileSize = grassTile.GetComponent<SpriteRenderer>().sprite.bounds.size.x;
 

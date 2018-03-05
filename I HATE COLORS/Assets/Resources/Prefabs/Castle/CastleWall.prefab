@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 61066865236457526}
   - component: {fileID: 114314805158718368}
   - component: {fileID: 82755754903318790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CastleWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

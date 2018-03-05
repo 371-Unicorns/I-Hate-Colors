@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82726012713261266}
   m_Layer: 8
   m_Name: BulletTower
-  m_TagString: Tower
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

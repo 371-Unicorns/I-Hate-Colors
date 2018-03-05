@@ -69,6 +69,12 @@ public abstract class Tower : MonoBehaviour
     public GameObject effectPrefab;
 
     /// <summary>
+    /// AudioSource to be played if tower upgrades.
+    /// </summary>
+    [SerializeField]
+    protected AudioSource upgradeAudioSource;
+
+    /// <summary>
     /// Setup this tower.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
@@ -89,12 +95,24 @@ public abstract class Tower : MonoBehaviour
 
         this.level = 1;
         this.target = null;
+        this.upgradeAudioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
-    /// Upgrade tower. Checking if player has enough money was done before calling this method.
+    /// Upgrade tower. 
+    /// Checking if player has enough money was done before calling this method.
+    /// 
+    /// Author: David Askari
     /// </summary>
-    public abstract void Upgrade();
+    public virtual void Upgrade()
+    {
+        if (level < maxLevel)
+        {
+            level += 1;
+            upgradeCosts *= (int)(level * upgradeCostsScale);
+            upgradeAudioSource.Play();
+        }
+    }
 
     /// <summary>
     /// Attack target with tower's specific attack.
@@ -108,8 +126,6 @@ public abstract class Tower : MonoBehaviour
             FindClosestTarget();
         }
     }
-
-    public float GetRange() { return range; }
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.

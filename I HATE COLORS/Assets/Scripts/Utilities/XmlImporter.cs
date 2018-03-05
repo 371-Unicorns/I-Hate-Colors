@@ -85,10 +85,8 @@ public class XmlImporter
             int value = int.Parse(node.SelectSingleNode("value").InnerText);
             ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("color").InnerText);
 
-            Enemy e = GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id) as GameObject, LevelManager.PrefabHolderParent).GetComponent<Enemy>();
+            Enemy e = (GameObject.Instantiate(Resources.Load("Prefabs/Enemies/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<Enemy>();
             e.Initialize(health, speed, value, color);
-
-            e.gameObject.transform.position = new Vector3(-1000, 0, 0);
 
             retDictionary.Add(id, e);
         }
@@ -128,7 +126,6 @@ public class XmlImporter
             string description = node.SelectSingleNode("description").InnerText;
 
             ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<ProjectileTower>();
-            tower.transform.Translate(new Vector3(-1000, -1000, 0));
             tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage, color, description);
             tower.transform.SetParent(prefabHolder);
 
@@ -148,7 +145,6 @@ public class XmlImporter
             string description = node.SelectSingleNode("description").InnerText;
 
             AoETower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<AoETower>();
-            tower.transform.Translate(new Vector3(-1000, -1000, 0));
             tower.Initialize(id, cost, aoeDamage, fireRate, upgradeCost, upgradeCostScale, maxLevel, range, description);
             tower.transform.SetParent(prefabHolder);
 
@@ -168,7 +164,6 @@ public class XmlImporter
             string description = node.SelectSingleNode("description").InnerText;
 
             DoTTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<DoTTower>();
-            tower.transform.Translate(new Vector3(-1000, -1000, 0));
             tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage, color, description);
             tower.transform.SetParent(prefabHolder);
 

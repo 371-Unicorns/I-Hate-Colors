@@ -5,7 +5,7 @@ using UnityEngine;
 public class AoETower : Tower
 {
     private bool shouldSpawnEffect = true;
-   
+
     private AoEEffect aoeEffect;
 
     /// <summary>
@@ -52,6 +52,6 @@ public class AoETower : Tower
 
     public override void Upgrade()
     {
-        throw new System.NotImplementedException();
+        base.Upgrade();
     }
 }

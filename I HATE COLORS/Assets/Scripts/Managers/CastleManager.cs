@@ -18,7 +18,7 @@ public class CastleManager : MonoBehaviour
     {
         CastleHealth = 100;
         castleWallPrefab = (GameObject)Resources.Load("Prefabs/Castle/CastleWall");
-        Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation);
+        Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation, LevelManager.Map.transform);
     }
 
     public static void TakeDamage(int damage)

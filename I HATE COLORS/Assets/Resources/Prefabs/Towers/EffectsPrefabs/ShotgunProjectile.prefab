@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212565854547413374}
   - component: {fileID: 114574722398167338}
   - component: {fileID: 58567151691678734}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ShotgunProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

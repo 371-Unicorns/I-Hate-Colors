@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private static int height = 14;
     public static int Height { get { return height; } }
-    
+
     private static Button toMenuButton;
 
     /// <summary>
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Where the coins should fly to.
     /// </summary>
-    public static GameObject coinFlyTarget;
+    public static GameObject bloodFlyTarget;
 
     public static GameObject towerInformationPanel;
 
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
         currentWave = 1;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
-        coinFlyTarget = infoPanel.Find("BloodPanel").gameObject;
+        bloodFlyTarget = infoPanel.Find("BloodPanel").gameObject;
         healthText = infoPanel.Find("HealthPanel").GetComponentInChildren<Text>();
         moneyText = infoPanel.Find("BloodPanel").GetComponentInChildren<Text>();
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         SetTimerText();
         WaveManager.Update();
-        
+
         if (gameOver)
         {
             waveTimer.SetPaused(true);
@@ -154,9 +154,9 @@ public class GameManager : MonoBehaviour
     /// <param name="towerBtn">TowerBtn to select.</param>
     public static void SelectTowerAndHover(TowerBtn towerBtn)
     {
-        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().GetRange(), towerBtn.TowerHoverSprite);
+        Hover.Activate(towerBtn.TowerPrefab.GetComponent<Tower>().Range, towerBtn.TowerHoverSprite);
         GameManager.SelectedTower = towerBtn.TowerPrefab.GetComponent<Tower>();
-        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
         towerInformationPanel.SetActive(false);
@@ -171,7 +171,7 @@ public class GameManager : MonoBehaviour
         GameManager.SelectedTower = tower;
 
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
-        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.GetRange() * .66f, SelectedTower.GetRange() * .66f, 1);
+        GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
         towerInformationPanel.SetActive(true);
     }
@@ -237,7 +237,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log(string.Format("Tried to load and instantiate {0}'s GUI button, but an error occured.", tower.name));
                 return;
             }
-            if(tower == null)
+            if (tower == null)
             {
                 Debug.Log(string.Format("Tried to load and instantiate Tower, but an error occured."));
                 return;
