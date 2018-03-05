@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4568128881524914}
   - component: {fileID: 212963897472947326}
   - component: {fileID: 114238849393004814}
-  - component: {fileID: 60464826272003268}
   - component: {fileID: 50567083491473402}
+  - component: {fileID: 61335314849666472}
   m_Layer: 8
   m_Name: Candycane
   m_TagString: Untagged
@@ -63,8 +63,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!60 &60464826272003268
-PolygonCollider2D:
+--- !u!61 &61335314849666472
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -75,7 +75,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.2, y: 0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -85,41 +85,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.29999998, y: 0.02}
-      - {x: 0.38, y: 0.089999996}
-      - {x: 0.38, y: 0.22}
-      - {x: 0.32999998, y: 0.28}
-      - {x: 0.04, y: 0.26999998}
-      - {x: 0.22999999, y: 0.29}
-      - {x: 0.29, y: 0.35}
-      - {x: 0.28, y: 0.55}
-      - {x: 0.16, y: 0.59}
-      - {x: -0.07, y: 0.59}
-      - {x: -0.19, y: 0.53}
-      - {x: -0.53999996, y: 0.45999998}
-      - {x: -0.53999996, y: 0.19}
-      - {x: -0.48, y: 0.14}
-      - {x: -0.42, y: 0.14}
-      - {x: -0.35, y: 0.16}
-      - {x: -0.32999998, y: 0.29}
-      - {x: -0.37, y: 0.31}
-      - {x: -0.42, y: 0.31}
-      - {x: -0.31, y: 0.31}
-      - {x: -0.34, y: 0.16}
-      - {x: -0.42, y: 0.13}
-      - {x: -0.45999998, y: 0.08}
-      - {x: -0.48, y: 0.03}
-      - {x: -0.48, y: -0.12}
-      - {x: -0.32999998, y: -0.22999999}
-      - {x: -0.25, y: -0.13}
-      - {x: -0.28, y: -0.42}
-      - {x: -0.19999999, y: -0.44}
-      - {x: 0.08, y: -0.44}
-      - {x: 0.14, y: -0.24}
-      - {x: 0.04, y: 0.099999994}
-      - {x: 0.14999999, y: 0.04}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8}
+  m_EdgeRadius: 0
 --- !u!114 &114238849393004814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,8 +132,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -601889635
-  m_SortingLayer: 5
+  m_SortingLayerID: 172004857
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ea8fe7d3a260005469ed2a20634c0c03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
