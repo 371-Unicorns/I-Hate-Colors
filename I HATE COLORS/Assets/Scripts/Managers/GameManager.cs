@@ -132,15 +132,13 @@ public class GameManager : MonoBehaviour
             {
                 waveTimer.SkipTimer();
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+            else if (Input.GetMouseButtonUp(1) && Hover.IsActive())
             {
-                if (Hover.IsActive())
-                {
-                    GameManager.rangeIndicatorRenderer.enabled = false;
-                    Hover.Deactivate();
-                    GameManager.ResetTower();
-                    TowerInformation.Reset();
-                }
+                GameManager.rangeIndicatorRenderer.enabled = false;
+                Hover.Deactivate();
+                GameManager.ResetTower();
+                TowerInformation.Reset();
+                towerInformationPanel.SetActive(true);
             }
         }
 

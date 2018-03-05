@@ -131,8 +131,11 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     private void OnMouseUpAsButton()
     {
-        GameManager.SelectTower(this);
-        TowerInformation.ShowPlacedTower(this);
+        if (!SumPause.Status)
+        {
+            GameManager.SelectTower(this);
+            TowerInformation.ShowPlacedTower(this);
+        }
     }
 
     /// <summary>

@@ -69,7 +69,10 @@ public class TowerBtn : MonoBehaviour
     /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
     {
-        TowerInformation.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
+        if (!SumPause.Status)
+        {
+            TowerInformation.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
+        }
     }
 
     /// <summary>
