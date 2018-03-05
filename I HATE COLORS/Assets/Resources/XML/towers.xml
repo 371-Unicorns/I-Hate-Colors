@@ -45,6 +45,17 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
-    <description>A tower that opens a black hole. The black hole holds enemies in place.</description>
+    <description>A tower that opens a black hole that holds enemies in place.</description>
+  </aoe-tower>
+  <aoe-tower>
+    <id>FlameTower</id>
+    <aoe-damage>0.05</aoe-damage>
+    <fire-rate>10</fire-rate>
+    <range>3</range>
+    <cost>20</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <description>A tower that burns enemies with a flame wheel.</description>
   </aoe-tower>
 </towers>
