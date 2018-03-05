@@ -65,6 +65,9 @@ TagManager:
   - name: Enemies
     uniqueID: 3510059523
     locked: 0
+  - name: Trees
+    uniqueID: 172004857
+    locked: 0
   - name: Hover
     uniqueID: 326291917
     locked: 0
