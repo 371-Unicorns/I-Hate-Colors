@@ -46,6 +46,12 @@ public class GameManager : MonoBehaviour
     public static int money = 1000;
 
     /// <summary>
+    /// AudioSource to be played, once a blood reaches the bank.
+    /// </summary>
+    private AudioClip unicornBeginWaveSound;
+    private AudioSource audioSource;
+
+    /// <summary>
     /// Content of the towerScrollView. Add available TowerBtn to this.
     /// </summary>
     private static Transform towerScrollViewContent;
@@ -89,6 +95,9 @@ public class GameManager : MonoBehaviour
         towerDictionary = XmlImporter.GetTowersFromXml();
         LoadTowerButtons();
         StartCoroutine(BlinkText());
+
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+        unicornBeginWaveSound = (AudioClip)Resources.Load("Audio/unicornBeginWaveSound");
     }
 
     public void Update()
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour
             {
                 waveTimer.SetPaused(true);
                 WaveManager.BeginWave();
+                audioSource.PlayOneShot(unicornBeginWaveSound);
             }
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
