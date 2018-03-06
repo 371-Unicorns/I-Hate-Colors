@@ -39,6 +39,12 @@ public class OptionsMenu : MonoBehaviour
         SumPause.Status = false;
     }
 
+    public void RestartGame() 
+    {
+        SumPause.Status = false;
+        GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("main_menu");
+    }
+
     /// <summary>
     /// Switch audio and text of audio mute button.
     /// 

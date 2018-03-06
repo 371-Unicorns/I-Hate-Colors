@@ -16,6 +16,9 @@ public class EnemyManager : MonoBehaviour
 
     public void Start()
     {
+        activeEnemies = new List<Enemy>();
+        deadEnemies = new List<Enemy>();
+        
         enemyDictionary = XmlImporter.GetEnemiesFromXml();
         TargetTiles = new Tile[GameManager.Height];
     }
