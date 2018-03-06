@@ -21,9 +21,15 @@ public class CastleManager : MonoBehaviour
         Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation, LevelManager.Map.transform);
     }
 
+    public static void AddCastleHealth()
+    {
+        CastleHealth += 100;
+    }
+
     public static void TakeDamage(int damage)
     {
-        CastleHealth -= damage;
+        CastleHealth = Mathf.Max(CastleHealth - damage, 0);
+
         if (CastleHealth <= 0)
         {
             GameManager.gameOver = true;

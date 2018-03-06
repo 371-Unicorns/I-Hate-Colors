@@ -68,6 +68,7 @@ public class SumPause : MonoBehaviour
         image = GetComponent<Image>();
         optionsMenu = GameObject.Find("OptionsMenu");
         optionsMenu.SetActive(false);
+        towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();
     }
 
     void Start()
@@ -105,10 +106,7 @@ public class SumPause : MonoBehaviour
     /// <summary>This is what we want to do when the game is paused or unpaused.</summary>
     static void OnChange()
     {
-        if (towerButtons == null)
-        {
-            towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();
-        }
+        towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();
 
         if (status)
         {

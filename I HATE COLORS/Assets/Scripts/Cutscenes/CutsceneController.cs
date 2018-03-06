@@ -96,7 +96,6 @@ public class CutsceneController : MonoBehaviour {
             Rect imgPos = new Rect(0, Screen.height * .1f, Screen.width, cutsceneFrames[idx].frameImage.height);
             GUI.DrawTexture(imgPos, cutsceneFrames[idx].frameImage);
             text.transform.position = new Vector3(cutsceneFrames[idx].textPosition.x, cutsceneFrames[idx].textPosition.y, 0);
-            print(cutsceneFrames[idx].textPosition);
         }
     }
 }
