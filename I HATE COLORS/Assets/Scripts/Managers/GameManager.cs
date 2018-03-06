@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     private static GameTimer waveTimer;
     public static int currentWave;
 
-    public static int money = 1000;
+    public static int money = 150;
 
     /// <summary>
     /// Content of the towerScrollView. Add available TowerBtn to this.
