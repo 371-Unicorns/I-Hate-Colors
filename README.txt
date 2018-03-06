@@ -1,4 +1,5 @@
 I HATE COLORS.
+
 Team Members:
    * Amy Lewis
    * Cole Twitchell
@@ -27,9 +28,9 @@ Features:
    * Custom sound track and sound effects
    * Main menu (and replay option when you finish the game)
    * Settings menu - resume, mute audio, restart game, quit game
-   * Game Over and Victory screens 
+   * Game Over and Victory screens
    
 References:
-   * Explosive Realistic VFX Texture Free downloaded and modified from Unity Asset Store
-   * A* Pathfinding Package downloaded from Unity Asset Store
-   * Pause Button Kit downloaded and modified from Unity Asset Store
+   * 'Explosive Realistic VFX Texture Free' downloaded and modified from Unity Asset Store (http://bit.ly/2FrFXHz)
+   * 'A* Pathfinding Package' downloaded from Unity Asset Store (http://bit.ly/2Fhvv1W)
+   * 'Pause Button Kit' downloaded and modified from Unity Asset Store (http://bit.ly/2D3KJpf)

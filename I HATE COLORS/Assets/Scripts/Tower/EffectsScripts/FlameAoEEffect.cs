@@ -11,6 +11,9 @@ public class FlameAoEEffect : AoEEffect
 
     private GameTimer gTimer;
 
+    [SerializeField]
+    private ParticleSystem explosionPrefab;
+
     public FlameAoEEffect()
     {
         radius = 3;
@@ -39,6 +42,12 @@ public class FlameAoEEffect : AoEEffect
             {
                 GameObject target = c.gameObject;
                 target.GetComponent<Enemy>().TakeDamage(damage, ColorType.BLACK);
+                if(EnemyManager.deadEnemies.Contains(target.GetComponent<Enemy>()))
+                {
+                    ParticleSystem explosionParticle = Instantiate(explosionPrefab, target.transform.position, transform.rotation);
+                    explosionParticle.transform.SetParent(CastleWall.explosionParent);
+                    Destroy(explosionParticle.gameObject, explosionParticle.main.duration);
+                }
             }
 
         }
