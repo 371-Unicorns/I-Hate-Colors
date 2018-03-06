@@ -13,7 +13,7 @@ public class CastleWall : MonoBehaviour
     /// <summary>
     /// Parent in hierachy for explosions to appear in.
     /// </summary>
-    private Transform explosionParent;
+    public static Transform explosionParent;
 
     /// <summary>
     /// AudioSource to be played, once a enemy reaches this castle wall.

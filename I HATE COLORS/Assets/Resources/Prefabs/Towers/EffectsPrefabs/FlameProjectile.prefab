@@ -162,6 +162,8 @@ MonoBehaviour:
   damage: 0.05
   color: 7
   range: 3
+  explosionPrefab: {fileID: 198027294453737644, guid: 74e4d92dabffacd4f9e1d6a393ef3a7e,
+    type: 2}
 --- !u!212 &212825734267458696
 SpriteRenderer:
   m_ObjectHideFlags: 1
