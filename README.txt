@@ -24,9 +24,10 @@ Features:
    * Castle has limited health - once you lose it all you die
    * Different enemies
    * Multiple waves of enemies
-   * Custom sound track
-   * Main menu 
+   * Custom sound track and sound effects
+   * Main menu (and replay option when you finish the game)
    * Settings menu - resume, mute audio, restart game, quit game
+   * Game Over and Victory screens 
    
 References:   
    * Explosive artwork modified from "Explosive Realistic VFX Texture Free" from the
