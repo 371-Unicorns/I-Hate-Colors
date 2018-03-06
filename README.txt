@@ -29,7 +29,7 @@ Features:
    * Settings menu - resume, mute audio, restart game, quit game
    * Game Over and Victory screens 
    
-References:   
-   * Explosive artwork modified from "Explosive Realistic VFX Texture Free" from the
-      Unity Asset Store and written by Gustav Hagerling
+References:
+   * Explosive Realistic VFX Texture Free downloaded and modified from Unity Asset Store
    * A* Pathfinding Package downloaded from Unity Asset Store
+   * Pause Button Kit downloaded and modified from Unity Asset Store
