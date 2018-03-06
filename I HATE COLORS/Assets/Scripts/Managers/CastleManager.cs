@@ -28,7 +28,8 @@ public class CastleManager : MonoBehaviour
 
     public static void TakeDamage(int damage)
     {
-        CastleHealth -= damage;
+        CastleHealth = Mathf.Max(CastleHealth - damage, 0);
+
         if (CastleHealth <= 0)
         {
             GameManager.gameOver = true;
