@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
+                currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
                 waveTimer.SetPaused(false);
