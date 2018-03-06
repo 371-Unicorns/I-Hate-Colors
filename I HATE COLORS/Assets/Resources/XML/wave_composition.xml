@@ -4,7 +4,7 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>20</count>
+            <count>10</count>
          </enemy>
       </enemies>
       <spawn-rate>1</spawn-rate>
@@ -28,7 +28,7 @@
          </enemy>
          <enemy>
             <id>derrgon</id>
-            <count>5</count>
+            <count>1</count>
          </enemy>
       </enemies>
       <spawn-rate>0.33</spawn-rate>
@@ -38,11 +38,11 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>100</count>
+            <count>40</count>
          </enemy>
          <enemy>
             <id>derrgon</id>
-            <count>20</count>
+            <count>3</count>
          </enemy>
       </enemies>
       <spawn-rate>0.1</spawn-rate>
@@ -52,11 +52,11 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>100</count>
+            <count>50</count>
          </enemy>
          <enemy>
             <id>derrgon</id>
-            <count>40</count>
+            <count>5</count>
          </enemy>
       </enemies>
       <spawn-rate>0.1</spawn-rate>
@@ -66,11 +66,53 @@
       <enemies>
          <enemy>
             <id>unicorn</id>
-            <count>100</count>
+            <count>50</count>
          </enemy>
          <enemy>
             <id>derrgon</id>
-            <count>100</count>
+            <count>10</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
+   </wave>
+   <wave>
+      <id>7</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>55</count>
+         </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>12</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
+   </wave>
+   <wave>
+      <id>8</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>55</count>
+         </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>16</count>
+         </enemy>
+      </enemies>
+      <spawn-rate>0.1</spawn-rate>
+   </wave>
+   <wave>
+      <id>9</id>
+      <enemies>
+         <enemy>
+            <id>unicorn</id>
+            <count>60</count>
+         </enemy>
+         <enemy>
+            <id>derrgon</id>
+            <count>17</count>
          </enemy>
       </enemies>
       <spawn-rate>0.1</spawn-rate>

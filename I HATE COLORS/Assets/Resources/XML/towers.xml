@@ -4,9 +4,9 @@
       <proj-damage>10</proj-damage>
       <proj-speed>10</proj-speed>
       <proj-color>RED</proj-color>
-      <fire-rate>3</fire-rate>
+      <fire-rate>5</fire-rate>
       <range>3</range>
-      <cost>20</cost>
+      <cost>25</cost>
       <upgrade-cost>10</upgrade-cost>
       <upgrade-cost-scale>1.25</upgrade-cost-scale>
       <max-level>5</max-level>
@@ -19,7 +19,7 @@
       <proj-color>BLACK</proj-color>
       <fire-rate>3</fire-rate>
       <range>5</range>
-      <cost>25</cost>
+      <cost>30</cost>
       <upgrade-cost>10</upgrade-cost>
       <upgrade-cost-scale>1.25</upgrade-cost-scale>
       <max-level>5</max-level>
@@ -30,7 +30,7 @@
       <dot-damage>5</dot-damage>
       <dot-color>ORANGE</dot-color>
       <range>5</range>
-      <cost>20</cost>
+      <cost>60</cost>
       <upgrade-cost>10</upgrade-cost>
       <upgrade-cost-scale>1.25</upgrade-cost-scale>
       <max-level>5</max-level>
@@ -41,7 +41,7 @@
     <aoe-damage>0</aoe-damage>
     <fire-rate>10</fire-rate>
     <range>5</range>
-    <cost>20</cost>
+    <cost>60</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
@@ -49,10 +49,10 @@
   </aoe-tower>
   <aoe-tower>
     <id>FlameTower</id>
-    <aoe-damage>0.05</aoe-damage>
+    <aoe-damage>0.25</aoe-damage>
     <fire-rate>10</fire-rate>
     <range>3</range>
-    <cost>20</cost>
+    <cost>100</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
