@@ -14,7 +14,6 @@ public class UpgradesMenuButton : MonoBehaviour {
         upgradesMenu = GameObject.Find("UpgradesMenu");
         upgradesMenu.SetActive(false);
     }
-
     public void ToggleUpgradesMenu()
     {
         upgradesMenu.SetActive(!upgradesMenu.activeInHierarchy);

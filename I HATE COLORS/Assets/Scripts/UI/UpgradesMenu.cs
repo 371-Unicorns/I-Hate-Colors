@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class UpgradesMenu : MonoBehaviour
 {
 
-    private int currentHealthLevel = 1;
     public int upgradeHealthCost = 100;
 
     public void UpgradeCastleHealth()
@@ -15,8 +14,7 @@ public class UpgradesMenu : MonoBehaviour
         if (upgradeHealthCost <= GameManager.money)
         {
             GameManager.AddMoney(-upgradeHealthCost);
-
-            currentHealthLevel++;
+            CastleManager.AddCastleHealth();
         }
     }
 }
