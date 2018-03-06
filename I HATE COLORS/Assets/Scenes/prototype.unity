@@ -3917,7 +3917,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 150
 --- !u!222 &385971988
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3954,10 +3954,10 @@ RectTransform:
   m_Father: {fileID: 1276021717}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -24.3}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: 0, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &437161979
 MonoBehaviour:
@@ -3991,7 +3991,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +100 Life
+  m_Text: +100 Health
 --- !u!222 &437161980
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4023,15 +4023,15 @@ RectTransform:
   m_GameObject: {fileID: 441163771}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6666645, y: 0.4807676, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1679181422}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000076293945, y: -0.000056266785}
-  m_SizeDelta: {x: 32.5, y: 23.401}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &441163773
 MonoBehaviour:
@@ -5701,7 +5701,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1919212525}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999917
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -10823,7 +10823,7 @@ RectTransform:
   m_GameObject: {fileID: 1637015535}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.70000005, y: 0.70000005, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 522868060}
   m_RootOrder: 2
@@ -10831,7 +10831,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -15, y: -8}
-  m_SizeDelta: {x: 65, y: 65}
+  m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1637015537
 MonoBehaviour:
@@ -10967,10 +10967,10 @@ RectTransform:
   m_Father: {fileID: 1276021717}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -48.7}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: 0, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1649101643
 MonoBehaviour:
@@ -11004,7 +11004,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 'Cost: 100'
 --- !u!222 &1649101644
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11086,8 +11086,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 724278178}
   m_HandleRect: {fileID: 724278177}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11198,7 +11198,7 @@ GameObject:
   - component: {fileID: 1679181424}
   - component: {fileID: 1679181423}
   m_Layer: 5
-  m_Name: UpgradesButton
+  m_Name: UpgradesMenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11213,7 +11213,7 @@ RectTransform:
   m_GameObject: {fileID: 1679181421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 2.08, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 441163772}
   m_Father: {fileID: 522868060}
@@ -11221,8 +11221,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -78.5, y: -8}
-  m_SizeDelta: {x: 65, y: 21.667}
+  m_AnchoredPosition: {x: -70, y: -8}
+  m_SizeDelta: {x: 135, y: 45}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1679181423
 MonoBehaviour:
@@ -11429,7 +11429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00005340576, y: 0.0000147866185}
+  m_AnchoredPosition: {x: -0.00005340576, y: 0.00000087953777}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743294333
@@ -15814,8 +15814,8 @@ GameObject:
   - component: {fileID: 2124612543}
   - component: {fileID: 2124612542}
   - component: {fileID: 2124612539}
-  - component: {fileID: 2124612541}
   - component: {fileID: 2124612540}
+  - component: {fileID: 2124612541}
   m_Layer: 5
   m_Name: UpgradesMenu
   m_TagString: Untagged
@@ -15831,17 +15831,17 @@ RectTransform:
   m_GameObject: {fileID: 2124612537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999966, y: 0.9999966, z: 0.9999966}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1276021717}
   m_Father: {fileID: 522868060}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 284.49, y: 159}
-  m_SizeDelta: {x: 250, y: 123.4}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -140, y: -60}
+  m_SizeDelta: {x: 250, y: 120}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &2124612539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15882,11 +15882,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2124612537}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &2124612542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15906,10 +15909,10 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 300, y: 70}
+  m_CellSize: {x: 200, y: 70}
   m_Spacing: {x: 0, y: 5}
-  m_Constraint: 2
-  m_ConstraintCount: 5
+  m_Constraint: 0
+  m_ConstraintCount: 1
 --- !u!114 &2124612543
 MonoBehaviour:
   m_ObjectHideFlags: 0

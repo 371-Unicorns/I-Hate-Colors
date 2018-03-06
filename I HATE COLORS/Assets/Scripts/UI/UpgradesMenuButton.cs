@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradesMenuButton : MonoBehaviour {
-    
+public class UpgradesMenuButton : MonoBehaviour
+{
+
     /// <summary>
     /// Upgrades menu
     /// </summary>

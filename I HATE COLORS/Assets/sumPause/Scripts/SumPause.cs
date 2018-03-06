@@ -25,14 +25,24 @@ public class SumPause : MonoBehaviour
     Image image;
 
     /// <summary>
-    /// Options menu
+    /// Options menu.
     /// </summary>
     static GameObject optionsMenu;
+
+    /// <summary>
+    /// Button for the upgrade menu.
+    /// </summary>
+    static Button upgradesMenuButton;
 
     /// <summary>
     /// Buttons of all tower buttons, who are in TowerScrollView.
     /// </summary>
     static Button[] towerButtons;
+
+    /// <summary>
+    /// Buttons of all upgrade buttons, who are in UpgradesMenu.
+    /// </summary>
+    static Button[] upgradeButtons;
 
     static bool status = false;
     /// <summary>
@@ -68,7 +78,9 @@ public class SumPause : MonoBehaviour
         image = GetComponent<Image>();
         optionsMenu = GameObject.Find("OptionsMenu");
         optionsMenu.SetActive(false);
+        upgradesMenuButton = GameObject.Find("UpgradesMenuButton").GetComponent<Button>();
         towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();
+        upgradeButtons = GameObject.Find("UpgradesMenu").GetComponentsInChildren<Button>();
     }
 
     void Start()
@@ -112,21 +124,19 @@ public class SumPause : MonoBehaviour
         {
             // What to do when paused
             Time.timeScale = 0; // Set game speed to 0
-            foreach (Button button in towerButtons)
-            {
-                button.interactable = false;
-            }
+            foreach (Button button in towerButtons) { button.interactable = false; }
+            foreach (Button button in upgradeButtons) { button.interactable = false; }
             optionsMenu.SetActive(true);
+            upgradesMenuButton.interactable = false;
         }
         else
         {
             // What to do when unpaused
             Time.timeScale = 1; // Resume normal game speed
-            foreach (Button button in towerButtons)
-            {
-                button.interactable = true;
-            }
+            foreach (Button button in towerButtons) { button.interactable = true; }
+            foreach (Button button in upgradeButtons) { button.interactable = true; }
             optionsMenu.SetActive(false);
+            upgradesMenuButton.interactable = true;
         }
     }
 
