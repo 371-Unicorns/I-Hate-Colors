@@ -57,6 +57,14 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
+    
+    /// <summary>
+    /// Boolean variables related to the reward panel
+    /// </summary>
+    public static GameObject rewardsPanel;
+    public static Text rewardsPanelText;
+    public static bool didUpgradeFirstTower = false;
+    private static bool me = false;
 
     /*
     /// <summary>
@@ -67,6 +75,9 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         gameOver = false;
+        rewardsPanel = GameObject.Find("RewardsPanel");
+        rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
+        rewardsPanel.SetActive(false);
         towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
@@ -206,7 +217,6 @@ public class GameManager : MonoBehaviour
         if (waveTimer.IsDone())
         {
             waveTimer.startBlinking = true;
-
         }
         else
         {
@@ -233,6 +243,18 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
 
+        }
+    }
+
+    public static IEnumerator DisplayRewardsPanel()
+    {
+        if (didUpgradeFirstTower)
+        {
+            rewardsPanel.SetActive(true);
+            rewardsPanelText.text = "You Upgraded your first tower! Nice!";
+            AddMoney(20);
+            yield return new WaitForSeconds(6);
+            rewardsPanel.SetActive(false);
         }
     }
 

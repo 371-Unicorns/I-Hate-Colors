@@ -109,7 +109,7 @@ public abstract class Tower : MonoBehaviour
         {
             level += 1;
             upgradeCosts *= (int)(level * upgradeCostsScale);
-            upgradeAudioSource.Play();
+            //upgradeAudioSource.Play();
         }
     }
 
