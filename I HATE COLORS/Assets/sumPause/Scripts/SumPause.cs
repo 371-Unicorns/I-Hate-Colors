@@ -39,11 +39,6 @@ public class SumPause : MonoBehaviour
     /// </summary>
     static Button[] towerButtons;
 
-    /// <summary>
-    /// Buttons of all upgrade buttons, who are in UpgradesMenu.
-    /// </summary>
-    static Button[] upgradeButtons;
-
     static bool status = false;
     /// <summary>
     /// Sets/Returns current pause state (true for paused, false for normal)
@@ -80,7 +75,6 @@ public class SumPause : MonoBehaviour
         optionsMenu.SetActive(false);
         upgradesMenuButton = GameObject.Find("UpgradesMenuButton").GetComponent<Button>();
         towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();
-        upgradeButtons = GameObject.Find("UpgradesMenu").GetComponentsInChildren<Button>();
     }
 
     void Start()
@@ -125,7 +119,7 @@ public class SumPause : MonoBehaviour
             // What to do when paused
             Time.timeScale = 0; // Set game speed to 0
             foreach (Button button in towerButtons) { button.interactable = false; }
-            foreach (Button button in upgradeButtons) { button.interactable = false; }
+            foreach (Button button in UpgradesMenu.upgradeButtons) { button.interactable = false; }
             optionsMenu.SetActive(true);
             upgradesMenuButton.interactable = false;
         }
@@ -134,7 +128,7 @@ public class SumPause : MonoBehaviour
             // What to do when unpaused
             Time.timeScale = 1; // Resume normal game speed
             foreach (Button button in towerButtons) { button.interactable = true; }
-            foreach (Button button in upgradeButtons) { button.interactable = true; }
+            foreach (Button button in UpgradesMenu.upgradeButtons) { button.interactable = true; }
             optionsMenu.SetActive(false);
             upgradesMenuButton.interactable = true;
         }
