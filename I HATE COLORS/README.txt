@@ -1,5 +1,8 @@
 I HATE COLORS.
 
+Code:
+   https://github.com/371-Unicorns/I-Hate-Colors
+
 Team Members:
    * Amy Lewis
    * Cole Twitchell
