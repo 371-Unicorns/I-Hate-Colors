@@ -1,45 +1,45 @@
 <towers>
   <proj-tower>
-      <id>BulletTower</id>
-      <proj-damage>10</proj-damage>
-      <proj-speed>10</proj-speed>
-      <proj-color>RED</proj-color>
-      <fire-rate>5</fire-rate>
-      <range>3</range>
-      <cost>25</cost>
-      <upgrade-cost>10</upgrade-cost>
-      <upgrade-cost-scale>1.25</upgrade-cost-scale>
-      <max-level>5</max-level>
-      <description>A standard one bullet at a time tower.</description>
+    <name>BulletTower</name>
+    <proj-damage>10</proj-damage>
+    <proj-speed>10</proj-speed>
+    <proj-color>RED</proj-color>
+    <attack-rate>5</attack-rate>
+    <range>3</range>
+    <cost>25</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <description>A standard one bullet at a time tower.</description>
   </proj-tower>
   <proj-tower>
-      <id>ShotgunTower</id>
-      <proj-damage>5</proj-damage>
-      <proj-speed>5</proj-speed>
-      <proj-color>BLACK</proj-color>
-      <fire-rate>3</fire-rate>
-      <range>5</range>
-      <cost>30</cost>
-      <upgrade-cost>10</upgrade-cost>
-      <upgrade-cost-scale>1.25</upgrade-cost-scale>
-      <max-level>5</max-level>
-      <description>A tower that fires off a spread of bullets.</description>
-   </proj-tower>
-   <dot-tower>
-      <id>LaserTower</id>
-      <dot-damage>5</dot-damage>
-      <dot-color>ORANGE</dot-color>
-      <range>5</range>
-      <cost>60</cost>
-      <upgrade-cost>10</upgrade-cost>
-      <upgrade-cost-scale>1.25</upgrade-cost-scale>
-      <max-level>5</max-level>
-      <description>A tower that shoots out a target tracking laser.</description>
-   </dot-tower>
+    <name>ShotgunTower</name>
+    <proj-damage>5</proj-damage>
+    <proj-speed>5</proj-speed>
+    <proj-color>BLACK</proj-color>
+    <attack-rate>3</attack-rate>
+    <range>5</range>
+    <cost>30</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <description>A tower that fires off a spread of bullets.</description>
+  </proj-tower>
+  <dot-tower>
+    <name>LaserTower</name>
+    <dot-damage>5</dot-damage>
+    <dot-color>ORANGE</dot-color>
+    <range>5</range>
+    <cost>60</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <description>A tower that shoots out a target tracking laser.</description>
+  </dot-tower>
   <aoe-tower>
-    <id>BlackHoleTower</id>
+    <name>BlackHoleTower</name>
     <aoe-damage>0</aoe-damage>
-    <fire-rate>10</fire-rate>
+    <attack-rate>10</attack-rate>
     <range>5</range>
     <cost>60</cost>
     <upgrade-cost>10</upgrade-cost>
@@ -48,9 +48,9 @@
     <description>A tower that opens a black hole that holds enemies in place.</description>
   </aoe-tower>
   <aoe-tower>
-    <id>FlameTower</id>
+    <name>FlameTower</name>
     <aoe-damage>0.25</aoe-damage>
-    <fire-rate>10</fire-rate>
+    <attack-rate>10</attack-rate>
     <range>3</range>
     <cost>100</cost>
     <upgrade-cost>10</upgrade-cost>

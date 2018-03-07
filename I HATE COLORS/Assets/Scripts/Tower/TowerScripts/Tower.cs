@@ -14,9 +14,6 @@ public abstract class Tower : MonoBehaviour
     protected string towerName;
     public string Name { get { return towerName; } }
 
-    protected string description;
-    public string Description { get { return description; } }
-
     /// <summary>
     /// Base costs to build tower.
     /// </summary>
@@ -58,6 +55,12 @@ public abstract class Tower : MonoBehaviour
     public float Range { get { return range; } }
 
     /// <summary>
+    /// Short description of this tower.
+    /// </summary>
+    protected string description;
+    public string Description { get { return description; } }
+
+    /// <summary>
     /// Tower's current target.
     /// </summary>
     [SerializeField, HideInInspector]
@@ -82,6 +85,7 @@ public abstract class Tower : MonoBehaviour
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
+    /// <param name="description">Short description of this tower.</param>
     protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description)
     {
         this.towerName = name;
