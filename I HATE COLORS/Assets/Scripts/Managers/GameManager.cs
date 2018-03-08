@@ -139,6 +139,11 @@ public class GameManager : MonoBehaviour
                 GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
             }
 
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                GameManager.AddMoney(100);
+            }
+
             if (Input.GetKeyDown(KeyCode.A))
             {
                 waveTimer.SkipTimer();
