@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 using Pathfinding;
 
@@ -42,6 +43,12 @@ public class GameManager : MonoBehaviour
 
     private static GameTimer waveTimer;
     public static int currentWave;
+    private static int totalWaves;
+
+    /// <summary>
+    /// Post Processing Profile.
+    /// </summary>
+    public  PostProcessingProfile ppProfile;
 
     public static int money = 150;
 
@@ -81,6 +88,7 @@ public class GameManager : MonoBehaviour
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
         currentWave = 1;
+        totalWaves = WaveManager.GetWaves().Count;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
         bloodFlyTarget = infoPanel.Find("BloodPanel").gameObject;
@@ -105,14 +113,24 @@ public class GameManager : MonoBehaviour
         SetTimerText();
         WaveManager.Update();
 
+        var saturation = ppProfile.colorGrading.settings;
+
+        if (currentWave == 1)
+        {
+            saturation.basic.saturation = 1;
+        }
+
         if (gameOver)
         {
             waveTimer.SetPaused(true);
             if (CastleManager.CastleHealth <= 0)
                 gameOverText.text = "GAME OVER";
             else
+            {
+                saturation.basic.saturation = 0;
                 gameOverText.text = "CONGRATULATIONS";
-
+            }
+                
             gameOverText.gameObject.SetActive(true);
             toMenuButton.gameObject.SetActive(true);
         }
@@ -127,11 +145,12 @@ public class GameManager : MonoBehaviour
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
+                saturation.basic.saturation = 1.0f -  ((float)(currentWave - 1) / (float)totalWaves);
                 currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
                 waveTimer.SetPaused(false);
-                WaveManager.SetNextWave();
+                WaveManager.SetNextWave();               
             }
 
             if (Hover.IsActive())
@@ -152,7 +171,7 @@ public class GameManager : MonoBehaviour
                 towerInformationPanel.SetActive(true);
             }
         }
-
+        ppProfile.colorGrading.settings = saturation;
         healthText.text = CastleManager.CastleHealth.ToString();
         moneyText.text = money.ToString();
     }
