@@ -15,6 +15,7 @@ public class UpgradesMenu : MonoBehaviour
     private void Start()
     {
         upgradeButtons = GetComponentsInChildren<Button>();
+        this.gameObject.SetActive(false);
     }
 
     private void Update()
