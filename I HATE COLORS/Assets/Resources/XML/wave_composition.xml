@@ -3,8 +3,8 @@
       <id>1</id>
       <enemies>
          <enemy>
-            <id>unicorn</id>
-            <count>10</count>
+            <id>greenicorn</id>
+            <count>20</count>
          </enemy>
       </enemies>
       <spawn-rate>1</spawn-rate>
