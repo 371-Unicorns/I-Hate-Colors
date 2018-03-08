@@ -20,8 +20,6 @@ public class GameManager : MonoBehaviour
     private static int height = 14;
     public static int Height { get { return height; } }
 
-    private static Button toMenuButton;
-
     /// <summary>
     /// Currently selected tower by player. Could either be a ready to place tower or an already placed tower.
     /// </summary>
@@ -30,7 +28,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public static bool gameOver;
-    private static Text gameOverText, healthText, moneyText, waveText, countdownTimerText;
+    private static GameObject gameOverObject;
+    private static Text healthText, moneyText, waveText, countdownTimerText;
 
     public static GameObject canvas;
 
@@ -64,6 +63,14 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
+    
+    /// <summary>
+    /// Boolean variables related to the reward panel
+    /// </summary>
+    public static GameObject rewardsPanel;
+    public static Text rewardsPanelText;
+    public static bool didUpgradeFirstTower = false;
+    private static bool me = false;
 
     /*
     /// <summary>
@@ -74,16 +81,16 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         gameOver = false;
+        rewardsPanel = GameObject.Find("RewardsPanel");
+        rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
+        rewardsPanel.SetActive(false);
         towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
-        gameOverText = canvas.transform.Find("GameOverText").gameObject.GetComponent<Text>();
-        gameOverText.gameObject.SetActive(false);
+        gameOverObject = canvas.transform.Find("GameOver").gameObject;
+        gameOverObject.SetActive(false);
 
         SelectedTower = null;
-
-        toMenuButton = canvas.transform.Find("ToMenuButton").gameObject.GetComponent<Button>();
-        toMenuButton.gameObject.SetActive(false);
 
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
@@ -123,16 +130,19 @@ public class GameManager : MonoBehaviour
         if (gameOver)
         {
             waveTimer.SetPaused(true);
-            if (CastleManager.CastleHealth <= 0)
-                gameOverText.text = "GAME OVER";
-            else
-            {
+
+            if (CastleManager.CastleHealth > 0)
                 saturation.basic.saturation = 0;
-                gameOverText.text = "CONGRATULATIONS";
-            }
-                
-            gameOverText.gameObject.SetActive(true);
-            toMenuButton.gameObject.SetActive(true);
+               
+               
+            SumPause.Status = true;
+
+            GameObject.Find("OptionsMenu").SetActive(false);
+            GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
+
+            Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
+            gameOverText.text = CastleManager.CastleHealth <= 0 ? "GAME OVER" : "CONGRATULATIONS";
+            gameOverObject.SetActive(true);
         }
         else
         {
@@ -156,6 +166,11 @@ public class GameManager : MonoBehaviour
             if (Hover.IsActive())
             {
                 GameManager.rangeIndicatorRenderer.transform.position = Hover.GetPosition();
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                GameManager.AddMoney(100);
             }
 
             if (Input.GetKeyDown(KeyCode.A))
@@ -225,7 +240,6 @@ public class GameManager : MonoBehaviour
         if (waveTimer.IsDone())
         {
             waveTimer.startBlinking = true;
-
         }
         else
         {
@@ -252,6 +266,18 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1);
 
+        }
+    }
+
+    public static IEnumerator DisplayRewardsPanel()
+    {
+        if (didUpgradeFirstTower)
+        {
+            rewardsPanel.SetActive(true);
+            rewardsPanelText.text = "You Upgraded your first tower! Nice!";
+            AddMoney(20);
+            yield return new WaitForSeconds(6);
+            rewardsPanel.SetActive(false);
         }
     }
 
