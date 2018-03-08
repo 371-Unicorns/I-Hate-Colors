@@ -118,6 +118,7 @@ public class TowerInformation : MonoBehaviour
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
         GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        TowerInformation.CheckUpgrade();
     }
 
     /// <summary>

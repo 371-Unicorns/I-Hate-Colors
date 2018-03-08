@@ -74,6 +74,7 @@ public abstract class Tower : MonoBehaviour
     /// <summary>
     /// AudioSource to be played if tower upgrades.
     /// </summary>
+    [SerializeField, HideInInspector]
     protected AudioSource upgradeAudioSource;
 
     /// <summary>
