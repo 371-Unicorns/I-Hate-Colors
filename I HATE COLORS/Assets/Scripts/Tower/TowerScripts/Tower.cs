@@ -46,6 +46,7 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     [SerializeField, HideInInspector]
     protected int maxLevel;
+    public int MaxLevel { get { return maxLevel; } }
 
     /// <summary>
     /// Range tower can attack within.
@@ -104,7 +105,7 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Upgrade tower. 
-    /// Checking if player has enough money was done before calling this method.
+    /// It does not check whether the player has enough money. Do this BEFORE calling this method.
     /// 
     /// Author: David Askari
     /// </summary>

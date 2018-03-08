@@ -83,7 +83,14 @@ public class ProjectileTower : Tower
 
     public override void Upgrade()
     {
-        base.Upgrade();
+        if (level < maxLevel)
+        {
+            base.Upgrade();
+            projectileDamage += (0.2f * projectileDamage);
+            projectileSpeed += (0.1f * projectileSpeed);
+            attackRate -= (0.2f * attackRate);
+            print(attackRate);
+        }
     }
 
     public override void Attack()

@@ -107,7 +107,7 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public static void CheckUpgrade()
     {
-        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money ? true : false;
+        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money && selectedTower.Level <= selectedTower.MaxLevel ? true : false;
     }
 
     /// <summary>
@@ -115,9 +115,9 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public void UpgradeTower()
     {
+        GameManager.AddMoney(-selectedTower.UpgradeCosts);
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
-        GameManager.AddMoney(-selectedTower.UpgradeCosts);
         TowerInformation.CheckUpgrade();
     }
 
