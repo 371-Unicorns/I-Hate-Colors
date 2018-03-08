@@ -40,7 +40,7 @@ public class CastleWall : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        var behaviour = GetComponent<PostProcessingBehaviour>();
+        /*var behaviour = GetComponent<PostProcessingBehaviour>();
 
         if (behaviour.profile == null)
         {
@@ -49,7 +49,7 @@ public class CastleWall : MonoBehaviour
         }
 
         ppProfile = Instantiate(behaviour.profile);
-        behaviour.profile = ppProfile;
+        behaviour.profile = ppProfile;*/
     }
 
     /// <summary>
