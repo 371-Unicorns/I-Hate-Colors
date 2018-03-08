@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     public static string waveXmlFile;
     private static Wave currentWave;
     private static Queue<Wave> waves;
-    
+
     // Use this for initialization
     public void Start()
     {
@@ -28,7 +28,7 @@ public class WaveManager : MonoBehaviour
                 EnemyManager.SpawnEnemy(currentWave.NextEnemy());
             }
         }
-        if(waves.Count == 0)
+        if (waves.Count == 0)
         {
             GameManager.gameOver = true;
         }
@@ -36,15 +36,8 @@ public class WaveManager : MonoBehaviour
 
     public static void SetNextWave()
     {
-        if (waves.Count == 0)
-        {
-            print(string.Format("No more waves, add more!!"));
-        }
-        else
-        {
-            currentWave = waves.Dequeue();
-            waveRunning = false;
-        }
+        currentWave = waves.Dequeue();
+        waveRunning = false;
     }
 
     public static void BeginWave()
