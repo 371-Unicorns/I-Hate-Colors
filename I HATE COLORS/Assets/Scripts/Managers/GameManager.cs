@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     private static GameTimer waveTimer;
     public static int currentWave;
 
-    public static int money = 150;
+    public static int money = 1000;
 
     /// <summary>
     /// AudioSource to be played, once a blood reaches the bank.
@@ -63,7 +63,11 @@ public class GameManager : MonoBehaviour
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
     public static bool didUpgradeFirstTower = false;
-    private static bool me = false;
+    public static bool didPlaceBulletTower = false;
+    public static bool didPlaceShotgunTower = false;
+    public static bool didPlaceBlackHoleTower = false;
+    public static bool didPlaceLaserTower = false;
+    public static bool didPlaceFlameTower = false;
 
     /*
     /// <summary>
@@ -207,6 +211,31 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.enabled = false;
     }
 
+    public static bool CheckForFirstPlacement() {
+        if(SelectedTower.CompareTag("BulletTower") && !GameManager.didPlaceBulletTower) {
+            GameManager.didPlaceBulletTower = true;
+        }
+        else if(SelectedTower.CompareTag("BlackHoleTower") && !GameManager.didPlaceBlackHoleTower) {
+            GameManager.didPlaceBlackHoleTower = true;
+        }
+        else if(SelectedTower.CompareTag("FlameTower") && !GameManager.didPlaceFlameTower) {
+            GameManager.didPlaceFlameTower = true;
+        }
+        else if(SelectedTower.CompareTag("LaserTower") && !GameManager.didPlaceLaserTower) {
+            GameManager.didPlaceLaserTower = true;
+        }
+        else if(SelectedTower.CompareTag("ShotgunTower") && !GameManager.didPlaceShotgunTower) {
+            GameManager.didPlaceShotgunTower = true;
+        }
+
+        if(GameManager.didPlaceBulletTower && GameManager.didPlaceShotgunTower && GameManager.didPlaceBlackHoleTower && GameManager.didPlaceLaserTower && GameManager.didPlaceFlameTower) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public static void AddMoney(int m)
     {
         GameManager.money += m;
@@ -250,14 +279,22 @@ public class GameManager : MonoBehaviour
 
     public static IEnumerator DisplayRewardsPanel()
     {
+        rewardsPanel.SetActive(true);
+
         if (didUpgradeFirstTower)
         {
-            rewardsPanel.SetActive(true);
             rewardsPanelText.text = "You Upgraded your first tower! Nice!";
             AddMoney(20);
-            yield return new WaitForSeconds(6);
-            rewardsPanel.SetActive(false);
+            
         }
+        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower) 
+        {
+            rewardsPanelText.text = "You placed one of every tower type! Nice!";
+            AddMoney(50);
+        }
+
+        yield return new WaitForSeconds(6);
+        rewardsPanel.SetActive(false);
     }
 
     private void LoadTowerButtons()

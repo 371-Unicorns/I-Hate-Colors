@@ -152,10 +152,14 @@ public abstract class Tower : MonoBehaviour
             return null;
         }
         GameManager.AddMoney(-baseCosts);
-
+        
         // Place tower.
         GameObject tower = Instantiate(GameManager.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity, parentTile.transform);
 
+        if(GameManager.CheckForFirstPlacement()) {
+            StartCoroutine(GameManager.DisplayRewardsPanel());
+        }
+        
         // Check if path is blocked.
         if (!GridGraphManager.IsGraphNotBlocked(tower))
         {
