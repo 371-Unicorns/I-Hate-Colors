@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 using Pathfinding;
 
@@ -37,10 +38,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject bloodFlyTarget;
 
-    public static GameObject towerInformationPanel;
-
     private static GameTimer waveTimer;
     public static int currentWave;
+    private static int totalWaves;
+
+    /// <summary>
+    /// Post Processing Profile.
+    /// </summary>
+    public PostProcessingProfile ppProfile;
 
     public static int money = 1000;
 
@@ -56,7 +61,7 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
-    
+
     /// <summary>
     /// Boolean variables related to the reward panel
     /// </summary>
@@ -81,7 +86,6 @@ public class GameManager : MonoBehaviour
         rewardsPanel = GameObject.Find("RewardsPanel");
         rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
         rewardsPanel.SetActive(false);
-        towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
@@ -92,6 +96,7 @@ public class GameManager : MonoBehaviour
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
         currentWave = 1;
+        totalWaves = WaveManager.GetWaves().Count;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
         bloodFlyTarget = infoPanel.Find("BloodPanel").gameObject;
@@ -116,9 +121,21 @@ public class GameManager : MonoBehaviour
         SetTimerText();
         WaveManager.Update();
 
+        var saturation = ppProfile.colorGrading.settings;
+
+        if (currentWave == 1)
+        {
+            saturation.basic.saturation = 1;
+        }
+
         if (gameOver)
         {
             waveTimer.SetPaused(true);
+
+            if (CastleManager.CastleHealth > 0)
+                saturation.basic.saturation = 0;
+
+
             SumPause.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
@@ -139,6 +156,7 @@ public class GameManager : MonoBehaviour
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
+                saturation.basic.saturation = 1.0f - ((float)(currentWave - 1) / (float)totalWaves);
                 currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
@@ -166,10 +184,9 @@ public class GameManager : MonoBehaviour
                 Hover.Deactivate();
                 GameManager.ResetTower();
                 TowerInformation.Reset();
-                towerInformationPanel.SetActive(true);
             }
         }
-
+        ppProfile.colorGrading.settings = saturation;
         healthText.text = CastleManager.CastleHealth.ToString();
         moneyText.text = money.ToString();
     }
@@ -185,7 +202,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(false);
     }
 
     /// <summary>
@@ -199,7 +215,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(true);
     }
 
     /// <summary>

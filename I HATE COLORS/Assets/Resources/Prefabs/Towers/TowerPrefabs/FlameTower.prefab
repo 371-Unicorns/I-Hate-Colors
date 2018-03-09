@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4946047242552526}
   - component: {fileID: 212985201083047778}
   - component: {fileID: 61515005363212820}
+  - component: {fileID: 114453351332870048}
   - component: {fileID: 82637478858420942}
   - component: {fileID: 95680897743842398}
-  - component: {fileID: 114453351332870048}
   m_Layer: 8
   m_Name: FlameTower
   m_TagString: FlameTower
@@ -187,7 +187,9 @@ MonoBehaviour:
   target: {fileID: 0}
   effectPrefab: {fileID: 1390247207227386, guid: 86758e0234d8ad44eb4b15dbe3768c5d,
     type: 2}
-  shotTimer:
+  attackRate: 0
+  aoEDamage: 0
+  attackTimer:
     timeRemaining: 0
     lastTimeSet: 0
     startBlinking: 0

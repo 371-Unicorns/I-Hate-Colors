@@ -14,9 +14,6 @@ public abstract class Tower : MonoBehaviour
     protected string towerName;
     public string Name { get { return towerName; } }
 
-    protected string description;
-    public string Description { get { return description; } }
-
     /// <summary>
     /// Base costs to build tower.
     /// </summary>
@@ -49,6 +46,7 @@ public abstract class Tower : MonoBehaviour
     /// </summary>
     [SerializeField, HideInInspector]
     protected int maxLevel;
+    public int MaxLevel { get { return maxLevel; } }
 
     /// <summary>
     /// Range tower can attack within.
@@ -56,6 +54,18 @@ public abstract class Tower : MonoBehaviour
     [SerializeField, HideInInspector]
     protected float range;
     public float Range { get { return range; } }
+
+    /// <summary>
+    /// Color of this towers effect.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    protected ColorType color;
+
+    /// <summary>
+    /// Short description of this tower.
+    /// </summary>
+    protected string description;
+    public string Description { get { return description; } }
 
     /// <summary>
     /// Tower's current target.
@@ -71,7 +81,15 @@ public abstract class Tower : MonoBehaviour
     /// <summary>
     /// AudioSource to be played if tower upgrades.
     /// </summary>
+    [SerializeField, HideInInspector]
     protected AudioSource upgradeAudioSource;
+
+    /// <summary>
+    /// Tile this tower stands on.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    protected Tile tile;
+    public Tile Tile { get { return tile; } }
 
     /// <summary>
     /// Setup this tower.
@@ -82,7 +100,9 @@ public abstract class Tower : MonoBehaviour
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
-    protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description)
+    /// <param name="color">Color of this towers effect.</param>
+    /// <param name="description">Short description of this tower.</param>
+    protected void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description)
     {
         this.towerName = name;
         this.baseCosts = baseCosts;
@@ -90,6 +110,7 @@ public abstract class Tower : MonoBehaviour
         this.upgradeCostsScale = upgradeCostsScale;
         this.maxLevel = maxLevel;
         this.range = range;
+        this.color = color;
         this.description = description;
 
         this.level = 1;
@@ -97,9 +118,17 @@ public abstract class Tower : MonoBehaviour
         this.upgradeAudioSource = GetComponent<AudioSource>();
     }
 
+    public virtual void Update()
+    {
+        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
+        {
+            FindClosestTarget();
+        }
+    }
+
     /// <summary>
     /// Upgrade tower. 
-    /// Checking if player has enough money was done before calling this method.
+    /// It does not check whether the player has enough money. Do this BEFORE calling this method.
     /// 
     /// Author: David Askari
     /// </summary>
@@ -117,14 +146,6 @@ public abstract class Tower : MonoBehaviour
     /// Attack target with tower's specific attack.
     /// </summary>
     public abstract void Attack();
-
-    public virtual void Update()
-    {
-        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
-        {
-            FindClosestTarget();
-        }
-    }
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
@@ -177,8 +198,10 @@ public abstract class Tower : MonoBehaviour
         {
             Hover.Deactivate();
             GameManager.SelectTower(tower.GetComponent<Tower>());
-            TowerInformation.ShowPlacedTower(GameManager.SelectedTower);
+            TowerInformation.Reset();
         }
+
+        tower.GetComponent<Tower>().tile = parentTile;
         return tower.GetComponent<Tower>();
     }
 
