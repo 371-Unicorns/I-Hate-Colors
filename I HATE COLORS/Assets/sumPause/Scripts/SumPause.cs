@@ -122,6 +122,7 @@ public class SumPause : MonoBehaviour
             foreach (Button button in UpgradesMenu.upgradeButtons) { button.interactable = false; }
             optionsMenu.SetActive(true);
             upgradesMenuButton.interactable = false;
+            GameManager.SkipTimeButton.interactable = false;
         }
         else
         {
@@ -131,6 +132,7 @@ public class SumPause : MonoBehaviour
             foreach (Button button in UpgradesMenu.upgradeButtons) { button.interactable = true; }
             optionsMenu.SetActive(false);
             upgradesMenuButton.interactable = true;
+            GameManager.SkipTimeButton.interactable = !GameManager.WaveTimer.IsDone();
         }
     }
 

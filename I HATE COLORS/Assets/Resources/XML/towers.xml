@@ -37,6 +37,17 @@
     <attack-rate>10</attack-rate>
     <aoe-damage>0</aoe-damage>
   </aoe-tower>
+  <dot-tower>
+    <name>LaserTower</name>
+    <cost>60</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <range>5</range>
+    <color>ORANGE</color>
+    <description>A tower that shoots out a target tracking laser.</description>
+    <dot-damage>10</dot-damage>
+  </dot-tower>
   <aoe-tower>
     <name>FlameTower</name>
     <cost>100</cost>
@@ -49,15 +60,4 @@
     <attack-rate>10</attack-rate>
     <aoe-damage>0.25</aoe-damage>
   </aoe-tower>
-  <dot-tower>
-    <name>LaserTower</name>
-    <cost>60</cost>
-    <upgrade-cost>10</upgrade-cost>
-    <upgrade-cost-scale>1.25</upgrade-cost-scale>
-    <max-level>5</max-level>
-    <range>5</range>
-    <color>ORANGE</color>
-    <description>A tower that shoots out a target tracking laser.</description>
-    <dot-damage>10</dot-damage>
-  </dot-tower>
 </towers>
