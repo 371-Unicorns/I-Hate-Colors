@@ -322,11 +322,7 @@ public class GameManager : MonoBehaviour
             AddMoney(20);
 
         }
-<<<<<<< HEAD
         else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetRecievedTowerPlacementReward) 
-=======
-        else if (didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower)
->>>>>>> 93dd2319f548c917db0ea2562485417658fa2b6d
         {
             rewardsPanelText.text = "You placed one of every tower type! Nice!";
             rewardsPanel.SetActive(true);
