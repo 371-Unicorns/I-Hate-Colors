@@ -56,11 +56,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public PostProcessingProfile ppProfile;
 
-<<<<<<< HEAD
-    public static int money = 100;
-=======
     public static int money = 150;
->>>>>>> 93dd2319f548c917db0ea2562485417658fa2b6d
 
     /// <summary>
     /// AudioSource to be played, once a blood reaches the bank.
