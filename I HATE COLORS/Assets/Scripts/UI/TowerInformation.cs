@@ -116,6 +116,11 @@ public class TowerInformation : MonoBehaviour
     public void UpgradeTower()
     {
         GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        if (!GameManager.didUpgradeFirstTower)
+        {
+            GameManager.didUpgradeFirstTower = true;
+            StartCoroutine(GameManager.DisplayRewardsPanel());
+        }
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
         TowerInformation.CheckUpgrade();

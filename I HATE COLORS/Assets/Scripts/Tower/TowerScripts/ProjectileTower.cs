@@ -12,6 +12,8 @@ public class ProjectileTower : Tower
     /// </summary>
     [SerializeField, HideInInspector]
     private float attackRate;
+    [SerializeField, HideInInspector]
+    private float attackRateScale;
 
     /// <summary>
     /// Speed of the projectile.
@@ -24,6 +26,8 @@ public class ProjectileTower : Tower
     /// </summary>
     [SerializeField, HideInInspector]
     private float projectileDamage;
+    [SerializeField, HideInInspector]
+    private float projectileDamageScale;
 
     /// <summary>
     /// Color of this towers projectile.
@@ -55,8 +59,10 @@ public class ProjectileTower : Tower
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
         this.attackRate = attackRate;
+        this.attackRateScale = attackRate;
         this.projectileSpeed = projectileSpeed;
         this.projectileDamage = projectileDamage;
+        this.projectileDamageScale = projectileDamage;
         this.color = color;
 
         effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
@@ -86,10 +92,15 @@ public class ProjectileTower : Tower
         if (level < maxLevel)
         {
             base.Upgrade();
-            projectileDamage += (0.2f * projectileDamage);
-            projectileSpeed += (0.1f * projectileSpeed);
-            attackRate -= (0.2f * attackRate);
-            print(attackRate);
+
+            // Get projectileDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with projectileDamageScale.
+            projectileDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * projectileDamageScale;
+
+            // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
+            attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;
+            attackTimer = new GameTimer(attackRate);
+            attackTimer.SkipTimer();
+            attackTimer.SetPaused(false);
         }
     }
 

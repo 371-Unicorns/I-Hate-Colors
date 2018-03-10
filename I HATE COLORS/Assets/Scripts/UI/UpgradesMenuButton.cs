@@ -13,7 +13,6 @@ public class UpgradesMenuButton : MonoBehaviour
     private void Start()
     {
         upgradesMenu = GameObject.Find("UpgradesMenu");
-        upgradesMenu.SetActive(false);
     }
     public void ToggleUpgradesMenu()
     {

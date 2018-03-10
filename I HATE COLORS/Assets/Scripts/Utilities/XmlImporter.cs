@@ -16,6 +16,11 @@ public class XmlImporter
 
     public static Queue<Wave> GetWavesFromXml()
     {
+        if (waves != null)
+        {
+            return waves;
+        }
+        
         enemies = GetEnemiesFromXml();
 
         Queue<Wave> retQueue = new Queue<Wave>();
@@ -58,6 +63,11 @@ public class XmlImporter
 
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
     {
+        if (enemies != null)
+        {
+            return enemies;
+        }
+
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
         XmlDocument doc = new XmlDocument();
@@ -85,6 +95,11 @@ public class XmlImporter
 
     public static Dictionary<string, Tower> GetTowersFromXml()
     {
+        if (towers != null)
+        {
+            return towers;
+        }
+
         Dictionary<string, Tower> retDictionary = new Dictionary<string, Tower>();
 
         XmlDocument doc = new XmlDocument();

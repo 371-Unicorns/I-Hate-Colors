@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserDoTEffect : DoTEffect {
+public class LaserDoTEffect : DoTEffect
+{
 
     private Sprite sprite;
     private Vector3 towerPosition;
@@ -27,7 +28,7 @@ public class LaserDoTEffect : DoTEffect {
     {
         base.Update();
 
-        if ((target.transform.position - towerPosition).magnitude > range)
+        if (target == null || (target.transform.position - towerPosition).magnitude > range)
         {
             Destroy(gameObject);
         }

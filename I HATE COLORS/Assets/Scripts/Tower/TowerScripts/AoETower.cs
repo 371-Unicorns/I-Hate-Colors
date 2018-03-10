@@ -9,12 +9,16 @@ public class AoETower : Tower
     /// </summary>
     [SerializeField, HideInInspector]
     private float attackRate;
+    [SerializeField, HideInInspector]
+    private float attackRateScale;
 
     /// <summary>
     /// Damage of this towers AoE effect.
     /// </summary>
     [SerializeField, HideInInspector]
     private float aoEDamage;
+    [SerializeField, HideInInspector]
+    private float aoEDamageScale;
 
     /// <summary>
     /// Timer controlling when to attack.
@@ -42,7 +46,9 @@ public class AoETower : Tower
     {
         base.Initialize(name, baseCost, upgradeCost, upgradeCostScale, maxLevel, range, description);
         this.attackRate = attackRate;
+        this.attackRateScale = attackRate;
         this.aoEDamage = aoEDamage;
+        this.aoEDamageScale = aoEDamage;
 
         effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, ColorType.BLACK);
 
@@ -79,6 +85,18 @@ public class AoETower : Tower
 
     public override void Upgrade()
     {
-        base.Upgrade();
+        if (level < maxLevel)
+        {
+            base.Upgrade();
+
+            // Get aoEDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with aoEDamageScale.
+            aoEDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * aoEDamageScale;
+
+            // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
+            attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;
+            attackTimer = new GameTimer(attackRate);
+            attackTimer.SkipTimer();
+            attackTimer.SetPaused(false);
+        }
     }
 }

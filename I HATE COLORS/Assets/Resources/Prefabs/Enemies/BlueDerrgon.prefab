@@ -28,7 +28,7 @@ GameObject:
   - component: {fileID: 95938149315272084}
   - component: {fileID: 114769023112928054}
   m_Layer: 0
-  m_Name: Unicorn
+  m_Name: BlueDerrgon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Transform:
   m_GameObject: {fileID: 1845804638312314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,7 +81,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.15
+  m_Radius: 0.3
 --- !u!95 &95228236814650134
 Animator:
   serializedVersion: 3
@@ -108,7 +108,7 @@ Animator:
   m_GameObject: {fileID: 1845804638312314}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c57819e4213e25b45b9bde9d471b330b, type: 2}
+  m_Controller: {fileID: 9100000, guid: d77e706245e2bb54dbc716c606713e69, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -232,12 +232,12 @@ SpriteRenderer:
   m_SortingLayerID: -784907773
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 69be6e7aeead6ee46814b02dac0db1c4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c078d5bc81870ea41ba0af547bebf6bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.24, y: 1.88}
+  m_Size: {x: 0.55, y: 0.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

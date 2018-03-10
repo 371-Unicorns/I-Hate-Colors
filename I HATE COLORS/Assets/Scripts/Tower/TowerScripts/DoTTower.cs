@@ -9,6 +9,8 @@ public class DoTTower : Tower
     /// </summary>
     [SerializeField, HideInInspector]
     private float doTDamage;
+    [SerializeField, HideInInspector]
+    private float doTDamageScale;
 
     /// <summary>
     /// Color of this towers effect.
@@ -34,6 +36,7 @@ public class DoTTower : Tower
     {
         base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
         this.doTDamage = doTDamage;
+        this.doTDamageScale = doTDamage;
         this.color = color;
 
         effectPrefab.GetComponent<DoTEffect>().Initialize(doTDamage, range, color);
@@ -62,5 +65,8 @@ public class DoTTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+
+        // Get doTDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with doTDamageScale.
+        doTDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * doTDamageScale;
     }
 }

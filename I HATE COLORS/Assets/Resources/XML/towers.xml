@@ -27,7 +27,7 @@
   </proj-tower>
   <dot-tower>
     <name>LaserTower</name>
-    <dot-damage>5</dot-damage>
+    <dot-damage>10</dot-damage>
     <dot-color>ORANGE</dot-color>
     <range>5</range>
     <cost>60</cost>
