@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public PostProcessingProfile ppProfile;
 
-    public static int money = 1500;
+    public static int money = 150;
 
     /// <summary>
     /// AudioSource to be played, once a blood reaches the bank.
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         didPlaceFlameTower = false;
         notYetReceivedTowerPlacementReward = true;
 
-        money = 1500;
+        money = 150;
 
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
@@ -177,7 +177,13 @@ public class GameManager : MonoBehaviour
             GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
 
             Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
-            gameOverText.text = CastleManager.CastleHealth <= 0 ? "GAME OVER" : "CONGRATULATIONS";
+            if (CastleManager.CastleHealth > 0)
+            {
+                //gameOverText.text = "CONGRATULATIONS";
+                GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("victory_cutscene");
+            }
+            else
+                gameOverText.text = "GAME OVER";
             gameOverObject.SetActive(true);
         }
         else
