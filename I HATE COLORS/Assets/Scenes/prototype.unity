@@ -231,6 +231,7 @@ GameObject:
   - component: {fileID: 214776964}
   - component: {fileID: 214776967}
   - component: {fileID: 214776966}
+  - component: {fileID: 214776965}
   m_Layer: 5
   m_Name: RewardsPanel
   m_TagString: Untagged
@@ -257,6 +258,18 @@ RectTransform:
   m_AnchoredPosition: {x: 292.80463, y: -213}
   m_SizeDelta: {x: 233.4, y: 62.9}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &214776965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 214776963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ebdd3841cddaa045b3dfdcae9f586e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodFly: {fileID: 114189671122330494, guid: 407233b1645e40f40b9ff41e1ac1b676, type: 2}
 --- !u!114 &214776966
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
     public static bool didPlaceLaserTower = false;
     public static bool didPlaceFlameTower = false;
     public static bool notYetRecievedTowerPlacementReward = true;
+    public static bool rewardsPanelFirstEnable = true;
 
     /*
     /// <summary>
@@ -93,9 +94,6 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         gameOver = false;
-        rewardsPanel = GameObject.Find("RewardsPanel");
-        rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
-        rewardsPanel.SetActive(false);
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
@@ -116,6 +114,9 @@ public class GameManager : MonoBehaviour
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
         skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
+        rewardsPanel = GameObject.Find("RewardsPanel");
+        rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
+        rewardsPanel.SetActive(false);
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
 
