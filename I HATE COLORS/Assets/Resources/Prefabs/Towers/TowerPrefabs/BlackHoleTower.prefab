@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82088125076708216}
   m_Layer: 8
   m_Name: BlackHoleTower
-  m_TagString: Untagged
+  m_TagString: BlackHoleTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

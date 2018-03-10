@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82109395788281038}
   m_Layer: 8
   m_Name: ShotgunTower
-  m_TagString: Untagged
+  m_TagString: ShotgunTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -601889635
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 6c23bdbd349602241b78d6554a86bb9a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

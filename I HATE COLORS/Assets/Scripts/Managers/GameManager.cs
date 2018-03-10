@@ -38,16 +38,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject bloodFlyTarget;
 
-    public static GameObject towerInformationPanel;
+    /// <summary>
+    /// Button to skip the timer in the info panel.
+    /// </summary>
+    private static Button skipTimeButton;
+    public static Button SkipTimeButton { get { return skipTimeButton; } }
 
     private static GameTimer waveTimer;
+    public static GameTimer WaveTimer { get { return waveTimer; } }
+
+
     public static int currentWave;
     private static int totalWaves;
 
     /// <summary>
     /// Post Processing Profile.
     /// </summary>
-    public  PostProcessingProfile ppProfile;
+    public PostProcessingProfile ppProfile;
 
     public static int money = 150;
 
@@ -63,14 +70,18 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
-    
+
     /// <summary>
     /// Boolean variables related to the reward panel
     /// </summary>
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
     public static bool didUpgradeFirstTower = false;
-    private static bool me = false;
+    public static bool didPlaceBulletTower = false;
+    public static bool didPlaceShotgunTower = false;
+    public static bool didPlaceBlackHoleTower = false;
+    public static bool didPlaceLaserTower = false;
+    public static bool didPlaceFlameTower = false;
 
     /*
     /// <summary>
@@ -84,7 +95,6 @@ public class GameManager : MonoBehaviour
         rewardsPanel = GameObject.Find("RewardsPanel");
         rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
         rewardsPanel.SetActive(false);
-        towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
@@ -104,6 +114,7 @@ public class GameManager : MonoBehaviour
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
+        skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
 
@@ -133,8 +144,8 @@ public class GameManager : MonoBehaviour
 
             if (CastleManager.CastleHealth > 0)
                 saturation.basic.saturation = 0;
-               
-               
+
+
             SumPause.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
@@ -155,12 +166,13 @@ public class GameManager : MonoBehaviour
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
-                saturation.basic.saturation = 1.0f -  ((float)(currentWave - 1) / (float)totalWaves);
+                saturation.basic.saturation = 1.0f - ((float)(currentWave - 1) / (float)totalWaves);
                 currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
                 waveTimer.SetPaused(false);
-                WaveManager.SetNextWave();               
+                WaveManager.SetNextWave();
+                skipTimeButton.interactable = true;
             }
 
             if (Hover.IsActive())
@@ -175,7 +187,7 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                waveTimer.SkipTimer();
+                SkipTimer();
             }
             else if (Input.GetMouseButtonUp(1) && Hover.IsActive())
             {
@@ -183,7 +195,6 @@ public class GameManager : MonoBehaviour
                 Hover.Deactivate();
                 GameManager.ResetTower();
                 TowerInformation.Reset();
-                towerInformationPanel.SetActive(true);
             }
         }
         ppProfile.colorGrading.settings = saturation;
@@ -202,7 +213,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(false);
     }
 
     /// <summary>
@@ -216,7 +226,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(true);
     }
 
     /// <summary>
@@ -226,6 +235,39 @@ public class GameManager : MonoBehaviour
     {
         GameManager.SelectedTower = null;
         GameManager.rangeIndicatorRenderer.enabled = false;
+    }
+
+    public static bool CheckForFirstPlacement()
+    {
+        if (SelectedTower.CompareTag("BulletTower") && !GameManager.didPlaceBulletTower)
+        {
+            GameManager.didPlaceBulletTower = true;
+        }
+        else if (SelectedTower.CompareTag("BlackHoleTower") && !GameManager.didPlaceBlackHoleTower)
+        {
+            GameManager.didPlaceBlackHoleTower = true;
+        }
+        else if (SelectedTower.CompareTag("FlameTower") && !GameManager.didPlaceFlameTower)
+        {
+            GameManager.didPlaceFlameTower = true;
+        }
+        else if (SelectedTower.CompareTag("LaserTower") && !GameManager.didPlaceLaserTower)
+        {
+            GameManager.didPlaceLaserTower = true;
+        }
+        else if (SelectedTower.CompareTag("ShotgunTower") && !GameManager.didPlaceShotgunTower)
+        {
+            GameManager.didPlaceShotgunTower = true;
+        }
+
+        if (GameManager.didPlaceBulletTower && GameManager.didPlaceShotgunTower && GameManager.didPlaceBlackHoleTower && GameManager.didPlaceLaserTower && GameManager.didPlaceFlameTower)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static void AddMoney(int m)
@@ -271,14 +313,22 @@ public class GameManager : MonoBehaviour
 
     public static IEnumerator DisplayRewardsPanel()
     {
+        rewardsPanel.SetActive(true);
+
         if (didUpgradeFirstTower)
         {
-            rewardsPanel.SetActive(true);
             rewardsPanelText.text = "You Upgraded your first tower! Nice!";
             AddMoney(20);
-            yield return new WaitForSeconds(6);
-            rewardsPanel.SetActive(false);
+
         }
+        else if (didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower)
+        {
+            rewardsPanelText.text = "You placed one of every tower type! Nice!";
+            AddMoney(50);
+        }
+
+        yield return new WaitForSeconds(6);
+        rewardsPanel.SetActive(false);
     }
 
     private void LoadTowerButtons()
@@ -298,6 +348,17 @@ public class GameManager : MonoBehaviour
             }
             towerButton.SetSprites(tower.gameObject);
         }
+    }
+
+    /// <summary>
+    /// Skip the currently running wave timer.
+    /// 
+    /// Author: David Askari
+    /// </summary>
+    public void SkipTimer()
+    {
+        waveTimer.SkipTimer();
+        skipTimeButton.interactable = false;
     }
 
 }

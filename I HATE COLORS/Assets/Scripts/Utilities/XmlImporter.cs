@@ -20,7 +20,7 @@ public class XmlImporter
         {
             return waves;
         }
-        
+
         enemies = GetEnemiesFromXml();
 
         Queue<Wave> retQueue = new Queue<Wave>();
@@ -110,61 +110,65 @@ public class XmlImporter
 
         foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("proj-tower"))
         {
-            string id = node.SelectSingleNode("id").InnerText;
-            float projectileDamage = float.Parse(node.SelectSingleNode("proj-damage").InnerText);
-            float projectileSpeed = float.Parse(node.SelectSingleNode("proj-speed").InnerText);
-            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("proj-color").InnerText);
-            float fireRate = float.Parse(node.SelectSingleNode("fire-rate").InnerText);
-            float range = float.Parse(node.SelectSingleNode("range").InnerText);
-            int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
-            int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
-            double upgradeCostScale = double.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
-            int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
-            string description = node.SelectSingleNode("description").InnerText;
-
-            ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<ProjectileTower>();
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, fireRate, projectileSpeed, projectileDamage, color, description);
-            tower.transform.SetParent(prefabHolder);
-
-            retDictionary.Add(id, tower);
-        }
-
-        foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("aoe-tower"))
-        {
-            string id = node.SelectSingleNode("id").InnerText;
-            float aoeDamage = float.Parse(node.SelectSingleNode("aoe-damage").InnerText);
-            float fireRate = float.Parse(node.SelectSingleNode("fire-rate").InnerText);
-            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            string name = node.SelectSingleNode("name").InnerText;
             int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
             int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
             float upgradeCostScale = float.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
             int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("color").InnerText);
             string description = node.SelectSingleNode("description").InnerText;
 
-            AoETower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<AoETower>();
-            tower.Initialize(id, cost, aoeDamage, fireRate, upgradeCost, upgradeCostScale, maxLevel, range, description);
-            tower.transform.SetParent(prefabHolder);
+            // Projectile tower specific
+            float projectileDamage = float.Parse(node.SelectSingleNode("proj-damage").InnerText);
+            float projectileSpeed = float.Parse(node.SelectSingleNode("proj-speed").InnerText);
+            float attackRate = float.Parse(node.SelectSingleNode("attack-rate").InnerText);
 
-            retDictionary.Add(id, tower);
+            ProjectileTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + name), LevelManager.PrefabHolderParent) as GameObject).GetComponent<ProjectileTower>();
+            tower.Initialize(name, cost, upgradeCost, upgradeCostScale, maxLevel, range, color, description, attackRate, projectileSpeed, projectileDamage);
+
+            retDictionary.Add(name, tower);
+        }
+
+        foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("aoe-tower"))
+        {
+            string name = node.SelectSingleNode("name").InnerText;
+            int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
+            int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
+            float upgradeCostScale = float.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
+            int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("color").InnerText);
+            string description = node.SelectSingleNode("description").InnerText;
+
+            // Projectile tower specific
+            float aoeDamage = float.Parse(node.SelectSingleNode("aoe-damage").InnerText);
+            float attackRate = float.Parse(node.SelectSingleNode("attack-rate").InnerText);
+
+            AoETower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + name), LevelManager.PrefabHolderParent) as GameObject).GetComponent<AoETower>();
+            tower.Initialize(name, cost, upgradeCost, upgradeCostScale, maxLevel, range, color, description, attackRate, aoeDamage);
+
+            retDictionary.Add(name, tower);
         }
 
         foreach (XmlNode node in doc.SelectSingleNode("towers").SelectNodes("dot-tower"))
         {
-            string id = node.SelectSingleNode("id").InnerText;
-            float effectDamage = float.Parse(node.SelectSingleNode("dot-damage").InnerText);
-            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("dot-color").InnerText);
-            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            string name = node.SelectSingleNode("name").InnerText;
             int cost = int.Parse(node.SelectSingleNode("cost").InnerText);
             int upgradeCost = int.Parse(node.SelectSingleNode("upgrade-cost").InnerText);
-            double upgradeCostScale = double.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
+            float upgradeCostScale = float.Parse(node.SelectSingleNode("upgrade-cost-scale").InnerText);
             int maxLevel = int.Parse(node.SelectSingleNode("max-level").InnerText);
+            float range = float.Parse(node.SelectSingleNode("range").InnerText);
+            ColorType color = (ColorType)ColorType.Parse(typeof(ColorType), node.SelectSingleNode("color").InnerText);
             string description = node.SelectSingleNode("description").InnerText;
 
-            DoTTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + id), LevelManager.PrefabHolderParent) as GameObject).GetComponent<DoTTower>();
-            tower.Initialize(id, cost, upgradeCost, upgradeCostScale, maxLevel, range, effectDamage, color, description);
-            tower.transform.SetParent(prefabHolder);
+            // Projectile tower specific
+            float doTDamage = float.Parse(node.SelectSingleNode("dot-damage").InnerText);
 
-            retDictionary.Add(id, tower);
+            DoTTower tower = (GameObject.Instantiate(Resources.Load("Prefabs/Towers/TowerPrefabs/" + name), LevelManager.PrefabHolderParent) as GameObject).GetComponent<DoTTower>();
+            tower.Initialize(name, cost, upgradeCost, upgradeCostScale, maxLevel, range, color, description, doTDamage);
+
+            retDictionary.Add(name, tower);
         }
 
         towers = retDictionary;

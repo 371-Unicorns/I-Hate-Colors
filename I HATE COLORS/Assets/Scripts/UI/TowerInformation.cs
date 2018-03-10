@@ -85,7 +85,7 @@ public class TowerInformation : MonoBehaviour
         selectedTower = tower;
         FillHead();
 
-        informationPanel.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        informationPanel.transform.position = Camera.main.WorldToScreenPoint(tower.Tile.transform.position);
         levelText.text = "Level: " + selectedTower.Level.ToString();
         upgradeCostText.text = "Upgrade: " + selectedTower.UpgradeCosts.ToString();
         CheckUpgrade();
@@ -107,7 +107,7 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public static void CheckUpgrade()
     {
-        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money ? true : false;
+        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money && selectedTower.Level <= selectedTower.MaxLevel ? true : false;
     }
 
     /// <summary>
@@ -115,13 +115,15 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public void UpgradeTower()
     {
-        if(!GameManager.didUpgradeFirstTower) {
+        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        if (!GameManager.didUpgradeFirstTower)
+        {
             GameManager.didUpgradeFirstTower = true;
             StartCoroutine(GameManager.DisplayRewardsPanel());
         }
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
-        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        TowerInformation.CheckUpgrade();
     }
 
     /// <summary>

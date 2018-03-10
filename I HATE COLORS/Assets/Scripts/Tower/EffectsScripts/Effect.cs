@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class Effect : MonoBehaviour
 {
     /// <summary>
-    /// Amount of damage the effet deals.
+    /// Amount of damage the effect deals.
     /// </summary>
     [SerializeField, HideInInspector]
     protected float damage;
