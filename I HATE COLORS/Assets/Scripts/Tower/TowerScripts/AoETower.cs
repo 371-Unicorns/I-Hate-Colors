@@ -91,6 +91,7 @@ public class AoETower : Tower
 
             // Get aoEDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with aoEDamageScale.
             aoEDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * aoEDamageScale;
+            effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, ColorType.BLACK);
 
             // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
             attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;

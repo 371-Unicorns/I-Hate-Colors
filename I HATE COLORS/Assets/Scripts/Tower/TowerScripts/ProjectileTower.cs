@@ -95,6 +95,7 @@ public class ProjectileTower : Tower
 
             // Get projectileDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with projectileDamageScale.
             projectileDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * projectileDamageScale;
+            effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
 
             // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
             attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;

@@ -68,5 +68,6 @@ public class DoTTower : Tower
 
         // Get doTDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with doTDamageScale.
         doTDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * doTDamageScale;
+        effectPrefab.GetComponent<DoTEffect>().Initialize(doTDamage, range, color);
     }
 }
