@@ -1,61 +1,63 @@
 <towers>
   <proj-tower>
     <name>BulletTower</name>
-    <proj-damage>10</proj-damage>
-    <proj-speed>10</proj-speed>
-    <proj-color>RED</proj-color>
-    <attack-rate>5</attack-rate>
-    <range>3</range>
     <cost>25</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
+    <range>3</range>
+    <color>RED</color>
     <description>A standard one bullet at a time tower.</description>
+    <attack-rate>5</attack-rate>
+    <proj-speed>10</proj-speed>
+    <proj-damage>10</proj-damage>
   </proj-tower>
   <proj-tower>
     <name>ShotgunTower</name>
-    <proj-damage>5</proj-damage>
-    <proj-speed>5</proj-speed>
-    <proj-color>BLACK</proj-color>
-    <attack-rate>3</attack-rate>
-    <range>5</range>
     <cost>30</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
-    <description>A tower that fires off a spread of bullets.</description>
-  </proj-tower>
-  <dot-tower>
-    <name>LaserTower</name>
-    <dot-damage>10</dot-damage>
-    <dot-color>ORANGE</dot-color>
     <range>5</range>
-    <cost>60</cost>
-    <upgrade-cost>10</upgrade-cost>
-    <upgrade-cost-scale>1.25</upgrade-cost-scale>
-    <max-level>5</max-level>
-    <description>A tower that shoots out a target tracking laser.</description>
-  </dot-tower>
+    <color>BLACK</color>
+    <description>A tower that fires off a spread of bullets.</description>
+    <attack-rate>3</attack-rate>
+    <proj-speed>5</proj-speed>
+    <proj-damage>5</proj-damage>
+  </proj-tower>
   <aoe-tower>
     <name>BlackHoleTower</name>
-    <aoe-damage>0</aoe-damage>
-    <attack-rate>10</attack-rate>
-    <range>5</range>
     <cost>60</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
+    <range>5</range>
+    <color>BLACK</color>
     <description>A tower that opens a black hole that holds enemies in place.</description>
+    <attack-rate>10</attack-rate>
+    <aoe-damage>0</aoe-damage>
   </aoe-tower>
   <aoe-tower>
     <name>FlameTower</name>
-    <aoe-damage>0.25</aoe-damage>
-    <attack-rate>10</attack-rate>
-    <range>3</range>
     <cost>100</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
+    <range>3</range>
+    <color>BLACK</color>
     <description>A tower that burns enemies with a flame wheel.</description>
+    <attack-rate>10</attack-rate>
+    <aoe-damage>0.25</aoe-damage>
   </aoe-tower>
+  <dot-tower>
+    <name>LaserTower</name>
+    <cost>60</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <range>5</range>
+    <color>ORANGE</color>
+    <description>A tower that shoots out a target tracking laser.</description>
+    <dot-damage>10</dot-damage>
+  </dot-tower>
 </towers>

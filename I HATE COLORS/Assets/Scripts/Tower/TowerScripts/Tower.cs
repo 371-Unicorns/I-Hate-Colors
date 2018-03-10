@@ -56,6 +56,12 @@ public abstract class Tower : MonoBehaviour
     public float Range { get { return range; } }
 
     /// <summary>
+    /// Color of this towers effect.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    protected ColorType color;
+
+    /// <summary>
     /// Short description of this tower.
     /// </summary>
     protected string description;
@@ -94,8 +100,9 @@ public abstract class Tower : MonoBehaviour
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
+    /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
-    protected void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description)
+    protected void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description)
     {
         this.towerName = name;
         this.baseCosts = baseCosts;
@@ -103,6 +110,7 @@ public abstract class Tower : MonoBehaviour
         this.upgradeCostsScale = upgradeCostsScale;
         this.maxLevel = maxLevel;
         this.range = range;
+        this.color = color;
         this.description = description;
 
         this.level = 1;

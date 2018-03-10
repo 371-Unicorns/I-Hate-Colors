@@ -39,18 +39,19 @@ public class AoETower : Tower
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
+    /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
     /// <param name="attackRate">Fire rate of this tower.</param>
     /// <param name="aoEDamage">Damage of this towers AoE effect.</param>
-    public void Initialize(string name, int baseCost, int upgradeCost, float upgradeCostScale, int maxLevel, float range, string description, float attackRate, float aoEDamage)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description, float attackRate, float aoEDamage)
     {
-        base.Initialize(name, baseCost, upgradeCost, upgradeCostScale, maxLevel, range, description);
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, color, description);
         this.attackRate = attackRate;
         this.attackRateScale = attackRate;
         this.aoEDamage = aoEDamage;
         this.aoEDamageScale = aoEDamage;
 
-        effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, ColorType.BLACK);
+        effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, color);
 
         attackTimer = new GameTimer(attackRate);
         attackTimer.SkipTimer();
@@ -91,7 +92,7 @@ public class AoETower : Tower
 
             // Get aoEDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with aoEDamageScale.
             aoEDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * aoEDamageScale;
-            effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, ColorType.BLACK);
+            effectPrefab.GetComponent<AoEEffect>().Initialize(aoEDamage, range, color);
 
             // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
             attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;

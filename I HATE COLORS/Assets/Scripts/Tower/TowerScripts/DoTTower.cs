@@ -29,15 +29,14 @@ public class DoTTower : Tower
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
+    /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
     /// <param name="doTDamage">Damage of the DoT effect.</param>
-    /// <param name="color">Color of this towers effect.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description, float doTDamage, ColorType color)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description, float doTDamage)
     {
-        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, color, description);
         this.doTDamage = doTDamage;
         this.doTDamageScale = doTDamage;
-        this.color = color;
 
         effectPrefab.GetComponent<DoTEffect>().Initialize(doTDamage, range, color);
     }

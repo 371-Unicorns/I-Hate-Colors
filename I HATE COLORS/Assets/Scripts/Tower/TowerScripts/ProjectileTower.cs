@@ -30,12 +30,6 @@ public class ProjectileTower : Tower
     private float projectileDamageScale;
 
     /// <summary>
-    /// Color of this towers projectile.
-    /// </summary>
-    [SerializeField, HideInInspector]
-    private ColorType color;
-
-    /// <summary>
     /// Timer controlling when to attack.
     /// </summary>
     [SerializeField, HideInInspector]
@@ -50,20 +44,19 @@ public class ProjectileTower : Tower
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
+    /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
     /// <param name="attackRate">Fire rate of this tower.</param>
     /// <param name="projectileSpeed">Speed of the projectile.</param>
     /// <param name="projectileDamage">Damage of the projectile.</param>
-    /// <param name="color">Color of this towers projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, string description, float attackRate, float projectileSpeed, float projectileDamage, ColorType color)
+    public void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description, float attackRate, float projectileSpeed, float projectileDamage)
     {
-        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, color, description);
         this.attackRate = attackRate;
         this.attackRateScale = attackRate;
         this.projectileSpeed = projectileSpeed;
         this.projectileDamage = projectileDamage;
         this.projectileDamageScale = projectileDamage;
-        this.color = color;
 
         effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
 
