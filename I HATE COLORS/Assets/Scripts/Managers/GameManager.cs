@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject bloodFlyTarget;
 
-    public static GameObject towerInformationPanel;
-
     private static GameTimer waveTimer;
     public static int currentWave;
     private static int totalWaves;
@@ -47,7 +45,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Post Processing Profile.
     /// </summary>
-    public  PostProcessingProfile ppProfile;
+    public PostProcessingProfile ppProfile;
 
     public static int money = 150;
 
@@ -63,14 +61,13 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
-    
+
     /// <summary>
     /// Boolean variables related to the reward panel
     /// </summary>
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
     public static bool didUpgradeFirstTower = false;
-    private static bool me = false;
 
     /*
     /// <summary>
@@ -84,7 +81,6 @@ public class GameManager : MonoBehaviour
         rewardsPanel = GameObject.Find("RewardsPanel");
         rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
         rewardsPanel.SetActive(false);
-        towerInformationPanel = GameObject.Find("TowerInformation");
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
@@ -133,8 +129,8 @@ public class GameManager : MonoBehaviour
 
             if (CastleManager.CastleHealth > 0)
                 saturation.basic.saturation = 0;
-               
-               
+
+
             SumPause.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
@@ -155,12 +151,12 @@ public class GameManager : MonoBehaviour
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
-                saturation.basic.saturation = 1.0f -  ((float)(currentWave - 1) / (float)totalWaves);
+                saturation.basic.saturation = 1.0f - ((float)(currentWave - 1) / (float)totalWaves);
                 currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
                 waveTimer.SetPaused(false);
-                WaveManager.SetNextWave();               
+                WaveManager.SetNextWave();
             }
 
             if (Hover.IsActive())
@@ -183,7 +179,6 @@ public class GameManager : MonoBehaviour
                 Hover.Deactivate();
                 GameManager.ResetTower();
                 TowerInformation.Reset();
-                towerInformationPanel.SetActive(true);
             }
         }
         ppProfile.colorGrading.settings = saturation;
@@ -202,7 +197,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(false);
     }
 
     /// <summary>
@@ -216,7 +210,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(true);
     }
 
     /// <summary>

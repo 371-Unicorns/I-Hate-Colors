@@ -79,6 +79,13 @@ public abstract class Tower : MonoBehaviour
     protected AudioSource upgradeAudioSource;
 
     /// <summary>
+    /// Tile this tower stands on.
+    /// </summary>
+    [SerializeField, HideInInspector]
+    protected Tile tile;
+    public Tile Tile { get { return tile; } }
+
+    /// <summary>
     /// Setup this tower.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
@@ -103,6 +110,14 @@ public abstract class Tower : MonoBehaviour
         this.upgradeAudioSource = GetComponent<AudioSource>();
     }
 
+    public virtual void Update()
+    {
+        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
+        {
+            FindClosestTarget();
+        }
+    }
+
     /// <summary>
     /// Upgrade tower. 
     /// It does not check whether the player has enough money. Do this BEFORE calling this method.
@@ -123,14 +138,6 @@ public abstract class Tower : MonoBehaviour
     /// Attack target with tower's specific attack.
     /// </summary>
     public abstract void Attack();
-
-    public virtual void Update()
-    {
-        if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
-        {
-            FindClosestTarget();
-        }
-    }
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
@@ -179,8 +186,10 @@ public abstract class Tower : MonoBehaviour
         {
             Hover.Deactivate();
             GameManager.SelectTower(tower.GetComponent<Tower>());
-            TowerInformation.ShowPlacedTower(GameManager.SelectedTower);
+            TowerInformation.Reset();
         }
+
+        tower.GetComponent<Tower>().tile = parentTile;
         return tower.GetComponent<Tower>();
     }
 

@@ -85,7 +85,7 @@ public class TowerInformation : MonoBehaviour
         selectedTower = tower;
         FillHead();
 
-        informationPanel.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        informationPanel.transform.position = Camera.main.WorldToScreenPoint(tower.Tile.transform.position);
         levelText.text = "Level: " + selectedTower.Level.ToString();
         upgradeCostText.text = "Upgrade: " + selectedTower.UpgradeCosts.ToString();
         CheckUpgrade();
