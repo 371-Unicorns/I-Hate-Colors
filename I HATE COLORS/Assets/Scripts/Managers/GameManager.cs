@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public PostProcessingProfile ppProfile;
 
-    public static int money = 1000;
+    public static int money = 100;
 
     /// <summary>
     /// AudioSource to be played, once a blood reaches the bank.
@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     public static bool didPlaceBlackHoleTower = false;
     public static bool didPlaceLaserTower = false;
     public static bool didPlaceFlameTower = false;
+    public static bool notYetRecievedTowerPlacementReward = true;
 
     /*
     /// <summary>
@@ -294,17 +295,19 @@ public class GameManager : MonoBehaviour
 
     public static IEnumerator DisplayRewardsPanel()
     {
-        rewardsPanel.SetActive(true);
 
         if (didUpgradeFirstTower)
         {
             rewardsPanelText.text = "You Upgraded your first tower! Nice!";
+            rewardsPanel.SetActive(true);
             AddMoney(20);
             
         }
-        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower) 
+        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetRecievedTowerPlacementReward) 
         {
             rewardsPanelText.text = "You placed one of every tower type! Nice!";
+            rewardsPanel.SetActive(true);
+            GameManager.notYetRecievedTowerPlacementReward = false;
             AddMoney(50);
         }
 
