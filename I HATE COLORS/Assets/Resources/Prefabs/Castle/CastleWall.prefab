@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 198913861749684202, guid: 98ed2599855b7574a901763f6f866920,
     type: 2}
+  ppProfile: {fileID: 11400000, guid: ebae01c33bc50f04287d8677aa0448f7, type: 2}
 --- !u!212 &212045165444671260
 SpriteRenderer:
   m_ObjectHideFlags: 1

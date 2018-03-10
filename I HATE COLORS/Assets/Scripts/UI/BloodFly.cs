@@ -13,7 +13,7 @@ public class BloodFly : MonoBehaviour
     private GameObject target;
 
     /// <summary>
-    /// AudioSource to be played, once a coin reaches the bank.
+    /// AudioSource to be played, once a blood reaches the bank.
     /// </summary>
     private AudioSource bloodSound;
 

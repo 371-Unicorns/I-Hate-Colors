@@ -556,7 +556,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1009997728
+  randomSeed: -128505109
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5771,6 +5771,7 @@ GameObject:
   - component: {fileID: 966140174}
   - component: {fileID: 966140173}
   - component: {fileID: 966140172}
+  - component: {fileID: 966140176}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5842,6 +5843,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &966140176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 966140171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  profile: {fileID: 11400000, guid: ebae01c33bc50f04287d8677aa0448f7, type: 2}
 --- !u!1 &995539559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6371,7 +6384,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1186712084}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 12, y: 0, z: -0.026807541}
+  m_LocalPosition: {x: 10.76, y: 0, z: -0.026807541}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 277411019}
@@ -6870,7 +6883,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1426408204
+  randomSeed: -881212811
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11370,8 +11383,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 724278178}
   m_HandleRect: {fileID: 724278177}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11713,7 +11726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00005340576, y: 0.000014934905}
+  m_AnchoredPosition: {x: -0.00005340576, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743294333
@@ -12508,7 +12521,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -12793,7 +12806,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -343679011
+  randomSeed: 1589375695
   InitialModule:
     serializedVersion: 3
     enabled: 1
