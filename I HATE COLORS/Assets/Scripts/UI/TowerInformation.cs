@@ -121,6 +121,13 @@ public class TowerInformation : MonoBehaviour
             GameManager.didUpgradeFirstTower = true;
             StartCoroutine(GameManager.DisplayRewardsPanel());
         }
+
+        if(GameManager.CheckForFirstUpgrade())
+        {
+            StartCoroutine(GameManager.DisplayRewardsPanel());
+        }
+        
+
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
         TowerInformation.CheckUpgrade();

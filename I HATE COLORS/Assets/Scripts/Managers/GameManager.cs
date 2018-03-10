@@ -77,12 +77,19 @@ public class GameManager : MonoBehaviour
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
     public static bool didUpgradeFirstTower = false;
+    public static bool notYetReceivedFirstTowerUpgradeReward = true;
+    public static bool didUpgradeBulletTower = false;
+    public static bool didUpgradeShotgunTower = false;
+    public static bool didUpgradeBlackHoleTower = false;
+    public static bool didUpgradeLaserTower = false;
+    public static bool didUpgradeFlameTower = false;
+    public static bool notYetReceivedTowerUpgradeReward = true;
     public static bool didPlaceBulletTower = false;
     public static bool didPlaceShotgunTower = false;
     public static bool didPlaceBlackHoleTower = false;
     public static bool didPlaceLaserTower = false;
     public static bool didPlaceFlameTower = false;
-    public static bool notYetRecievedTowerPlacementReward = true;
+    public static bool notYetReceivedTowerPlacementReward = true;
     public static bool rewardsPanelFirstEnable = true;
 
     /*
@@ -239,6 +246,45 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.enabled = false;
     }
 
+    public static bool CheckForFirstUpgrade()
+    {
+        switch (SelectedTower.tag)
+        {
+            case "BulletTower":
+                if(!GameManager.didUpgradeBulletTower)
+                    GameManager.didUpgradeBulletTower = true;
+                break;
+            case "ShotgunTower":
+                if (!GameManager.didUpgradeShotgunTower)
+                    GameManager.didUpgradeShotgunTower = true;
+                break;
+            case "BlackHoleTower":
+                if (!GameManager.didUpgradeBlackHoleTower)
+                    GameManager.didUpgradeBlackHoleTower = true;
+                break;
+            case "LaserTower":
+                if (!GameManager.didUpgradeLaserTower)
+                    GameManager.didUpgradeLaserTower = true;
+                break;
+            case "FlameTower":
+                if (!GameManager.didUpgradeFlameTower)
+                    GameManager.didUpgradeFlameTower = true;
+                break;
+        }
+        if (GameManager.didUpgradeBulletTower
+            && GameManager.didUpgradeShotgunTower
+            && GameManager.didUpgradeBlackHoleTower
+            && GameManager.didUpgradeLaserTower
+            && GameManager.didUpgradeFlameTower)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public static bool CheckForFirstPlacement()
     {
         if (SelectedTower.CompareTag("BulletTower") && !GameManager.didPlaceBulletTower)
@@ -316,19 +362,27 @@ public class GameManager : MonoBehaviour
     public static IEnumerator DisplayRewardsPanel()
     {
 
-        if (didUpgradeFirstTower)
+        if (didUpgradeFirstTower && notYetReceivedFirstTowerUpgradeReward)
         {
             rewardsPanelText.text = "You Upgraded your first tower! Nice!";
             rewardsPanel.SetActive(true);
+            GameManager.notYetReceivedFirstTowerUpgradeReward = false;
             AddMoney(20);
 
         }
-        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetRecievedTowerPlacementReward) 
+        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetReceivedTowerPlacementReward) 
         {
             rewardsPanelText.text = "You placed one of every tower type! Nice!";
             rewardsPanel.SetActive(true);
-            GameManager.notYetRecievedTowerPlacementReward = false;
+            GameManager.notYetReceivedTowerPlacementReward = false;
             AddMoney(50);
+        }
+        else if(didUpgradeBulletTower && didUpgradeShotgunTower && didUpgradeBlackHoleTower && didUpgradeLaserTower && didUpgradeFlameTower && notYetReceivedTowerUpgradeReward)
+        {
+            rewardsPanelText.text = "You upgraded one of every tower type! Nice!";
+            rewardsPanel.SetActive(true);
+            GameManager.notYetReceivedTowerUpgradeReward = false;
+            CastleManager.AddCastleHealth();
         }
 
         yield return new WaitForSeconds(6);
