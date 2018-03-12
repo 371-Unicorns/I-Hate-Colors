@@ -12,12 +12,6 @@ public class DoTTower : Tower
     [SerializeField, HideInInspector]
     private float doTDamageScale;
 
-    /// <summary>
-    /// Color of this towers effect.
-    /// </summary>
-    [SerializeField, HideInInspector]
-    private ColorType color;
-
     private DoTEffect spawnedEffect;
 
     /// <summary>

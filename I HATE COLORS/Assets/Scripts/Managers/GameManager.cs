@@ -92,11 +92,10 @@ public class GameManager : MonoBehaviour
     public static bool notYetReceivedTowerPlacementReward = true;
     public static bool rewardsPanelFirstEnable = true;
 
-    /*
     /// <summary>
-    /// Prevent instance of this class, since it's a Singleton.
+    /// All created TowerBtn.
     /// </summary>
-    public GameManager() { } */
+    private static List<TowerBtn> towerBtns;
 
     public void Start()
     {
@@ -143,6 +142,7 @@ public class GameManager : MonoBehaviour
         skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
+        towerBtns = new List<TowerBtn>();
 
         towerDictionary = XmlImporter.GetTowersFromXml();
         LoadTowerButtons();
@@ -344,6 +344,10 @@ public class GameManager : MonoBehaviour
     public static void AddMoney(int m)
     {
         GameManager.money += m;
+        foreach (TowerBtn towerBtn in towerBtns)
+        {
+            towerBtn.CheckEnoughMoney();
+        }
     }
 
     private void SetTimerText()
@@ -427,7 +431,8 @@ public class GameManager : MonoBehaviour
                 Debug.Log(string.Format("Tried to load and instantiate Tower, but an error occured."));
                 return;
             }
-            towerButton.SetSprites(tower.gameObject);
+            towerButton.Initalize(tower.gameObject);
+            towerBtns.Add(towerButton);
         }
     }
 

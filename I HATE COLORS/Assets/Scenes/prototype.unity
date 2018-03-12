@@ -12024,8 +12024,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1841071676}
-  - component: {fileID: 1841071679}
   - component: {fileID: 1841071678}
+  - component: {fileID: 1841071679}
   m_Layer: 5
   m_Name: TowerScrollView
   m_TagString: Untagged
