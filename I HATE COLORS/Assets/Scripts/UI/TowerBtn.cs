@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Represent available tower buttons.
@@ -34,8 +35,9 @@ public class TowerBtn : MonoBehaviour
     private void Start()
     {
         InitalizeEventTrigger();
-        Text priceText = this.transform.Find("PricePanel").GetComponentInChildren<Text>();
-        priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString();
+        TextMeshProUGUI priceText = this.transform.Find("PricePanel").GetComponentInChildren<TextMeshProUGUI>();
+        priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString() + " <sprite=1>";
+        priceText.SetText("{0}  <sprite=1>", TowerPrefab.GetComponent<Tower>().BaseCosts);
         towerButton = GetComponent<Button>();
         towerButton.onClick.AddListener(OnClickListener);
     }
