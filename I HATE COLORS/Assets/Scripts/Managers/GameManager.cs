@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static bool gameOver;
     private static GameObject gameOverObject;
-    private static Text healthText, moneyText, waveText, countdownTimerText;
+    private static Text healthText, moneyText, waveText, countdownTimerText, errorText;
+    public Text _errorText;
 
     public static GameObject canvas;
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     private static Button skipTimeButton;
     public static Button SkipTimeButton { get { return skipTimeButton; } }
 
-    private static GameTimer waveTimer;
+    private static GameTimer waveTimer, errorTextTimer;
     public static GameTimer WaveTimer { get { return waveTimer; } }
 
 
@@ -129,6 +130,8 @@ public class GameManager : MonoBehaviour
 
         SelectedTower = null;
 
+        errorTextTimer = new GameTimer(5);
+
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
         currentWave = 1;
@@ -141,6 +144,7 @@ public class GameManager : MonoBehaviour
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
+        errorText = _errorText;
         skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
@@ -243,6 +247,14 @@ public class GameManager : MonoBehaviour
         ppProfile.colorGrading.settings = saturation;
         healthText.text = CastleManager.CastleHealth.ToString();
         moneyText.text = money.ToString();
+
+        errorTextTimer.Update();
+        if (errorTextTimer.IsDone())
+        {
+            errorText.gameObject.SetActive(false);
+            errorTextTimer.Reset();
+            errorTextTimer.SetPaused(true);
+        }
     }
 
     /// <summary>
@@ -459,4 +471,10 @@ public class GameManager : MonoBehaviour
         skipTimeButton.interactable = false;
     }
 
+    public static void DisplayErrorText(string text)
+    {
+        errorText.gameObject.SetActive(true);
+        errorText.text = text;
+        errorTextTimer.SetPaused(false);
+    }
 }
