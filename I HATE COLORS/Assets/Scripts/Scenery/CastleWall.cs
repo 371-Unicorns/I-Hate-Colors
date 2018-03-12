@@ -35,6 +35,7 @@ public class CastleWall : MonoBehaviour
     /// <param name="other">The other Collider2D involved in this collision.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
+       
         if (other.tag == "Enemy")
         {
             CastleManager.TakeDamage(1);

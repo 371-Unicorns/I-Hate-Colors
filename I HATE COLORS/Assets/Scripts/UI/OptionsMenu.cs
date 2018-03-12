@@ -39,7 +39,7 @@ public class OptionsMenu : MonoBehaviour
         SumPause.Status = false;
     }
 
-    public void RestartGame() 
+    public void RestartGame()
     {
         SumPause.Status = false;
         GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("main_menu");

@@ -11,7 +11,9 @@ public class ProjectileTower : Tower
     /// Fire rate of this tower.
     /// </summary>
     [SerializeField, HideInInspector]
-    private float fireRate;
+    private float attackRate;
+    [SerializeField, HideInInspector]
+    private float attackRateScale;
 
     /// <summary>
     /// Speed of the projectile.
@@ -24,6 +26,8 @@ public class ProjectileTower : Tower
     /// </summary>
     [SerializeField, HideInInspector]
     private float projectileDamage;
+    [SerializeField, HideInInspector]
+    private float projectileDamageScale;
 
     /// <summary>
     /// Timer controlling when to attack.
@@ -40,15 +44,23 @@ public class ProjectileTower : Tower
     /// <param name="upgradeCostsScale">Scale of upgrade costs after each upgrade.</param>
     /// <param name="maxLevel">Max level tower can reach.</param>
     /// <param name="range">Range tower can attack within.</param>
-    /// <param name="fireRate">Fire rate of this tower.</param>
+    /// <param name="color">Color of this towers effect.</param>
+    /// <param name="description">Short description of this tower.</param>
+    /// <param name="attackRate">Fire rate of this tower.</param>
     /// <param name="projectileSpeed">Speed of the projectile.</param>
-    /// <param name="projectileSpeed">Damage of the projectile.</param>
-    public void Initialize(string name, int baseCosts, int upgradeCosts, double upgradeCostsScale, int maxLevel, float range, float fireRate, float projectileSpeed, float projectileDamage, ColorType color, string description)
+    /// <param name="projectileDamage">Damage of the projectile.</param>
+    public void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description, float attackRate, float projectileSpeed, float projectileDamage)
     {
-        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, description);
+        base.Initialize(name, baseCosts, upgradeCosts, upgradeCostsScale, maxLevel, range, color, description);
+        this.attackRate = attackRate;
+        this.attackRateScale = attackRate;
+        this.projectileSpeed = projectileSpeed;
+        this.projectileDamage = projectileDamage;
+        this.projectileDamageScale = projectileDamage;
+
         effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
 
-        attackTimer = new GameTimer(fireRate);
+        attackTimer = new GameTimer(attackRate);
         attackTimer.SkipTimer();
         attackTimer.SetPaused(false);
     }
@@ -70,7 +82,20 @@ public class ProjectileTower : Tower
 
     public override void Upgrade()
     {
-        base.Upgrade();
+        if (level < maxLevel)
+        {
+            base.Upgrade();
+
+            // Get projectileDamage with (0.34x)^2+1, where x is the current tower level. Then scale back with projectileDamageScale.
+            projectileDamage = (Mathf.Pow(0.34f * (float)level, 2.0f) + 1.0f) * projectileDamageScale;
+            effectPrefab.GetComponent<ProjectileEffect>().Initialize(projectileSpeed, projectileDamage, range, color);
+
+            // Get attackRate with ln(8-x)-0.9, where x is the current tower level. Then scale back with attackRateScale.
+            attackRate = (Mathf.Log(8 - level) - 0.9f) * attackRateScale;
+            attackTimer = new GameTimer(attackRate);
+            attackTimer.SkipTimer();
+            attackTimer.SetPaused(false);
+        }
     }
 
     public override void Attack()

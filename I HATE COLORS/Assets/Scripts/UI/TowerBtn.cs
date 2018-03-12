@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Represent available tower buttons.
@@ -20,20 +21,49 @@ public class TowerBtn : MonoBehaviour
     private Sprite towerHoverSprite;
     public Sprite TowerHoverSprite { get { return towerHoverSprite; } }
 
+    /// <summary>
+    /// Interactable button of this TowerBtn.
+    /// </summary>
+    private Button towerButton;
+
+    /// <summary>
+    /// Setup mouse trigger, the price text and the button.
+    /// This get's called after Initalize()!
+    /// 
+    /// Author: David Askari
+    /// </summary>
     private void Start()
     {
         InitalizeEventTrigger();
-        Text priceText = this.transform.Find("PricePanel").GetComponentInChildren<Text>();
-        priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString();
-
-        GetComponent<Button>().onClick.AddListener(OnClickListener);
+        TextMeshProUGUI priceText = this.transform.Find("PricePanel").GetComponentInChildren<TextMeshProUGUI>();
+        priceText.text = TowerPrefab.GetComponent<Tower>().BaseCosts.ToString() + " <sprite=1>";
+        priceText.SetText("{0}  <sprite=1>", TowerPrefab.GetComponent<Tower>().BaseCosts);
+        towerButton = GetComponent<Button>();
+        towerButton.onClick.AddListener(OnClickListener);
     }
 
-    public void SetSprites(GameObject tower)
+    /// <summary>
+    /// Initalize this TowerBtn by setting TowerPrefab and towerHoverSprite.
+    /// This get's called before Start()!
+    /// 
+    /// Author: Cole Twitchell, David Askari
+    /// </summary>
+    /// <param name="tower">Tower use for this towerBtn.</param>
+    public void Initalize(GameObject tower)
     {
         TowerPrefab = tower;
         towerHoverSprite = tower.GetComponent<SpriteRenderer>().sprite;
         GetComponent<Button>().image.sprite = TowerHoverSprite;
+    }
+
+    /// <summary>
+    /// Check whether this TowerBtn button should be interactable based on player's money.
+    /// 
+    /// Author: David Askari
+    /// </summary>
+    public void CheckEnoughMoney()
+    {
+        towerButton.interactable = TowerPrefab.GetComponent<Tower>().BaseCosts <= GameManager.money ? true : false;
     }
 
     /// <summary>

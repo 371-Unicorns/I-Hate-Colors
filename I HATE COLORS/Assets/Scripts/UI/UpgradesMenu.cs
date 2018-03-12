@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-// TODO doc
 /// <summary>
 /// Menu for upgrades.
 /// </summary>
@@ -14,7 +13,8 @@ public class UpgradesMenu : MonoBehaviour
 
     private void Start()
     {
-        upgradeButtons = GetComponentsInChildren<Button>();
+        upgradeButtons = GameObject.Find("UpgradesMenu").GetComponentsInChildren<Button>();
+        this.gameObject.SetActive(false);
     }
 
     private void Update()

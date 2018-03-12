@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
@@ -22,8 +23,13 @@ public class TowerInformation : MonoBehaviour
 
     private static Transform placedBody;
     private static Text levelText;
-    private static Text upgradeCostText;
+    private static TextMeshProUGUI upgradeCostText;
     private static Button upgradeButton;
+
+    /// <summary>
+    /// Whether TowerInformation is currently in use.
+    /// </summary>
+    public static bool isActive;
 
     public void Start()
     {
@@ -40,7 +46,7 @@ public class TowerInformation : MonoBehaviour
 
         placedBody = transform.Find("PlacedBody").transform;
         levelText = placedBody.transform.Find("LevelText").GetComponent<Text>();
-        upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<Text>();
+        upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<TextMeshProUGUI>();
         upgradeButton = placedBody.transform.Find("UpgradeButton").GetComponent<Button>();
 
         Reset();
@@ -56,6 +62,7 @@ public class TowerInformation : MonoBehaviour
         head.gameObject.SetActive(false);
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(false);
+        isActive = false;
 
         GameManager.ResetTower();
     }
@@ -74,6 +81,7 @@ public class TowerInformation : MonoBehaviour
         head.gameObject.SetActive(true);
         hoverBody.gameObject.SetActive(true);
         placedBody.gameObject.SetActive(false);
+        isActive = true;
     }
 
     /// <summary>
@@ -85,15 +93,16 @@ public class TowerInformation : MonoBehaviour
         selectedTower = tower;
         FillHead();
 
-        informationPanel.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        informationPanel.transform.position = Camera.main.WorldToScreenPoint(tower.Tile.transform.position);
         levelText.text = "Level: " + selectedTower.Level.ToString();
-        upgradeCostText.text = "Upgrade: " + selectedTower.UpgradeCosts.ToString();
+        upgradeCostText.text = tower.Level < tower.MaxLevel ? "Upgrade: " + selectedTower.UpgradeCosts.ToString() + " <sprite=1>" : "Max Level";
         CheckUpgrade();
 
         background.enabled = true;
         head.gameObject.SetActive(true);
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(true);
+        isActive = true;
     }
 
     private static void FillHead()
@@ -107,7 +116,7 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public static void CheckUpgrade()
     {
-        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money ? true : false;
+        upgradeButton.interactable = selectedTower.UpgradeCosts <= GameManager.money && selectedTower.Level < selectedTower.MaxLevel ? true : false;
     }
 
     /// <summary>
@@ -115,13 +124,21 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public void UpgradeTower()
     {
-        if(!GameManager.didUpgradeFirstTower) {
+        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        if (!GameManager.didUpgradeFirstTower)
+        {
             GameManager.didUpgradeFirstTower = true;
             StartCoroutine(GameManager.DisplayRewardsPanel());
         }
+
+        if (GameManager.CheckForFirstUpgrade())
+        {
+            StartCoroutine(GameManager.DisplayRewardsPanel());
+        }
+
         selectedTower.Upgrade();
         TowerInformation.ShowPlacedTower(selectedTower);
-        GameManager.AddMoney(-selectedTower.UpgradeCosts);
+        TowerInformation.CheckUpgrade();
     }
 
     /// <summary>

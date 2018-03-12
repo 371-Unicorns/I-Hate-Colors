@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,10 +39,23 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject bloodFlyTarget;
 
-    public static GameObject towerInformationPanel;
+    /// <summary>
+    /// Button to skip the timer in the info panel.
+    /// </summary>
+    private static Button skipTimeButton;
+    public static Button SkipTimeButton { get { return skipTimeButton; } }
 
     private static GameTimer waveTimer;
+    public static GameTimer WaveTimer { get { return waveTimer; } }
+
+
     public static int currentWave;
+    private static int totalWaves;
+
+    /// <summary>
+    /// Post Processing Profile.
+    /// </summary>
+    public PostProcessingProfile ppProfile;
 
     public static int money = 150;
 
@@ -56,20 +71,37 @@ public class GameManager : MonoBehaviour
     private static Transform towerScrollViewContent;
 
     private static Dictionary<string, Tower> towerDictionary;
-    
+
     /// <summary>
     /// Boolean variables related to the reward panel
     /// </summary>
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
     public static bool didUpgradeFirstTower = false;
-    private static bool me = false;
+    public static bool notYetReceivedFirstTowerUpgradeReward = true;
+    public static bool didUpgradeBulletTower = false;
+    public static bool didUpgradeShotgunTower = false;
+    public static bool didUpgradeBlackHoleTower = false;
+    public static bool didUpgradeLaserTower = false;
+    public static bool didUpgradeFlameTower = false;
+    public static bool notYetReceivedTowerUpgradeReward = true;
+    public static bool didPlaceBulletTower = false;
+    public static bool didPlaceShotgunTower = false;
+    public static bool didPlaceBlackHoleTower = false;
+    public static bool didPlaceLaserTower = false;
+    public static bool didPlaceFlameTower = false;
+    public static bool notYetReceivedTowerPlacementReward = true;
+    public static bool rewardsPanelFirstEnable = true;
 
-    /*
     /// <summary>
-    /// Prevent instance of this class, since it's a Singleton.
+    /// All created TowerBtn.
     /// </summary>
-    public GameManager() { } */
+    private static List<TowerBtn> towerBtns;
+
+    /// <summary>
+    /// GameObject for sending a boss in the coming wave.
+    /// </summary>
+    public static GameObject sendBossButton;
 
     public void Start()
     {
@@ -77,17 +109,36 @@ public class GameManager : MonoBehaviour
         rewardsPanel = GameObject.Find("RewardsPanel");
         rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
         rewardsPanel.SetActive(false);
-        towerInformationPanel = GameObject.Find("TowerInformation");
+        didUpgradeFirstTower = false;
+        notYetReceivedFirstTowerUpgradeReward = true;
+        didUpgradeBulletTower = false;
+        didUpgradeShotgunTower = false;
+        didUpgradeBlackHoleTower = false;
+        didUpgradeLaserTower = false;
+        didUpgradeFlameTower = false;
+        notYetReceivedTowerUpgradeReward = true;
+        didPlaceBulletTower = false;
+        didPlaceShotgunTower = false;
+        didPlaceBlackHoleTower = false;
+        didPlaceLaserTower = false;
+        didPlaceFlameTower = false;
+        notYetReceivedTowerPlacementReward = true;
+
+        money = 150;
+
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
         gameOverObject.SetActive(false);
+        sendBossButton = canvas.transform.Find("SendBossButton").gameObject;
+        sendBossButton.SetActive(false);
 
         SelectedTower = null;
 
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
         currentWave = 1;
+        totalWaves = WaveManager.GetWaves().Count;
 
         Transform infoPanel = canvas.transform.Find("InfoPanel");
         bloodFlyTarget = infoPanel.Find("BloodPanel").gameObject;
@@ -96,8 +147,10 @@ public class GameManager : MonoBehaviour
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
+        skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
+        towerBtns = new List<TowerBtn>();
 
         towerDictionary = XmlImporter.GetTowersFromXml();
         LoadTowerButtons();
@@ -112,17 +165,43 @@ public class GameManager : MonoBehaviour
         SetTimerText();
         WaveManager.Update();
 
+        var saturation = ppProfile.colorGrading.settings;
+
+        if (currentWave == 1)
+        {
+            saturation.basic.saturation = 1;
+        }
+        else if (currentWave == 6)
+        {
+            sendBossButton.SetActive(true);
+            SumPause.sendBossButton = sendBossButton.GetComponent<SendBossButton>();
+        }
+
         if (gameOver)
         {
             waveTimer.SetPaused(true);
+
+            if (CastleManager.CastleHealth > 0)
+                saturation.basic.saturation = 0;
+
+
             SumPause.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
             GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
+            sendBossButton.GetComponent<SendBossButton>().DisableButton();
 
-            Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
-            gameOverText.text = CastleManager.CastleHealth <= 0 ? "GAME OVER" : "CONGRATULATIONS";
-            gameOverObject.SetActive(true);
+            if (CastleManager.CastleHealth > 0)
+            {
+                SumPause.Status = false;
+                SceneManager.LoadScene("victory_cutscene");
+            }
+            else
+            {
+                gameOverObject.transform.Find("GameOverText").GetComponent<Text>().text = "GAME OVER";
+                gameOverObject.SetActive(true);
+                enabled = false;
+            }
         }
         else
         {
@@ -131,15 +210,19 @@ public class GameManager : MonoBehaviour
                 waveTimer.SetPaused(true);
                 WaveManager.BeginWave();
                 audioSource.PlayOneShot(unicornBeginWaveSound);
+                sendBossButton.GetComponent<SendBossButton>().DisableButton();
             }
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
             {
+                saturation.basic.saturation = 1.0f - ((float)(currentWave - 1) / (float)totalWaves);
                 currentWave++;
                 waveText.text = currentWave.ToString();
                 waveTimer.Reset();
                 waveTimer.SetPaused(false);
                 WaveManager.SetNextWave();
+                skipTimeButton.interactable = true;
+                sendBossButton.GetComponent<SendBossButton>().ResetButton();
             }
 
             if (Hover.IsActive())
@@ -154,7 +237,7 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.A))
             {
-                waveTimer.SkipTimer();
+                SkipTimer();
             }
             else if (Input.GetMouseButtonUp(1) && Hover.IsActive())
             {
@@ -162,10 +245,9 @@ public class GameManager : MonoBehaviour
                 Hover.Deactivate();
                 GameManager.ResetTower();
                 TowerInformation.Reset();
-                towerInformationPanel.SetActive(true);
             }
         }
-
+        ppProfile.colorGrading.settings = saturation;
         healthText.text = CastleManager.CastleHealth.ToString();
         moneyText.text = money.ToString();
     }
@@ -181,7 +263,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(false);
     }
 
     /// <summary>
@@ -195,7 +276,6 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.transform.position = SelectedTower.transform.position;
         GameManager.rangeIndicatorRenderer.transform.localScale = new Vector3(SelectedTower.Range * .66f, SelectedTower.Range * .66f, 1);
         GameManager.rangeIndicatorRenderer.enabled = true;
-        towerInformationPanel.SetActive(true);
     }
 
     /// <summary>
@@ -207,9 +287,86 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.enabled = false;
     }
 
+    public static bool CheckForFirstUpgrade()
+    {
+        switch (SelectedTower.tag)
+        {
+            case "BulletTower":
+                if (!GameManager.didUpgradeBulletTower)
+                    GameManager.didUpgradeBulletTower = true;
+                break;
+            case "ShotgunTower":
+                if (!GameManager.didUpgradeShotgunTower)
+                    GameManager.didUpgradeShotgunTower = true;
+                break;
+            case "BlackHoleTower":
+                if (!GameManager.didUpgradeBlackHoleTower)
+                    GameManager.didUpgradeBlackHoleTower = true;
+                break;
+            case "LaserTower":
+                if (!GameManager.didUpgradeLaserTower)
+                    GameManager.didUpgradeLaserTower = true;
+                break;
+            case "FlameTower":
+                if (!GameManager.didUpgradeFlameTower)
+                    GameManager.didUpgradeFlameTower = true;
+                break;
+        }
+        if (GameManager.didUpgradeBulletTower
+            && GameManager.didUpgradeShotgunTower
+            && GameManager.didUpgradeBlackHoleTower
+            && GameManager.didUpgradeLaserTower
+            && GameManager.didUpgradeFlameTower)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public static bool CheckForFirstPlacement()
+    {
+        if (SelectedTower.CompareTag("BulletTower") && !GameManager.didPlaceBulletTower)
+        {
+            GameManager.didPlaceBulletTower = true;
+        }
+        else if (SelectedTower.CompareTag("BlackHoleTower") && !GameManager.didPlaceBlackHoleTower)
+        {
+            GameManager.didPlaceBlackHoleTower = true;
+        }
+        else if (SelectedTower.CompareTag("FlameTower") && !GameManager.didPlaceFlameTower)
+        {
+            GameManager.didPlaceFlameTower = true;
+        }
+        else if (SelectedTower.CompareTag("LaserTower") && !GameManager.didPlaceLaserTower)
+        {
+            GameManager.didPlaceLaserTower = true;
+        }
+        else if (SelectedTower.CompareTag("ShotgunTower") && !GameManager.didPlaceShotgunTower)
+        {
+            GameManager.didPlaceShotgunTower = true;
+        }
+
+        if (GameManager.didPlaceBulletTower && GameManager.didPlaceShotgunTower && GameManager.didPlaceBlackHoleTower && GameManager.didPlaceLaserTower && GameManager.didPlaceFlameTower)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public static void AddMoney(int m)
     {
         GameManager.money += m;
+        if (TowerInformation.isActive) { TowerInformation.CheckUpgrade(); }
+        foreach (TowerBtn towerBtn in towerBtns)
+        {
+            towerBtn.CheckEnoughMoney();
+        }
     }
 
     private void SetTimerText()
@@ -250,14 +407,32 @@ public class GameManager : MonoBehaviour
 
     public static IEnumerator DisplayRewardsPanel()
     {
-        if (didUpgradeFirstTower)
+
+        if (didUpgradeFirstTower && notYetReceivedFirstTowerUpgradeReward)
         {
-            rewardsPanel.SetActive(true);
             rewardsPanelText.text = "You Upgraded your first tower! Nice!";
+            rewardsPanel.SetActive(true);
+            GameManager.notYetReceivedFirstTowerUpgradeReward = false;
             AddMoney(20);
-            yield return new WaitForSeconds(6);
-            rewardsPanel.SetActive(false);
+
         }
+        else if (didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetReceivedTowerPlacementReward)
+        {
+            rewardsPanelText.text = "You placed one of every tower type! Nice!";
+            rewardsPanel.SetActive(true);
+            GameManager.notYetReceivedTowerPlacementReward = false;
+            AddMoney(50);
+        }
+        else if (didUpgradeBulletTower && didUpgradeShotgunTower && didUpgradeBlackHoleTower && didUpgradeLaserTower && didUpgradeFlameTower && notYetReceivedTowerUpgradeReward)
+        {
+            rewardsPanelText.text = "You upgraded one of every tower type! Nice!";
+            rewardsPanel.SetActive(true);
+            GameManager.notYetReceivedTowerUpgradeReward = false;
+            CastleManager.AddCastleHealth();
+        }
+
+        yield return new WaitForSeconds(6);
+        rewardsPanel.SetActive(false);
     }
 
     private void LoadTowerButtons()
@@ -275,8 +450,20 @@ public class GameManager : MonoBehaviour
                 Debug.Log(string.Format("Tried to load and instantiate Tower, but an error occured."));
                 return;
             }
-            towerButton.SetSprites(tower.gameObject);
+            towerButton.Initalize(tower.gameObject);
+            towerBtns.Add(towerButton);
         }
+    }
+
+    /// <summary>
+    /// Skip the currently running wave timer.
+    /// 
+    /// Author: David Askari
+    /// </summary>
+    public void SkipTimer()
+    {
+        waveTimer.SkipTimer();
+        skipTimeButton.interactable = false;
     }
 
 }

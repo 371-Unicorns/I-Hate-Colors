@@ -8,6 +8,7 @@ public class WaveManager : MonoBehaviour
 
     public static string waveXmlFile;
     private static Wave currentWave;
+    public static Wave CurrentWave { get { return currentWave; } }
     private static Queue<Wave> waves;
 
     // Use this for initialization

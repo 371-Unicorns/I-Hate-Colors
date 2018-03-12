@@ -25,8 +25,8 @@ GameObject:
   - component: {fileID: 114650938773823200}
   - component: {fileID: 58394860376140122}
   - component: {fileID: 50595561919409864}
-  - component: {fileID: 114769023112928054}
   - component: {fileID: 95425103671473614}
+  - component: {fileID: 114769023112928054}
   m_Layer: 0
   m_Name: Bluenicorn
   m_TagString: Enemy
