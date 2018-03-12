@@ -178,7 +178,6 @@ public class GameManager : MonoBehaviour
             GameObject.Find("OptionsMenu").SetActive(false);
             GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
 
-            Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
             if (CastleManager.CastleHealth > 0)
             {
                 SumPause.Status = false;
@@ -186,8 +185,9 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                gameOverText.text = "GAME OVER";
+                gameOverObject.transform.Find("GameOverText").GetComponent<Text>().text = "GAME OVER";
                 gameOverObject.SetActive(true);
+                enabled = false;
             }
         }
         else
