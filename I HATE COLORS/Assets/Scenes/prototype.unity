@@ -5053,7 +5053,7 @@ Transform:
   - {fileID: 108725615}
   - {fileID: 733548324}
   m_Father: {fileID: 738701219}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &627846913
 GameObject:
@@ -5709,6 +5709,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 995204127}
   - {fileID: 1294420089}
   - {fileID: 624774912}
   - {fileID: 1549632074}
@@ -6586,7 +6587,6 @@ GameObject:
   - component: {fileID: 966140173}
   - component: {fileID: 966140172}
   - component: {fileID: 966140176}
-  - component: {fileID: 966140177}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6670,18 +6670,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: ebae01c33bc50f04287d8677aa0448f7, type: 2}
---- !u!114 &966140177
+--- !u!1 &995204126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 995204127}
+  - component: {fileID: 995204128}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &995204127
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 995204126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 738701219}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &995204128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 966140171}
+  m_GameObject: {fileID: 995204126}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebbdd5ef6cec1f9409fdcec48f3aa4a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 627846914}
+  _source: {fileID: 627846914}
   waveSongs:
   - {fileID: 8300000, guid: 637d98d66e742e24597024c15a733048, type: 3}
   - {fileID: 8300000, guid: e834ed7074de4114791c3f21b93a515e, type: 3}
@@ -7681,7 +7710,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 738701219}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1294420090
 MonoBehaviour:
@@ -12182,7 +12211,7 @@ Transform:
   - {fileID: 1528435590}
   - {fileID: 738334716}
   m_Father: {fileID: 738701219}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1571872444
 GameObject:
@@ -17672,7 +17701,7 @@ Transform:
   - {fileID: 775595804}
   - {fileID: 897200653}
   m_Father: {fileID: 738701219}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2124612537
 GameObject:
