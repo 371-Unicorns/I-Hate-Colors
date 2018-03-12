@@ -120,7 +120,7 @@ public class GameManager : MonoBehaviour
         notYetReceivedTowerPlacementReward = true;
 
         money = 150;
-        
+
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
@@ -141,9 +141,6 @@ public class GameManager : MonoBehaviour
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
         skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
-        rewardsPanel = GameObject.Find("RewardsPanel");
-        rewardsPanelText = rewardsPanel.gameObject.GetComponentInChildren<Text>();
-        rewardsPanel.SetActive(false);
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
 
@@ -277,7 +274,7 @@ public class GameManager : MonoBehaviour
         switch (SelectedTower.tag)
         {
             case "BulletTower":
-                if(!GameManager.didUpgradeBulletTower)
+                if (!GameManager.didUpgradeBulletTower)
                     GameManager.didUpgradeBulletTower = true;
                 break;
             case "ShotgunTower":
@@ -396,14 +393,14 @@ public class GameManager : MonoBehaviour
             AddMoney(20);
 
         }
-        else if(didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetReceivedTowerPlacementReward) 
+        else if (didPlaceBulletTower && didPlaceShotgunTower && didPlaceBlackHoleTower && didPlaceLaserTower && didPlaceFlameTower && notYetReceivedTowerPlacementReward)
         {
             rewardsPanelText.text = "You placed one of every tower type! Nice!";
             rewardsPanel.SetActive(true);
             GameManager.notYetReceivedTowerPlacementReward = false;
             AddMoney(50);
         }
-        else if(didUpgradeBulletTower && didUpgradeShotgunTower && didUpgradeBlackHoleTower && didUpgradeLaserTower && didUpgradeFlameTower && notYetReceivedTowerUpgradeReward)
+        else if (didUpgradeBulletTower && didUpgradeShotgunTower && didUpgradeBlackHoleTower && didUpgradeLaserTower && didUpgradeFlameTower && notYetReceivedTowerUpgradeReward)
         {
             rewardsPanelText.text = "You upgraded one of every tower type! Nice!";
             rewardsPanel.SetActive(true);
