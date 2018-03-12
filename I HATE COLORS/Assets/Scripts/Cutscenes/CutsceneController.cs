@@ -73,6 +73,7 @@ public class CutsceneController : MonoBehaviour {
             else
             {
                 string nextText = cutsceneFrames[idx].GetNextScript();
+                text.text = "";
                 if (nextText != null)
                 {
                     StartCoroutine(AnimateText(nextText));
@@ -93,7 +94,14 @@ public class CutsceneController : MonoBehaviour {
     {
         if (idx < cutsceneFrames.Length)
         {
-            Rect imgPos = new Rect(0, Screen.height * .1f, Screen.width, cutsceneFrames[idx].frameImage.height);
+            Rect imgPos;
+            if (cutsceneFrames[idx].fullscreen)
+            {
+                imgPos = new Rect(0, 0, Screen.width, Screen.height);
+            } else
+            {
+                imgPos = new Rect(0, Screen.height * .1f, Screen.width, cutsceneFrames[idx].frameImage.height);
+            }
             GUI.DrawTexture(imgPos, cutsceneFrames[idx].frameImage);
             text.transform.position = new Vector3(cutsceneFrames[idx].textPosition.x, cutsceneFrames[idx].textPosition.y, 0);
         }

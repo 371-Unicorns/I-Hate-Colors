@@ -193,6 +193,8 @@ public class GameManager : MonoBehaviour
 
             if (CastleManager.CastleHealth > 0)
             {
+                XmlImporter.Cleanup();
+
                 SumPause.Status = false;
                 SceneManager.LoadScene("victory_cutscene");
             }

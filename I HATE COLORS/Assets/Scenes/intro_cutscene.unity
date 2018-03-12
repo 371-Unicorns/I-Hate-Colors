@@ -439,6 +439,7 @@ MonoBehaviour:
     frameScripts:
     - 'Mono: Victoria... Come back to bed.'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 4307fb83327b8914fbecf032864d8666, type: 3}
     frameScripts:
     - 'Victoria: I''m not sure how you expect me to sleep with all of this light constantly
@@ -446,6 +447,7 @@ MonoBehaviour:
     - 'Victoria: You know, when I started dating the lord of the grey planet, I thought
       there would be much fewer sparkles and rainbows.'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: f44373b20f31f5d40bf12a31400472d0, type: 3}
     frameScripts:
     - 'Mono: I''m sorry babe, but the planet Rainbow in the distance has always shone
@@ -458,6 +460,7 @@ MonoBehaviour:
     - 'Mono: Alright. Anything for you, dear.'
     - 'Mono: Now where did I put my drab-o-matic...'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 70a0899f77649d94bba1c61689a58075, type: 3}
     frameScripts:
     - 'Mono: This thing is such a pain.'
@@ -465,24 +468,61 @@ MonoBehaviour:
     - 'Mono: I should have gone solar.'
     - 'Mono: Oh well. Off to Rainbow.'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 33f242b73d617624bb0d27ac7ce9a492, type: 3}
     frameScripts:
     - 'Mono: I suppose this is a good enough place to set up.'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 261e0d5aa42c10146badc63739df1c36, type: 3}
     frameScripts:
     - 'Mono: Things are going well.'
     - 'Mono: This should be over soon enough.'
     - 'Mono: Huh, what''s this note?'
     textPosition: {x: 525, y: 200}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 79aa28fbf19dd884a9f5fd4a93439ec1, type: 3}
     frameScripts:
     - ' '
     textPosition: {x: 525, y: 0}
+    fullscreen: 0
   - frameImage: {fileID: 2800000, guid: e97d032fd82bae24482310adcc762e61, type: 3}
     frameScripts:
     - Well, I suppose I'd better prepare for a fight...
     textPosition: {x: 718, y: 212.6}
+    fullscreen: 0
+  - frameImage: {fileID: 2800000, guid: 2e7e69be90dfc204a9574eac1f7281f7, type: 3}
+    frameScripts: []
+    textPosition: {x: 0, y: 0}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: 56582214404f1d84a9dd89ce64e20a0f, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: 72ae37cd19f84cd49be7e0cbeed26248, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: 0c830f45d46ecc649b0b2d882c62f43c, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: ef1efefcbb39b55439defaa9ccae06ed, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: 359f034cd06cca24487fed1dec957c7d, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: 984747af3fa082c4da0a10a623f1370c, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
+  - frameImage: {fileID: 2800000, guid: b1b71828272ec1a449b1635b8c8d6be0, type: 3}
+    frameScripts: []
+    textPosition: {x: 718, y: 212.6}
+    fullscreen: 1
 --- !u!4 &1345081689
 Transform:
   m_ObjectHideFlags: 0

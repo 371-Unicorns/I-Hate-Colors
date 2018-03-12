@@ -10,6 +10,7 @@ public class CutsceneFrame {
     public Texture2D frameImage;
     public string[] frameScripts;
     public Vector2 textPosition;
+    public bool fullscreen = false;
 
     public CutsceneFrame()
     {
