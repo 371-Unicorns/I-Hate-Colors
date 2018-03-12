@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         didPlaceFlameTower = false;
         notYetReceivedTowerPlacementReward = true;
 
-        money = 1500;
+        money = 150;
 
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
