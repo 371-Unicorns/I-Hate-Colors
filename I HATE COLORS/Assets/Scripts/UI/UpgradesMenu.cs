@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-// TODO doc
 /// <summary>
 /// Menu for upgrades.
 /// </summary>

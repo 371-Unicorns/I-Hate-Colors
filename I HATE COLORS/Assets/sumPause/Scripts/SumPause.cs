@@ -39,6 +39,16 @@ public class SumPause : MonoBehaviour
     /// </summary>
     static Button[] towerButtons;
 
+    /// <summary>
+    /// Button for sending a boss in the coming wave.
+    /// </summary>
+    public static SendBossButton sendBossButton;
+
+    /// <summary>
+    /// Whether sendBossButton was already pressed.
+    /// </summary>
+    private static bool sendBossButtonActive;
+
     static bool status = false;
     /// <summary>
     /// Sets/Returns current pause state (true for paused, false for normal)
@@ -123,6 +133,11 @@ public class SumPause : MonoBehaviour
             optionsMenu.SetActive(true);
             upgradesMenuButton.interactable = false;
             GameManager.SkipTimeButton.interactable = false;
+            if (sendBossButton != null)
+            {
+                sendBossButtonActive = sendBossButton.Active;
+                sendBossButton.DisableButton();
+            }
         }
         else
         {
@@ -133,6 +148,11 @@ public class SumPause : MonoBehaviour
             optionsMenu.SetActive(false);
             upgradesMenuButton.interactable = true;
             GameManager.SkipTimeButton.interactable = !GameManager.WaveTimer.IsDone();
+            if (sendBossButton != null)
+            {
+                if (sendBossButtonActive) { sendBossButton.ResetButton(); }
+                else { sendBossButton.DisableButton(); }
+            }
         }
     }
 

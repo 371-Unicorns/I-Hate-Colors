@@ -20,15 +20,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4044859673052332}
   - component: {fileID: 212763966402918830}
-  - component: {fileID: 114224979863128212}
   - component: {fileID: 114664792879058826}
+  - component: {fileID: 114224979863128212}
   - component: {fileID: 114375776977245858}
-  - component: {fileID: 50531305263733190}
-  - component: {fileID: 114707762285437636}
   - component: {fileID: 58035993140873566}
+  - component: {fileID: 50531305263733190}
+  - component: {fileID: 95889358435653902}
+  - component: {fileID: 114707762285437636}
   - component: {fileID: 198241544702719368}
   - component: {fileID: 199270580330679888}
-  - component: {fileID: 95889358435653902}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Enemy
@@ -44,7 +44,7 @@ Transform:
   m_GameObject: {fileID: 1365669006663354}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -83,7 +83,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.51
+  m_Radius: 0.25
 --- !u!95 &95889358435653902
 Animator:
   serializedVersion: 3
@@ -165,9 +165,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 0
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 2
-  endReachedDistance: 0.2
+  slowdownDistance: 0.75
+  pickNextWaypointDist: 0.75
+  endReachedDistance: 0.75
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0

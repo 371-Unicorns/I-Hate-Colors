@@ -98,6 +98,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private static List<TowerBtn> towerBtns;
 
+    /// <summary>
+    /// GameObject for sending a boss in the coming wave.
+    /// </summary>
+    public static GameObject sendBossButton;
+
     public void Start()
     {
         gameOver = false;
@@ -125,6 +130,8 @@ public class GameManager : MonoBehaviour
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
         gameOverObject = canvas.transform.Find("GameOver").gameObject;
         gameOverObject.SetActive(false);
+        sendBossButton = canvas.transform.Find("SendBossButton").gameObject;
+        sendBossButton.SetActive(false);
 
         SelectedTower = null;
 
@@ -164,6 +171,11 @@ public class GameManager : MonoBehaviour
         {
             saturation.basic.saturation = 1;
         }
+        else if (currentWave == 6)
+        {
+            sendBossButton.SetActive(true);
+            SumPause.sendBossButton = sendBossButton.GetComponent<SendBossButton>();
+        }
 
         if (gameOver)
         {
@@ -177,6 +189,7 @@ public class GameManager : MonoBehaviour
 
             GameObject.Find("OptionsMenu").SetActive(false);
             GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
+            sendBossButton.GetComponent<SendBossButton>().DisableButton();
 
             if (CastleManager.CastleHealth > 0)
             {
@@ -197,6 +210,7 @@ public class GameManager : MonoBehaviour
                 waveTimer.SetPaused(true);
                 WaveManager.BeginWave();
                 audioSource.PlayOneShot(unicornBeginWaveSound);
+                sendBossButton.GetComponent<SendBossButton>().DisableButton();
             }
 
             if (WaveManager.WaveFinished() && EnemyManager.EnemiesRemaining() <= 0)
@@ -208,6 +222,7 @@ public class GameManager : MonoBehaviour
                 waveTimer.SetPaused(false);
                 WaveManager.SetNextWave();
                 skipTimeButton.interactable = true;
+                sendBossButton.GetComponent<SendBossButton>().ResetButton();
             }
 
             if (Hover.IsActive())
