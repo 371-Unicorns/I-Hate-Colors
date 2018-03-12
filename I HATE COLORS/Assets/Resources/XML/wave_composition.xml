@@ -72,6 +72,10 @@
                 <id>derrgon</id>
                 <count>10</count>
             </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>1</count>
+            </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
     </wave>
@@ -85,6 +89,10 @@
             <enemy>
                 <id>derrgon</id>
                 <count>12</count>
+            </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>2</count>
             </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
@@ -100,6 +108,10 @@
                 <id>derrgon</id>
                 <count>16</count>
             </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>4</count>
+            </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
     </wave>
@@ -113,6 +125,10 @@
             <enemy>
                 <id>derrgon</id>
                 <count>17</count>
+            </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>4</count>
             </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
@@ -128,6 +144,10 @@
                 <id>derrgon</id>
                 <count>20</count>
             </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>5</count>
+            </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
     </wave>
@@ -141,6 +161,10 @@
             <enemy>
                 <id>derrgon</id>
                 <count>22</count>
+            </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>7</count>
             </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
@@ -156,6 +180,10 @@
                 <id>derrgon</id>
                 <count>30</count>
             </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>7</count>
+            </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
     </wave>
@@ -169,6 +197,10 @@
             <enemy>
                 <id>derrgon</id>
                 <count>35</count>
+            </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>9</count>
             </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
@@ -184,6 +216,10 @@
                 <id>derrgon</id>
                 <count>30</count>
             </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>10</count>
+            </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>
     </wave>
@@ -197,6 +233,10 @@
             <enemy>
                 <id>derrgon</id>
                 <count>35</count>
+            </enemy>
+            <enemy>
+                <id>walrusu</id>
+                <count>15</count>
             </enemy>
         </enemies>
         <spawn-rate>0.1</spawn-rate>

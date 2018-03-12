@@ -41,6 +41,13 @@
       <value>10</value>
       <color>BLUE</color>
    </enemy>
+   <enemy>
+      <id>walrusu</id>
+      <health>60</health>
+      <speed>2</speed>
+      <value>10</value>
+      <color>BLUE</color>
+   </enemy>
     <enemy>
       <id>Boss</id>
       <health>75</health>
