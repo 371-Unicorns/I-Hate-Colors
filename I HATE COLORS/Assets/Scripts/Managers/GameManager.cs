@@ -347,6 +347,7 @@ public class GameManager : MonoBehaviour
     public static void AddMoney(int m)
     {
         GameManager.money += m;
+        if (TowerInformation.isActive) { TowerInformation.CheckUpgrade(); }
         foreach (TowerBtn towerBtn in towerBtns)
         {
             towerBtn.CheckEnoughMoney();

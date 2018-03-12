@@ -75,7 +75,6 @@ public class Enemy : MonoBehaviour
             bloodFlyRect.anchoredPosition = new Vector2(0, 0);
 
             GameManager.AddMoney(value);
-            TowerInformation.CheckUpgrade();
             this.SetSpeed(0f);
             EnemyManager.RemoveEnemy(this);
         }

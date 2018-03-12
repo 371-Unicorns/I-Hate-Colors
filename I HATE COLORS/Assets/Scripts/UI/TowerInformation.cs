@@ -26,6 +26,11 @@ public class TowerInformation : MonoBehaviour
     private static TextMeshProUGUI upgradeCostText;
     private static Button upgradeButton;
 
+    /// <summary>
+    /// Whether TowerInformation is currently in use.
+    /// </summary>
+    public static bool isActive;
+
     public void Start()
     {
         background = GetComponent<Image>();
@@ -57,6 +62,7 @@ public class TowerInformation : MonoBehaviour
         head.gameObject.SetActive(false);
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(false);
+        isActive = false;
 
         GameManager.ResetTower();
     }
@@ -75,6 +81,7 @@ public class TowerInformation : MonoBehaviour
         head.gameObject.SetActive(true);
         hoverBody.gameObject.SetActive(true);
         placedBody.gameObject.SetActive(false);
+        isActive = true;
     }
 
     /// <summary>
@@ -95,6 +102,7 @@ public class TowerInformation : MonoBehaviour
         head.gameObject.SetActive(true);
         hoverBody.gameObject.SetActive(false);
         placedBody.gameObject.SetActive(true);
+        isActive = true;
     }
 
     private static void FillHead()
