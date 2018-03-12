@@ -11,6 +11,8 @@ public class CutsceneController : MonoBehaviour {
 
     public string nextScene;
 
+    public Button skipButton;
+
     public Text text;
     public CutsceneFrame[] cutsceneFrames;
 
@@ -19,6 +21,7 @@ public class CutsceneController : MonoBehaviour {
 
     void Start()
     {
+        skipButton.gameObject.SetActive(true);
         string nextText = cutsceneFrames[idx].GetNextScript();
         StartCoroutine(AnimateText(nextText));
     }
@@ -61,6 +64,7 @@ public class CutsceneController : MonoBehaviour {
     {
         if (idx >= cutsceneFrames.Length)
         {
+            skipButton.gameObject.SetActive(false);
             SceneManager.LoadScene(nextScene);
         }
 
@@ -100,7 +104,7 @@ public class CutsceneController : MonoBehaviour {
                 imgPos = new Rect(0, 0, Screen.width, Screen.height);
             } else
             {
-                imgPos = new Rect(0, Screen.height * .1f, Screen.width, cutsceneFrames[idx].frameImage.height);
+                imgPos = new Rect(0, Screen.height * .1f, Screen.width, cutsceneFrames[idx].frameImage.height * (Screen.width / (float)cutsceneFrames[idx].frameImage.width));
             }
             GUI.DrawTexture(imgPos, cutsceneFrames[idx].frameImage);
             text.transform.position = new Vector3(cutsceneFrames[idx].textPosition.x, cutsceneFrames[idx].textPosition.y, 0);
