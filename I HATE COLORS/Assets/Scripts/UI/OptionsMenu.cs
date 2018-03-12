@@ -41,6 +41,8 @@ public class OptionsMenu : MonoBehaviour
 
     public void RestartGame()
     {
+        XmlImporter.Cleanup();
+
         SumPause.Status = false;
         GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("main_menu");
     }
