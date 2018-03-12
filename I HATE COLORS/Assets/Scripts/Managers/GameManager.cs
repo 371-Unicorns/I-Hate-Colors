@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.PostProcessing;
 using UnityEngine.UI;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
         didPlaceFlameTower = false;
         notYetReceivedTowerPlacementReward = true;
 
-        money = 150;
+        money = 1500;
 
         canvas = GameObject.Find("Canvas");
         rangeIndicatorRenderer = GameObject.Find("RangeIndicator").gameObject.GetComponent<SpriteRenderer>();
@@ -180,12 +181,14 @@ public class GameManager : MonoBehaviour
             Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
             if (CastleManager.CastleHealth > 0)
             {
-                //gameOverText.text = "CONGRATULATIONS";
-                GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("victory_cutscene");
+                gameOverText.text = "CONGRATULATIONS";
+                SceneManager.LoadScene("victory_cutscene");
             }
             else
+            {
                 gameOverText.text = "GAME OVER";
-            gameOverObject.SetActive(true);
+                gameOverObject.SetActive(true);
+            }
         }
         else
         {
