@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour
             Text gameOverText = gameOverObject.transform.Find("GameOverText").GetComponent<Text>();
             if (CastleManager.CastleHealth > 0)
             {
-                gameOverText.text = "CONGRATULATIONS";
+                SumPause.Status = false;
                 SceneManager.LoadScene("victory_cutscene");
             }
             else
