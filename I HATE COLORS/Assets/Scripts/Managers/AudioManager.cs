@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip[] waveSongs;
     public static AudioClip beginWaveSound;
 
-    int currentlyPlaying = 1;
+    int currentlyPlaying = 0;
 
     private void Start()
     {
@@ -21,8 +21,8 @@ public class AudioManager : MonoBehaviour {
     void Update () {
 		if (!source.isPlaying)
         {
-            currentlyPlaying = currentlyPlaying == 1 ? 0 : 1;
-            source.PlayOneShot(waveSongs[currentlyPlaying]);
+            currentlyPlaying++;
+            source.PlayOneShot(waveSongs[currentlyPlaying % waveSongs.Length]);
         }
 	}
 
