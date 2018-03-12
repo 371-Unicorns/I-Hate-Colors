@@ -21,7 +21,10 @@ public class CutsceneController : MonoBehaviour {
 
     void Start()
     {
-        skipButton.gameObject.SetActive(true);
+        if (skipButton != null)
+        {
+            skipButton.gameObject.SetActive(true);
+        }
         string nextText = cutsceneFrames[idx].GetNextScript();
         StartCoroutine(AnimateText(nextText));
     }
@@ -64,7 +67,11 @@ public class CutsceneController : MonoBehaviour {
     {
         if (idx >= cutsceneFrames.Length)
         {
-            skipButton.gameObject.SetActive(false);
+            if (skipButton != null)
+            {
+                skipButton.gameObject.SetActive(false);
+            }
+
             SceneManager.LoadScene(nextScene);
         }
 

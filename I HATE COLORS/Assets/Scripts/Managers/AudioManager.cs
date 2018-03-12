@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip[] waveSongs;
     public static AudioClip beginWaveSound;
 
-    int currentlyPlaying = 1;
+    int currentlyPlaying = 0;
 
     private void Start()
     {
