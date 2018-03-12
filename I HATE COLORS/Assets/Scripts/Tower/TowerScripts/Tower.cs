@@ -168,8 +168,7 @@ public abstract class Tower : MonoBehaviour
     {
         if (baseCosts > GameManager.money)
         {
-            // TODO Display warning message with this.
-            print("Can't place tower. Not enough funds.");
+            GameManager.DisplayErrorText("Can't place tower. Not enough funds.");
             return null;
         }
         GameManager.AddMoney(-baseCosts);
@@ -184,8 +183,8 @@ public abstract class Tower : MonoBehaviour
         // Check if path is blocked.
         if (!GridGraphManager.IsGraphNotBlocked(tower))
         {
-            // TODO Display warning message with this.
-            print("Can't place tower here. Path is entirely blocked.");
+            GameManager.DisplayErrorText("Can't place tower here. Path is entirely blocked.");
+            GameManager.AddMoney(baseCosts);
             Destroy(tower);
             return null;
         }

@@ -10,8 +10,17 @@ public class XmlImporter
     private static readonly string WAVE_COMPOSITION_FILEPATH = "XML/wave_composition";
     private static readonly string TOWERS_XML_FILEPATH = "XML/towers";
 
+    private static Dictionary<string, Enemy> enemies = null;
+    private static Dictionary<string, Tower> towers = null;
+    private static Queue<Wave> waves = null;
+
     public static Queue<Wave> GetWavesFromXml()
     {
+        if (waves != null)
+        {
+            return waves;
+        }
+
         Dictionary<string, Enemy> enemies = GetEnemiesFromXml();
 
         Queue<Wave> retQueue = new Queue<Wave>();
@@ -47,11 +56,18 @@ public class XmlImporter
             retQueue.Enqueue(wave);
         }
 
+        waves = retQueue;
+
         return retQueue;
     }
 
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
     {
+        if (enemies != null)
+        {
+            return enemies;
+        }
+
         Dictionary<string, Enemy> retDictionary = new Dictionary<string, Enemy>();
 
         XmlDocument doc = new XmlDocument();
@@ -72,11 +88,18 @@ public class XmlImporter
             retDictionary.Add(id, e);
         }
 
+        enemies = retDictionary;
+
         return retDictionary;
     }
 
     public static Dictionary<string, Tower> GetTowersFromXml()
     {
+        if (towers != null)
+        {
+            return towers;
+        }
+
         Dictionary<string, Tower> retDictionary = new Dictionary<string, Tower>();
 
         XmlDocument doc = new XmlDocument();
@@ -148,6 +171,31 @@ public class XmlImporter
             retDictionary.Add(name, tower);
         }
 
+        towers = retDictionary;
+
         return retDictionary;
+    }
+
+    public static void Cleanup()
+    {
+        foreach (Enemy e in enemies.Values)
+        {
+            if (e != null)
+            {
+                UnityEngine.MonoBehaviour.Destroy(e);
+            }
+        }
+
+        foreach (Tower t in towers.Values)
+        {
+            if (t != null)
+            {
+                UnityEngine.MonoBehaviour.Destroy(t);
+            }
+        }
+
+        waves = null;
+        enemies = null;
+        towers = null;
     }
 }

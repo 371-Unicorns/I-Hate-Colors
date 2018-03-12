@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public static bool gameOver;
     private static GameObject gameOverObject;
-    private static Text healthText, moneyText, waveText, countdownTimerText;
+    private static Text healthText, moneyText, waveText, countdownTimerText, errorText;
+    public Text _errorText;
 
     public static GameObject canvas;
 
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     private static Button skipTimeButton;
     public static Button SkipTimeButton { get { return skipTimeButton; } }
 
-    private static GameTimer waveTimer;
+    private static GameTimer waveTimer, errorTextTimer;
     public static GameTimer WaveTimer { get { return waveTimer; } }
 
 
@@ -58,12 +59,6 @@ public class GameManager : MonoBehaviour
     public PostProcessingProfile ppProfile;
 
     public static int money = 150;
-
-    /// <summary>
-    /// AudioSource to be played, once a blood reaches the bank.
-    /// </summary>
-    private AudioClip unicornBeginWaveSound;
-    private AudioSource audioSource;
 
     /// <summary>
     /// Content of the towerScrollView. Add available TowerBtn to this.
@@ -135,6 +130,8 @@ public class GameManager : MonoBehaviour
 
         SelectedTower = null;
 
+        errorTextTimer = new GameTimer(5);
+
         waveTimer = new GameTimer();
         waveTimer.SetTimer(30);
         currentWave = 1;
@@ -147,6 +144,7 @@ public class GameManager : MonoBehaviour
         waveText = infoPanel.Find("WavePanel").GetComponentInChildren<Text>();
         countdownTimerText = infoPanel.Find("TimePanel").GetComponentInChildren<Text>();
         waveText.text = currentWave.ToString();
+        errorText = _errorText;
         skipTimeButton = infoPanel.Find("SkipTimeButton").GetComponent<Button>();
 
         towerScrollViewContent = canvas.transform.Find("TowerScrollView").GetComponentInChildren<GridLayoutGroup>().transform;
@@ -155,9 +153,6 @@ public class GameManager : MonoBehaviour
         towerDictionary = XmlImporter.GetTowersFromXml();
         LoadTowerButtons();
         StartCoroutine(BlinkText());
-
-        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
-        unicornBeginWaveSound = (AudioClip)Resources.Load("Audio/unicornBeginWaveSound");
     }
 
     public void Update()
@@ -193,6 +188,8 @@ public class GameManager : MonoBehaviour
 
             if (CastleManager.CastleHealth > 0)
             {
+                XmlImporter.Cleanup();
+
                 SumPause.Status = false;
                 SceneManager.LoadScene("victory_cutscene");
             }
@@ -209,7 +206,7 @@ public class GameManager : MonoBehaviour
             {
                 waveTimer.SetPaused(true);
                 WaveManager.BeginWave();
-                audioSource.PlayOneShot(unicornBeginWaveSound);
+                AudioManager.PlayBeginWaveSound();
                 sendBossButton.GetComponent<SendBossButton>().DisableButton();
             }
 
@@ -250,6 +247,14 @@ public class GameManager : MonoBehaviour
         ppProfile.colorGrading.settings = saturation;
         healthText.text = CastleManager.CastleHealth.ToString();
         moneyText.text = money.ToString();
+
+        errorTextTimer.Update();
+        if (errorTextTimer.IsDone())
+        {
+            errorText.gameObject.SetActive(false);
+            errorTextTimer.Reset();
+            errorTextTimer.SetPaused(true);
+        }
     }
 
     /// <summary>
@@ -466,4 +471,10 @@ public class GameManager : MonoBehaviour
         skipTimeButton.interactable = false;
     }
 
+    public static void DisplayErrorText(string text)
+    {
+        errorText.gameObject.SetActive(true);
+        errorText.text = text;
+        errorTextTimer.SetPaused(false);
+    }
 }

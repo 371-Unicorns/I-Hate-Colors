@@ -5,7 +5,7 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
-    <range>3</range>
+    <range>4</range>
     <color>RED</color>
     <description>A standard one bullet at a time tower.</description>
     <attack-rate>5</attack-rate>
@@ -18,7 +18,7 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
-    <range>5</range>
+    <range>4</range>
     <color>BLACK</color>
     <description>A tower that fires off a spread of bullets.</description>
     <attack-rate>3</attack-rate>
@@ -43,14 +43,14 @@
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
-    <range>5</range>
+    <range>3</range>
     <color>ORANGE</color>
     <description>A tower that shoots out a target tracking laser.</description>
     <dot-damage>10</dot-damage>
   </dot-tower>
   <aoe-tower>
     <name>FlameTower</name>
-    <cost>100</cost>
+    <cost>120</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>

@@ -260,7 +260,7 @@ RectTransform:
   m_GameObject: {fileID: 357348193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1016030501}
   m_RootOrder: 0
@@ -433,11 +433,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: prototype
+  skipButton: {fileID: 195450488}
   text: {fileID: 357348195}
   cutsceneFrames:
   - frameImage: {fileID: 2800000, guid: e97d032fd82bae24482310adcc762e61, type: 3}
     frameScripts:
-    - 'Mono: Victoria... Come back to bed.'
+    - 'MonoKrome: Victoria... Come back to bed.'
     textPosition: {x: 525, y: 200}
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 4307fb83327b8914fbecf032864d8666, type: 3}
@@ -450,35 +451,35 @@ MonoBehaviour:
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: f44373b20f31f5d40bf12a31400472d0, type: 3}
     frameScripts:
-    - 'Mono: I''m sorry babe, but the planet Rainbow in the distance has always shone
+    - 'MonoKrome: I''m sorry babe, but the planet Rainbow in the distance has always shone
       brightly in the sky.'
-    - 'Mono: I promise you get used to it after a while.'
+    - 'MonoKrome: I promise you get used to it after a while.'
     - 'Victoria: I don''t want to get used to it. I want it gone. Extinguished. Dead.
       Drab.'
     - 'Victoria: Monooooooooo, make it grey.'
-    - 'Mono: ....'
-    - 'Mono: Alright. Anything for you, dear.'
-    - 'Mono: Now where did I put my drab-o-matic...'
+    - 'MonoKrome: ....'
+    - 'MonoKrome: Alright. Anything for you, dear.'
+    - 'MonoKrome: Now where did I put my drab-o-matic...'
     textPosition: {x: 525, y: 200}
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 70a0899f77649d94bba1c61689a58075, type: 3}
     frameScripts:
-    - 'Mono: This thing is such a pain.'
-    - 'Mono: I don''t know why I got the model that runs on unicorn blood.'
-    - 'Mono: I should have gone solar.'
-    - 'Mono: Oh well. Off to Rainbow.'
+    - 'MonoKrome: This thing is such a pain.'
+    - 'MonoKrome: I don''t know why I got the model that runs on unicorn blood.'
+    - 'MonoKrome: I should have gone solar.'
+    - 'MonoKrome: Oh well. Off to Rainbow.'
     textPosition: {x: 525, y: 200}
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 33f242b73d617624bb0d27ac7ce9a492, type: 3}
     frameScripts:
-    - 'Mono: I suppose this is a good enough place to set up.'
+    - 'MonoKrome: I suppose this is a good enough place to set up.'
     textPosition: {x: 525, y: 200}
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 261e0d5aa42c10146badc63739df1c36, type: 3}
     frameScripts:
-    - 'Mono: Things are going well.'
-    - 'Mono: This should be over soon enough.'
-    - 'Mono: Huh, what''s this note?'
+    - 'MonoKrome: Things are going well.'
+    - 'MonoKrome: This should be over soon enough.'
+    - 'MonoKrome: Huh, what''s this note?'
     textPosition: {x: 525, y: 200}
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: 79aa28fbf19dd884a9f5fd4a93439ec1, type: 3}
