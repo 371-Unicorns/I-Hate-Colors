@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
@@ -22,7 +23,7 @@ public class TowerInformation : MonoBehaviour
 
     private static Transform placedBody;
     private static Text levelText;
-    private static Text upgradeCostText;
+    private static TextMeshProUGUI upgradeCostText;
     private static Button upgradeButton;
 
     public void Start()
@@ -40,7 +41,7 @@ public class TowerInformation : MonoBehaviour
 
         placedBody = transform.Find("PlacedBody").transform;
         levelText = placedBody.transform.Find("LevelText").GetComponent<Text>();
-        upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<Text>();
+        upgradeCostText = placedBody.transform.Find("UpgradeCostText").GetComponent<TextMeshProUGUI>();
         upgradeButton = placedBody.transform.Find("UpgradeButton").GetComponent<Button>();
 
         Reset();
@@ -87,7 +88,7 @@ public class TowerInformation : MonoBehaviour
 
         informationPanel.transform.position = Camera.main.WorldToScreenPoint(tower.Tile.transform.position);
         levelText.text = "Level: " + selectedTower.Level.ToString();
-        upgradeCostText.text = tower.Level < tower.MaxLevel ? "Upgrade: " + selectedTower.UpgradeCosts.ToString() : "Max Level";
+        upgradeCostText.text = tower.Level < tower.MaxLevel ? "Upgrade: " + selectedTower.UpgradeCosts.ToString() + " <sprite=1>" : "Max Level";
         CheckUpgrade();
 
         background.enabled = true;
