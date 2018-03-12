@@ -23,9 +23,9 @@ public class SendBossButton : MonoBehaviour
     /// 
     /// Author: David Askari
     /// </summary>
-    void Start()
+    void Awake()
     {
-        sendBossButton = GetComponent<Button>();
+        sendBossButton = gameObject.GetComponent<Button>();
         ResetButton();
     }
 
