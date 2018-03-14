@@ -37,3 +37,4 @@ References:
    * 'Explosive Realistic VFX Texture Free' downloaded and modified from Unity Asset Store (http://bit.ly/2FrFXHz)
    * 'A* Pathfinding Package' downloaded from Unity Asset Store (http://bit.ly/2Fhvv1W)
    * 'Pause Button Kit' downloaded and modified from Unity Asset Store (http://bit.ly/2D3KJpf)
+   * 'Post Processing Stack' downloaded from Unity Asset Store (https://assetstore.unity.com/packages/essentials/post-processing-stack-83912)

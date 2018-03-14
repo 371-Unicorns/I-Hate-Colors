@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Post Processing Profile that allows for color fade via decreasing saturation.
+    /// Downloaded from the Unity Asset Store from this link:
+    /// https://assetstore.unity.com/packages/essentials/post-processing-stack-83912
     /// 
     /// Author: Amy Lewis
     /// </summary>

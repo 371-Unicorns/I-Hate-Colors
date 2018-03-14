@@ -2,18 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Flame Tower attacks all enemies within its range.
+/// It attacks them for LIFESPAN (5 seconds) and then stops for LIFESPAN.
+/// Does the most damage to enemies of all the effects.
+/// </summary>
 public class FlameAoEEffect : AoEEffect
 {
 
+    /// <summary>
+    /// How many seconds the flames are activated and attacking enemies.
+    /// Also how long between each flame effect generated from its tower.
+    /// </summary>
     private readonly float LIFESPAN = 5.0f;
 
+    /// <summary>
+    /// Flame effect sprite.
+    /// </summary>
     private Sprite sprite;
 
+    /// <summary>
+    /// Timer that controls how long the flames are active.
+    /// </summary>
     private GameTimer gTimer;
 
+    /// <summary>
+    /// Flame prefab.
+    /// </summary>
     [SerializeField]
     private ParticleSystem explosionPrefab;
 
+    /// <summary>
+    /// Constructor for the effect. 
+    /// </summary>
     public FlameAoEEffect()
     {
         radius = 3;
@@ -21,6 +43,11 @@ public class FlameAoEEffect : AoEEffect
         gTimer.SetPaused(false);
     }
 
+    /// <summary>
+    /// Update function that resets the timer. 
+    /// Makes sure the flame tower is active LIFESPAN seconds and then disactivated LIFESPAN seconds.
+    /// 
+    /// </summary>
     public override void Update()
     {
         gTimer.Update();
@@ -31,6 +58,11 @@ public class FlameAoEEffect : AoEEffect
         }
     }
 
+    /// <summary>
+    /// Applies the effect in the game.
+    /// Sends flames in a circle damaging all targets in the range of this effect. 
+    /// 
+    /// </summary>
     public override void ApplyAoEEffect()
     {
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
@@ -53,6 +85,14 @@ public class FlameAoEEffect : AoEEffect
         }
     }
 
+    /// <summary>
+    /// Applies the effect in the game.
+    /// Sends flames in a circle damaging all targets in the range of this effect. 
+    /// 
+    /// </summary>
+    /// <param name="damage">Amount of this effect does to an enemy.</param>
+    /// <param name="range">How far the effect can reach.</param>
+    /// <param name="color">Color enemy this effect does more damage to.</param>
     public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
         GameObject newEffect = Instantiate(prefab, position, Quaternion.identity);

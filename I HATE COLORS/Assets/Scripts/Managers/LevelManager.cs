@@ -87,7 +87,7 @@ public class LevelManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Instatiate the right tile for each element of the grid.
+    /// Instantiate the right tile for each element of the grid.
     /// Start point of the grid is bottom left.
     /// </summary>
     /// <param name="width">Amount of tiles on the x-Axis.</param>

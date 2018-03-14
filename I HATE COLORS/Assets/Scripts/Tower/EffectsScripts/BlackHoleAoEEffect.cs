@@ -11,7 +11,7 @@ public class BlackHoleAoEEffect : AoEEffect
 {
     /// <summary>
     /// How many seconds the Black Hole is activated and holding enemies.
-    /// Also how long between each black hole effect generated its tower.
+    /// Also how long between each black hole effect generated from its tower.
     /// 
     /// Author: Amy Lewis
     /// </summary>

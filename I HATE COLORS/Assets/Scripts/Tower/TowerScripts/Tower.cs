@@ -118,6 +118,9 @@ public abstract class Tower : MonoBehaviour
         this.upgradeAudioSource = GetComponent<AudioSource>();
     }
 
+    /// <summary>
+    /// Finds a new target if the tower does not have a target, the target goes out of range or is dead.
+    /// </summary>
     public virtual void Update()
     {
         if (target == null || target.isDead() || (target.transform.position - transform.position).magnitude > range)
@@ -204,6 +207,9 @@ public abstract class Tower : MonoBehaviour
         return tower.GetComponent<Tower>();
     }
 
+    /// <summary>
+    /// Finds the closest enemy to the tower and sets it as the target.
+    /// </summary>
     protected void FindClosestTarget()
     {
         List<Enemy> enemies = EnemyManager.GetEnemies();

@@ -12,6 +12,9 @@ public class DoTTower : Tower
     [SerializeField, HideInInspector]
     private float doTDamageScale;
 
+    /// <summary>
+    /// DoT effect to be spawned by this tower.
+    /// </summary>
     private DoTEffect spawnedEffect;
 
     /// <summary>
@@ -35,6 +38,9 @@ public class DoTTower : Tower
         effectPrefab.GetComponent<DoTEffect>().Initialize(doTDamage, range, color);
     }
 
+    /// <summary>
+    /// Updates the DoT effect so that it only affects enemies for the time it is set.
+    /// </summary>
     public override void Update()
     {
         base.Update();
@@ -45,6 +51,9 @@ public class DoTTower : Tower
         }
     }
 
+    /// <summary>
+    /// Applies the DoT effect targeted at the enemeies.
+    /// </summary>
     public override void Attack()
     {
         if (spawnedEffect == null)
@@ -55,6 +64,9 @@ public class DoTTower : Tower
         spawnedEffect.ApplyDoTEffect();
     }
 
+    /// <summary>
+    /// If the player upgrades the tower, the towers abilities are scaled up.
+    /// </summary>
     public override void Upgrade()
     {
         base.Upgrade();

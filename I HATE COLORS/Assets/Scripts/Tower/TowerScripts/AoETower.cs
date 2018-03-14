@@ -58,6 +58,9 @@ public class AoETower : Tower
         attackTimer.SetPaused(false);
     }
 
+    /// <summary>
+    /// Updates the AoE effect so that it only affects enemies for the time it is set.
+    /// </summary>
     public override void Update()
     {
         base.Update();
@@ -76,6 +79,9 @@ public class AoETower : Tower
         }
     }
 
+    /// <summary>
+    /// Applies the AoE effect to the enemeies.
+    /// </summary>
     public override void Attack()
     {
         if (aoeEffect != null)
@@ -84,6 +90,9 @@ public class AoETower : Tower
         }
     }
 
+    /// <summary>
+    /// If the player upgrades the tower, the towers abilities are scaled up.
+    /// </summary>
     public override void Upgrade()
     {
         if (level < maxLevel)

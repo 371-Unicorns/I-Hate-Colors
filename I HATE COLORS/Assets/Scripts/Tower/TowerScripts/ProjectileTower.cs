@@ -80,6 +80,9 @@ public class ProjectileTower : Tower
         }
     }
 
+    /// <summary>
+    /// If the player upgrades the tower, the towers abilities are scaled up.
+    /// </summary>
     public override void Upgrade()
     {
         if (level < maxLevel)
@@ -98,6 +101,9 @@ public class ProjectileTower : Tower
         }
     }
 
+    /// <summary>
+    /// Applies the Projectile effect targeted at the enemeies.
+    /// </summary>
     public override void Attack()
     {
         effectPrefab.GetComponent<ProjectileEffect>().SpawnEffect(effectPrefab, transform.position, target);

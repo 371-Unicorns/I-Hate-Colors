@@ -2,12 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Laser effect for the laser damage over time tower.
+/// Does damage to enemies as long as the laser is targeting them.
+/// </summary>
 public class LaserDoTEffect : DoTEffect
 {
-
+    /// <summary>
+    /// Laser effect sprite.
+    /// </summary>
     private Sprite sprite;
+
+    /// <summary>
+    /// Position of the laser tower the effect is spawn from.
+    /// </summary>
     private Vector3 towerPosition;
 
+    /// <summary>
+    /// Applies the effect in the game.
+    /// Laser does damage to the target over time. 
+    /// </summary>
     public override void ApplyDoTEffect()
     {
         if (target != null)
@@ -24,6 +38,10 @@ public class LaserDoTEffect : DoTEffect
         }
     }
 
+    /// <summary>
+    /// Update function that creates the laser. 
+    /// If the laser fires out of range or kills its target it is destroyed.
+    /// </summary>
     public override void Update()
     {
         base.Update();
@@ -34,6 +52,13 @@ public class LaserDoTEffect : DoTEffect
         }
     }
 
+    /// <summary>
+    /// Applies the effect in the game.
+    /// Does damage to enemies as long as the laser is targeting them.
+    /// </summary>
+    /// <param name="damage">Amount of this effect does to an enemy.</param>
+    /// <param name="range">How far the effect can reach.</param>
+    /// <param name="color">Color enemy this effect does more damage to.</param>
     public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
         GameObject newEffect = Instantiate(prefab, position, Quaternion.identity);
@@ -45,8 +70,16 @@ public class LaserDoTEffect : DoTEffect
         return effect;
     }
 
+    /// <summary>
+    /// Sets the laser sprite to be the sprite for this effect.
+    /// </summary>
+    /// <param name="s">Sprite for this effect.</param>
     private void SetSprite(Sprite s) { sprite = s; }
 
+    /// <summary>
+    /// Sets the position of the laser tower.
+    /// </summary>
+    /// <param name="position">Position of the tower.</param>
     private void SetTowerPosition(Vector3 position)
     {
         towerPosition = position;

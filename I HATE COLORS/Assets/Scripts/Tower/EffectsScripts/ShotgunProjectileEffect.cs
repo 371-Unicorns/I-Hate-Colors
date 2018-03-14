@@ -8,36 +8,82 @@ using UnityEngine;
 /// </summary>
 public class ShotgunProjectileEffect : ProjectileEffect
 {
-
+    /// <summary>
+    /// How many projetiles are fired at once from the tower.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     private static readonly int NUM_SHELLS = 3;
+
+    /// <summary>
+    /// How spread out the projectiles are when fired.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     private static readonly float SHELL_SPREAD = 1.5f;
 
     /// <summary>
-    /// The position of the enemy on instantiation of a new shell
+    /// The position of the enemy on instantiation of a new shell.
+    /// 
+    /// Author: Amy Lewis
     /// </summary>
     private Vector3 enemyPos;
+
+    /// <summary>
+    /// The position of the projectiles when they are spawn.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     private Vector3 spawnPos;
 
+    /// <summary>
+    /// The position of the enemy when they are targeted.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     public Vector3 GetEnemyPosition()
     {
         return enemyPos;
     }
 
+    /// <summary>
+    /// Resets the position of the enemy.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
+    /// <param name="pos">Sets position of the enemy.</param>
     public void SetEnemyPosition(Vector3 pos)
     {
         enemyPos = pos;
     }
 
+    /// <summary>
+    /// Returns the spawn position.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     public Vector3 GetSpawnPosition()
     {
         return spawnPos;
     }
 
+    /// <summary>
+    /// Resets the spawn position.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
+    /// <param name="pos">Sets position of the spawn point.</param>
     public void SetSpawnPosition(Vector3 pos)
     {
         spawnPos = pos;
     }
 
+    /// <summary>
+    /// Moves the projectiles toward their target.
+    /// If they go out of range or collide with their target they are destroyed.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     public override void Update()
     {
         float step = speed * Time.deltaTime;
@@ -50,6 +96,13 @@ public class ShotgunProjectileEffect : ProjectileEffect
         } 
     }
 
+    /// <summary>
+    /// If a projectile collides with its target, the target takes damage.
+    /// Otherwise, the projectile just explodes on contact.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
+    /// <param name="other">The object the projectile collides with. </param>
     protected override void OnTriggerEnter2D(Collider2D other)
     {
         if (target != null && other.gameObject == target.gameObject)
@@ -59,6 +112,12 @@ public class ShotgunProjectileEffect : ProjectileEffect
         ProcessCollision();
     }
 
+    /// <summary>
+    /// If a projectile collides with an object (even if that object is not its target), it explodes.
+    /// The explosion is a particle system.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
     public override void ProcessCollision()
     {
         GameObject fx = (GameObject)Instantiate(projectileImpact, transform.position, transform.rotation, LevelManager.ProjectilesEffectParent);
@@ -66,6 +125,15 @@ public class ShotgunProjectileEffect : ProjectileEffect
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// Applies the effect in the game.
+    /// Sends a bullet projectile after the targeted enemy.
+    /// 
+    /// Author: Amy Lewis
+    /// </summary>
+    /// <param name="damage">Amount of this effect does to an enemy.</param>
+    /// <param name="range">How far the effect can reach.</param>
+    /// <param name="color">Color enemy this effect does more damage to.</param>
     public override Effect SpawnEffect(GameObject prefab, Vector3 position, Enemy target)
     {
         ShotgunProjectileEffect shell = null;
