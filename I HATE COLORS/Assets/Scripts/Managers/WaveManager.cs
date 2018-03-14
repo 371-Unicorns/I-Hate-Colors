@@ -2,22 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages waves of enemies and loads which ones are supposed to be sent from wave_composition.xml.
+/// </summary>
 public class WaveManager : MonoBehaviour
 {
+    /// <summary>
+    /// Boolean for if enemies are currently attacking or not.
+    /// </summary>
     private static bool waveRunning = false;
 
+    /// <summary>
+    /// The file wave_composition.xml where the number and type of enemies are set.
+    /// </summary>
     public static string waveXmlFile;
+
+    /// <summary>
+    /// The current wave of attacking enemies.
+    /// </summary>
     private static Wave currentWave;
     public static Wave CurrentWave { get { return currentWave; } }
+
+    /// <summary>
+    /// A queue containing all waves for the game.
+    /// </summary>
     private static Queue<Wave> waves;
 
-    // Use this for initialization
+    /// <summary>
+    /// Instantiates the waves frm the xml.
+    /// </summary>
     public void Start()
     {
         waves = XmlImporter.GetWavesFromXml();
         WaveManager.SetNextWave();
     }
 
+    /// <summary>
+    /// Sets which waves should be running according to the xml.
+    /// </summary>
     public static void Update()
     {
         if (currentWave != null && waveRunning)
@@ -35,12 +57,18 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the next wave from the queue.
+    /// </summary>
     public static void SetNextWave()
     {
         currentWave = waves.Dequeue();
         waveRunning = false;
     }
 
+    /// <summary>
+    /// Clears all of the dead enemies from the field and starts the next wave.
+    /// </summary>
     public static void BeginWave()
     {
         waveRunning = true;
@@ -48,11 +76,17 @@ public class WaveManager : MonoBehaviour
         EnemyManager.ClearDeadEnemies();
     }
 
+    /// <summary>
+    /// Returns true if all of the enemies have either died or made it to the castle.
+    /// </summary>
     public static bool WaveFinished()
     {
         return currentWave != null && currentWave.EnemiesRemaining() == 0;
     }
 
+    /// <summary>
+    /// Returns the queue holding all of the waves for the game.
+    /// </summary>
     public static Queue<Wave> GetWaves()
     {
         return waves;

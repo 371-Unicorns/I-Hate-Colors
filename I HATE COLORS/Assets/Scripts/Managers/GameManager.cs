@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using Pathfinding;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the whole game.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     /// <summary>
@@ -27,6 +30,9 @@ public class GameManager : MonoBehaviour
     public static Tower SelectedTower { get; private set; }
     public static SpriteRenderer rangeIndicatorRenderer;
 
+    /// <summary>
+    /// All the text that is displayed to the player during game play.
+    /// </summary>
     [HideInInspector]
     public static bool gameOver;
     private static GameObject gameOverObject;
@@ -36,7 +42,7 @@ public class GameManager : MonoBehaviour
     public static GameObject canvas;
 
     /// <summary>
-    /// Where the coins should fly to.
+    /// Where the rainbow blood should fly to.
     /// </summary>
     public static GameObject bloodFlyTarget;
 
@@ -46,18 +52,33 @@ public class GameManager : MonoBehaviour
     private static Button skipTimeButton;
     public static Button SkipTimeButton { get { return skipTimeButton; } }
 
+    /// <summary>
+    /// Shows how long the player has before the next wave comes.
+    /// Flashes 0:00 when the enemies are attacking.
+    /// </summary>
     private static GameTimer waveTimer, errorTextTimer;
     public static GameTimer WaveTimer { get { return waveTimer; } }
 
-
+    /// <summary>
+    /// The number of the current wave of attacking enemies.
+    /// </summary>
     public static int currentWave;
+
+    /// <summary>
+    /// How many total waves are in the game as set in wave_composition.xml.
+    /// </summary>
     private static int totalWaves;
 
     /// <summary>
-    /// Post Processing Profile.
+    /// Post Processing Profile that allows for color fade via decreasing saturation.
+    /// 
+    /// Author: Amy Lewis
     /// </summary>
     public PostProcessingProfile ppProfile;
 
+    /// <summary>
+    /// How much money the player starts with.
+    /// </summary>
     public static int money = 150;
 
     /// <summary>
@@ -65,10 +86,13 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private static Transform towerScrollViewContent;
 
+    /// <summary>
+    /// Contains all of the towers in the game as set in towers.xml.
+    /// </summary>
     private static Dictionary<string, Tower> towerDictionary;
 
     /// <summary>
-    /// Boolean variables related to the reward panel
+    /// Boolean variables related to the reward panel.
     /// </summary>
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
@@ -98,6 +122,11 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameObject sendBossButton;
 
+    /// <summary>
+    /// Initializes everything needed for game play.
+    /// 
+    /// Autors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson,  Courtney Chu
+    /// </summary>
     public void Start()
     {
         gameOver = false;
@@ -155,6 +184,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(BlinkText());
     }
 
+    /// <summary>
+    /// Updates times and other necessary pieces of game play.
+    /// 
+    /// Autors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson, Courtney Chu
+    /// </summary>
     public void Update()
     {
         SetTimerText();
@@ -292,6 +326,9 @@ public class GameManager : MonoBehaviour
         GameManager.rangeIndicatorRenderer.enabled = false;
     }
 
+    /// <summary>
+    /// Gives player a reward if all of the types of towers have been upgraded at least once.
+    /// </summary>
     public static bool CheckForFirstUpgrade()
     {
         switch (SelectedTower.tag)
@@ -307,14 +344,14 @@ public class GameManager : MonoBehaviour
             case "BlackHoleTower":
                 if (!GameManager.didUpgradeBlackHoleTower)
                     GameManager.didUpgradeBlackHoleTower = true;
+                break;            
+            case "FlameTower":
+                if (!GameManager.didUpgradeFlameTower)
+                    GameManager.didUpgradeFlameTower = true;
                 break;
             case "LaserTower":
                 if (!GameManager.didUpgradeLaserTower)
                     GameManager.didUpgradeLaserTower = true;
-                break;
-            case "FlameTower":
-                if (!GameManager.didUpgradeFlameTower)
-                    GameManager.didUpgradeFlameTower = true;
                 break;
         }
         if (GameManager.didUpgradeBulletTower
@@ -331,6 +368,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gives player a reward if all of the types of towers have been placed at least once.
+    /// </summary>
     public static bool CheckForFirstPlacement()
     {
         if (SelectedTower.CompareTag("BulletTower") && !GameManager.didPlaceBulletTower)
@@ -364,6 +404,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds m amount of money to the player's available blood.
+    /// </summary>
+    /// <param name="m">Amount of money added.</param>
     public static void AddMoney(int m)
     {
         GameManager.money += m;
@@ -374,6 +418,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the text of the wave timer. 
+    /// Gives 30 seconds between each wave.
+    /// </summary>
     private void SetTimerText()
     {
         waveTimer.Update();
@@ -390,6 +438,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Makes the wave timer blink when enemies are attacking.
+    /// </summary>
     public static IEnumerator BlinkText()
     {
 
@@ -410,6 +461,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Displays when player earns a reward.
+    /// Tells them what they earned and why.
+    /// </summary>
     public static IEnumerator DisplayRewardsPanel()
     {
 
@@ -440,6 +495,10 @@ public class GameManager : MonoBehaviour
         rewardsPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Loads all of the buttons into the UI that the player can scroll through to select what tower they want.
+    /// When clicked on the user can place that tower (if they have enough blood).
+    /// </summary>
     private void LoadTowerButtons()
     {
         foreach (Tower tower in towerDictionary.Values)
@@ -471,6 +530,10 @@ public class GameManager : MonoBehaviour
         skipTimeButton.interactable = false;
     }
 
+    /// <summary>
+    /// Displays any error text to the player so they can know something went wrong.
+    /// 
+    /// </summary>
     public static void DisplayErrorText(string text)
     {
         errorText.gameObject.SetActive(true);

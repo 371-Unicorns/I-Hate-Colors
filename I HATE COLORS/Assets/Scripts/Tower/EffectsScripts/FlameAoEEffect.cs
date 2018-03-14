@@ -38,7 +38,7 @@ public class FlameAoEEffect : AoEEffect
 
         foreach (Collider2D c in targets)
         {
-            if (c.gameObject.tag == "Enemy")
+            if (c.gameObject.tag == "Enemy" || c.gameObject.tag == "Walrusu" || c.gameObject.tag == "Boss")
             {
                 GameObject target = c.gameObject;
                 target.GetComponent<Enemy>().TakeDamage(damage, ColorType.BLACK);

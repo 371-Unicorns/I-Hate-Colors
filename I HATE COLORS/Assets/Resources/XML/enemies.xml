@@ -50,7 +50,7 @@
   </enemy>
   <enemy>
     <id>boss</id>
-    <health>75</health>
+    <health>250</health>
     <speed>3</speed>
     <value>200</value>
     <color>BLACK</color>

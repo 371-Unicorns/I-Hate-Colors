@@ -39,6 +39,7 @@ public class SendBossButton : MonoBehaviour
         sendBossButton.interactable = false;
         Enemy boss = EnemyManager.enemyDictionary["boss"];
         WaveManager.CurrentWave.EnqueueEnemy(boss);
+        AudioManager.PlayBossSentSound();
     }
 
     /// <summary>

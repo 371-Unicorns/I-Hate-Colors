@@ -31,6 +31,8 @@ public class CastleWall : MonoBehaviour
 
     /// <summary>
     /// Take damage, remove entered gameobject from list of active enemies and then destroy gameobject.
+    /// 
+    /// Author: Amy Lewis
     /// </summary>
     /// <param name="other">The other Collider2D involved in this collision.</param>
     private void OnTriggerEnter2D(Collider2D other)
@@ -39,6 +41,32 @@ public class CastleWall : MonoBehaviour
         if (other.tag == "Enemy")
         {
             CastleManager.TakeDamage(1);
+
+            ParticleSystem explosionParticle = Instantiate(explosionPrefab, other.transform.position, transform.rotation);
+            explosionParticle.transform.SetParent(explosionParent);
+
+            deathSound.PlayOneShot(deathSound.clip);
+
+            EnemyManager.RemoveEnemy(other.gameObject.GetComponent<Enemy>());
+            Destroy(explosionParticle.gameObject, explosionParticle.main.duration);
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "Walrusu")
+        {
+            CastleManager.TakeDamage(10);
+
+            ParticleSystem explosionParticle = Instantiate(explosionPrefab, other.transform.position, transform.rotation);
+            explosionParticle.transform.SetParent(explosionParent);
+
+            deathSound.PlayOneShot(deathSound.clip);
+
+            EnemyManager.RemoveEnemy(other.gameObject.GetComponent<Enemy>());
+            Destroy(explosionParticle.gameObject, explosionParticle.main.duration);
+            Destroy(other.gameObject);
+        }
+        else if (other.tag == "Boss")
+        {
+            CastleManager.TakeDamage(25);
 
             ParticleSystem explosionParticle = Instantiate(explosionPrefab, other.transform.position, transform.rotation);
             explosionParticle.transform.SetParent(explosionParent);

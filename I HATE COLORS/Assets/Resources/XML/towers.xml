@@ -25,18 +25,6 @@
     <proj-speed>5</proj-speed>
     <proj-damage>5</proj-damage>
   </proj-tower>
-  <aoe-tower>
-    <name>BlackHoleTower</name>
-    <cost>60</cost>
-    <upgrade-cost>10</upgrade-cost>
-    <upgrade-cost-scale>1.25</upgrade-cost-scale>
-    <max-level>5</max-level>
-    <range>5</range>
-    <color>BLACK</color>
-    <description>A tower that opens a black hole that holds enemies in place.</description>
-    <attack-rate>10</attack-rate>
-    <aoe-damage>0</aoe-damage>
-  </aoe-tower>
   <dot-tower>
     <name>LaserTower</name>
     <cost>60</cost>
@@ -49,8 +37,20 @@
     <dot-damage>10</dot-damage>
   </dot-tower>
   <aoe-tower>
+    <name>BlackHoleTower</name>
+    <cost>60</cost>
+    <upgrade-cost>10</upgrade-cost>
+    <upgrade-cost-scale>1.25</upgrade-cost-scale>
+    <max-level>5</max-level>
+    <range>5</range>
+    <color>BLACK</color>
+    <description>A tower that opens a black hole that holds enemies in place.</description>
+    <attack-rate>10</attack-rate>
+    <aoe-damage>0</aoe-damage>
+  </aoe-tower>
+  <aoe-tower>
     <name>FlameTower</name>
-    <cost>120</cost>
+    <cost>100</cost>
     <upgrade-cost>10</upgrade-cost>
     <upgrade-cost-scale>1.25</upgrade-cost-scale>
     <max-level>5</max-level>
@@ -58,6 +58,6 @@
     <color>BLACK</color>
     <description>A tower that burns enemies with a flame wheel.</description>
     <attack-rate>10</attack-rate>
-    <aoe-damage>0.25</aoe-damage>
+    <aoe-damage>0.05</aoe-damage>
   </aoe-tower>
 </towers>

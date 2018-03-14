@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the player's castle in the game.
+/// </summary>
 public class CastleManager : MonoBehaviour
 {
     public static int CastleHealth { get; private set; }
