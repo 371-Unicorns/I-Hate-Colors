@@ -3,12 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Rewards panel in the UI.
+/// </summary>
 public class RewardsPanel : MonoBehaviour {
 
-	[SerializeField]
+    /// <summary>
+    /// Blood flies from dead enemy to reward panel.
+    /// 
+    /// Authors: David Askari, Amy Lewis
+    /// </summary>
+    [SerializeField]
     private BloodFly bloodFly;
 
-	void OnEnable () {
+    /// <summary>
+    /// Enables rewards panel so blood can fly to the panel from the enemy.
+    /// 
+    /// Authors: David Askari, Amy Lewis
+    /// </summary>
+    void OnEnable () {
 		if(GameManager.rewardsPanelFirstEnable) {
 			GameManager.rewardsPanelFirstEnable = false;
 		}

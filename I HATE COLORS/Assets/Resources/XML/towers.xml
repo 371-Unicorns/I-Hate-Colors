@@ -58,6 +58,6 @@
     <color>BLACK</color>
     <description>A tower that burns enemies with a flame wheel.</description>
     <attack-rate>10</attack-rate>
-    <aoe-damage>0.05</aoe-damage>
+    <aoe-damage>0.075</aoe-damage>
   </aoe-tower>
 </towers>
