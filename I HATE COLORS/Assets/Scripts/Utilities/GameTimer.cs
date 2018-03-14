@@ -12,6 +12,9 @@ public class GameTimer
 
     public bool startBlinking;
 
+    /// <summary>
+    /// Instantiates the game timer
+    /// </summary>
     public GameTimer() { }
     public GameTimer(float initialTime)
     {
@@ -19,6 +22,9 @@ public class GameTimer
         startBlinking = false;
     }
 
+    /// <summary>
+    /// Updates remaining time
+    /// </summary>
     public void Update()
     {
         if (!isPaused)
@@ -27,37 +33,63 @@ public class GameTimer
         }
     }
 
+    /// <summary>
+    /// Returns remaining time as a float
+    /// </summary>
+    /// <returns> remaining time as a float</returns>
     public float TimeRemaining()
     {
         return timeRemaining;
     }
 
+    /// <summary>
+    /// Sets time remaining as a float
+    /// </summary>
+    /// <param name="time">float</param>
     public void SetTimer(float time)
     {
         timeRemaining = lastTimeSet = time;
     }
 
+    /// <summary>
+    /// Pauses or unpauses the game timer
+    /// </summary>
+    /// <param name="paused">bool</param>
     public void SetPaused(bool paused)
     {
         isPaused = paused;
     }
 
+    /// <summary>
+    /// Sets remaining time to zero
+    /// </summary>
     public void SkipTimer()
     {
         timeRemaining = 0;
     }
 
+    /// <summary>
+    /// Returns whether the game timer is paused
+    /// </summary>
+    /// <returns>bool game timer pause status</returns>
     public bool IsPaused()
     {
         return isPaused;
     }
 
+    /// <summary>
+    /// Resets remaining time to the last start time and ceases to blink
+    /// </summary>
     public void Reset()
     {
         timeRemaining = lastTimeSet;
         startBlinking = false;
     }
 
+    /// <summary>
+    /// Returns whether the timer has 'gone off'
+    /// </summary>
+    /// <returns>bool is time remaining zero</returns>
     public bool IsDone()
     {
         if(timeRemaining <= 0) {

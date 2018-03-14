@@ -195,7 +195,7 @@ public class XmlImporter
     }
 
     /// <summary>
-    /// remove 
+    /// Removes all enemies and towers from their respective lists and sets these lists to null to allow for clean restarts
     /// </summary>
     public static void Cleanup()
     {
