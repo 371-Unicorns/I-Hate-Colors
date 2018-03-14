@@ -12,10 +12,19 @@ using UnityEngine;
 /// </summary>
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+    /// <summary>
+    /// Single instance of an object.
+    /// </summary>
     private static T _instance;
 
+    /// <summary>
+    /// Lock to make sure there is only one instance.
+    /// </summary>
     private static object _lock = new object();
 
+    /// <summary>
+    /// Method to make sure that there is only one instance of the singleton.
+    /// </summary>
     public static T Instance
     {
         get
@@ -54,7 +63,11 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Singleton is only destroyed when application quits.
+    /// </summary>
     private static bool applicationIsQuitting = false;
+
     /// <summary>
     /// When Unity quits, it destroys objects in a random order.
     /// In principle, a Singleton is only destroyed when application quits.

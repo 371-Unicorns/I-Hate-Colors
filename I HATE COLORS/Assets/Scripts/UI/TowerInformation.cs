@@ -9,21 +9,68 @@ using TMPro;
 /// </summary>
 public class TowerInformation : MonoBehaviour
 {
+    /// <summary>
+    /// Currently selected tower.
+    /// </summary>
     private static Tower selectedTower;
 
+    /// <summary>
+    /// Background image of game.
+    /// 
+    /// Drawn by Amy Lewis.
+    /// </summary>
     private static Image background;
+
+    /// <summary>
+    /// Header located next to every tower in side panel of UI.
+    /// </summary>
     private static Transform head;
+
+    /// <summary>
+    /// Information panel is readable if player hovers over towers in panel.
+    /// </summary>
     private static Transform informationPanel;
+
+    /// <summary>
+    /// Name of tower displayed in information panel.
+    /// </summary>
     private static Text nameText;
+
+    /// <summary>
+    /// Range of tower displayed in information panel.
+    /// </summary>
     private static Text rangeText;
 
+    /// <summary>
+    /// Panel that isreadable if player hovers over towers in panel.
+    /// </summary>
     private static Transform hoverBody;
+
+    /// <summary>
+    /// Description of tower displayed in information panel.
+    /// </summary>
     private static Text descriptionText;
+
+    /// <summary>
+    /// Position of panel must be the same Y as the tower it corresponds with.
+    /// </summary>
     private static Vector2 hoverPanelPosition;
 
     private static Transform placedBody;
+
+    /// <summary>
+    /// Which level the tower is.
+    /// </summary>
     private static Text levelText;
+
+    /// <summary>
+    /// How much it costs to upgrade the tower.
+    /// </summary>
     private static TextMeshProUGUI upgradeCostText;
+
+    /// <summary>
+    /// Button player can click to upgrade tower.
+    /// </summary>
     private static Button upgradeButton;
 
     /// <summary>
@@ -31,6 +78,9 @@ public class TowerInformation : MonoBehaviour
     /// </summary>
     public static bool isActive;
 
+    /// <summary>
+    /// Instantiates the tower information.
+    /// </summary>
     public void Start()
     {
         background = GetComponent<Image>();
@@ -105,6 +155,9 @@ public class TowerInformation : MonoBehaviour
         isActive = true;
     }
 
+    /// <summary>
+    /// Fills the head with information from the XML.
+    /// </summary>
     private static void FillHead()
     {
         nameText.text = TowerInformation.selectedTower.Name;

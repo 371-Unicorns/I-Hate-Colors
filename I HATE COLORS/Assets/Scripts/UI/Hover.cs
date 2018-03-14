@@ -17,6 +17,9 @@ public class Hover : MonoBehaviour
     /// </summary>
     public Hover() { }
 
+    /// <summary>
+    /// Gets the sprite renderer at the beginning of the game and makes sure sprites are deactivated to start.
+    /// </summary>
     public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -24,6 +27,9 @@ public class Hover : MonoBehaviour
         Deactivate();
     }
 
+    /// <summary>
+    /// Makes the hover sprite follow the tower's position if activated.
+    /// </summary>
     public void Update()
     {
         /// Change hovers position to current mouse position.
@@ -49,10 +55,16 @@ public class Hover : MonoBehaviour
         Hover.spriteRenderer.enabled = false;
     }
 
+    /// <summary>
+    /// Returns if hovering effect is active.
+    /// </summary>
     public static bool IsActive()
     {
         return Hover.spriteRenderer.enabled;
     }
 
+    /// <summary>
+    /// Returns position of hovering effect.
+    /// </summary>
     public static Vector3 GetPosition() { return spriteRenderer.transform.position; }
 }

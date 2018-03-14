@@ -5,11 +5,16 @@ using UnityEngine;
 /// <summary>
 /// Scales background to fit current screen situation.
 /// Based on https://kylewbanks.com/blog/create-fullscreen-background-image-in-unity2d-with-spriterenderer.!--
-/// 
-/// Author: David Askari
 /// </summary>
 public class BackgroundFitter : MonoBehaviour
 {
+    /// <summary>
+    /// Scales background to fit current screen situation.
+    /// Based on https://kylewbanks.com/blog/create-fullscreen-background-image-in-unity2d-with-spriterenderer.!--
+    /// 
+    /// Background drawn by Amy Lewis.
+    /// Author: David Askari
+    /// </summary>
     void Start()
     {
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
