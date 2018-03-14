@@ -22,6 +22,7 @@ public class LaserDoTEffect : DoTEffect
     /// Applies the effect in the game.
     /// Laser does damage to the target over time. 
     /// </summary>
+    /// Edited by Courtney Chu
     public override void ApplyDoTEffect()
     {
         if (target != null)
@@ -42,6 +43,7 @@ public class LaserDoTEffect : DoTEffect
     /// Update function that creates the laser. 
     /// If the laser fires out of range or kills its target it is destroyed.
     /// </summary>
+    /// Edited by Courtney Chu
     public override void Update()
     {
         base.Update();
@@ -56,6 +58,7 @@ public class LaserDoTEffect : DoTEffect
     /// Applies the effect in the game.
     /// Does damage to enemies as long as the laser is targeting them.
     /// </summary>
+    /// Edited by Courtney Chu
     /// <param name="damage">Amount of this effect does to an enemy.</param>
     /// <param name="range">How far the effect can reach.</param>
     /// <param name="color">Color enemy this effect does more damage to.</param>

@@ -120,6 +120,7 @@ public class SumPause : MonoBehaviour
     }
 
     /// <summary>This is what we want to do when the game is paused or unpaused.</summary>
+    /// Edited by Courtney Chu
     static void OnChange()
     {
         towerButtons = GameObject.Find("TowerScrollView").GetComponentsInChildren<Button>();

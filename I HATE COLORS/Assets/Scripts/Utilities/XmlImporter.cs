@@ -14,6 +14,12 @@ public class XmlImporter
     private static Dictionary<string, Tower> towers = null;
     private static Queue<Wave> waves = null;
 
+    /// <summary>
+    /// Returns Queue waves full of enemies from XML file
+    /// 
+    /// Edited by Courtney Chu
+    /// </summary>
+    /// <returns>Queue of waves</returns>
     public static Queue<Wave> GetWavesFromXml()
     {
         if (waves != null)
@@ -61,6 +67,12 @@ public class XmlImporter
         return retQueue;
     }
 
+    /// <summary>
+    /// Returns Dictionary of enemies from XML file
+    /// 
+    /// Edited by Courtney Chu
+    /// </summary>
+    /// <returns>Dictionary of enemies</returns>
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
     {
         if (enemies != null)
@@ -93,6 +105,12 @@ public class XmlImporter
         return retDictionary;
     }
 
+    /// <summary>
+    /// Returns Dictionary of Tower types from XML file
+    /// 
+    /// Authors: Cole Twitchell, Courtney Chu
+    /// </summary>
+    /// <returns>Dictionary of tower types</returns>
     public static Dictionary<string, Tower> GetTowersFromXml()
     {
         if (towers != null)
@@ -176,6 +194,9 @@ public class XmlImporter
         return retDictionary;
     }
 
+    /// <summary>
+    /// remove 
+    /// </summary>
     public static void Cleanup()
     {
         foreach (Enemy e in enemies.Values)

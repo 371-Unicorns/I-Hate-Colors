@@ -68,6 +68,7 @@ public class LevelManager : MonoBehaviour
 
     /// <summary>
     /// Build the whole level.
+    /// Edited by Courtney
     /// </summary>
     public void Start()
     {
@@ -90,6 +91,7 @@ public class LevelManager : MonoBehaviour
     /// Instantiate the right tile for each element of the grid.
     /// Start point of the grid is bottom left.
     /// </summary>
+    /// Edited by Courtney
     /// <param name="width">Amount of tiles on the x-Axis.</param>
     /// <param name="height">Amount of tiles on the y-Axis.</param>
     /// <param name="tileSize">Length of one size.</param>

@@ -19,6 +19,9 @@ public class CutsceneController : MonoBehaviour {
     private int idx = 0;
     private string showingText;
 
+    /// <summary>
+    /// Initializes skip button and the next string
+    /// </summary>
     void Start()
     {
         if (skipButton != null)
@@ -29,7 +32,11 @@ public class CutsceneController : MonoBehaviour {
         StartCoroutine(AnimateText(nextText));
     }
 
-
+    /// <summary>
+    /// Runs through text and displays in succession (animating it)
+    /// </summary>
+    /// <param name="strComplete">string</param>
+    /// <returns></returns>
     IEnumerator AnimateText(string strComplete)
     {
         if (strComplete == null)
@@ -101,6 +108,9 @@ public class CutsceneController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Draws text on screen
+    /// </summary>
     private void OnGUI()
     {
         if (idx < cutsceneFrames.Length)

@@ -29,7 +29,7 @@ public class WaveManager : MonoBehaviour
     private static Queue<Wave> waves;
 
     /// <summary>
-    /// Instantiates the waves frm the xml.
+    /// Instantiates the waves from the xml.
     /// </summary>
     public void Start()
     {
@@ -39,6 +39,7 @@ public class WaveManager : MonoBehaviour
 
     /// <summary>
     /// Sets which waves should be running according to the xml.
+    /// Edited by Courtney
     /// </summary>
     public static void Update()
     {
@@ -59,6 +60,7 @@ public class WaveManager : MonoBehaviour
 
     /// <summary>
     /// Gets the next wave from the queue.
+    /// Edited by Courtney
     /// </summary>
     public static void SetNextWave()
     {
@@ -68,6 +70,7 @@ public class WaveManager : MonoBehaviour
 
     /// <summary>
     /// Clears all of the dead enemies from the field and starts the next wave.
+    /// Edited by Courtney
     /// </summary>
     public static void BeginWave()
     {
@@ -78,6 +81,7 @@ public class WaveManager : MonoBehaviour
 
     /// <summary>
     /// Returns true if all of the enemies have either died or made it to the castle.
+    /// Edited by Courtney
     /// </summary>
     public static bool WaveFinished()
     {
@@ -86,6 +90,7 @@ public class WaveManager : MonoBehaviour
 
     /// <summary>
     /// Returns the queue holding all of the waves for the game.
+    /// Edited by Courtney
     /// </summary>
     public static Queue<Wave> GetWaves()
     {

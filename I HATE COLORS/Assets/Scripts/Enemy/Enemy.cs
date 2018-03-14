@@ -16,6 +16,13 @@ public class Enemy : MonoBehaviour
 
     private Enemy() { }
 
+    /// <summary>
+    /// Initializes enemy w/ starting values
+    /// </summary>
+    /// <param name="health">float</param>
+    /// <param name="speed">float</param>
+    /// <param name="value">int</param>
+    /// <param name="color">ColorType</param>
     public void Initialize(float health, float speed, int value, ColorType color)
     {
         SetHealth(health);
@@ -25,6 +32,10 @@ public class Enemy : MonoBehaviour
         this.color = color;
     }
 
+    /// <summary>
+    /// Initializing new enemy with given enemy's values
+    /// </summary>
+    /// <param name="other">Enemy</param>
     public void Initialize(Enemy other)
     {
         SetHealth(other.health);
@@ -34,22 +45,35 @@ public class Enemy : MonoBehaviour
         this.color = other.color;
     }
 
+    /// <summary>
+    /// Sets enemy's health
+    /// </summary>
+    /// <param name="health">float</param>
     private void SetHealth(float health)
     {
         this.health = health;
     }
 
+    /// <summary>
+    /// Sets the enemy's speed
+    /// </summary>
+    /// <param name="speed">float</param>
     private void SetSpeed(float speed)
     {
         this.speed = speed;
         gameObject.GetComponent<Pathfinding.AIPath>().maxSpeed = speed;
     }
 
+    /// <summary>
+    /// Returns whether the enemy is dead
+    /// </summary>
+    /// <returns>Dead boolean</returns>
     public bool isDead() { return dead; }
 
     /// <summary>
     /// Take damage and check whether for death.
     /// </summary>
+    /// Edited by Courtney Chu
     /// <param name="damage">Damage to take.</param>
     public void TakeDamage(float damage, ColorType damageType)
     {

@@ -20,6 +20,7 @@ public class DoTTower : Tower
     /// <summary>
     /// Initialize this tower.
     /// </summary>
+    /// Edited by Courtney Chu
     /// <param name="name">Name of the tower.</param>
     /// <param name="baseCosts">Base costs to build tower.</param>
     /// <param name="upgradeCosts">Base costs to build tower.</param>
@@ -41,6 +42,7 @@ public class DoTTower : Tower
     /// <summary>
     /// Updates the DoT effect so that it only affects enemies for the time it is set.
     /// </summary>
+    /// Edited by Courtney Chu
     public override void Update()
     {
         base.Update();
@@ -54,6 +56,7 @@ public class DoTTower : Tower
     /// <summary>
     /// Applies the DoT effect targeted at the enemeies.
     /// </summary>
+    /// Edited by Courtney Chu
     public override void Attack()
     {
         if (spawnedEffect == null)

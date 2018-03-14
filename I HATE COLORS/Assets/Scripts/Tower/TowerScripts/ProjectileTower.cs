@@ -36,7 +36,7 @@ public class ProjectileTower : Tower
     private GameTimer attackTimer;
 
     /// <summary>
-    /// Initialize this tower and activte attackTimer.
+    /// Initialize this tower and activate attackTimer.
     /// </summary>
     /// <param name="name">Name of the tower.</param>
     /// <param name="baseCosts">Base costs to build tower.</param>

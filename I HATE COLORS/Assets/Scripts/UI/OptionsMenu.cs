@@ -39,6 +39,10 @@ public class OptionsMenu : MonoBehaviour
         SumPause.Status = false;
     }
 
+    /// <summary>
+    /// Cleans up XML lists, sets paused status to false, loads main menu
+    /// Edited by Courtney Chu
+    /// </summary>
     public void RestartGame()
     {
         XmlImporter.Cleanup();

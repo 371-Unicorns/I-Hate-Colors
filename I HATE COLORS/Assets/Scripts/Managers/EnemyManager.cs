@@ -14,6 +14,10 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public static Tile[] TargetTiles { get; private set; }
 
+    /// <summary>
+    /// Initializes ActiveEnemies, DeadEnemies, EnemyDictionary, and TargetTiles
+    /// Edited by Courtney Chu
+    /// </summary>
     public void Start()
     {
         activeEnemies = new List<Enemy>();
@@ -23,11 +27,19 @@ public class EnemyManager : MonoBehaviour
         TargetTiles = new Tile[GameManager.Height];
     }
 
+    /// <summary>
+    /// Returns list of active enemies
+    /// </summary>
+    /// <returns>List of active enemies</returns>
     public static List<Enemy> GetEnemies()
     {
         return activeEnemies;
     }
 
+    /// <summary>
+    /// Instantiates given enemy at 'obj's location
+    /// </summary>
+    /// <param name="obj">Enemy</param>
     public static void SpawnEnemy(Enemy obj)
     {
         Point spawnPoint = new Point(0, Random.Range(0, GameManager.Height));
@@ -44,6 +56,9 @@ public class EnemyManager : MonoBehaviour
         activeEnemies.Add(enemy);
     }
 
+    /// <summary>
+    /// Destroys all dead enemies
+    /// </summary>
     public static void ClearDeadEnemies()
     {
         foreach (Enemy e in deadEnemies)  {
@@ -56,6 +71,10 @@ public class EnemyManager : MonoBehaviour
         deadEnemies.Clear();
     }
 
+    /// <summary>
+    /// Adds all active enemies to the dead enemies list
+    /// </summary>
+    /// <param name="obj">Enemy</param>
     public static void RemoveEnemy(Enemy obj)
     {
         obj.GetComponent<Collider2D>().enabled = false;
@@ -65,6 +84,10 @@ public class EnemyManager : MonoBehaviour
         obj.gameObject.GetComponent<Animator>().SetBool("isDead", true);
     }
 
+    /// <summary>
+    /// Counts number of active enemies left in the field
+    /// </summary>
+    /// <returns>Number of active enemies</returns>
     public static int EnemiesRemaining()
     {
         return activeEnemies.Count;

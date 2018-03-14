@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Initializes everything needed for game play.
     /// 
-    /// Autors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson,  Courtney Chu
+    /// Authors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson, Courtney Chu
     /// </summary>
     public void Start()
     {
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Updates times and other necessary pieces of game play.
     /// 
-    /// Autors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson, Courtney Chu
+    /// Authors: Amy Lewis, Cole Twitchell, David Askari, Steven Johnson, Courtney Chu
     /// </summary>
     public void Update()
     {
@@ -330,6 +330,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Gives player a reward if all of the types of towers have been upgraded at least once.
+    /// Author: Courtney Chu
     /// </summary>
     public static bool CheckForFirstUpgrade()
     {
@@ -372,6 +373,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Gives player a reward if all of the types of towers have been placed at least once.
+    /// Author: Steven Johnson
     /// </summary>
     public static bool CheckForFirstPlacement()
     {
@@ -442,6 +444,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Makes the wave timer blink when enemies are attacking.
+    /// Author: Steven Johnson
     /// </summary>
     public static IEnumerator BlinkText()
     {
@@ -466,6 +469,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Displays when player earns a reward.
     /// Tells them what they earned and why.
+    /// Authors: Steven Johnson, Courtney Chu
     /// </summary>
     public static IEnumerator DisplayRewardsPanel()
     {

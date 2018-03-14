@@ -27,6 +27,7 @@ public class GridGraphManager : MonoBehaviour
     /// <summary>
     /// Setup GridGraph to match tiles grid.
     /// </summary>
+    /// Edited by Courtney
     /// <param name="width">Amount of tiles on the x-Axis.</param>
     /// <param name="height">Amount of tiles on the y-Axis.</param>
     /// <param name="tileSize">Length of one tile.</param>

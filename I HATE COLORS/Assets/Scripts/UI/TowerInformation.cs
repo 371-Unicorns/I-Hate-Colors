@@ -174,6 +174,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Upgrade the currently selected tower.
+    /// 
+    /// Edited by Courtney Chu
     /// </summary>
     public void UpgradeTower()
     {

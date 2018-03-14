@@ -17,6 +17,10 @@ public class CastleManager : MonoBehaviour
     /// </summary>
     public CastleManager() { }
 
+    /// <summary>
+    /// Gives Castle a starting health point and instantiates the object from the prefab
+    /// </summary>
+    /// Edited by Courtney Chu
     private void Start()
     {
         CastleHealth = 100;
@@ -24,11 +28,19 @@ public class CastleManager : MonoBehaviour
         Instantiate(castleWallPrefab, castleWallPrefab.transform.position, castleWallPrefab.transform.rotation, LevelManager.Map.transform);
     }
 
+    /// <summary>
+    /// Adds 100 health to the castle
+    /// </summary>
     public static void AddCastleHealth()
     {
         CastleHealth += 100;
     }
 
+    /// <summary>
+    /// Castle takes given amount of damage
+    /// </summary>
+    /// Edited by Courtney Chu
+    /// <param name="damage">int</param>
     public static void TakeDamage(int damage)
     {
         CastleHealth = Mathf.Max(CastleHealth - damage, 0);
