@@ -164,7 +164,8 @@ public class GameManager : MonoBehaviour
         errorTextTimer = new GameTimer(5);
 
         waveTimer = new GameTimer();
-        waveTimer.SetTimer(30);
+        waveTimer.SetTimer(60);
+        waveTimer.SetResetTime(30);
         currentWave = 1;
         totalWaves = WaveManager.GetWaves().Count;
 

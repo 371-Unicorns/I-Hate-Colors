@@ -52,6 +52,15 @@ public class GameTimer
     }
 
     /// <summary>
+    /// Sets the amount of time to be added to the timer after calling Reset()
+    /// </summary>
+    /// <param name="time"></param>
+    public void SetResetTime(float time)
+    {
+        lastTimeSet = time;
+    }
+
+    /// <summary>
     /// Pauses or unpauses the game timer
     /// </summary>
     /// <param name="paused">bool</param>

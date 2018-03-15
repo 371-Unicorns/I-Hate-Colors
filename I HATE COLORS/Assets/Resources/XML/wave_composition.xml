@@ -45,7 +45,7 @@
                 <count>3</count>
             </enemy>
         </enemies>
-        <spawn-rate>0.1</spawn-rate>
+        <spawn-rate>0.33</spawn-rate>
     </wave>
     <wave>
         <id>5</id>
@@ -59,7 +59,7 @@
                 <count>5</count>
             </enemy>
         </enemies>
-        <spawn-rate>0.1</spawn-rate>
+        <spawn-rate>0.2</spawn-rate>
     </wave>
     <wave>
         <id>6</id>
@@ -77,7 +77,7 @@
                 <count>1</count>
             </enemy>
         </enemies>
-        <spawn-rate>0.1</spawn-rate>
+        <spawn-rate>0.2</spawn-rate>
     </wave>
     <wave>
         <id>7</id>
