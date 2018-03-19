@@ -197,7 +197,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: prototype
+          m_StringArgument: main_game
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dee85be52533094589672b42913bd83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: prototype
+  nextScene: main_game
   skipButton: {fileID: 195450488}
   text: {fileID: 357348195}
   cutsceneFrames:
@@ -451,8 +451,8 @@ MonoBehaviour:
     fullscreen: 0
   - frameImage: {fileID: 2800000, guid: f44373b20f31f5d40bf12a31400472d0, type: 3}
     frameScripts:
-    - 'MonoKrome: I''m sorry babe, but the planet Rainbow in the distance has always shone
-      brightly in the sky.'
+    - 'MonoKrome: I''m sorry babe, but the planet Rainbow in the distance has always
+      shone brightly in the sky.'
     - 'MonoKrome: I promise you get used to it after a while.'
     - 'Victoria: I don''t want to get used to it. I want it gone. Extinguished. Dead.
       Drab.'
