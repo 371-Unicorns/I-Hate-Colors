@@ -208,8 +208,8 @@ public class GameManager : MonoBehaviour
         }
         else if (currentWave == 6)
         {
-            PauseGamsButton.SetActive(true);
-            SumPause.sendBossButton = sendBossButton.GetComponent<SendBossButton>();
+            sendBossButton.SetActive(true);
+            PauseGame.sendBossButton = sendBossButton.GetComponent<SendBossButton>();
         }
 
         if (gameOver)
@@ -219,8 +219,7 @@ public class GameManager : MonoBehaviour
             if (CastleManager.CastleHealth > 0)
                 saturation.basic.saturation = 0;
 
-            PauseGam
-            SumPause.Status = true;
+            PauseGame.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
             GameObject.Find("OptionsButton").GetComponent<Button>().interactable = false;
@@ -229,8 +228,7 @@ public class GameManager : MonoBehaviour
             if (CastleManager.CastleHealth > 0)
             {
                 XmlImporter.Cleanup();
-                PauseGam
-                SumPause.Status = false;
+                PauseGame.Status = false;
                 SceneManager.LoadScene("victory_cutscene");
             }
             else
