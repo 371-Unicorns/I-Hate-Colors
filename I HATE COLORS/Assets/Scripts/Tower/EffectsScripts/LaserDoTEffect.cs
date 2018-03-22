@@ -22,6 +22,7 @@ public class LaserDoTEffect : DoTEffect
     /// Applies the effect in the game.
     /// Laser does damage to the target over time. 
     /// </summary>
+    /// Author: Cole Twitchell
     /// Edited by Courtney Chu
     public override void ApplyDoTEffect()
     {

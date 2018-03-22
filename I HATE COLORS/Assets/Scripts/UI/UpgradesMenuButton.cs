@@ -4,6 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// All buttons that are used in the upgrades menu.
+/// 
+/// Author: Cole Twitchell
 /// </summary>
 public class UpgradesMenuButton : MonoBehaviour
 {

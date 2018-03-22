@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class represents a generic timer. It is initialized, updated every frame, and can be reset at will.
+/// 
+/// Author: Cole Twitchell
+/// </summary>
 [System.Serializable]
 public class GameTimer
 {
@@ -10,11 +15,12 @@ public class GameTimer
     public float timeRemaining;
     public float lastTimeSet;
 
+    // Blinking mechanics created and handled by Steven Johnson
     public bool startBlinking;
 
     /// <summary>
     /// Instantiates the game timer
-    /// Authors: Steven Johnson
+    /// Author: Cole Twitchell
     /// </summary>
     public GameTimer() { }
     public GameTimer(float initialTime)
@@ -97,8 +103,7 @@ public class GameTimer
     }
 
     /// <summary>
-    /// Returns whether the timer has 'gone off'
-    /// Authors: Steven Johnson
+    /// Returns whether the timer has expired.
     /// </summary>
     /// <returns>bool is time remaining zero</returns>
     public bool IsDone()

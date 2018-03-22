@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// This controller is to be attached to a game object. It handles all displaying of cutscenes.
+/// 
+/// Author: Cole Twitchell
+/// </summary>
 public class CutsceneController : MonoBehaviour {
 
     private readonly float TEXT_SPEED = 0.033f;
@@ -109,7 +114,7 @@ public class CutsceneController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Draws text on screen
+    /// Renders the image and text to the screen.
     /// </summary>
     private void OnGUI()
     {

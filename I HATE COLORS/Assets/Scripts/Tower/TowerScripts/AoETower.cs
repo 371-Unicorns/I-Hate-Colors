@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Implementation of Area of Effect towers.
+/// 
+/// Author: Cole Twitchell
+/// Edited by others as we've added more to AoE Towers
+/// </summary>
 public class AoETower : Tower
 {
     /// <summary>

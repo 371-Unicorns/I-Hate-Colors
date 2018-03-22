@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
+
+/// <summary>
+/// This class loads and initializes prefabs from an XML file. It ensures that only one copy of all enemies and towers will be created
+/// in order to maximize efficiency and memory allocation. 
+/// 
+/// Author: Cole Twitchell
+/// Edited by all other group members as they added attributes to towers or enemies that needed to be filled by XML.
+/// </summary>
 public class XmlImporter
 {
 
@@ -17,7 +25,7 @@ public class XmlImporter
     /// <summary>
     /// Returns Queue waves full of enemies from XML file
     /// 
-    /// Edited by Courtney Chu
+    /// Author: Cole Twitchell
     /// </summary>
     /// <returns>Queue of waves</returns>
     public static Queue<Wave> GetWavesFromXml()
@@ -70,7 +78,7 @@ public class XmlImporter
     /// <summary>
     /// Returns Dictionary of enemies from XML file
     /// 
-    /// Edited by Courtney Chu
+    /// Author: Cole Twitchell
     /// </summary>
     /// <returns>Dictionary of enemies</returns>
     public static Dictionary<string, Enemy> GetEnemiesFromXml()
@@ -108,7 +116,7 @@ public class XmlImporter
     /// <summary>
     /// Returns Dictionary of Tower types from XML file
     /// 
-    /// Authors: Cole Twitchell, Courtney Chu
+    /// Author: Cole Twitchell
     /// </summary>
     /// <returns>Dictionary of tower types</returns>
     public static Dictionary<string, Tower> GetTowersFromXml()
@@ -195,7 +203,9 @@ public class XmlImporter
     }
 
     /// <summary>
-    /// Removes all enemies and towers from their respective lists and sets these lists to null to allow for clean restarts
+    /// Removes all enemies and towers from their respective lists and sets these lists to null to allow for clean restarts.
+    /// 
+    /// Author: Cole Twitchell
     /// </summary>
     public static void Cleanup()
     {
