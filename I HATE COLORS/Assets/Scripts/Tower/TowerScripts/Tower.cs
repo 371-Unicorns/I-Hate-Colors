@@ -93,6 +93,9 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Setup this tower.
+    /// 
+    /// 
+    /// Author: David Askari, Steven Johnson
     /// </summary>
     /// <param name="name">Name of the tower.</param>
     /// <param name="baseCosts">Base costs to build tower.</param>
@@ -102,11 +105,6 @@ public abstract class Tower : MonoBehaviour
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
-
-    /// <summary>
-    /// Initialize tower
-    /// Author: Steven Johnson
-    /// </summary>
     protected void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description)
     {
         this.towerName = name;
@@ -158,11 +156,12 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     private void OnMouseUpAsButton()
     {
-        if (!SumPause.Status)
+        if (!PauseGame.Status)
         {
             GameManager.SelectTower(this);
             TowerInformation.ShowPlacedTower(this);
@@ -171,7 +170,8 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Place tower on passed tile, if it is possible (enough money & don't block path).
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     /// <param name="parentTile">Parent tile for this tower.</param>
     /// <returns>Created tower.</returns>
@@ -183,14 +183,15 @@ public abstract class Tower : MonoBehaviour
             return null;
         }
         GameManager.AddMoney(-baseCosts);
-        
+
         // Place tower.
         GameObject tower = Instantiate(GameManager.SelectedTower.gameObject, parentTile.transform.position, Quaternion.identity, parentTile.transform);
 
-        if(GameManager.CheckForFirstPlacement()) {
+        if (GameManager.CheckForFirstPlacement())
+        {
             StartCoroutine(GameManager.DisplayRewardsPanel());
         }
-        
+
         // Check if path is blocked.
         if (!GridGraphManager.IsGraphNotBlocked(tower))
         {

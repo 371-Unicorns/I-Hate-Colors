@@ -80,7 +80,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Instantiates the tower information.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     public void Start()
     {
@@ -106,7 +107,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Reset panel to represent that no tower is currently selected.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     public static void Reset()
     {
@@ -121,7 +123,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Fill the panel with informations about the currently selected hovering tower.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     /// <param name="tower">Tower to show.</param>
     public static void ShowHoveringTower(Tower tower)
@@ -139,7 +142,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Fill the panel with informations about the currently selected placed tower.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     /// <param name="tower">Tower to show.</param>
     public static void ShowPlacedTower(Tower tower)
@@ -161,6 +165,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Fills the head with information from the XML.
+    /// 
+    /// Author: David Askari
     /// </summary>
     private static void FillHead()
     {
@@ -170,6 +176,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Check whether it's possible to upgrade the currently selected tower and if it is, enable the upgrade button.
+    /// 
+    /// Author: David Askari
     /// </summary>
     public static void CheckUpgrade()
     {
@@ -178,9 +186,8 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Upgrade the currently selected tower.
-    /// 
-    /// Edited by Courtney Chu
-    /// Author: Steven Johnson
+    ///
+    /// Author: Steven Johnson, David Askari, Courtney Chu
     /// </summary>
     public void UpgradeTower()
     {
@@ -202,7 +209,9 @@ public class TowerInformation : MonoBehaviour
     }
 
     /// <summary>
-    /// Deletes selected tower and returns a subset of money spent on tower
+    /// Deletes selected tower and returns a subset of money spent on tower.
+    /// 
+    /// Author: David Askari
     /// </summary>
     public void SellTower()
     {

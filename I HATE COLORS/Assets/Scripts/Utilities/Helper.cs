@@ -12,6 +12,8 @@ public static class Helper
     /// Both input arrays have to be the same length.
     /// 
     /// Based of https://docs.unity3d.com/Manual/RandomNumbers.html.
+    /// 
+    /// Author: David Askari
     /// </summary>
     /// <param name="data">Array containing all possible element.</param>
     /// <param name="weight">Array containing the weight of the elements. weight[0] defines the weight of data[0]. Sum of all weights can be greater than 1.</param>

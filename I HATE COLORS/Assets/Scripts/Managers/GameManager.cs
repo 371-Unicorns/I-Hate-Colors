@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
         }
         else if (currentWave == 6)
         {
-            sendBossButton.SetActive(true);
+            PauseGamsButton.SetActive(true);
             SumPause.sendBossButton = sendBossButton.GetComponent<SendBossButton>();
         }
 
@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
             if (CastleManager.CastleHealth > 0)
                 saturation.basic.saturation = 0;
 
-
+            PauseGam
             SumPause.Status = true;
 
             GameObject.Find("OptionsMenu").SetActive(false);
@@ -227,7 +227,7 @@ public class GameManager : MonoBehaviour
             if (CastleManager.CastleHealth > 0)
             {
                 XmlImporter.Cleanup();
-
+                PauseGam
                 SumPause.Status = false;
                 SceneManager.LoadScene("victory_cutscene");
             }
@@ -349,7 +349,7 @@ public class GameManager : MonoBehaviour
             case "BlackHoleTower":
                 if (!GameManager.didUpgradeBlackHoleTower)
                     GameManager.didUpgradeBlackHoleTower = true;
-                break;            
+                break;
             case "FlameTower":
                 if (!GameManager.didUpgradeFlameTower)
                     GameManager.didUpgradeFlameTower = true;

@@ -32,7 +32,7 @@ public class SendBossButton : MonoBehaviour
     /// <summary>
     /// Set button not interactable and enqueue boss to the coming wave.
     /// 
-    /// Autor: David Askari
+    /// Author: David Askari
     /// </summary>
     public void SendBoss()
     {
@@ -45,7 +45,7 @@ public class SendBossButton : MonoBehaviour
     /// <summary>
     /// Set button interactable.
     /// 
-    /// Autor: David Askari
+    /// Author: David Askari
     /// </summary>
     public void ResetButton()
     {

@@ -23,12 +23,13 @@ public class Hover : MonoBehaviour
     public void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-
         Deactivate();
     }
 
     /// <summary>
     /// Makes the hover sprite follow the tower's position if activated.
+    /// 
+    /// Author: David Askari
     /// </summary>
     public void Update()
     {
@@ -39,6 +40,8 @@ public class Hover : MonoBehaviour
 
     /// <summary>
     /// Activate hovering effect by passing sprite to show.
+    /// 
+    /// Author: David Askari
     /// </summary>
     /// <param name="sprite">Sprite to display.</param>
     public static void Activate(float range, Sprite sprite)
@@ -49,6 +52,8 @@ public class Hover : MonoBehaviour
 
     /// <summary>
     /// Disable hovering effect.
+    /// 
+    /// Author: David Askari
     /// </summary>
     public static void Deactivate()
     {

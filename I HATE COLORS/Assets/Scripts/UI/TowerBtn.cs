@@ -67,8 +67,10 @@ public class TowerBtn : MonoBehaviour
     }
 
     /// <summary>
-    /// Listenen, what to do at button's OnClick.
+    /// Listener, what to do at button's OnClick.
     /// If button is clicked, update selected tower and activate hover.
+    /// 
+    /// Author: David Askari
     /// </summary>
     void OnClickListener()
     {
@@ -77,7 +79,8 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Setup trigger, when mouse enters or exits the TowerBtn.
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     private void InitalizeEventTrigger()
     {
@@ -96,12 +99,13 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Belongs to InitalizeEventTrigger().
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
     {
-        if (!SumPause.Status)
+        if (!PauseGame.Status)
         {
             TowerInformation.ShowHoveringTower(TowerPrefab.GetComponent<Tower>());
         }
@@ -109,7 +113,8 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Belongs to InitalizeEventTrigger().
-    /// Author: Steven Johnson
+    /// 
+    /// Author: Steven Johnson, David Askari
     /// </summary>
     /// <param name="data">Information about the event.</param>
     public void OnPointerExitDelegate(PointerEventData data)

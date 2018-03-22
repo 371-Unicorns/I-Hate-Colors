@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Generic enemy.
+/// </summary>
 public class Enemy : MonoBehaviour
 {
     [SerializeField]

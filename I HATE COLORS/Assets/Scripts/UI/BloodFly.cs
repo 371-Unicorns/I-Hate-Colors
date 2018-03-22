@@ -10,21 +10,21 @@ public class BloodFly : MonoBehaviour
     /// <summary>
     /// Target to fly to.
     /// 
-    /// Author: Amy Lewis
+    /// Author: Amy Lewis, David Askari
     /// </summary>
     private GameObject target;
 
     /// <summary>
     /// AudioSource to be played, once a blood reaches the bank.
     /// 
-    /// Author: Amy Lewis
+    /// Author: Amy Lewis, David Askari
     /// </summary>
     private AudioSource bloodSound;
 
     /// <summary>
     /// Take target from GameManager.
     /// 
-    /// Author: Amy Lewis
+    /// Author: Amy Lewis, David Askari
     /// </summary>
     private void Start()
     {
@@ -35,7 +35,7 @@ public class BloodFly : MonoBehaviour
     /// <summary>
     /// Move to target and if close enough, destroy this gameobject.
     /// 
-    /// Author: AMy Lewis
+    /// Author: Amy Lewis, David Askari
     /// </summary>
     private void Update()
     {

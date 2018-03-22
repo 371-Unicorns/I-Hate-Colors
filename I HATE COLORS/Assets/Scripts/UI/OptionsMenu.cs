@@ -36,18 +36,19 @@ public class OptionsMenu : MonoBehaviour
     /// </summary>
     public void ResumeGame()
     {
-        SumPause.Status = false;
+        PauseGame.Status = false;
     }
 
     /// <summary>
     /// Cleans up XML lists, sets paused status to false, loads main menu
-    /// Edited by Courtney Chu
+    /// 
+    /// Autor: David Askari, Courtney Chu, Cole Twitchell
     /// </summary>
     public void RestartGame()
     {
         XmlImporter.Cleanup();
 
-        SumPause.Status = false;
+        PauseGame.Status = false;
         GameObject.Find("GameManager").GetComponent<SceneLoader>().LoadScene("main_menu");
     }
 

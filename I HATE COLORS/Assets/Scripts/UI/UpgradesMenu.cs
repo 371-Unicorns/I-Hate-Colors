@@ -25,7 +25,7 @@ public class UpgradesMenu : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (!SumPause.Status)
+        if (!PauseGame.Status)
         {
             foreach (Button button in upgradeButtons)
             {

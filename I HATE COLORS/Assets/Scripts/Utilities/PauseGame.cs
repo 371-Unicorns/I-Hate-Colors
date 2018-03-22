@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// Source: https://jerrydenton.github.io/sumPause/
 /// Modified by: David Askari
 /// </summary>
-public class SumPause : MonoBehaviour
+public class PauseGame : MonoBehaviour
 {
 
     // Event managers
@@ -76,7 +76,7 @@ public class SumPause : MonoBehaviour
     }
 
     // Instance used for singleton
-    public static SumPause instance;
+    public static PauseGame instance;
 
     void Awake()
     {
@@ -90,8 +90,8 @@ public class SumPause : MonoBehaviour
     void Start()
     {
         // Ensure singleton
-        if (SumPause.instance == null)
-            SumPause.instance = this;
+        if (PauseGame.instance == null)
+            PauseGame.instance = this;
         else
             Destroy(this);
     }
