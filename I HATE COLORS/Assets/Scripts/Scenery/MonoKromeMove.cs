@@ -29,6 +29,8 @@ public class MonoKromeMove : MonoBehaviour
     /// </summary>
     private Vector3 extents;
 
+    private Animator monoKromeAnimator;
+
     /// <summary>
     /// Get the parents Collider2D and find random position within it.
     /// 
@@ -36,6 +38,7 @@ public class MonoKromeMove : MonoBehaviour
     /// </summary>
     void Start()
     {
+        monoKromeAnimator = GetComponent<Animator>();
         moveArea = GetComponentInParent<Collider2D>();
         center = moveArea.bounds.center;
         extents = moveArea.bounds.extents;
@@ -53,6 +56,14 @@ public class MonoKromeMove : MonoBehaviour
         if (Vector2.Distance(transform.position, target) <= 0.1)
         {
             target = new Vector2(Random.Range(center.x - extents.x, center.x + extents.x), Random.Range(center.y - extents.y, center.y + extents.y));
+            if (target.y < transform.position.y) 
+            {
+                monoKromeAnimator.SetBool("facingBackwards", false);
+            }
+            else 
+            {
+                monoKromeAnimator.SetBool("facingBackwards", true);
+            }
         }
     }
 }
