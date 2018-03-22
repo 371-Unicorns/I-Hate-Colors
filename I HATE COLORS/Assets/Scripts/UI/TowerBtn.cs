@@ -77,6 +77,7 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Setup trigger, when mouse enters or exits the TowerBtn.
+    /// Author: Steven Johnson
     /// </summary>
     private void InitalizeEventTrigger()
     {
@@ -95,6 +96,7 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Belongs to InitalizeEventTrigger().
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="data">Information about the event.</param>
     public void OnPointerEnterDelegate(PointerEventData data)
@@ -107,6 +109,7 @@ public class TowerBtn : MonoBehaviour
 
     /// <summary>
     /// Belongs to InitalizeEventTrigger().
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="data">Information about the event.</param>
     public void OnPointerExitDelegate(PointerEventData data)

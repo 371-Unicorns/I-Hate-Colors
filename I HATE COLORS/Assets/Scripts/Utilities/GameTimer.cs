@@ -14,6 +14,7 @@ public class GameTimer
 
     /// <summary>
     /// Instantiates the game timer
+    /// Authors: Steven Johnson
     /// </summary>
     public GameTimer() { }
     public GameTimer(float initialTime)
@@ -97,6 +98,7 @@ public class GameTimer
 
     /// <summary>
     /// Returns whether the timer has 'gone off'
+    /// Authors: Steven Johnson
     /// </summary>
     /// <returns>bool is time remaining zero</returns>
     public bool IsDone()

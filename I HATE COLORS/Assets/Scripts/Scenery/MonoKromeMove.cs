@@ -48,7 +48,7 @@ public class MonoKromeMove : MonoBehaviour
     /// <summary>
     /// Move MonoKrome towards target position and, once it's reached, find a new one.
     /// 
-    /// Author: David Askari
+    /// Authors: David Askari, Steven Johnson
     /// </summary>
     void Update()
     {

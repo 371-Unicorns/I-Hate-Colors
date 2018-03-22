@@ -50,6 +50,7 @@ public class Tile : MonoBehaviour
 
     /// <summary>
     /// Check whether a tower is currently selected and the tile is empty, then either place a tower or reset TowerInformation panel based on Hover. 
+    /// Authors: David Askari, Steven Johnson
     /// </summary>
     private void OnMouseUpAsButton()
     {

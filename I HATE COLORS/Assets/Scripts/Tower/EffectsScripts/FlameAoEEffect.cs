@@ -35,6 +35,7 @@ public class FlameAoEEffect : AoEEffect
 
     /// <summary>
     /// Constructor for the effect. 
+    /// Author: Steven Johnson
     /// </summary>
     public FlameAoEEffect()
     {
@@ -46,7 +47,7 @@ public class FlameAoEEffect : AoEEffect
     /// <summary>
     /// Update function that resets the timer. 
     /// Makes sure the flame tower is active LIFESPAN seconds and then disactivated LIFESPAN seconds.
-    /// 
+    /// Author: Steven Johnson
     /// </summary>
     public override void Update()
     {
@@ -61,7 +62,7 @@ public class FlameAoEEffect : AoEEffect
     /// <summary>
     /// Applies the effect in the game.
     /// Sends flames in a circle damaging all targets in the range of this effect. 
-    /// 
+    /// Author: Steven Johnson
     /// </summary>
     public override void ApplyAoEEffect()
     {
@@ -88,7 +89,7 @@ public class FlameAoEEffect : AoEEffect
     /// <summary>
     /// Applies the effect in the game.
     /// Sends flames in a circle damaging all targets in the range of this effect. 
-    /// 
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="damage">Amount of this effect does to an enemy.</param>
     /// <param name="range">How far the effect can reach.</param>

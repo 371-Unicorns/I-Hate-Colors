@@ -94,7 +94,8 @@ public class GameManager : MonoBehaviour
     private static Dictionary<string, Tower> towerDictionary;
 
     /// <summary>
-    /// Boolean variables related to the reward panel.
+    /// Variables related to the reward panel.
+    /// Authors: Steven Johnson, Courtney Chu
     /// </summary>
     public static GameObject rewardsPanel;
     public static Text rewardsPanelText;
@@ -331,7 +332,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Gives player a reward if all of the types of towers have been upgraded at least once.
-    /// Author: Courtney Chu
+    /// Author: Courtney Chu, Steven Johnson
     /// </summary>
     public static bool CheckForFirstUpgrade()
     {
@@ -426,6 +427,7 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Sets the text of the wave timer. 
     /// Gives 30 seconds between each wave.
+    /// Author: Steven Johnson
     /// </summary>
     private void SetTimerText()
     {

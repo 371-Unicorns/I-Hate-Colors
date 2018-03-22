@@ -80,6 +80,7 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Instantiates the tower information.
+    /// Author: Steven Johnson
     /// </summary>
     public void Start()
     {
@@ -105,6 +106,7 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Reset panel to represent that no tower is currently selected.
+    /// Author: Steven Johnson
     /// </summary>
     public static void Reset()
     {
@@ -119,6 +121,7 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Fill the panel with informations about the currently selected hovering tower.
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="tower">Tower to show.</param>
     public static void ShowHoveringTower(Tower tower)
@@ -136,6 +139,7 @@ public class TowerInformation : MonoBehaviour
 
     /// <summary>
     /// Fill the panel with informations about the currently selected placed tower.
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="tower">Tower to show.</param>
     public static void ShowPlacedTower(Tower tower)
@@ -176,6 +180,7 @@ public class TowerInformation : MonoBehaviour
     /// Upgrade the currently selected tower.
     /// 
     /// Edited by Courtney Chu
+    /// Author: Steven Johnson
     /// </summary>
     public void UpgradeTower()
     {

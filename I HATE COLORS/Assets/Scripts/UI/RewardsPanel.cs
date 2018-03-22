@@ -11,7 +11,7 @@ public class RewardsPanel : MonoBehaviour {
     /// <summary>
     /// Blood flies from dead enemy to reward panel.
     /// 
-    /// Authors: David Askari, Amy Lewis
+    /// Authors: David Askari, Amy Lewis, Steven Johnson
     /// </summary>
     [SerializeField]
     private BloodFly bloodFly;
@@ -19,7 +19,7 @@ public class RewardsPanel : MonoBehaviour {
     /// <summary>
     /// Enables rewards panel so blood can fly to the panel from the enemy.
     /// 
-    /// Authors: David Askari, Amy Lewis
+    /// Authors: David Askari, Amy Lewis, Steven Johnson
     /// </summary>
     void OnEnable () {
 		if(GameManager.rewardsPanelFirstEnable) {

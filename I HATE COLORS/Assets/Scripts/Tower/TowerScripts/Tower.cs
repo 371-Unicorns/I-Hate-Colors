@@ -102,6 +102,11 @@ public abstract class Tower : MonoBehaviour
     /// <param name="range">Range tower can attack within.</param>
     /// <param name="color">Color of this towers effect.</param>
     /// <param name="description">Short description of this tower.</param>
+
+    /// <summary>
+    /// Initialize tower
+    /// Author: Steven Johnson
+    /// </summary>
     protected void Initialize(string name, int baseCosts, int upgradeCosts, float upgradeCostsScale, int maxLevel, float range, ColorType color, string description)
     {
         this.towerName = name;
@@ -120,6 +125,7 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Finds a new target if the tower does not have a target, the target goes out of range or is dead.
+    /// Author: Steven Johnson
     /// </summary>
     public virtual void Update()
     {
@@ -133,7 +139,7 @@ public abstract class Tower : MonoBehaviour
     /// Upgrade tower. 
     /// It does not check whether the player has enough money. Do this BEFORE calling this method.
     /// 
-    /// Author: David Askari
+    /// Author: David Askari, Steven Johnson
     /// </summary>
     public virtual void Upgrade()
     {
@@ -152,6 +158,7 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// When a tower is clicked, set the currently selected tower and update the TowerInformation panel.
+    /// Author: Steven Johnson
     /// </summary>
     private void OnMouseUpAsButton()
     {
@@ -164,6 +171,7 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Place tower on passed tile, if it is possible (enough money & don't block path).
+    /// Author: Steven Johnson
     /// </summary>
     /// <param name="parentTile">Parent tile for this tower.</param>
     /// <returns>Created tower.</returns>

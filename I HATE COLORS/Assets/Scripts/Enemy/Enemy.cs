@@ -73,7 +73,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Take damage and check whether for death.
     /// </summary>
-    /// Edited by Courtney Chu
+    /// Authors: Courtney Chu, Steven Johnson
     /// <param name="damage">Damage to take.</param>
     public void TakeDamage(float damage, ColorType damageType)
     {
