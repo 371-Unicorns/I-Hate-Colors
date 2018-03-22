@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Manages waves of enemies and loads which ones are supposed to be sent from wave_composition.xml.
+/// Manages waves of enemies and loads which ones are supposed to be sent from wave_composition.xml using the XMLImporter.
+/// 
+/// Author: Cole Twitchell
 /// </summary>
 public class WaveManager : MonoBehaviour
 {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// Abstract class for towers.
+/// 
+/// Authors: Cole Twitchell, Steven Johnson
 /// </summary>
 public abstract class Tower : MonoBehaviour
 {
@@ -94,7 +96,6 @@ public abstract class Tower : MonoBehaviour
     /// <summary>
     /// Setup this tower.
     /// 
-    /// 
     /// Author: David Askari, Steven Johnson
     /// </summary>
     /// <param name="name">Name of the tower.</param>
@@ -123,7 +124,6 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Finds a new target if the tower does not have a target, the target goes out of range or is dead.
-    /// Author: Steven Johnson
     /// </summary>
     public virtual void Update()
     {
@@ -218,6 +218,8 @@ public abstract class Tower : MonoBehaviour
 
     /// <summary>
     /// Finds the closest enemy to the tower and sets it as the target.
+    /// 
+    /// Author: Cole Twitchell
     /// </summary>
     protected void FindClosestTarget()
     {

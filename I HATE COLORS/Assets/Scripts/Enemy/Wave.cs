@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents one wave to send to the player. Most fields are to be initialized during wave creation using the XMLImporter.
+/// 
+/// Author: Cole Twitchell
+/// </summary>
 public class Wave {
 
     private float spawnRate = 1.0f;
@@ -49,11 +54,19 @@ public class Wave {
         unitSpawnTimer.SetTimer(rate);
     }
 
+    /// <summary>
+    /// Adds an enemy to the wave.
+    /// </summary>
+    /// <param name="e"></param>
     public void EnqueueEnemy(Enemy e)
     {
         enemies.Enqueue(e);
     }
 
+    /// <summary>
+    /// Returns true if the wave is ready to spawn a new enemy, false otherwise.
+    /// </summary>
+    /// <returns></returns>
     public bool SpawnReady()
     {
         return !unitSpawnTimer.IsPaused() && unitSpawnTimer.IsDone() && EnemiesRemaining() > 0;

@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Implementation of damage over time towers.
+/// 
+/// Author: Cole Twitchell
+/// Edited by all group members as we've added more to DoT Towers.
+/// </summary>
 public class DoTTower : Tower
 {
     /// <summary>

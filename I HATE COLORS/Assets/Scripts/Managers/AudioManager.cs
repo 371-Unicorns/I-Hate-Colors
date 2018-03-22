@@ -4,6 +4,8 @@ using UnityEngine;
 
 /// <summary>
 /// Manages all sound tracks and sound effects in the game.
+/// 
+/// Author: Cole Twitchell
 /// </summary>
 public class AudioManager : MonoBehaviour {
 

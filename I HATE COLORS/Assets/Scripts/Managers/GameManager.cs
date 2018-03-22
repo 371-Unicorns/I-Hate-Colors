@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Manages the whole game.
+/// 
+/// Authors: The entire group
 /// </summary>
 public class GameManager : MonoBehaviour
 {

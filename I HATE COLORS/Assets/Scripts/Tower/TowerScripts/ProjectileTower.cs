@@ -4,6 +4,9 @@ using UnityEngine;
 
 /// <summary>
 /// Tower, which shoots single projectiles targeting one enemy.
+/// 
+/// Author: Cole Twitchell
+/// Edited by all members as we've added more and more to Projectile Towers
 /// </summary>
 public class ProjectileTower : Tower
 {

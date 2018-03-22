@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Menu for upgrades.
+/// 
+/// Author: Cole Twitchell
 /// </summary>
 public class UpgradesMenu : MonoBehaviour
 {

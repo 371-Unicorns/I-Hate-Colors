@@ -6,6 +6,8 @@ using TMPro;
 
 /// <summary>
 /// Manage TowerInformation panel, which displays information about the currently selected tower (either a placed one or a hovering one).
+/// 
+/// 80% David, 10% Steven, 10% Courtney
 /// </summary>
 public class TowerInformation : MonoBehaviour
 {

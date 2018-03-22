@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 
+/// <summary>
+/// This class manages the creation, storage of, and deletion of all enemies in the game.
+/// 
+/// Author: Cole Twitchell
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
     public static Dictionary<string, Enemy> enemyDictionary;
@@ -16,7 +21,6 @@ public class EnemyManager : MonoBehaviour
 
     /// <summary>
     /// Initializes ActiveEnemies, DeadEnemies, EnemyDictionary, and TargetTiles
-    /// Edited by Courtney Chu
     /// </summary>
     public void Start()
     {
@@ -96,6 +100,8 @@ public class EnemyManager : MonoBehaviour
     /// <summary>
     /// Find tiles to be used by enemies as target tiles.
     /// Currently those are the most right column of the grid.
+    /// 
+    /// Author: David Askari
     /// </summary>
     public static void FindTargetTiles()
     {
@@ -107,6 +113,8 @@ public class EnemyManager : MonoBehaviour
 
     /// <summary>
     /// Gets a random target tile.
+    /// 
+    /// Author: David Askari
     /// </summary>
     /// <returns>Random target tile.</returns>
     public static Tile GetRandomTargetTile()
